@@ -5,6 +5,7 @@
     - [Schemas v3](#schemas-v3)
     - [Shacl files](#shacl-files)
     - [V3 source](#v3-source)
+    - [Dataclasses](#dataclasses)
 
 Python dataclasses for CGMES 3 + rdf schema description + SHACL files
 
@@ -29,3 +30,16 @@ is referenced, specially with older versions, but Entsoe is moving away from it.
 
 From Entsoe, in [data](./data/). This is one small-ish zip file, containing a bit more than just shacl and rdfs, but
 is usually not needed.
+
+### Dataclasses
+
+Generated from our [fork](https://github.com/Alliander/uno-cimgen/) of [cimgen](https://github.com/sogno-platform/cimgen), with as goal to push back our changes upstream.
+
+The main differences between our version and upstream are:
+
+- handle CGMES v3
+- generate dataclasses instead of classes
+- typing
+- more comments
+- independent of [cimpy](https://github.com/sogno-platform/cimpy)
+-
