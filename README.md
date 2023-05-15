@@ -28,8 +28,8 @@ is referenced, specially with older versions, but Entsoe is moving away from it.
 
 ### V3 source
 
-From Entsoe, in [data](./data/). This is one small-ish zip file, containing a bit more than just shacl and rdfs, but
-is usually not needed.
+From Entsoe, in [data](./data/). This is one small-ish zip file, containing a bit more than just the shacl and rdfs
+files (those extracted and emtioned above) but is usually not needed.
 
 ### Dataclasses
 
@@ -42,4 +42,3 @@ The main differences between our version and upstream are:
 - typing
 - more comments
 - independent of [cimpy](https://github.com/sogno-platform/cimpy)
--
