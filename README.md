@@ -4,6 +4,7 @@
   - [Content](#content)
     - [Schemas v3](#schemas-v3)
     - [Shacl files](#shacl-files)
+    - [V3 source](#v3-source)
 
 Python dataclasses for CGMES 3 + rdf schema description + SHACL files
 
@@ -23,3 +24,8 @@ Older versions could be found on the [Entsoe site](https://www.entsoe.eu/data/ci
 [Shapes constraint Language](https://en.wikipedia.org/wiki/SHACL) is used for validation of the actual content of the
 CGMES files, not just XML validation. They can be found in [SHACL](./SHACL/). This is the new validation standard. OCL
 is referenced, specially with older versions, but Entsoe is moving away from it.
+
+### V3 source
+
+From Entsoe, in [data](./data/). This is one small-ish zip file, containing a bit more than just shacl and rdfs, but
+is usually not needed.
