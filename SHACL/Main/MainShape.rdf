@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:dl="http://iec.ch/TC57/ns/CIM/DiagramLayout-EU/Constraints#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dy="http://iec.ch/TC57/ns/CIM/Dynamics-EU/Constraints#"
+    xmlns:main="http://iec.ch/TC57/ns/CIM/CGMES/Constraints/main/3.0#"
+    xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:sv="http://iec.ch/TC57/ns/CIM/StateVariables-EU/Constraints#"
+    xmlns:eu="http://iec.ch/TC57/CIM100-European#"
+    xmlns:op="http://iec.ch/TC57/ns/CIM/Operation-EU/Constraints#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:sh="http://www.w3.org/ns/shacl#"
+    xmlns:dcat="http://www.w3.org/ns/dcat#"
+    xmlns:cim="http://iec.ch/TC57/CIM100#"
+    xmlns:dash="http://datashapes.org/dash#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xml:base="http://iec.ch/TC57/ns/CIM/CGMES/Constraints/main/3.0" > 
+  <rdf:Description rdf:about="http://iec.ch/TC57/ns/CIM/Dynamics-EU/Constraints#EnergyConsumer.LoadDynamics-valueTypeNodeShape">
+    <rdf:type rdf:resource="http://www.w3.org/ns/shacl#NodeShape"/>
+    <sh:deactivated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sh:deactivated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://iec.ch/TC57/ns/CIM/DiagramLayout-EU/Constraints#DiagramObject.IdentifiedObject-valueTypeNodeShape">
+    <rdf:type rdf:resource="http://www.w3.org/ns/shacl#NodeShape"/>
+    <sh:deactivated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sh:deactivated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://iec.ch/TC57/ns/CIM/Operation-EU/Constraints#Measurement.Terminal-valueTypeNodeShape">
+    <rdf:type rdf:resource="http://www.w3.org/ns/shacl#NodeShape"/>
+    <sh:deactivated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sh:deactivated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://iec.ch/TC57/ns/CIM/StateVariables-EU/Constraints#SvStatus.ConductingEquipment-valueTypeNodeShape">
+    <rdf:type rdf:resource="http://www.w3.org/ns/shacl#NodeShape"/>
+    <sh:deactivated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sh:deactivated>
+  </rdf:Description>
+  <rdf:Description rdf:about="#">
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//InverseAssocCardinality//DLinv.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//RDFS//CoreEquipmentProfile.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//DY_NotSolvedMAS_457.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-301UML//SC_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//CrossProfileValueType//OP_452_cp_explicit.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-453//DL_453.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//CrossProfileValueType//DY_457_cp_explicit.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//CrossProfileValueType//SC_452_cp.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-452//OP_452.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-600-1//EQ_600-1.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//InverseAssocCardinality//DYinv.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-456//SV_456.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-452//EQ_452.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//SSH_NotSolvedMAS_456.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//RDFS//DiagramLayoutProfile.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//TP_NotSolvedMAS_600.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-600-2//GL_600-2.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//CrossProfileValueType//GL_13_cp_explicit.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//SolvedMAS//SolvedMAS_456.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//CrossProfileValueType//DL_453_cp_explicit.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//SC_NotSolvedMAS_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//RDFS//FileHeaderProfile.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-600-1//prof10_header.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-301UML//SSH_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//RDFS//SteadyStateHypothesisProfile.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//InverseAssocCardinality//EQinv.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//DL_NotSolvedMAS_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//RDFS//TopologyProfile.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//SolvedMAS//SolvedMAS_600-2.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//RDFS//StateVariablesProfile.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//CrossProfileValueType//SV_456_cp_explicit.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//Common//IdentifiedObjecStringLength.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-301UML//OP_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-457//DY_457.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//SolvedMAS//SolvedMAS_600-1.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//EQ_NotSolvedMAS_452.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-301UML//SV_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//InverseAssocCardinality//EQBDinv.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//EQBD_NotSolvedMAS_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-600-2//SC_600-2.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//RDFS//ShortCircuitProfile.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//TP_NotSolvedMAS_456.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-452//SC_452.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-302UML//DY_302UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61968-13//GL_13.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//SolvedMAS//SV_SolvedMAS_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//InverseAssocCardinality//SVinv.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//InverseAssocCardinality//TPinv.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-456//TP_456.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//SSH_NotSolvedMAS_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//RDFS//OperationProfile.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-301UML//EQ_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//OP_NotSolvedMAS_452.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//CrossProfileValueType//TP_456_cp_explicit.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//EQ_NotSolvedMAS_600.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-301UML//DL_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-600-2//EQ_600-2.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//RDFS//DynamicsProfile.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//InverseAssocCardinality//GLinv.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//SolvedMAS//SV_SolvedMAS_456.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//InverseAssocCardinality//OPinv.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//EQ_NotSolvedMAS_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-456//SSH_456.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//RDFS//GeographicalLocationProfile.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//NotSolvedMAS//TP_NotSolvedMAS_301UML.ttl"/>
+    <owl:imports rdf:resource="Z://ConstraintsSHACLCAS3//IEC61970-600-1//All_600-1.ttl"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="#Ontology">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <owl:versionIRI rdf:resource=""/>
+    <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2020-10-19</dct:modified>
+    <dct:publisher xml:lang="en">ENTSO-E</dct:publisher>
+    <dct:conformsTo>urn:iso:std:iec:61970-501:draft:ed-2</dct:conformsTo>
+    <dct:creator xml:lang="en">ENTSO-E CIM EG</dct:creator>
+    <dcat:theme xml:lang="en">constraints</dcat:theme>
+    <dct:conformsTo>urn:iso:std:iec:61970-301:ed-7:amd1</dct:conformsTo>
+    <dct:conformsTo>urn:iso:std:iec:61970-600-2:ed-1</dct:conformsTo>
+    <dct:identifier>urn:uuid:42cd5ac5-45b8-4893-b120-8f22427255dc</dct:identifier>
+    <owl:versionInfo xml:lang="en">3.0.0</owl:versionInfo>
+    <dct:description xml:lang="en">Main constraints.</dct:description>
+    <dct:title xml:lang="en">Main Constraints</dct:title>
+    <dct:conformsTo>file://iec61970cim17v40_iec61968cim13v13a_iec62325cim03v17a.eap</dct:conformsTo>
+    <dct:rightsHolder xml:lang="en">ENTSO-E</dct:rightsHolder>
+    <dct:language>en-GB</dct:language>
+    <dct:rights xml:lang="en">Copyright</dct:rights>
+    <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2021-10-19T12:09:21Z</dct:issued>
+    <dcat:landingPage>https://www.entsoe.eu/digital/cim/cim-for-grid-models-exchange/</dcat:landingPage>
+  </rdf:Description>
+</rdf:RDF>
