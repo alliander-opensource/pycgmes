@@ -8,6 +8,7 @@ repository = "https://github.com/Alliander/cgmes-python"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+poetry = ">=1.5.0" # key 'priority' in source
 
 [tool.poetry.group.dev.dependencies]
 bandit = { extras = ["toml"], version = "*" } # Security checks
@@ -23,8 +24,11 @@ SCons = "*" # Command runner
 [[tool.poetry.source]]
 name = "internal-cloud"
 url = "https://nexus.appx.cloud/repository/cloud-team/simple"
-default = false
-secondary = true
+priority = "explicit" # Means that it needs to be explicitely mentioned to be used.
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary" # Means it is the first source tried.
 
 [tool.black]
 line-length = 120
