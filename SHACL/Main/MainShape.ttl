@@ -1,0 +1,163 @@
+@base          <http://iec.ch/TC57/ns/CIM/CGMES/Constraints/main/3.0> .
+@prefix eu:    <http://iec.ch/TC57/CIM100-European#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/CIM100#> .
+@prefix main:  <http://iec.ch/TC57/ns/CIM/CGMES/Constraints/main/3.0#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix dl:    <http://iec.ch/TC57/ns/CIM/DiagramLayout-EU/Constraints#> .
+@prefix dy:    <http://iec.ch/TC57/ns/CIM/Dynamics-EU/Constraints#> .
+@prefix sv:    <http://iec.ch/TC57/ns/CIM/StateVariables-EU/Constraints#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix op:      <http://iec.ch/TC57/ns/CIM/Operation-EU/Constraints#> .
+
+main:Ontology  rdf:type         owl:Ontology ;
+        dct:conformsTo        "urn:iso:std:iec:61970-501:draft:ed-2" , "urn:iso:std:iec:61970-600-2:ed-1" , "urn:iso:std:iec:61970-301:ed-7:amd1" , "file://iec61970cim17v40_iec61968cim13v13a_iec62325cim03v17a.eap" ;
+        dct:creator           "ENTSO-E CIM EG"@en ;
+        dct:description       "Main constraints."@en ;
+        dct:identifier        "urn:uuid:42cd5ac5-45b8-4893-b120-8f22427255dc" ;
+        dct:issued            "2021-10-19T12:09:21Z"^^xsd:dateTime ;
+        dct:language          "en-GB" ;
+        dct:modified          "2020-10-19"^^xsd:date ;
+        dct:publisher         "ENTSO-E"@en ;
+        dct:rights            "Copyright"@en ;
+        dct:rightsHolder      "ENTSO-E"@en ;
+        dct:title             "Main Constraints"@en ;
+        owl:versionIRI        <http://iec.ch/TC57/ns/CIM/CGMES/Constraints/main/3.0> ;
+        owl:versionInfo       "3.0.0"@en ;
+        dcat:landingPage      "https://www.entsoe.eu/digital/cim/cim-for-grid-models-exchange/" ;
+        dcat:theme            "constraints"@en .
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61968-13//GL_13.ttl> .
+
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-301UML//DL_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-301UML//EQ_301UML.ttl> .
+#EQBD constraints are already included in the EQ
+#main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-301UML//EQBD_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-301UML//OP_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-301UML//SC_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-301UML//SSH_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-301UML//SV_301UML.ttl> .
+#TPBD constraints are already included in the TP
+#main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-301UML//TPBD_301UML.ttl> .
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-302UML//DY_302UML.ttl> .
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-452//EQ_452.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-452//OP_452.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-452//SC_452.ttl> .
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-453//DL_453.ttl> .
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-456//SSH_456.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-456//SV_456.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-456//TP_456.ttl> .
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-457//DY_457.ttl> .
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-600-1//All_600-1.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-600-1//prof10_header.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-600-1//EQ_600-1.ttl> .
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-600-2//EQ_600-2.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-600-2//GL_600-2.ttl> .
+#TPBD constraints are already included in the TP
+#main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-600-2//TPBD_600-2.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//IEC61970-600-2//SC_600-2.ttl> .
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//InverseAssocCardinality//DLinv.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//InverseAssocCardinality//DYinv.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//InverseAssocCardinality//EQBDinv.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//InverseAssocCardinality//EQinv.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//InverseAssocCardinality//GLinv.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//InverseAssocCardinality//OPinv.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//InverseAssocCardinality//SVinv.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//InverseAssocCardinality//TPinv.ttl> .
+
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//DL_NotSolvedMAS_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//DY_NotSolvedMAS_457.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//EQ_NotSolvedMAS_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//EQ_NotSolvedMAS_600.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//EQBD_NotSolvedMAS_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//OP_NotSolvedMAS_452.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//SC_NotSolvedMAS_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//SSH_NotSolvedMAS_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//SSH_NotSolvedMAS_456.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//TP_NotSolvedMAS_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//TP_NotSolvedMAS_456.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//EQ_NotSolvedMAS_452.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//NotSolvedMAS//TP_NotSolvedMAS_600.ttl> .
+
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//CoreEquipmentProfile.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//DiagramLayoutProfile.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//DynamicsProfile.ttl> .
+#The EQBD from RDFS is fully included in the EQ so in case of assembled model validation EQBD constraints are not needed. 
+#main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//EquipmentBoundaryProfile.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//GeographicalLocationProfile.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//OperationProfile.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//ShortCircuitProfile.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//StateVariablesProfile.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//SteadyStateHypothesisProfile.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//TopologyProfile.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//RDFS//FileHeaderProfile.ttl> .
+
+#The following constraints validate the value type of the associations that are cross profile. They are done
+#in explicit way and implicit way. The implicit way requires that the validation engine is set to use inference so that knows the inheritance structure.
+#explicit shapes
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//DL_453_cp_explicit.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//DY_457_cp_explicit.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//GL_13_cp_explicit.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//OP_452_cp_explicit.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//SV_456_cp_explicit.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//TP_456_cp_explicit.ttl> .
+
+#implicit way
+#main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//TP_456_cp_implicit.ttl> .
+#main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//SV_456_cp_implicit.ttl> .
+#main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//OP_452_cp_implicit.ttl> .
+#main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//GL_13_cp_implicit.ttl> .
+#main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//DL_453_cp_implicit.ttl> .
+#main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//DY_457_cp_implicit.ttl> .
+
+#shapes used in both explicit and implicit way
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//CrossProfileValueType//SC_452_cp.ttl> .
+
+
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//SolvedMAS//SolvedMAS_600-1.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//SolvedMAS//SolvedMAS_600-2.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//SolvedMAS//SV_SolvedMAS_301UML.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//SolvedMAS//SV_SolvedMAS_456.ttl> .
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//SolvedMAS//SolvedMAS_456.ttl> .
+
+#stringLength related Shapes for the IdentifiedObject attributes 
+main:   owl:imports  <Z://ConstraintsSHACLCAS3//Common//IdentifiedObjecStringLength.ttl> .
+
+
+
+
+# This is deactivating the value type check for the association DiagramObject.IdentifiedObject because the sh:or statement would require to have references only to classes within the DL profile, which is not correct 
+dl:DiagramObject.IdentifiedObject-valueTypeNodeShape
+        a               sh:NodeShape ;
+        sh:deactivated  true .
+        
+#In case DY profile is used - the constrains from RDFS DynamicsProfile.ttl and the DY_457_cp_explicit.ttl is used, the following NodeShape needs to be deactivated.
+dy:EnergyConsumer.LoadDynamics-valueTypeNodeShape
+        a               sh:NodeShape ;
+        sh:deactivated  true .
+
+# This is deactivated because the valueType constraint is not complete in the constraints converted from RDFS. This is checked in detail in the cross profile shapes.       
+sv:SvStatus.ConductingEquipment-valueTypeNodeShape
+        a               sh:NodeShape ;
+        sh:deactivated  true .
+        
+op:Measurement.Terminal-valueTypeNodeShape
+        a               sh:NodeShape ;
+        sh:deactivated  true .        
