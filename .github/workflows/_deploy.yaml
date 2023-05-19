@@ -1,0 +1,100 @@
+name: CI/CD
+on:
+  workflow_call:
+    inputs:
+      deployto:
+        type: string
+        required: true
+      # _SKIP*: sometimes you want to quickly test something, without having the whole suite kicking in.
+      # This is a lazy way to switch on and off steps. But never set it to true in main.
+      _SKIP_QUALITY:
+        type: boolean
+        default: false
+        description: for debug purposes only - if true skip all scons quality checks
+      # Python version. Nothing is 3.10 specific yet as far as I know
+      _PYTHON_VERSION:
+        type: string
+        default: "3.10" # Weirdly enough, trailing 0 are removed if this string is not quoted.
+        description: Version of python used to run tests
+    secrets:
+      # Coming from the github action setup from the cloud team, nothing more to do here.
+      EKS_NEXUS_USER:
+        required: true
+      EKS_NEXUS_PASSWORD:
+        required: true
+      ALL_PACKAGE_TOKEN:
+        required: true
+
+jobs:
+  builder:
+    environment:
+      name: ${{ inputs.deployto }}
+    runs-on: ubuntu-latest
+    name: Build & Deploy
+    steps:
+      - name: printinfo
+        # This should be its own parallel job, but it would run for 2 seconds, and we would be billed 1 minute.
+        # I'm a cheap bastard, so it became a step there.
+        run: |
+          <<'____UNIQUEDCT____'
+          Role name: ${{ inputs.ROLE_NAME }}: arn:aws:iam::${{ inputs.ENVIRONMENT_ID }}:role/${{ inputs.ROLE_NAME }}
+          region : ${{ inputs._AWS_REGION }}
+          deploy to ${{ inputs.deployto }}
+          Stack module: ${{ inputs.stack_module }}
+          GitHub event:
+          ${{ toJson(github) }}
+          Environment:
+          ${{ toJson(env) }}
+          ____UNIQUEDCT____
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "${{ inputs._PYTHON_VERSION }}"
+          architecture: "x64" # default
+          # cache: "poetry"  # This caches only the poetry downloads, not the builds.
+          # cache-dependency-path: poetry.lock
+
+      - name: Poetry caching
+        id: poetry-cache
+        uses: actions/cache@v3
+        with:
+          path: .cache/pypoetry # NOT $HOME/.cache, which only caches the downloads, before building.
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+
+      - name: Poetry setup
+        run: |
+          pip install -U poetry
+          poetry lock --check || exit 1
+          poetry env info
+
+      - name: Python package installation
+        if: steps.poetry-cache.outputs.cache-hit != 'true'
+        env:
+          EKS_NEXUS_USER: ${{ secrets.EKS_NEXUS_USER }}
+          EKS_NEXUS_PASSWORD: ${{ secrets.EKS_NEXUS_PASSWORD }}
+        run: |
+          poetry config http-basic.internal-cloud "$EKS_NEXUS_USER" "$EKS_NEXUS_PASSWORD"
+          poetry install --with dev
+
+      - name: scons black
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons black check
+      - name: scons ruff
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons ruff check
+      - name: scons pylint
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons pylint
+      - name: scons mypy
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons mypy
+      - name: scons tests
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons tests
+      - name: scons coverage
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons coverage

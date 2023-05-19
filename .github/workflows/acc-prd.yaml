@@ -1,0 +1,45 @@
+
+name: Acc/prd deploy
+concurrency:
+  # means: only one run with this name (the workflow name) can run in parallel.
+  # An in progress job will carry on, but old pending jobs will be replaced by the new one.
+  # Done at workflow level, otherwise a deploy to prd could happen for something
+  # which has not been deployed to acc.
+  group: ${{ github.workflow }}
+
+on:
+  # Only if a PR to main is closed by merging (see if in buildndeploy_acc)
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: write # needed write to tag
+  packages: read
+
+jobs:
+  buildndeploy_acc:
+    if: github.event.pull_request.merged == true
+    uses: ./.github/workflows/_deploy.yaml
+    with:
+      deployto: acc
+    secrets:
+      EKS_NEXUS_USER: ${{ secrets.EKS_NEXUS_USER }}
+      EKS_NEXUS_PASSWORD: ${{ secrets.EKS_NEXUS_PASSWORD }}
+      ALL_PACKAGE_TOKEN: ${{ secrets.ALL_PACKAGE_TOKEN }}
+
+  # TODO add a tag action?
+  buildndeploy_prd:
+    needs:
+      - buildndeploy_acc
+
+    uses: ./.github/workflows/_deploy.yaml
+    with:
+      deployto: prd
+    secrets:
+      EKS_NEXUS_USER: ${{ secrets.EKS_NEXUS_USER }}
+      EKS_NEXUS_PASSWORD: ${{ secrets.EKS_NEXUS_PASSWORD }}
+      ALL_PACKAGE_TOKEN: ${{ secrets.ALL_PACKAGE_TOKEN }}
