@@ -20,7 +20,7 @@ permissions:
   packages: read
 
 jobs:
-  buildndeploy_acc:
+  buildndeploy:
     if: github.event.pull_request.merged == true
     uses: ./.github/workflows/_deploy.yaml
     with:

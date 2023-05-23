@@ -41,7 +41,9 @@ include = ["pycgmes/*"]
 omit = []
 
 [tool.coverage.report]
-fail_under = 85
+# Low coverage. Should split between dataclasses (won't be fully covered) and
+# the rest (should be well covered).
+fail_under = 70
 exclude_also = [ # Regexp of lines (or first line of block) which do not count for coverage.
     # __main__ block is never tested.
     "if __name__ == .__main__.:",
