@@ -1,13 +1,23 @@
 # cgmes-python
 
 - [cgmes-python](#cgmes-python)
+  - [Library usage](#library-usage)
   - [Content](#content)
     - [Schemas v3](#schemas-v3)
     - [Shacl files](#shacl-files)
     - [V3 source](#v3-source)
     - [Dataclasses](#dataclasses)
+  - [Library build, CI, CD...](#library-build-ci-cd)
+    - [CI](#ci)
+    - [CD](#cd)
+  - [TODOs](#todos)
 
 Python dataclasses for CGMES 3 + rdf schema description + SHACL files
+
+## Library usage
+
+
+
 
 ## Content
 
@@ -42,3 +52,21 @@ The main differences between our version and upstream are:
 - typing
 - more comments
 - independent of [cimpy](https://github.com/sogno-platform/cimpy)
+
+## Library build, CI, CD...
+
+### CI
+
+The CI happens ia GitHub actions.
+
+The standard black/mypy/autoflake/isort/pylint/ruff/mypy are run there, via scons.
+
+### CD
+
+Deployment happens to the internal Alliander Nexus for now, via the standard poetry commands `poetry build`, `poetry publish`.
+
+## TODOs
+
+- open source it?
+- build the library with different versions possible, to eventually use it with eg. `pip install pycgmes["3.0.0"]` for CGMES version 3 or `pip install pycgmes["2.4.5"]` for another version.
+- buid cimexport in ?

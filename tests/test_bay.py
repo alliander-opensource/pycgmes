@@ -1,6 +1,13 @@
 import textwrap
 
-from src import Base, Bay, ConnectivityNodeContainer, EquipmentContainer, IdentifiedObject, PowerSystemResource
+from pycgmes.resources import (
+    Base,
+    Bay,
+    ConnectivityNodeContainer,
+    EquipmentContainer,
+    IdentifiedObject,
+    PowerSystemResource,
+)
 
 
 class TestBay:

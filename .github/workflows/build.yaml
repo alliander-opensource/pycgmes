@@ -1,5 +1,4 @@
-
-name: Tst deploy
+name: Build & CI
 concurrency:
   # means: only one run with this name (the workflow name) can run in parallel.
   # An in progress job will carry on, but old pending jobs will be replaced by the new one.
@@ -22,7 +21,7 @@ jobs:
   buildndeploy_tst:
     uses: ./.github/workflows/_deploy.yaml
     with:
-      deployto: tst
+      deploy: false
     secrets:
       EKS_NEXUS_USER: ${{ secrets.EKS_NEXUS_USER }}
       EKS_NEXUS_PASSWORD: ${{ secrets.EKS_NEXUS_PASSWORD }}

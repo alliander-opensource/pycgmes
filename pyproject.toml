@@ -1,10 +1,12 @@
 [tool.poetry]
-name = "cgmes-python"
+name = "pycgmes"
 version = "0.1.0"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["uno <uno@alliander.com>"]
 readme = "README.md"
 repository = "https://github.com/Alliander/cgmes-python"
+# Because the standard structure (packagename) is used, it is not needed to give
+# a package configuration entry.
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -35,7 +37,7 @@ line-length = 120
 
 [tool.coverage.run]
 # Coverage is here by default, but not going to uniot test 500+ generated classes. So mostly useless.
-include = ["src/*"]
+include = ["pycgmes/*"]
 omit = []
 
 [tool.coverage.report]
@@ -56,7 +58,7 @@ install_types = true # Install stubs if required
 check_untyped_defs = true # Checks what it can even in files without annotation
 
 [tool.bandit]
-targets = ["src"]
+targets = ["pycgmes"]
 exclude_dirs = ["tests", "SConstruct.py"]
 skips = [
     "B101" # assert_used
@@ -95,7 +97,7 @@ notes = "FIXME"
 
 [tool.pylint.master]
 # Tell pylint to add the directory where this file is as pythonpath. Not ideal, but it seems to work nicely, on cli and vscode.
-init-hook = "from pylint.config import find_default_config_files; import os, sys; sys.path.append(os.path.dirname(list(find_default_config_files())[-1])); sys.path.append('./src/lambdas')"
+init-hook = "from pylint.config import find_default_config_files; import os, sys; sys.path.append(os.path.dirname(list(find_default_config_files())[-1])); sys.path.append('./pycgmes/lambdas')"
 
 [tool.ruff]
 line-length = 120
@@ -104,7 +106,7 @@ format = "grouped"
 
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib",] # modern way to import tests
-pythonpath = ["."] # Allows from src import in the tests, which is easier for the IDE.
+pythonpath = ["."] # Allows from pycgmes import in the tests, which is easier for the IDE.
 
 
 [build-system]

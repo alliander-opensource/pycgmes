@@ -2,8 +2,8 @@ name: CI/CD
 on:
   workflow_call:
     inputs:
-      deployto:
-        type: string
+      deploy:
+        type: bool
         required: true
       # _SKIP*: sometimes you want to quickly test something, without having the whole suite kicking in.
       # This is a lazy way to switch on and off steps. But never set it to true in main.
@@ -39,7 +39,7 @@ jobs:
           <<'____UNIQUEDCT____'
           Role name: ${{ inputs.ROLE_NAME }}: arn:aws:iam::${{ inputs.ENVIRONMENT_ID }}:role/${{ inputs.ROLE_NAME }}
           region : ${{ inputs._AWS_REGION }}
-          deploy to ${{ inputs.deployto }}
+          deploy: ${{ inputs.deploy }}
           Stack module: ${{ inputs.stack_module }}
           GitHub event:
           ${{ toJson(github) }}
@@ -98,3 +98,10 @@ jobs:
       - name: scons coverage
         if: ${{ ! inputs._SKIP_QUALITY }}
         run: poetry run scons coverage
+
+      - name: poetry build
+        run: poetry build
+
+      - name: poetry publish
+        if: ${{ ! inputs.deploy }}
+        run: poetry publish
