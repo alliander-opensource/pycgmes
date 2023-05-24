@@ -1,10 +1,26 @@
 [tool.poetry]
 name = "pycgmes"
-version = "0.1.0"
+# Note that trying to reupload the same version will fail.
+version = "0.1.1"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["uno <uno@alliander.com>"]
 readme = "README.md"
 repository = "https://github.com/Alliander/cgmes-python"
+license = "Could be open source, right? I like MIT."
+classifiers = [
+    # I had fun going through https://pypi.org/classifiers/
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Framework :: AWS CDK :: 2",
+    "Framework :: FastAPI",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+    # "License :: OSI Approved :: MIT License",
+]
 # Because the standard structure (packagename) is used, it is not needed to give
 # a package configuration entry.
 
@@ -24,6 +40,9 @@ SCons = "*" # Command runner
 
 # yes, the double [[]] is required
 [[tool.poetry.source]]
+# Note that poetry treats repositories to which you publish packages as user specific and not project specific
+# configuration. So this config is niet enough to push.
+# You'll need to run poetry config repositories.internal-uno https://nexus.appx.cloud/repository/uno/simple
 name = "internal-cloud"
 url = "https://nexus.appx.cloud/repository/cloud-team/simple"
 priority = "explicit" # Means that it needs to be explicitely mentioned to be used.
