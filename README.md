@@ -70,3 +70,5 @@ Deployment happens to the internal Alliander Nexus for now, via the standard poe
 - open source it?
 - build the library with different versions possible, to eventually use it with eg. `pip install pycgmes["3.0.0"]` for CGMES version 3 or `pip install pycgmes["2.4.5"]` for another version.
 - buid cimexport in ?
+- add shacl files as optional extra `pip install pycgmes["shacl"]`
+- Sort out proper versioning. Currently pypi will prevent reupload, but maybe we can be smarter than that, inclusive github artifacts & co.

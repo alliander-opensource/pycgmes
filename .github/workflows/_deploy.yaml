@@ -107,12 +107,11 @@ jobs:
         run: poetry build
 
       - name: poetry publish
-        if: ${{ ! inputs.deploy }} # REMOVE THE ! AFTER TESTING
+        if: ${{ inputs.deploy }}
         env:
           UNO_NEXUS_PASSWORD: ${{ secrets.UNO_NEXUS_PASSWORD }}
           UNO_NEXUS_USER: ${{ secrets.UNO_NEXUS_USER }}
         run: |
           poetry config repositories.internal-uno https://nexus.appx.cloud/repository/uno-pypi/
           poetry config http-basic.internal-uno "$UNO_NEXUS_USER" "$UNO_NEXUS_PASSWORD"
-          echo poetry config http-basic.internal-uno "$UNO_NEXUS_USER" "$UNO_NEXUS_PASSWORD"
           poetry publish --repository internal-uno
