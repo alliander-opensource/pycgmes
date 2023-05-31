@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   build:
-    uses: ./.github/workflows/_deploy.yaml
+    uses: ./.github/workflows/_core.yaml
     with:
       deploy: false
     secrets:

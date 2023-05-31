@@ -57,13 +57,15 @@ The main differences between our version and upstream are:
 
 ### CI
 
-The CI happens ia GitHub actions.
+The CI happens in GitHub actions.
 
 The standard black/mypy/autoflake/isort/pylint/ruff/mypy are run there, via scons.
 
 ### CD
 
-Deployment happens to the internal Alliander Nexus for now, via the standard poetry commands `poetry build`, `poetry publish`.
+Deployment happens to the internal [Alliander Nexus](https://nexus.appx.cloud/#browse/browse:uno-pypi:pycgmes) for now, via the standard poetry commands `poetry build`, `poetry publish`.
+
+This is managed by Team Uno, which has the nexus credentials in their own keeper and as action secrets in GitHub.
 
 ## TODOs
 
