@@ -43,8 +43,8 @@ class TestBay:
         VoltageLevel=None
         """
         )[
-            1:
-        ]  # The first character is a newline, which is not in str()
+            1:-1
+        ]  # The first and last characters are newlines, which are not in str()
         assert str(Bay()) == expected
 
     def test_bay_has_expected_profiles(self):

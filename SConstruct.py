@@ -52,7 +52,7 @@ if "black" in COMMAND_LINE_TARGETS:
 
 # Quality target.
 if "ruff" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
-    # Replaces isort, autoflake and probalby pylint eventually.
+    # Replaces isort, autoflake and probably pylint eventually.
     cmd = f"ruff {_SUBJECT}"
     if _CHECK_ONLY:
         cmd += " --no-fix"
