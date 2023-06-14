@@ -72,7 +72,6 @@ class Profile(Enum):
 
 
 class DataclassConfig:  # pylint: disable=too-few-public-methods
-
     """
     Used to configure pydantic dataclasses.
 
