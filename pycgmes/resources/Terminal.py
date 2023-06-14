@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ACDCTerminal import ACDCTerminal
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class Terminal(ACDCTerminal):
     """
     An AC electrical connection point to a piece of conducting equipment. Terminals are connected at physical connection
@@ -39,9 +41,6 @@ class Terminal(ACDCTerminal):
     RemoteInputSignal: Input signal coming from this terminal.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     TopologicalNode: Optional[str] = None  # Type M:0..1 in CIM
     ConductingEquipment: Optional[str] = None  # Type M:1 in CIM
     ConnectivityNode: Optional[str] = None  # Type M:0..1 in CIM
@@ -67,11 +66,10 @@ class Terminal(ACDCTerminal):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=Terminal\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=Terminal"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -82,56 +80,56 @@ class Terminal(ACDCTerminal):
         return {
             # Class itself
             "class": [
-                self.profiles.TP.value,
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
-                self.profiles.DY.value,
-                self.profiles.OP.value,
+                Profile.TP.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SV.value,
+                Profile.SSH.value,
+                Profile.DY.value,
+                Profile.OP.value,
             ],
             # Attributes
             "TopologicalNode": [
-                self.profiles.TP.value,
+                Profile.TP.value,
             ],
             "ConductingEquipment": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
-                self.profiles.DY.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
+                Profile.DY.value,
             ],
             "ConnectivityNode": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "ConverterDCSides": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "AuxiliaryEquipment": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "RegulatingControl": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "phases": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "TransformerEnd": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "TieFlow": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "HasSecondMutualCoupling": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "HasFirstMutualCoupling": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "SvPowerFlow": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "RemoteInputSignal": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

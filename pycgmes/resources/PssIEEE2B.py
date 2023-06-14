@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PssIEEE2B(PowerSystemStabilizerDynamics):
     """
     IEEE 421.5-2005 type PSS2B power system stabilizer model. This stabilizer model is designed to represent a variety
@@ -45,9 +47,6 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
     vstmin: Stabilizer output minimum limit (Vstmin) (< PssIEEE2B.vstmax).  Typical value = -0,1.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     inputSignal1Type: Optional[str] = None  # Type M:1..1 in CIM
     inputSignal2Type: Optional[str] = None  # Type M:1..1 in CIM
     vsi1max: float = 0.0  # Type #PU in CIM
@@ -78,11 +77,10 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PssIEEE2B\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PssIEEE2B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -93,88 +91,88 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "inputSignal1Type": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "inputSignal2Type": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vsi1max": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vsi1min": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vsi2max": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vsi2min": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t11": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "n": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "m": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vstmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vstmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

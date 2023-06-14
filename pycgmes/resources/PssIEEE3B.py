@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PssIEEE3B(PowerSystemStabilizerDynamics):
     """
     IEEE 421.5-2005 type PSS3B power system stabilizer model. The PSS model PSS3B has dual inputs of electrical power
@@ -35,9 +37,6 @@ class PssIEEE3B(PowerSystemStabilizerDynamics):
     vstmin: Stabilizer output minimum limit (Vstmin) (< PssIEEE3B.vstmax).  Typical value = -0,1.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     t1: int = 0  # Type #Seconds in CIM
     t2: int = 0  # Type #Seconds in CIM
     tw1: int = 0  # Type #Seconds in CIM
@@ -58,11 +57,10 @@ class PssIEEE3B(PowerSystemStabilizerDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PssIEEE3B\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PssIEEE3B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -73,58 +71,58 @@ class PssIEEE3B(PowerSystemStabilizerDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "t1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vstmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vstmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

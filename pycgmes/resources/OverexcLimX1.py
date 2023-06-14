@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .OverexcitationLimiterDynamics import OverexcitationLimiterDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class OverexcLimX1(OverexcitationLimiterDynamics):
     """
     Field voltage over excitation limiter.
@@ -27,9 +29,6 @@ class OverexcLimX1(OverexcitationLimiterDynamics):
     vlow: Low voltage limit (VLOW) (> 0).
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     efdrated: float = 0.0  # Type #PU in CIM
     efd1: float = 0.0  # Type #PU in CIM
     t1: int = 0  # Type #Seconds in CIM
@@ -43,11 +42,10 @@ class OverexcLimX1(OverexcitationLimiterDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=OverexcLimX1\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=OverexcLimX1"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -58,37 +56,37 @@ class OverexcLimX1(OverexcitationLimiterDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "efdrated": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efd1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efd2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efd3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efddes": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vlow": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

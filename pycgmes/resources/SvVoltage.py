@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class SvVoltage(Base):
     """
     State variable for voltage.
@@ -18,20 +20,16 @@ class SvVoltage(Base):
     TopologicalNode: The topological node associated with the voltage state.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     angle: float = 0.0  # Type #AngleDegrees in CIM
     v: float = 0.0  # Type #Voltage in CIM
     TopologicalNode: Optional[str] = None  # Type M:1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=SvVoltage\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=SvVoltage"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -42,16 +40,16 @@ class SvVoltage(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             # Attributes
             "angle": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "v": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "TopologicalNode": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
         }

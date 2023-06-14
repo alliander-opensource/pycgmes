@@ -1,31 +1,29 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class Boolean(Base):
     """
     A type with the value space "true" and "false".
 
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # No attributes defined for this class.
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=Boolean\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=Boolean"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -36,15 +34,15 @@ class Boolean(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.GL.value,
-                self.profiles.DL.value,
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
-                self.profiles.DY.value,
-                self.profiles.OP.value,
+                Profile.GL.value,
+                Profile.DL.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SV.value,
+                Profile.SSH.value,
+                Profile.DY.value,
+                Profile.OP.value,
             ],
             # Attributes
         }

@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .DCBaseTerminal import DCBaseTerminal
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ACDCConverterDCTerminal(DCBaseTerminal):
     """
     A DC electrical connection point at the AC/DC converter. The AC/DC converter is electrically connected also to the
@@ -24,19 +26,16 @@ class ACDCConverterDCTerminal(DCBaseTerminal):
       `positive`, `middle` and `negative`.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     DCConductingEquipment: Optional[str] = None  # Type M:1 in CIM
     polarity: Optional[str] = None  # Type M:1..1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ACDCConverterDCTerminal\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ACDCConverterDCTerminal"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -47,15 +46,15 @@ class ACDCConverterDCTerminal(DCBaseTerminal):
         return {
             # Class itself
             "class": [
-                self.profiles.TP.value,
-                self.profiles.EQ.value,
-                self.profiles.SSH.value,
+                Profile.TP.value,
+                Profile.EQ.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "DCConductingEquipment": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "polarity": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

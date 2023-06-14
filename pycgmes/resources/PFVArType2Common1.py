@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PFVArControllerType2Dynamics import PFVArControllerType2Dynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PFVArType2Common1(PFVArControllerType2Dynamics):
     """
     Power factor / reactive power regulator. This model represents the power factor or reactive power controller such as
@@ -25,9 +27,6 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
       of the reference setting.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     j: bool = False  # Type #Boolean in CIM
     kp: float = 0.0  # Type #PU in CIM
     ki: float = 0.0  # Type #PU in CIM
@@ -36,11 +35,11 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PFVArType2Common1\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PFVArType2Common1"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -51,22 +50,22 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "j": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "max": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ref": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

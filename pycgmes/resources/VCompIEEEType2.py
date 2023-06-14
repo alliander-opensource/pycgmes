@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .VoltageCompensatorDynamics import VoltageCompensatorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class VCompIEEEType2(VoltageCompensatorDynamics):
     """
     Terminal voltage transducer and load compensator as defined in IEEE 421.5-2005, 4. This model is designed to cover
@@ -19,20 +21,16 @@ class VCompIEEEType2(VoltageCompensatorDynamics):
       generator.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     tr: int = 0  # Type #Seconds in CIM
     # *Association not used*
     # GenICompensationForGenJ : list = field(default_factory=list)  # Type M:2..n in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=VCompIEEEType2\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=VCompIEEEType2"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -43,13 +41,13 @@ class VCompIEEEType2(VoltageCompensatorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "tr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "GenICompensationForGenJ": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

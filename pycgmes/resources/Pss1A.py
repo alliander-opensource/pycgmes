@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class Pss1A(PowerSystemStabilizerDynamics):
     """
     Single input power system stabilizer. It is a modified version in order to allow representation of various vendors'
@@ -39,9 +41,6 @@ class Pss1A(PowerSystemStabilizerDynamics):
     tdelay: Time constant (Tdelay) (>= 0).
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     inputSignalType: Optional[str] = None  # Type M:1..1 in CIM
     a1: float = 0.0  # Type #PU in CIM
     a2: float = 0.0  # Type #PU in CIM
@@ -67,11 +66,10 @@ class Pss1A(PowerSystemStabilizerDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=Pss1A\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=Pss1A"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -82,73 +80,73 @@ class Pss1A(PowerSystemStabilizerDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "inputSignalType": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vcu": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vcl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tdelay": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

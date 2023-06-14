@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindPlantFreqPcontrolIEC(IdentifiedObject):
     """
     Frequency and active power controller model. Reference: IEC 61400-27-1:2015, Annex D.
@@ -41,9 +43,6 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
     WindPlantIEC: Wind plant model with which this wind plant frequency and active power control is associated.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # WindDynamicsLookupTable : list = field(default_factory=list)  # Type M:1..n in CIM
     dprefmax: float = 0.0  # Type #PU in CIM
@@ -66,11 +65,11 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindPlantFreqPcontrolIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindPlantFreqPcontrolIEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -81,58 +80,58 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "WindDynamicsLookupTable": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dprefmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dprefmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dpwprefmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dpwprefmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "prefmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "prefmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kiwpp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kiwppmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kiwppmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpwpp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kwppref": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpft": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpfv": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "twpffiltp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "twppfiltp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindPlantIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

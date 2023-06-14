@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindContCurrLimIEC(IdentifiedObject):
     """
     Current limitation model.  The current limitation model combines the physical limits and the control limits.
@@ -30,9 +32,6 @@ class WindContCurrLimIEC(IdentifiedObject):
     WindDynamicsLookupTable: The wind dynamics lookup table associated with this current control limitation model.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     imax: float = 0.0  # Type #PU in CIM
     imaxdip: float = 0.0  # Type #PU in CIM
     kpqu: float = 0.0  # Type #PU in CIM
@@ -47,11 +46,11 @@ class WindContCurrLimIEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindContCurrLimIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindContCurrLimIEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -62,34 +61,34 @@ class WindContCurrLimIEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "imax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "imaxdip": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpqu": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "mdfslim": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "mqpri": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tufiltcl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "upqumax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType3or4IEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindDynamicsLookupTable": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

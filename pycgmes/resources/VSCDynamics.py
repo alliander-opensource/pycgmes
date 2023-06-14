@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .HVDCDynamics import HVDCDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class VSCDynamics(HVDCDynamics):
     """
     VSC function block whose behaviour is described by reference to a standard model or by definition of a user-defined
@@ -17,18 +19,14 @@ class VSCDynamics(HVDCDynamics):
     VsConverter: Voltage source converter to which voltage source converter dynamics model applies.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     VsConverter: Optional[str] = None  # Type M:1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=VSCDynamics\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=VSCDynamics"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -39,10 +37,10 @@ class VSCDynamics(HVDCDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "VsConverter": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class Pss5(PowerSystemStabilizerDynamics):
     """
     Detailed Italian PSS.
@@ -35,9 +37,6 @@ class Pss5(PowerSystemStabilizerDynamics):
       than Pmin). Typical value = true.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     kpe: float = 0.0  # Type #Float in CIM
     kf: float = 0.0  # Type #Float in CIM
     isfreq: bool = False  # Type #Boolean in CIM
@@ -58,11 +57,10 @@ class Pss5(PowerSystemStabilizerDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=Pss5\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=Pss5"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -73,58 +71,58 @@ class Pss5(PowerSystemStabilizerDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "kpe": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "isfreq": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpss": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ctw2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vsmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vsmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpe": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "deadband": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vadat": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

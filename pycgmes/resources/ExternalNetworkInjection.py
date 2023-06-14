@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .RegulatingCondEq import RegulatingCondEq
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExternalNetworkInjection(RegulatingCondEq):
     """
     This class represents the external network and it is used for IEC 60909 calculations.
@@ -49,9 +51,6 @@ class ExternalNetworkInjection(RegulatingCondEq):
       value for steady state solutions.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     governorSCD: float = 0.0  # Type #ActivePowerPerFrequency in CIM
     maxP: float = 0.0  # Type #ActivePower in CIM
     maxQ: float = 0.0  # Type #ReactivePower in CIM
@@ -73,11 +72,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExternalNetworkInjection\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExternalNetworkInjection"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -88,63 +87,63 @@ class ExternalNetworkInjection(RegulatingCondEq):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "governorSCD": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "maxP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "maxQ": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "minP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "minQ": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ikSecond": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "maxInitialSymShCCurrent": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "maxR0ToX0Ratio": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "maxR1ToX1Ratio": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "maxZ0ToZ1Ratio": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "minInitialSymShCCurrent": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "minR0ToX0Ratio": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "minR1ToX1Ratio": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "minZ0ToZ1Ratio": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "voltageFactor": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "referencePriority": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "p": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "q": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }

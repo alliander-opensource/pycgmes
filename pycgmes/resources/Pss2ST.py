@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class Pss2ST(PowerSystemStabilizerDynamics):
     """
     PTI microprocessor-based stabilizer type 1.
@@ -38,9 +40,6 @@ class Pss2ST(PowerSystemStabilizerDynamics):
     vcl: Cutoff limiter (VCL).
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     inputSignal1Type: Optional[str] = None  # Type M:1..1 in CIM
     inputSignal2Type: Optional[str] = None  # Type M:1..1 in CIM
     k1: float = 0.0  # Type #PU in CIM
@@ -62,11 +61,10 @@ class Pss2ST(PowerSystemStabilizerDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=Pss2ST\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=Pss2ST"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -77,61 +75,61 @@ class Pss2ST(PowerSystemStabilizerDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "inputSignal1Type": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "inputSignal2Type": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "lsmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "lsmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vcu": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vcl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

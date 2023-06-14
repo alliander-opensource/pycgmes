@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class Status(Base):
     """
     Current status information relevant to an entity.
@@ -19,9 +21,6 @@ class Status(Base):
     reason: Reason code or explanation for why an object went to the current status `value`.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     value: str = ""  # Type #String in CIM
     dateTime: str = ""  # Type #DateTime in CIM
     remark: str = ""  # Type #String in CIM
@@ -29,11 +28,10 @@ class Status(Base):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=Status\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=Status"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -44,19 +42,19 @@ class Status(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             # Attributes
             "value": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "dateTime": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "remark": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "reason": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
         }

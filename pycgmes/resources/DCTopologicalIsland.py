@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import field, fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class DCTopologicalIsland(IdentifiedObject):
     """
     An electrically connected subset of the network. DC topological islands can change as the current network state
@@ -18,18 +20,15 @@ class DCTopologicalIsland(IdentifiedObject):
     DCTopologicalNodes: The DC topological nodes in a DC topological island.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     DCTopologicalNodes: list = field(default_factory=list)  # Type M:1..n in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=DCTopologicalIsland\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=DCTopologicalIsland"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -40,10 +39,10 @@ class DCTopologicalIsland(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             # Attributes
             "DCTopologicalNodes": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
         }

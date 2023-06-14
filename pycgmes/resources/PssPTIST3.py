@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PssPTIST3(PowerSystemStabilizerDynamics):
     """
     PTI microprocessor-based stabilizer type 3.
@@ -49,9 +51,6 @@ class PssPTIST3(PowerSystemStabilizerDynamics):
     ncr: Number of counts until reset after limit function is triggered (NCR).
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     m: float = 0.0  # Type #PU in CIM
     tf: int = 0  # Type #Seconds in CIM
     tp: int = 0  # Type #Seconds in CIM
@@ -89,11 +88,10 @@ class PssPTIST3(PowerSystemStabilizerDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PssPTIST3\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PssPTIST3"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -104,109 +102,109 @@ class PssPTIST3(PowerSystemStabilizerDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "m": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dtf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dtc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dtp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a0": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "b0": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "b1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "b2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "a5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "b3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "b4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "b5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "athres": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "al": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "lthres": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "isw": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "nav": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ncl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ncr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

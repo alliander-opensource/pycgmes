@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ShuntCompensator import ShuntCompensator
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class LinearShuntCompensator(ShuntCompensator):
     """
     A linear shunt compensator has banks or sections with equal admittance values.
@@ -18,9 +20,6 @@ class LinearShuntCompensator(ShuntCompensator):
     g0PerSection: Zero sequence shunt (charging) conductance per section.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     bPerSection: float = 0.0  # Type #Susceptance in CIM
     gPerSection: float = 0.0  # Type #Conductance in CIM
     b0PerSection: float = 0.0  # Type #Susceptance in CIM
@@ -28,11 +27,11 @@ class LinearShuntCompensator(ShuntCompensator):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=LinearShuntCompensator\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=LinearShuntCompensator"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -43,21 +42,21 @@ class LinearShuntCompensator(ShuntCompensator):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "bPerSection": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "gPerSection": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "b0PerSection": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "g0PerSection": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
         }

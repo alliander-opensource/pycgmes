@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class StreetDetail(Base):
     """
     Street details, in the context of address.
@@ -31,9 +33,6 @@ class StreetDetail(Base):
       of this address.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     number: str = ""  # Type #String in CIM
     name: str = ""  # Type #String in CIM
     suffix: str = ""  # Type #String in CIM
@@ -50,11 +49,10 @@ class StreetDetail(Base):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=StreetDetail\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=StreetDetail"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -65,46 +63,46 @@ class StreetDetail(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             # Attributes
             "number": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "name": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "suffix": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "prefix": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "type": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "code": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "buildingName": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "suiteNumber": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "addressGeneral": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "addressGeneral2": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "addressGeneral3": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "withinTownLimits": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "floorIdentification": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
         }

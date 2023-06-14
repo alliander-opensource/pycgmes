@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .DCConductingEquipment import DCConductingEquipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class DCLineSegment(DCConductingEquipment):
     """
     A wire or combination of wires not insulated from one another, with consistent electrical characteristics, used to
@@ -19,9 +21,6 @@ class DCLineSegment(DCConductingEquipment):
     length: Segment length for calculating line section capabilities.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     capacitance: float = 0.0  # Type #Capacitance in CIM
     inductance: float = 0.0  # Type #Inductance in CIM
     resistance: float = 0.0  # Type #Resistance in CIM
@@ -29,11 +28,10 @@ class DCLineSegment(DCConductingEquipment):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=DCLineSegment\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=DCLineSegment"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -44,19 +42,19 @@ class DCLineSegment(DCConductingEquipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "capacitance": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "inductance": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "resistance": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "length": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

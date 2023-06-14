@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class VoltageAdjusterDynamics(DynamicsFunctionBlock):
     """
     Voltage adjuster function block whose behaviour is described by reference to a standard model or by definition of a
@@ -18,18 +20,15 @@ class VoltageAdjusterDynamics(DynamicsFunctionBlock):
       associated.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     PFVArControllerType1Dynamics: Optional[str] = None  # Type M:1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=VoltageAdjusterDynamics\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=VoltageAdjusterDynamics"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -40,10 +39,10 @@ class VoltageAdjusterDynamics(DynamicsFunctionBlock):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "PFVArControllerType1Dynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

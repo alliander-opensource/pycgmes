@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ConductingEquipment import ConductingEquipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PowerTransformer(ConductingEquipment):
     """
     An electrical device consisting of  two or more coupled windings, with or without a magnetic core, for introducing
@@ -44,9 +46,6 @@ class PowerTransformer(ConductingEquipment):
       data exchange according to IEC 60909.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # PowerTransformerEnd : list = field(default_factory=list)  # Type M:0..n in CIM
     beforeShCircuitHighestOperatingCurrent: float = 0.0  # Type #CurrentFlow in CIM
@@ -58,11 +57,11 @@ class PowerTransformer(ConductingEquipment):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PowerTransformer\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PowerTransformer"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -73,29 +72,29 @@ class PowerTransformer(ConductingEquipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
+                Profile.EQ.value,
+                Profile.SC.value,
             ],
             # Attributes
             "PowerTransformerEnd": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "beforeShCircuitHighestOperatingCurrent": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "beforeShCircuitHighestOperatingVoltage": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "beforeShortCircuitAnglePf": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "highSideMinOperatingU": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "isPartOfGeneratorUnit": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "operationalValuesConsidered": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
         }

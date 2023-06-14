@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ACDCTerminal(IdentifiedObject):
     """
     An electrical connection point (AC or DC) to a piece of conducting equipment. Terminals are connected at physical
@@ -32,9 +34,6 @@ class ACDCTerminal(IdentifiedObject):
       isolator.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     sequenceNumber: int = 0  # Type #Integer in CIM
     # *Association not used*
     # OperationalLimitSet : list = field(default_factory=list)  # Type M:0..n in CIM
@@ -45,11 +44,10 @@ class ACDCTerminal(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ACDCTerminal\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ACDCTerminal"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -60,29 +58,29 @@ class ACDCTerminal(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.TP.value,
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
-                self.profiles.DY.value,
-                self.profiles.OP.value,
+                Profile.TP.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SV.value,
+                Profile.SSH.value,
+                Profile.DY.value,
+                Profile.OP.value,
             ],
             # Attributes
             "sequenceNumber": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "OperationalLimitSet": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "BusNameMarker": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "connected": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "Measurements": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
         }

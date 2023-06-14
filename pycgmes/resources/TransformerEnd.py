@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class TransformerEnd(IdentifiedObject):
     """
     A conducting connection point of a power transformer. It corresponds to a physical transformer winding terminal.  In
@@ -28,9 +30,6 @@ class TransformerEnd(IdentifiedObject):
     xground: (for Yn and Zn connections) Reactive part of neutral impedance where `grounded` is true.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     BaseVoltage: Optional[str] = None  # Type M:1 in CIM
     # *Association not used*
     # PhaseTapChanger : Optional[str] = None  # Type M:0..1 in CIM
@@ -44,11 +43,10 @@ class TransformerEnd(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=TransformerEnd\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=TransformerEnd"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -59,32 +57,32 @@ class TransformerEnd(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
+                Profile.EQ.value,
+                Profile.SC.value,
             ],
             # Attributes
             "BaseVoltage": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "PhaseTapChanger": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "RatioTapChanger": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "Terminal": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "endNumber": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "rground": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "grounded": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "xground": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
         }

@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GovHydroWEH(TurbineGovernorDynamics):
     """
     WoodwardTM electric hydro governor.  [Footnote: Woodward electric hydro governors are an example of suitable
@@ -100,9 +102,6 @@ class GovHydroWEH(TurbineGovernorDynamics):
       mechanical power on machine MVA rating as a function of turbine flow.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     mwbase: float = 0.0  # Type #ActivePower in CIM
     rpg: float = 0.0  # Type #Float in CIM
     rpp: float = 0.0  # Type #Float in CIM
@@ -157,11 +156,10 @@ class GovHydroWEH(TurbineGovernorDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GovHydroWEH\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GovHydroWEH"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -172,160 +170,160 @@ class GovHydroWEH(TurbineGovernorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "mwbase": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rpg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rpp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpe": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "td": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tdv": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gtmxop": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gtmxcl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dturb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "db": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dpv": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dicn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "feedbackSignal": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fl1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fl2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fl3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fl4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fl5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fp1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fp2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fp3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fp4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fp5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fp6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fp7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fp8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fp9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fp10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmss1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmss2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmss3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmss4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmss5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmss6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmss7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmss8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmss9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmss10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

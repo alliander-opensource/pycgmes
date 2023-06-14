@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class TopologicalNode(IdentifiedObject):
     """
     For a detailed substation model a topological node is a set of connectivity nodes that, in the current network
@@ -33,9 +35,6 @@ class TopologicalNode(IdentifiedObject):
     TopologicalIsland: A topological node belongs to a topological island.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     BaseVoltage: Optional[str] = None  # Type M:1..1 in CIM
     # *Association not used*
     # ConnectivityNodes : list = field(default_factory=list)  # Type M:0..n in CIM
@@ -54,11 +53,11 @@ class TopologicalNode(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=TopologicalNode\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=TopologicalNode"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -69,35 +68,35 @@ class TopologicalNode(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.TP.value,
-                self.profiles.SV.value,
+                Profile.TP.value,
+                Profile.SV.value,
             ],
             # Attributes
             "BaseVoltage": [
-                self.profiles.TP.value,
+                Profile.TP.value,
             ],
             "ConnectivityNodes": [
-                self.profiles.TP.value,
+                Profile.TP.value,
             ],
             "ConnectivityNodeContainer": [
-                self.profiles.TP.value,
+                Profile.TP.value,
             ],
             "Terminal": [
-                self.profiles.TP.value,
+                Profile.TP.value,
             ],
             "ReportingGroup": [
-                self.profiles.TP.value,
+                Profile.TP.value,
             ],
             "SvInjection": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "SvVoltage": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "AngleRefTopologicalIsland": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "TopologicalIsland": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
         }

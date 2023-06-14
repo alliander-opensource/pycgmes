@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcSK(ExcitationSystemDynamics):
     """
     Slovakian excitation system.  UEL and secondary voltage control are included in this model. When this model is used,
@@ -52,9 +54,6 @@ class ExcSK(ExcitationSystemDynamics):
     yp: Maximum output (Yp).  Typical value = 1.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     efdmax: float = 0.0  # Type #PU in CIM
     efdmin: float = 0.0  # Type #PU in CIM
     emax: float = 0.0  # Type #PU in CIM
@@ -90,11 +89,10 @@ class ExcSK(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcSK\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcSK"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -105,103 +103,103 @@ class ExcSK(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "efdmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efdmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "emax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "emin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kce": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kgob": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kqi": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kqob": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kqp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "nq": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "qconoff": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "qz": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "remote": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "sbase": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "uimax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "uimin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "urmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "urmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vtmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vtmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "yp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

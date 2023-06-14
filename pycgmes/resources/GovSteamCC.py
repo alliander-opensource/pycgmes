@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .CrossCompoundTurbineGovernorDynamics import CrossCompoundTurbineGovernorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GovSteamCC(CrossCompoundTurbineGovernorDynamics):
     """
     Cross compound turbine governor.  Unlike tandem compound units, cross compound units are not on the same shaft.
@@ -31,9 +33,6 @@ class GovSteamCC(CrossCompoundTurbineGovernorDynamics):
     dlp: LP damping factor (Dlp).  Typical value = 0.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     mwbase: float = 0.0  # Type #ActivePower in CIM
     pmaxhp: float = 0.0  # Type #PU in CIM
     rhp: float = 0.0  # Type #PU in CIM
@@ -54,11 +53,10 @@ class GovSteamCC(CrossCompoundTurbineGovernorDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GovSteamCC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GovSteamCC"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -69,58 +67,58 @@ class GovSteamCC(CrossCompoundTurbineGovernorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "mwbase": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmaxhp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rhp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1hp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t3hp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t4hp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t5hp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "fhp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dhp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmaxlp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rlp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1lp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t3lp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t4lp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t5lp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dlp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

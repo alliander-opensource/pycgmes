@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcST3A(ExcitationSystemDynamics):
     """
     Modified IEEE ST3A static excitation system with added speed multiplier.
@@ -34,9 +36,6 @@ class ExcST3A(ExcitationSystemDynamics):
     ks1: Coefficient to allow different usage of the model-speed coefficient (Ks1).  Typical value = 0.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     vimax: float = 0.0  # Type #PU in CIM
     vimin: float = 0.0  # Type #PU in CIM
     kj: float = 0.0  # Type #PU in CIM
@@ -60,11 +59,10 @@ class ExcST3A(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcST3A\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcST3A"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -75,67 +73,67 @@ class ExcST3A(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "vimax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vimin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kj": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efdmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "km": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tm": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "thetap": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vbmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vgmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

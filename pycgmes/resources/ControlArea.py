@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemResource import PowerSystemResource
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ControlArea(PowerSystemResource):
     """
     A control area is a grouping of generating units and/or loads and a cutset of tie lines (as terminals) which may be
@@ -40,9 +42,6 @@ class ControlArea(PowerSystemResource):
     pTolerance: Active power net interchange tolerance. The attribute shall be a positive value or zero.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     type: Optional[str] = None  # Type M:1..1 in CIM
     # *Association not used*
     # TieFlow : list = field(default_factory=list)  # Type M:0..n in CIM
@@ -54,11 +53,10 @@ class ControlArea(PowerSystemResource):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ControlArea\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ControlArea"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -69,26 +67,26 @@ class ControlArea(PowerSystemResource):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "type": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "TieFlow": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ControlAreaGeneratingUnit": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "EnergyArea": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "netInterchange": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "pTolerance": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }

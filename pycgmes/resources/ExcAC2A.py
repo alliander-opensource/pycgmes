@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcAC2A(ExcitationSystemDynamics):
     """
     Modified IEEE AC2A alternator-supplied rectifier excitation system with different field current limit.
@@ -47,9 +49,6 @@ class ExcAC2A(ExcitationSystemDynamics):
     lvgate: Indicates if LV gate is active (LVgate). true = gate is used false = gate is not used. Typical value = true.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     tb: int = 0  # Type #Seconds in CIM
     tc: int = 0  # Type #Seconds in CIM
     ka: float = 0.0  # Type #PU in CIM
@@ -81,11 +80,10 @@ class ExcAC2A(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcAC2A\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcAC2A"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -96,91 +94,91 @@ class ExcAC2A(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "tb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ka": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vamax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vamin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kb1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vfemax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kh": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vlr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kl1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ke": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ve1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "seve1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ve2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "seve2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "hvgate": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "lvgate": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

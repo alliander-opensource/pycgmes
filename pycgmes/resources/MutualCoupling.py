@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class MutualCoupling(IdentifiedObject):
     """
     This class represents the zero sequence line mutual coupling.
@@ -30,9 +32,6 @@ class MutualCoupling(IdentifiedObject):
       first and second terminals of a mutual coupling should point to different AC line segments.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     b0ch: float = 0.0  # Type #Susceptance in CIM
     distance11: float = 0.0  # Type #Length in CIM
     distance12: float = 0.0  # Type #Length in CIM
@@ -46,11 +45,10 @@ class MutualCoupling(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=MutualCoupling\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=MutualCoupling"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -61,37 +59,37 @@ class MutualCoupling(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             # Attributes
             "b0ch": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "distance11": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "distance12": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "distance21": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "distance22": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "g0ch": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "r0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "x0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "Second_Terminal": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "First_Terminal": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
         }

@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import field, fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .LimitSet import LimitSet
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class AnalogLimitSet(LimitSet):
     """
     An AnalogLimitSet specifies a set of Limits that are associated with an Analog measurement.
@@ -16,20 +18,16 @@ class AnalogLimitSet(LimitSet):
     Limits: The limit values used for supervision of Measurements.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     Measurements: list = field(default_factory=list)  # Type M:1..n in CIM
     # *Association not used*
     # Limits : list = field(default_factory=list)  # Type M:0..n in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=AnalogLimitSet\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=AnalogLimitSet"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -40,13 +38,13 @@ class AnalogLimitSet(LimitSet):
         return {
             # Class itself
             "class": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             # Attributes
             "Measurements": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "Limits": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
         }

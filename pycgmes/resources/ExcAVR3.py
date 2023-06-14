@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcAVR3(ExcitationSystemDynamics):
     """
     Italian excitation system. It represents an exciter dynamo and electric regulator.
@@ -26,9 +28,6 @@ class ExcAVR3(ExcitationSystemDynamics):
     se2: Saturation factor at E2 (S[E2]).  Typical value = 0,03.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     ka: float = 0.0  # Type #Float in CIM
     vrmn: float = 0.0  # Type #PU in CIM
     vrmx: float = 0.0  # Type #PU in CIM
@@ -44,11 +43,10 @@ class ExcAVR3(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcAVR3\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcAVR3"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -59,43 +57,43 @@ class ExcAVR3(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "ka": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "e1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "se1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "e2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "se2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,15 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
+from .DiscontinuousExcitationControlDynamics import DiscontinuousExcitationControlDynamics
 
-from .DiscontinuousExcitationControlDynamics import (
-    DiscontinuousExcitationControlDynamics,
-)
 
-
-@dataclass
+@dataclass(config=DataclassConfig)
 class DiscExcContIEEEDEC1A(DiscontinuousExcitationControlDynamics):
     """
     IEEE type DEC1A discontinuous excitation control model that boosts generator excitation to a level higher than that
@@ -36,9 +36,6 @@ class DiscExcContIEEEDEC1A(DiscontinuousExcitationControlDynamics):
     vanmax: Limiter for Van (VANMAX).
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     vtlmt: float = 0.0  # Type #PU in CIM
     vomax: float = 0.0  # Type #PU in CIM
     vomin: float = 0.0  # Type #PU in CIM
@@ -60,11 +57,11 @@ class DiscExcContIEEEDEC1A(DiscontinuousExcitationControlDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=DiscExcContIEEEDEC1A\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=DiscExcContIEEEDEC1A"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -75,61 +72,61 @@ class DiscExcContIEEEDEC1A(DiscontinuousExcitationControlDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "vtlmt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vomax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vomin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ketl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vtc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "val": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "esc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kan": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tan": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vsmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vsmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "td": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vtm": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vtn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vanmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

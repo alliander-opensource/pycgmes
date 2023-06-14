@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Control import Control
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class Command(Control):
     """
     A Command is a discrete control used for supervisory control.
@@ -19,9 +21,6 @@ class Command(Control):
     DiscreteValue: The MeasurementValue that is controlled.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     normalValue: int = 0  # Type #Integer in CIM
     value: int = 0  # Type #Integer in CIM
     ValueAliasSet: Optional[str] = None  # Type M:0..1 in CIM
@@ -29,11 +28,10 @@ class Command(Control):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=Command\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=Command"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -44,19 +42,19 @@ class Command(Control):
         return {
             # Class itself
             "class": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             # Attributes
             "normalValue": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "value": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "ValueAliasSet": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "DiscreteValue": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
         }

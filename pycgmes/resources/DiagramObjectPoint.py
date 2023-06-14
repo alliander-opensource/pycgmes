@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class DiagramObjectPoint(Base):
     """
     A point in a given space defined by 3 coordinates and associated to a diagram object.  The coordinates may be
@@ -23,9 +25,6 @@ class DiagramObjectPoint(Base):
     zPosition: The Z coordinate of this point.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     DiagramObject: Optional[str] = None  # Type M:1 in CIM
     DiagramObjectGluePoint: Optional[str] = None  # Type M:0..1 in CIM
     sequenceNumber: int = 0  # Type #Integer in CIM
@@ -35,11 +34,11 @@ class DiagramObjectPoint(Base):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=DiagramObjectPoint\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=DiagramObjectPoint"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -50,25 +49,25 @@ class DiagramObjectPoint(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             # Attributes
             "DiagramObject": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "DiagramObjectGluePoint": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "sequenceNumber": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "xPosition": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "yPosition": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "zPosition": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
         }

@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class UnderexcLimIEEE2(UnderexcitationLimiterDynamics):
     """
     Type UEL2 underexcitation limiter which has either a straight-line or multi-segment characteristic when plotted in
@@ -58,9 +60,6 @@ class UnderexcLimIEEE2(UnderexcitationLimiterDynamics):
       = 2.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     tuv: int = 0  # Type #Seconds in CIM
     tup: int = 0  # Type #Seconds in CIM
     tuq: int = 0  # Type #Seconds in CIM
@@ -104,11 +103,11 @@ class UnderexcLimIEEE2(UnderexcitationLimiterDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=UnderexcLimIEEE2\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=UnderexcLimIEEE2"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -119,127 +118,127 @@ class UnderexcLimIEEE2(UnderexcitationLimiterDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "tuv": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tup": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tuq": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kui": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kul": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vuimax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vuimin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kuf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kfb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tul": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tu1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tu2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tu3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tu4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vulmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vulmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p0": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q0": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "q10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

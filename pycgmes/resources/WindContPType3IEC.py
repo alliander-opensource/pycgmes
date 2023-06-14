@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindContPType3IEC(IdentifiedObject):
     """
     P control model type 3. Reference: IEC 61400-27-1:2015, 5.6.5.4.
@@ -44,9 +46,6 @@ class WindContPType3IEC(IdentifiedObject):
     WindDynamicsLookupTable: The wind dynamics lookup table associated with this P control type 3 model.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     dpmax: float = 0.0  # Type #PU in CIM
     dprefmax: float = 0.0  # Type #PU in CIM
     dprefmin: float = 0.0  # Type #PU in CIM
@@ -77,11 +76,11 @@ class WindContPType3IEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindContPType3IEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindContPType3IEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -92,82 +91,82 @@ class WindContPType3IEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "dpmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dprefmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dprefmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dthetamax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dthetamaxuvrt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kdtd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kip": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "mpuvrt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "omegaoffset": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pdtdmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tdvs": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "thetaemin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "thetauscale": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tomegafiltp3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpfiltp3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpord": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tufiltp3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tomegaref": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "udvs": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "updip": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "omegadtd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "zeta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType3IEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindDynamicsLookupTable": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .RegulatingControl import RegulatingControl
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class TapChangerControl(RegulatingControl):
     """
     Describes behaviour specific to tap changers, e.g. how the voltage at the end of a line varies with the load level
@@ -16,19 +18,16 @@ class TapChangerControl(RegulatingControl):
     TapChanger: The tap changers that participates in this regulating tap control scheme.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # TapChanger : list = field(default_factory=list)  # Type M:1..n in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=TapChangerControl\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=TapChangerControl"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -39,11 +38,11 @@ class TapChangerControl(RegulatingControl):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "TapChanger": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

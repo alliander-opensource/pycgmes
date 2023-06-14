@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindPitchContPowerIEC(IdentifiedObject):
     """
     Pitch control power model. Reference: IEC 61400-27-1:2015, 5.6.5.1.
@@ -25,9 +27,6 @@ class WindPitchContPowerIEC(IdentifiedObject):
     uuvrt: Dip detection threshold (uUVRT). It is a type-dependent parameter.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # WindDynamicsLookupTable : list = field(default_factory=list)  # Type M:1..n in CIM
     # *Association not used*
@@ -44,11 +43,11 @@ class WindPitchContPowerIEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindPitchContPowerIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindPitchContPowerIEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -59,37 +58,37 @@ class WindPitchContPowerIEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "WindDynamicsLookupTable": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindGenTurbineType1bIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindGenTurbineType2IEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dpmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dpmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pset": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "uuvrt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

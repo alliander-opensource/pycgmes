@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .RegulatingCondEq import RegulatingCondEq
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ShuntCompensator(RegulatingCondEq):
     """
     A shunt capacitor or reactor or switchable bank of shunt capacitors or reactors. A section of a shunt compensator is
@@ -37,9 +39,6 @@ class ShuntCompensator(RegulatingCondEq):
       NonlinearShuntCompenstorPoint-s.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     aVRDelay: int = 0  # Type #Seconds in CIM
     grounded: bool = False  # Type #Boolean in CIM
     maximumSections: int = 0  # Type #Integer in CIM
@@ -52,11 +51,11 @@ class ShuntCompensator(RegulatingCondEq):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ShuntCompensator\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ShuntCompensator"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -67,34 +66,34 @@ class ShuntCompensator(RegulatingCondEq):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SV.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "aVRDelay": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "grounded": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "maximumSections": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "nomU": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "normalSections": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "voltageSensitivity": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "SvShuntCompensatorSections": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "sections": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }

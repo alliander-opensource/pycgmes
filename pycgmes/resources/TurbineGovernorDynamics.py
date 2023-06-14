@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class TurbineGovernorDynamics(DynamicsFunctionBlock):
     """
     Turbine-governor function block whose behaviour is described by reference to a standard model or by definition of a
@@ -23,9 +25,6 @@ class TurbineGovernorDynamics(DynamicsFunctionBlock):
     TurbineLoadControllerDynamics: Turbine load controller providing input to this turbine-governor.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     SynchronousMachineDynamics: Optional[str] = None  # Type M:0..1 in CIM
     AsynchronousMachineDynamics: Optional[str] = None  # Type M:0..1 in CIM
     # *Association not used*
@@ -33,11 +32,11 @@ class TurbineGovernorDynamics(DynamicsFunctionBlock):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=TurbineGovernorDynamics\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=TurbineGovernorDynamics"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -48,16 +47,16 @@ class TurbineGovernorDynamics(DynamicsFunctionBlock):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "SynchronousMachineDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "AsynchronousMachineDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "TurbineLoadControllerDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

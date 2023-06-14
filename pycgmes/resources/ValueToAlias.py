@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ValueToAlias(IdentifiedObject):
     """
     Describes the translation of one particular value into a name, e.g. 1 as "Open".
@@ -17,19 +19,15 @@ class ValueToAlias(IdentifiedObject):
     value: The value that is mapped.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     ValueAliasSet: Optional[str] = None  # Type M:1 in CIM
     value: int = 0  # Type #Integer in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ValueToAlias\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ValueToAlias"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -40,13 +38,13 @@ class ValueToAlias(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             # Attributes
             "ValueAliasSet": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "value": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
         }

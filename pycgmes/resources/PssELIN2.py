@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PssELIN2(PowerSystemStabilizerDynamics):
     """
     Power system stabilizer typically associated with ExcELIN2 (though PssIEEE2B or Pss2B can also be used).
@@ -25,9 +27,6 @@ class PssELIN2(PowerSystemStabilizerDynamics):
     psslim: PSS limiter (psslim).  Typical value = 0,1.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     ts1: int = 0  # Type #Seconds in CIM
     ts2: int = 0  # Type #Seconds in CIM
     ts3: int = 0  # Type #Seconds in CIM
@@ -42,11 +41,10 @@ class PssELIN2(PowerSystemStabilizerDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PssELIN2\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PssELIN2"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -57,40 +55,40 @@ class PssELIN2(PowerSystemStabilizerDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "ts1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ts2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ts3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ts4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ts5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ts6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ppss": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "apss": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "psslim": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

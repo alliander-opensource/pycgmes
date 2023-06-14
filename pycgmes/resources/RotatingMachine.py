@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .RegulatingCondEq import RegulatingCondEq
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class RotatingMachine(RegulatingCondEq):
     """
     A rotating machine which may be used as a generator or motor.
@@ -28,9 +30,6 @@ class RotatingMachine(RegulatingCondEq):
       value for a steady state solution.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     GeneratingUnit: Optional[str] = None  # Type M:0..1 in CIM
     # *Association not used*
     # HydroPump : Optional[str] = None  # Type M:0..1 in CIM
@@ -42,11 +41,11 @@ class RotatingMachine(RegulatingCondEq):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=RotatingMachine\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=RotatingMachine"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -57,31 +56,31 @@ class RotatingMachine(RegulatingCondEq):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SSH.value,
-                self.profiles.DY.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SSH.value,
+                Profile.DY.value,
             ],
             # Attributes
             "GeneratingUnit": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "HydroPump": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ratedPowerFactor": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ratedS": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ratedU": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "p": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "q": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }

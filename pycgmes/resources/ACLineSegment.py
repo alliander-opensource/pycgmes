@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Conductor import Conductor
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ACLineSegment(Conductor):
     """
     A wire or combination of wires, with consistent electrical characteristics, building a single electrical system,
@@ -33,9 +35,6 @@ class ACLineSegment(Conductor):
     x0: Zero sequence series reactance of the entire line section.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     bch: float = 0.0  # Type #Susceptance in CIM
     gch: float = 0.0  # Type #Conductance in CIM
     r: float = 0.0  # Type #Resistance in CIM
@@ -52,11 +51,10 @@ class ACLineSegment(Conductor):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ACLineSegment\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ACLineSegment"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -67,41 +65,41 @@ class ACLineSegment(Conductor):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
+                Profile.EQ.value,
+                Profile.SC.value,
             ],
             # Attributes
             "bch": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "gch": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "r": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "x": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "Clamp": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "Cut": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "b0ch": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "g0ch": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "r0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "shortCircuitEndTemperature": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "x0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
         }

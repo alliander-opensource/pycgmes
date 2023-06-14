@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcIEEEST6B(ExcitationSystemDynamics):
     """
     IEEE 421.5-2005 type ST6B model. This model consists of a PI voltage regulator with an inner loop field voltage
@@ -31,9 +33,6 @@ class ExcIEEEST6B(ExcitationSystemDynamics):
     vrmin: Minimum voltage regulator output (VRMIN) (< 0).  Typical value = -3,85.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     ilr: float = 0.0  # Type #PU in CIM
     kci: float = 0.0  # Type #PU in CIM
     kff: float = 0.0  # Type #PU in CIM
@@ -51,11 +50,10 @@ class ExcIEEEST6B(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcIEEEST6B\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcIEEEST6B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -66,49 +64,49 @@ class ExcIEEEST6B(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "ilr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kci": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kff": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kia": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "klr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "km": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpa": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "oelin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vamax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vamin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

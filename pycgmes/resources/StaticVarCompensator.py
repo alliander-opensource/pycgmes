@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .RegulatingCondEq import RegulatingCondEq
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class StaticVarCompensator(RegulatingCondEq):
     """
     A facility for providing variable and controllable shunt reactive power. The SVC typically consists of a stepdown
@@ -33,9 +35,6 @@ class StaticVarCompensator(RegulatingCondEq):
       Static Var Compensator.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     capacitiveRating: float = 0.0  # Type #Reactance in CIM
     inductiveRating: float = 0.0  # Type #Reactance in CIM
     slope: float = 0.0  # Type #VoltagePerReactivePower in CIM
@@ -47,11 +46,11 @@ class StaticVarCompensator(RegulatingCondEq):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=StaticVarCompensator\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=StaticVarCompensator"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -62,30 +61,30 @@ class StaticVarCompensator(RegulatingCondEq):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SSH.value,
-                self.profiles.DY.value,
+                Profile.EQ.value,
+                Profile.SSH.value,
+                Profile.DY.value,
             ],
             # Attributes
             "capacitiveRating": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "inductiveRating": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "slope": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "sVCControlMode": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "voltageSetPoint": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "q": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "StaticVarCompensatorDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

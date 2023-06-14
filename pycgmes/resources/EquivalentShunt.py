@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .EquivalentEquipment import EquivalentEquipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class EquivalentShunt(EquivalentEquipment):
     """
     The class represents equivalent shunts.
@@ -16,19 +18,16 @@ class EquivalentShunt(EquivalentEquipment):
     g: Positive sequence shunt conductance.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     b: float = 0.0  # Type #Susceptance in CIM
     g: float = 0.0  # Type #Conductance in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=EquivalentShunt\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=EquivalentShunt"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -39,13 +38,13 @@ class EquivalentShunt(EquivalentEquipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "b": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "g": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

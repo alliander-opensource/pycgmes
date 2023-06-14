@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcST4B(ExcitationSystemDynamics):
     """
     Modified IEEE ST4B static excitation system with maximum inner loop feedback gain Vgmax.
@@ -35,9 +37,6 @@ class ExcST4B(ExcitationSystemDynamics):
       diagram.  Typical value = false.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     kpr: float = 0.0  # Type #PU in CIM
     kir: float = 0.0  # Type #PU in CIM
     ta: int = 0  # Type #Seconds in CIM
@@ -60,11 +59,10 @@ class ExcST4B(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcST4B\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcST4B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -75,64 +73,64 @@ class ExcST4B(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "kpr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kir": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpm": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kim": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vmmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vmmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "thetap": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vbmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vgmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "uel": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "lvgate": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

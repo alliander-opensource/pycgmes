@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GovHydroPelton(TurbineGovernorDynamics):
     """
     Detailed hydro unit - Pelton model.  This model can be used to represent the dynamic related to water tunnel and
@@ -50,9 +52,6 @@ class GovHydroPelton(TurbineGovernorDynamics):
     zsfc: Head of upper water level with respect to the level of penstock (Zsfc).  Unit = km.  Typical value = 0,025.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     av0: float = 0.0  # Type #Area in CIM
     av1: float = 0.0  # Type #Area in CIM
     bp: float = 0.0  # Type #PU in CIM
@@ -84,11 +83,10 @@ class GovHydroPelton(TurbineGovernorDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GovHydroPelton\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GovHydroPelton"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -99,91 +97,91 @@ class GovHydroPelton(TurbineGovernorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "av0": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "av1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "bp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "db1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "db2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "h1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "h2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "hn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "qc0": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "qn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "simplifiedPelton": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "staticCompensating": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ts": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tv": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "twnc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "twng": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "va": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "valvmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "valvmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vav": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vcv": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "waterTunnelSurgeChamberSimulation": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "zsfc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .EarthFaultCompensator import EarthFaultCompensator
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PetersenCoil(EarthFaultCompensator):
     """
     A variable impedance device normally used to offset line charging during single line faults in an ungrounded section
@@ -28,9 +30,6 @@ class PetersenCoil(EarthFaultCompensator):
       based on nominal voltage divided by position current.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     mode: Optional[str] = None  # Type M:1..1 in CIM
     nominalU: float = 0.0  # Type #Voltage in CIM
     offsetCurrent: float = 0.0  # Type #CurrentFlow in CIM
@@ -41,11 +40,10 @@ class PetersenCoil(EarthFaultCompensator):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PetersenCoil\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PetersenCoil"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -56,29 +54,29 @@ class PetersenCoil(EarthFaultCompensator):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
+                Profile.EQ.value,
+                Profile.SC.value,
             ],
             # Attributes
             "mode": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "nominalU": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "offsetCurrent": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "positionCurrent": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "xGroundMax": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "xGroundMin": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "xGroundNominal": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
         }

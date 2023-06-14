@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class LoadStatic(IdentifiedObject):
     """
     General static load. This model represents the sensitivity of the real and reactive power consumed by the load to
@@ -36,9 +38,6 @@ class LoadStatic(IdentifiedObject):
     kqf: Frequency deviation coefficient for reactive power (Kqf).  Not used when .staticLoadModelType = constantZ.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     LoadAggregate: Optional[str] = None  # Type M:1 in CIM
     staticLoadModelType: Optional[str] = None  # Type M:1..1 in CIM
     kp1: float = 0.0  # Type #Float in CIM
@@ -60,11 +59,10 @@ class LoadStatic(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=LoadStatic\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=LoadStatic"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -75,61 +73,61 @@ class LoadStatic(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "LoadAggregate": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "staticLoadModelType": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ep1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ep2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ep3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kq1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kq2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kq3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kq4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "eq1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "eq2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "eq3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kqf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

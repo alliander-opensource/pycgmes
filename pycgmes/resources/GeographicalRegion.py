@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GeographicalRegion(IdentifiedObject):
     """
     A geographical region of a power system network model.
@@ -15,19 +17,16 @@ class GeographicalRegion(IdentifiedObject):
     Regions: All sub-geographical regions within this geographical region.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # Regions : list = field(default_factory=list)  # Type M:0..n in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GeographicalRegion\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GeographicalRegion"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -38,12 +37,12 @@ class GeographicalRegion(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "Regions": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
         }

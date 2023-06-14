@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class Quality61850(Base):
     """
     Quality flags in this class are as defined in IEC 61850, except for estimatorReplaced, which has been included in
@@ -44,9 +46,6 @@ class Quality61850(Base):
     validity: Validity of the measurement value.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     badReference: bool = False  # Type #Boolean in CIM
     estimatorReplaced: bool = False  # Type #Boolean in CIM
     failure: bool = False  # Type #Boolean in CIM
@@ -62,11 +61,10 @@ class Quality61850(Base):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=Quality61850\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=Quality61850"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -77,43 +75,43 @@ class Quality61850(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             # Attributes
             "badReference": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "estimatorReplaced": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "failure": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "oldData": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "operatorBlocked": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "oscillatory": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "outOfRange": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "overFlow": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "source": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "suspect": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "test": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "validity": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
         }

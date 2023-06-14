@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GovSteamEU(TurbineGovernorDynamics):
     """
     Simplified boiler and steam turbine with PID governor.
@@ -49,9 +51,6 @@ class GovSteamEU(TurbineGovernorDynamics):
     tb: Boiler time constant (Tb) (>= 0).  Typical value = 100.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     mwbase: float = 0.0  # Type #ActivePower in CIM
     tp: int = 0  # Type #Seconds in CIM
     ke: float = 0.0  # Type #PU in CIM
@@ -90,11 +89,10 @@ class GovSteamEU(TurbineGovernorDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GovSteamEU\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GovSteamEU"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -105,112 +103,112 @@ class GovSteamEU(TurbineGovernorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "mwbase": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ke": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tip": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tdp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tfp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kfcor": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "db1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "wfmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "wfmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ten": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "komegacor": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "db2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "wwmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "wwmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "wmax1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "wmax2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tvhp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "cho": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "chc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "hhpmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tvip": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "cio": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "cic": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "simx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "thp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "trh": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tlp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "prhmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "khp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "klp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

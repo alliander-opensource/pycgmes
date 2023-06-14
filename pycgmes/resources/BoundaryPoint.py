@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemResource import PowerSystemResource
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class BoundaryPoint(PowerSystemResource):
     """
     Designates a connection point at which one or more model authority sets shall connect to. The location of the
@@ -49,9 +51,6 @@ class BoundaryPoint(PowerSystemResource):
     ConnectivityNode: The connectivity node that is designated as a boundary point.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     fromEndIsoCode: str = ""  # Type #String in CIM
     fromEndName: str = ""  # Type #String in CIM
     fromEndNameTso: str = ""  # Type #String in CIM
@@ -64,11 +63,10 @@ class BoundaryPoint(PowerSystemResource):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=BoundaryPoint\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=BoundaryPoint"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -79,44 +77,44 @@ class BoundaryPoint(PowerSystemResource):
         return {
             # Class itself
             "class": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "fromEndIsoCode": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "fromEndName": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "fromEndNameTso": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "toEndIsoCode": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "toEndName": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "toEndNameTso": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "isDirectCurrent": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "isExcludedFromAreaInterchange": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "ConnectivityNode": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
         }

@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .MeasurementValue import MeasurementValue
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class AnalogValue(MeasurementValue):
     """
     AnalogValue represents an analog MeasurementValue.
@@ -17,20 +19,16 @@ class AnalogValue(MeasurementValue):
     AnalogControl: The Control variable associated with the MeasurementValue.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     Analog: Optional[str] = None  # Type M:1 in CIM
     # *Association not used*
     # AnalogControl : Optional[str] = None  # Type M:0..1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=AnalogValue\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=AnalogValue"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -41,13 +39,13 @@ class AnalogValue(MeasurementValue):
         return {
             # Class itself
             "class": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             # Attributes
             "Analog": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "AnalogControl": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
         }

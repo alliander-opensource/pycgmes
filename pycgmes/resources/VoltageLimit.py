@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .OperationalLimit import OperationalLimit
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class VoltageLimit(OperationalLimit):
     """
     Operational limit applied to voltage. The use of operational VoltageLimit is preferred instead of limits defined at
@@ -19,19 +21,15 @@ class VoltageLimit(OperationalLimit):
       type. The attribute shall be a positive value or zero.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     normalValue: float = 0.0  # Type #Voltage in CIM
     value: float = 0.0  # Type #Voltage in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=VoltageLimit\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=VoltageLimit"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -42,14 +40,14 @@ class VoltageLimit(OperationalLimit):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "normalValue": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "value": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }

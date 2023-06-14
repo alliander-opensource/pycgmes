@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GovGAST3(TurbineGovernorDynamics):
     """
     Generic turbogas with acceleration and temperature controller.
@@ -35,9 +37,6 @@ class GovGAST3(TurbineGovernorDynamics):
     mnef: Fuel flow maximum negative error value (MNef).  Typical value = -0,05.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     bp: float = 0.0  # Type #PU in CIM
     tg: int = 0  # Type #Seconds in CIM
     rcmx: float = 0.0  # Type #PU in CIM
@@ -62,11 +61,10 @@ class GovGAST3(TurbineGovernorDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GovGAST3\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GovGAST3"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -77,70 +75,70 @@ class GovGAST3(TurbineGovernorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "bp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rcmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rcmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ky": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ty": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tac": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kac": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "bca": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kca": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dtc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ka": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tsi": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ksi": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ttc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tfen": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "td": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "mxef": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "mnef": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

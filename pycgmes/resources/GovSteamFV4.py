@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GovSteamFV4(TurbineGovernorDynamics):
     """
     Detailed electro-hydraulic governor for steam unit.
@@ -66,9 +68,6 @@ class GovSteamFV4(TurbineGovernorDynamics):
     ksh: Pressure loss due to flow friction in the boiler tubes (Ksh).  Typical value = 0,08.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     kf1: float = 0.0  # Type #PU in CIM
     kf3: float = 0.0  # Type #PU in CIM
     lps: float = 0.0  # Type #PU in CIM
@@ -123,11 +122,10 @@ class GovSteamFV4(TurbineGovernorDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GovSteamFV4\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GovSteamFV4"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -138,160 +136,160 @@ class GovSteamFV4(TurbineGovernorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "kf1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kf3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "lps": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "lpi": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "mxef": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "mnef": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "crmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "crmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kit": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rvgmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rvgmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "svmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "svmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "srmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "srmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kip": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rsmimx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rsmimn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kmp1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kmp2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "srsmp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ty": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "yhpmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "yhpmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tam": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tcm": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ympmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ympmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "y": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "thp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "trh": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tmp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "khp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pr1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pr2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "psmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kic": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kdc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tdc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "cpsmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "cpsmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "krc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tf1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tf2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tv": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ksh": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

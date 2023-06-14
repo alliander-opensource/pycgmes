@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GovHydroPID2(TurbineGovernorDynamics):
     """
     Hydro turbine and governor. Represents plants with straightforward penstock configurations and "three term" electro-
@@ -39,9 +41,6 @@ class GovHydroPID2(TurbineGovernorDynamics):
     feedbackSignal: Feedback signal type flag (Flag). true = use gate position feedback signal false = use Pe.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     mwbase: float = 0.0  # Type #ActivePower in CIM
     treg: int = 0  # Type #Seconds in CIM
     rperm: float = 0.0  # Type #PU in CIM
@@ -67,11 +66,10 @@ class GovHydroPID2(TurbineGovernorDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GovHydroPID2\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GovHydroPID2"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -82,73 +80,73 @@ class GovHydroPID2(TurbineGovernorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "mwbase": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "treg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rperm": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "velmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "velmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "d": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "g0": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "g1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "g2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "p3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "atw": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "feedbackSignal": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

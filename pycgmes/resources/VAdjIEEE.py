@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .VoltageAdjusterDynamics import VoltageAdjusterDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class VAdjIEEE(VoltageAdjusterDynamics):
     """
     IEEE voltage adjuster which is used to represent the voltage adjuster in either a power factor or VAr control
@@ -21,9 +23,6 @@ class VAdjIEEE(VoltageAdjusterDynamics):
     taoff: Time that adjuster pulses are off (TAOFF) (>= 0).  Typical value = 0,5.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     vadjf: float = 0.0  # Type #Float in CIM
     adjslew: float = 0.0  # Type #Float in CIM
     vadjmax: float = 0.0  # Type #PU in CIM
@@ -33,11 +32,10 @@ class VAdjIEEE(VoltageAdjusterDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=VAdjIEEE\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=VAdjIEEE"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -48,25 +46,25 @@ class VAdjIEEE(VoltageAdjusterDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "vadjf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "adjslew": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vadjmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vadjmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "taon": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "taoff": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

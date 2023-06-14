@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class TieFlow(IdentifiedObject):
     """
     Defines the structure (in terms of location and direction) of the net interchange constraint for a control area.
@@ -21,20 +23,16 @@ class TieFlow(IdentifiedObject):
       of ControlArea for further explanation of how TieFlow.positiveFlowIn is used.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     ControlArea: Optional[str] = None  # Type M:1 in CIM
     Terminal: Optional[str] = None  # Type M:1 in CIM
     positiveFlowIn: bool = False  # Type #Boolean in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=TieFlow\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=TieFlow"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -45,16 +43,16 @@ class TieFlow(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "ControlArea": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "Terminal": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "positiveFlowIn": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

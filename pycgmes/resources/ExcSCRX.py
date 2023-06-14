@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcSCRX(ExcitationSystemDynamics):
     """
     Simple excitation system with generic characteristics typical of many excitation systems; intended for use where
@@ -24,9 +26,6 @@ class ExcSCRX(ExcitationSystemDynamics):
     rcrfd: Ratio of field discharge resistance to field winding resistance ([rc / rfd]).  Typical value = 0.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     tatb: float = 0.0  # Type #Float in CIM
     tb: int = 0  # Type #Seconds in CIM
     k: float = 0.0  # Type #PU in CIM
@@ -38,11 +37,10 @@ class ExcSCRX(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcSCRX\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcSCRX"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -53,31 +51,31 @@ class ExcSCRX(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "tatb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "emin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "emax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "cswitch": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rcrfd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

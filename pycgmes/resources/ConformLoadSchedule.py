@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .SeasonDayTypeSchedule import SeasonDayTypeSchedule
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ConformLoadSchedule(SeasonDayTypeSchedule):
     """
     A curve of load  versus time (X-axis) showing the active power values (Y1-axis) and reactive power (Y2-axis) for
@@ -18,18 +20,15 @@ class ConformLoadSchedule(SeasonDayTypeSchedule):
     ConformLoadGroup: The ConformLoadGroup where the ConformLoadSchedule belongs.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     ConformLoadGroup: Optional[str] = None  # Type M:1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ConformLoadSchedule\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ConformLoadSchedule"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -40,10 +39,10 @@ class ConformLoadSchedule(SeasonDayTypeSchedule):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "ConformLoadGroup": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

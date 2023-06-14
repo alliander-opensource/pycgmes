@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PhaseTapChangerTable(IdentifiedObject):
     """
     Describes a tabular curve for how the phase angle difference and impedance varies with the tap step.
@@ -16,9 +18,6 @@ class PhaseTapChangerTable(IdentifiedObject):
     PhaseTapChangerTabular: The phase tap changers to which this phase tap table applies.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # PhaseTapChangerTablePoint : list = field(default_factory=list)  # Type M:1..n in CIM
     # *Association not used*
@@ -26,11 +25,11 @@ class PhaseTapChangerTable(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PhaseTapChangerTable\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PhaseTapChangerTable"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -41,13 +40,13 @@ class PhaseTapChangerTable(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "PhaseTapChangerTablePoint": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "PhaseTapChangerTabular": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

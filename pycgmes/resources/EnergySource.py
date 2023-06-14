@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .EnergyConnection import EnergyConnection
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class EnergySource(EnergyConnection):
     """
     A generic equivalent for an energy supplier on a transmission or distribution voltage level.
@@ -39,9 +41,6 @@ class EnergySource(EnergyConnection):
       attribute shall be a positive value or zero.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     EnergySchedulingType: Optional[str] = None  # Type M:0..1 in CIM
     nominalVoltage: float = 0.0  # Type #Voltage in CIM
     pMin: float = 0.0  # Type #ActivePower in CIM
@@ -59,11 +58,10 @@ class EnergySource(EnergyConnection):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=EnergySource\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=EnergySource"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -74,51 +72,51 @@ class EnergySource(EnergyConnection):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "EnergySchedulingType": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "nominalVoltage": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "pMin": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "pMax": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "r": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "r0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "rn": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "x": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "x0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "xn": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "activePower": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "reactivePower": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "voltageAngle": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "voltageMagnitude": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }
