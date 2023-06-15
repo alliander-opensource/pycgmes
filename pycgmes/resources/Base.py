@@ -103,6 +103,9 @@ class Base:
     def possible_profiles(self) -> dict[str, list]:
         raise NotImplementedError("Method not implemented because not relevant in Base.")
 
+    # Note about the type: in python <3.11, you cannot type yet with sSelf.
+    # It is possible to either from __future__ import annotations, or to
+    # use the class name in quotes, as done here. See forward reference in PEP 484.
     @staticmethod
     def parse_json_as(attrs: dict[str, Any]) -> "Base":
         """
