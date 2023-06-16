@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PssSB4(PowerSystemStabilizerDynamics):
     """
     Power sensitive stabilizer model.
@@ -25,9 +27,6 @@ class PssSB4(PowerSystemStabilizerDynamics):
     vsmin: Limiter (Vsmin) (< PssSB4.vsmax).  Typical value = -0,062.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     tt: int = 0  # Type #Seconds in CIM
     kx: float = 0.0  # Type #PU in CIM
     tx2: int = 0  # Type #Seconds in CIM
@@ -42,11 +41,10 @@ class PssSB4(PowerSystemStabilizerDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PssSB4\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PssSB4"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -57,40 +55,40 @@ class PssSB4(PowerSystemStabilizerDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "tt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tx2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tx1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "td": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vsmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vsmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

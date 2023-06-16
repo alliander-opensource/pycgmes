@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .EnergyArea import EnergyArea
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class LoadArea(EnergyArea):
     """
     The class is the root or first level in a hierarchical structure for grouping of loads for the purpose of load flow
@@ -16,19 +18,15 @@ class LoadArea(EnergyArea):
     SubLoadAreas: The SubLoadAreas in the LoadArea.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # SubLoadAreas : list = field(default_factory=list)  # Type M:1..n in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=LoadArea\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=LoadArea"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -39,10 +37,10 @@ class LoadArea(EnergyArea):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "SubLoadAreas": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

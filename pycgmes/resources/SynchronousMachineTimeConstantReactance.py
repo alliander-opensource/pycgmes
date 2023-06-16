@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .SynchronousMachineDetailed import SynchronousMachineDetailed
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
     """
     Synchronous machine detailed modelling types are defined by the combination of the attributes
@@ -52,9 +54,6 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
     tc: Damping time constant for `Canay` reactance (>= 0).  Typical value = 0.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     rotorType: Optional[str] = None  # Type M:0..1 in CIM
     modelType: Optional[str] = None  # Type M:1..1 in CIM
     ks: float = 0.0  # Type #Float in CIM
@@ -72,11 +71,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=SynchronousMachineTimeConstantReactance\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=SynchronousMachineTimeConstantReactance"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -87,49 +86,49 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "rotorType": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "modelType": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xDirectSync": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xDirectTrans": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xDirectSubtrans": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xQuadSync": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xQuadTrans": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xQuadSubtrans": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpdo": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tppdo": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpqo": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tppqo": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

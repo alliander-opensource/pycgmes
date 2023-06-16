@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Equipment import Equipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GeneratingUnit(Equipment):
     """
     A single or set of synchronous machines for converting mechanical power into alternating-current power. For example,
@@ -49,9 +51,6 @@ class GeneratingUnit(Equipment):
       factor. The attribute shall be a positive value or zero.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # ControlAreaGeneratingUnit : list = field(default_factory=list)  # Type M:0..n in CIM
     genControlSource: Optional[str] = None  # Type M:0..1 in CIM
@@ -77,11 +76,10 @@ class GeneratingUnit(Equipment):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GeneratingUnit\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GeneratingUnit"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -92,65 +90,65 @@ class GeneratingUnit(Equipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "ControlAreaGeneratingUnit": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "genControlSource": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "governorSCD": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "longPF": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "maximumAllowableSpinningReserve": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "maxOperatingP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "minOperatingP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "nominalP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ratedGrossMaxP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ratedGrossMinP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ratedNetMaxP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "shortPF": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "startupCost": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "variableCost": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "startupTime": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "totalEfficiency": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "GrossToNetActivePowerCurves": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "RotatingMachine": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "normalPF": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }

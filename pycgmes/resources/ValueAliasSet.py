@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ValueAliasSet(IdentifiedObject):
     """
     Describes the translation of a set of values into a name and is intendend to facilitate custom translations. Each
@@ -22,9 +24,6 @@ class ValueAliasSet(IdentifiedObject):
     Values: The ValueToAlias mappings included in the set.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # Commands : list = field(default_factory=list)  # Type M:0..n in CIM
     # *Association not used*
@@ -36,11 +35,10 @@ class ValueAliasSet(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ValueAliasSet\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ValueAliasSet"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -51,19 +49,19 @@ class ValueAliasSet(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             # Attributes
             "Commands": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "Discretes": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "RaiseLowerCommands": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "Values": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
         }

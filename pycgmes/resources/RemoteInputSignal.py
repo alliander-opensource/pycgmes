@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class RemoteInputSignal(IdentifiedObject):
     """
     Supports connection to a terminal associated with a remote bus from which an input signal of a specific type is
@@ -26,9 +28,6 @@ class RemoteInputSignal(IdentifiedObject):
     WindTurbineType3or4Dynamics: Wind turbine type 3 or type 4 models using this remote input signal.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     Terminal: Optional[str] = None  # Type M:1 in CIM
     remoteSignalType: Optional[str] = None  # Type M:1..1 in CIM
     DiscontinuousExcitationControlDynamics: Optional[str] = None  # Type M:0..1 in CIM
@@ -45,11 +44,11 @@ class RemoteInputSignal(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=RemoteInputSignal\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=RemoteInputSignal"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -60,37 +59,37 @@ class RemoteInputSignal(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "Terminal": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "remoteSignalType": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "DiscontinuousExcitationControlDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType1or2Dynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "PowerSystemStabilizerDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "UnderexcitationLimiterDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "PFVArControllerType1Dynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "VoltageCompensatorDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindPlantDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType3or4Dynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

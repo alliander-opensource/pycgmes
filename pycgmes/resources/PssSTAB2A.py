@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PssSTAB2A(PowerSystemStabilizerDynamics):
     """
     Power system stabilizer part of an ABB excitation system. [Footnote: ABB excitation systems are an example of
@@ -24,9 +26,6 @@ class PssSTAB2A(PowerSystemStabilizerDynamics):
     hlim: Stabilizer output limiter (HLIM).  Typical value = 0,5.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     k2: float = 0.0  # Type #PU in CIM
     k3: float = 0.0  # Type #PU in CIM
     k4: float = 0.0  # Type #PU in CIM
@@ -38,11 +37,10 @@ class PssSTAB2A(PowerSystemStabilizerDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PssSTAB2A\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PssSTAB2A"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -53,31 +51,31 @@ class PssSTAB2A(PowerSystemStabilizerDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "k2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "hlim": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

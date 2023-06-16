@@ -1,15 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
+from .DiscontinuousExcitationControlDynamics import DiscontinuousExcitationControlDynamics
 
-from .DiscontinuousExcitationControlDynamics import (
-    DiscontinuousExcitationControlDynamics,
-)
 
-
-@dataclass
+@dataclass(config=DataclassConfig)
 class DiscExcContIEEEDEC2A(DiscontinuousExcitationControlDynamics):
     """
     IEEE type DEC2A model for discontinuous excitation control. This system provides transient excitation boosting via
@@ -22,9 +22,6 @@ class DiscExcContIEEEDEC2A(DiscontinuousExcitationControlDynamics):
     vdmax: Limiter (VDMAX) (> DiscExcContIEEEDEC2A.vdmin).
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     vk: float = 0.0  # Type #PU in CIM
     td1: int = 0  # Type #Seconds in CIM
     td2: int = 0  # Type #Seconds in CIM
@@ -33,11 +30,11 @@ class DiscExcContIEEEDEC2A(DiscontinuousExcitationControlDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=DiscExcContIEEEDEC2A\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=DiscExcContIEEEDEC2A"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -48,22 +45,22 @@ class DiscExcContIEEEDEC2A(DiscontinuousExcitationControlDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "vk": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "td1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "td2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vdmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vdmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .RotatingMachineDynamics import RotatingMachineDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class AsynchronousMachineDynamics(RotatingMachineDynamics):
     """
     Asynchronous machine whose behaviour is described by reference to a standard model expressed in either time constant
@@ -23,9 +25,6 @@ class AsynchronousMachineDynamics(RotatingMachineDynamics):
     WindTurbineType1or2Dynamics: Wind generator type 1 or type 2 model associated with this asynchronous machine model.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     AsynchronousMachine: Optional[str] = None  # Type M:1 in CIM
     # *Association not used*
     # TurbineGovernorDynamics : Optional[str] = None  # Type M:0..1 in CIM
@@ -36,11 +35,11 @@ class AsynchronousMachineDynamics(RotatingMachineDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=AsynchronousMachineDynamics\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=AsynchronousMachineDynamics"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -51,19 +50,19 @@ class AsynchronousMachineDynamics(RotatingMachineDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "AsynchronousMachine": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "TurbineGovernorDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "MechanicalLoadDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType1or2Dynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class SvShuntCompensatorSections(Base):
     """
     State variable for the number of sections in service for a shunt compensator.
@@ -18,19 +20,16 @@ class SvShuntCompensatorSections(Base):
       zero. To get integer value scale with ShuntCompensator.bPerSection.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     ShuntCompensator: Optional[str] = None  # Type M:1 in CIM
     sections: float = 0.0  # Type #Float in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=SvShuntCompensatorSections\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=SvShuntCompensatorSections"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -41,13 +40,13 @@ class SvShuntCompensatorSections(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             # Attributes
             "ShuntCompensator": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "sections": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
         }

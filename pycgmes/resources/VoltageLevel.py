@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .EquipmentContainer import EquipmentContainer
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class VoltageLevel(EquipmentContainer):
     """
     A collection of equipment at one common system voltage forming a switchgear. The equipment typically consists of
@@ -26,9 +28,6 @@ class VoltageLevel(EquipmentContainer):
       preferable to use operational VoltageLimit, which prevails, if present.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     BaseVoltage: Optional[str] = None  # Type M:1 in CIM
     # *Association not used*
     # Bays : list = field(default_factory=list)  # Type M:0..n in CIM
@@ -38,11 +37,10 @@ class VoltageLevel(EquipmentContainer):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=VoltageLevel\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=VoltageLevel"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -53,28 +51,28 @@ class VoltageLevel(EquipmentContainer):
         return {
             # Class itself
             "class": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "BaseVoltage": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "Bays": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "Substation": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "highVoltageLimit": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "lowVoltageLimit": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
         }

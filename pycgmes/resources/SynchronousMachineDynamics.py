@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .RotatingMachineDynamics import RotatingMachineDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class SynchronousMachineDynamics(RotatingMachineDynamics):
     """
     Synchronous machine whose behaviour is described by reference to a standard model expressed in one of the following
@@ -34,9 +36,6 @@ class SynchronousMachineDynamics(RotatingMachineDynamics):
     GenICompensationForGenJ: Compensation of voltage compensator`s generator for current flow out of this  generator.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     SynchronousMachine: Optional[str] = None  # Type M:1 in CIM
     # *Association not used*
     # CrossCompoundTurbineGovernorDyanmics : Optional[str] = None  # Type M:0..1 in CIM
@@ -53,11 +52,11 @@ class SynchronousMachineDynamics(RotatingMachineDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=SynchronousMachineDynamics\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=SynchronousMachineDynamics"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -68,28 +67,28 @@ class SynchronousMachineDynamics(RotatingMachineDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "SynchronousMachine": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "CrossCompoundTurbineGovernorDyanmics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "CrossCompoundTurbineGovernorDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "MechanicalLoadDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ExcitationSystemDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "TurbineGovernorDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "GenICompensationForGenJ": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

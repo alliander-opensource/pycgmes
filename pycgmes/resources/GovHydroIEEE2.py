@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GovHydroIEEE2(TurbineGovernorDynamics):
     """
     IEEE hydro turbine governor model represents plants with straightforward penstock configurations and hydraulic-
@@ -42,9 +44,6 @@ class GovHydroIEEE2(TurbineGovernorDynamics):
     pgv6: Nonlinear gain point 6, PU power (Pgv6).  Typical value = 0.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     mwbase: float = 0.0  # Type #ActivePower in CIM
     tg: int = 0  # Type #Seconds in CIM
     tp: int = 0  # Type #Seconds in CIM
@@ -74,11 +73,10 @@ class GovHydroIEEE2(TurbineGovernorDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GovHydroIEEE2\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GovHydroIEEE2"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -89,85 +87,85 @@ class GovHydroIEEE2(TurbineGovernorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "mwbase": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "uo": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "uc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rperm": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rtemp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tw": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kturb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "aturb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "bturb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pgv1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pgv2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pgv3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pgv4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pgv5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "gv6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pgv6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

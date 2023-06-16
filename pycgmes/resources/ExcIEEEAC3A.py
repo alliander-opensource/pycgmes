@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcIEEEAC3A(ExcitationSystemDynamics):
     """
     IEEE 421.5-2005 type AC3A model. The model represents the field-controlled alternator-rectifier excitation systems
@@ -45,9 +47,6 @@ class ExcIEEEAC3A(ExcitationSystemDynamics):
       (SE[VE2]) (>= 0).  Typical value = 0,1.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     tb: int = 0  # Type #Seconds in CIM
     tc: int = 0  # Type #Seconds in CIM
     ka: float = 0.0  # Type #PU in CIM
@@ -72,11 +71,10 @@ class ExcIEEEAC3A(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcIEEEAC3A\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcIEEEAC3A"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -87,70 +85,70 @@ class ExcIEEEAC3A(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "tb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ka": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vamax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vamin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vemin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efdn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ke": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vfemax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ve1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "seve1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ve2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "seve2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Quality61850 import Quality61850
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class MeasurementValueQuality(Quality61850):
     """
     Measurement quality flags. Bits 0-10 are defined for substation automation in IEC 61850-7-3. Bits 11-15 are reserved
@@ -17,18 +19,15 @@ class MeasurementValueQuality(Quality61850):
     MeasurementValue: A MeasurementValue has a MeasurementValueQuality associated with it.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     MeasurementValue: Optional[str] = None  # Type M:1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=MeasurementValueQuality\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=MeasurementValueQuality"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -39,10 +38,10 @@ class MeasurementValueQuality(Quality61850):
         return {
             # Class itself
             "class": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             # Attributes
             "MeasurementValue": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
         }

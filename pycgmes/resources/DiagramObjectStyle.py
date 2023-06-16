@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class DiagramObjectStyle(IdentifiedObject):
     """
     A reference to a style used by the originating system for a diagram object.  A diagram object style describes
@@ -16,19 +18,16 @@ class DiagramObjectStyle(IdentifiedObject):
     StyledObjects: A style can be assigned to multiple diagram objects.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # StyledObjects : list = field(default_factory=list)  # Type M:0..n in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=DiagramObjectStyle\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=DiagramObjectStyle"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -39,10 +38,10 @@ class DiagramObjectStyle(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             # Attributes
             "StyledObjects": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
         }

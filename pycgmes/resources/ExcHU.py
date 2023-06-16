@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcHU(ExcitationSystemDynamics):
     """
     Hungarian excitation system, with built-in voltage transducer.
@@ -27,9 +29,6 @@ class ExcHU(ExcitationSystemDynamics):
     ke: Voltage base conversion constant (Ke).  Typical value = 4,666.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     tr: int = 0  # Type #Seconds in CIM
     te: int = 0  # Type #Seconds in CIM
     imin: float = 0.0  # Type #PU in CIM
@@ -45,11 +44,10 @@ class ExcHU(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcHU\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcHU"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -60,43 +58,43 @@ class ExcHU(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "tr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "imin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "imax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ae": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "emin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "emax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ai": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "atr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ke": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

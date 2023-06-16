@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .MeasurementValue import MeasurementValue
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class AccumulatorValue(MeasurementValue):
     """
     AccumulatorValue represents an accumulated (counted) MeasurementValue.
@@ -17,20 +19,17 @@ class AccumulatorValue(MeasurementValue):
     AccumulatorReset: The command that resets the accumulator value.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     Accumulator: Optional[str] = None  # Type M:1 in CIM
     # *Association not used*
     # AccumulatorReset : Optional[str] = None  # Type M:0..1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=AccumulatorValue\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=AccumulatorValue"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -41,13 +40,13 @@ class AccumulatorValue(MeasurementValue):
         return {
             # Class itself
             "class": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             # Attributes
             "Accumulator": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "AccumulatorReset": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
         }

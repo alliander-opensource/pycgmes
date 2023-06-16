@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class DCTopologicalNode(IdentifiedObject):
     """
     DC bus.
@@ -20,9 +22,6 @@ class DCTopologicalNode(IdentifiedObject):
     DCTopologicalIsland: A DC topological node belongs to a DC topological island.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # DCTerminals : list = field(default_factory=list)  # Type M:0..n in CIM
     DCEquipmentContainer: Optional[str] = None  # Type M:1 in CIM
@@ -33,11 +32,11 @@ class DCTopologicalNode(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=DCTopologicalNode\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=DCTopologicalNode"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -48,20 +47,20 @@ class DCTopologicalNode(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.TP.value,
-                self.profiles.SV.value,
+                Profile.TP.value,
+                Profile.SV.value,
             ],
             # Attributes
             "DCTerminals": [
-                self.profiles.TP.value,
+                Profile.TP.value,
             ],
             "DCEquipmentContainer": [
-                self.profiles.TP.value,
+                Profile.TP.value,
             ],
             "DCNodes": [
-                self.profiles.TP.value,
+                Profile.TP.value,
             ],
             "DCTopologicalIsland": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
         }

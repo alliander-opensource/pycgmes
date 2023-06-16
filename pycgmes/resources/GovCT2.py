@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GovCT2(TurbineGovernorDynamics):
     """
     General governor with frequency-dependent fuel flow limit.  This model is a modification of the GovCT1 model in
@@ -86,9 +88,6 @@ class GovCT2(TurbineGovernorDynamics):
     plim10: Power limit 10 (Plim10).  Typical value = 0.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     mwbase: float = 0.0  # Type #ActivePower in CIM
     r: float = 0.0  # Type #PU in CIM
     rselect: Optional[str] = None  # Type M:1..1 in CIM
@@ -148,11 +147,10 @@ class GovCT2(TurbineGovernorDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GovCT2\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GovCT2"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -163,175 +161,175 @@ class GovCT2(TurbineGovernorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "mwbase": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "r": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rselect": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpelec": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "maxerr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "minerr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpgov": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kigov": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kdgov": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tdgov": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tact": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kturb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "wfnl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "wfspd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "teng": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tfload": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpload": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kiload": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ldref": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dm": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ropen": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rclose": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kimw": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "aset": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ka": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "db": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tsa": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tsb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rup": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rdown": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "prate": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flim1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "plim1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flim2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "plim2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flim3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "plim3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flim4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "plim4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flim5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "plim5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flim6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "plim6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flim7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "plim7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flim8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "plim8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flim9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "plim9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "flim10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "plim10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

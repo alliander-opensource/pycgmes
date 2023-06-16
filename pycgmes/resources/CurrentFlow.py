@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class CurrentFlow(Base):
     """
     Electrical current with sign convention: positive flow is out of the conducting equipment into the connectivity
@@ -19,20 +21,16 @@ class CurrentFlow(Base):
     unit:
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     value: float = 0.0  # Type #Float in CIM
     multiplier: Optional[str] = None  # Type M:0..1 in CIM
     unit: Optional[str] = None  # Type M:0..1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=CurrentFlow\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=CurrentFlow"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -43,28 +41,28 @@ class CurrentFlow(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SV.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "value": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SV.value,
+                Profile.SSH.value,
             ],
             "multiplier": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SV.value,
+                Profile.SSH.value,
             ],
             "unit": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SV.value,
+                Profile.SSH.value,
             ],
         }

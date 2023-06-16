@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class DiagramObject(IdentifiedObject):
     """
     An object that defines one or more points in a given space. This object can be associated with anything that
@@ -46,9 +48,6 @@ class DiagramObject(IdentifiedObject):
       originating system.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     Diagram: Optional[str] = None  # Type M:1 in CIM
     drawingOrder: int = 0  # Type #Integer in CIM
     isPolygon: bool = False  # Type #Boolean in CIM
@@ -64,11 +63,10 @@ class DiagramObject(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=DiagramObject\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=DiagramObject"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -79,37 +77,37 @@ class DiagramObject(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             # Attributes
             "Diagram": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "drawingOrder": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "isPolygon": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "offsetX": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "offsetY": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "rotation": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "IdentifiedObject": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "DiagramObjectPoints": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "VisibilityLayers": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "DiagramObjectStyle": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
         }

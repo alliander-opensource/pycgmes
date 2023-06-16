@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindPlantReactiveControlIEC(IdentifiedObject):
     """
     Simplified plant voltage and reactive power control model for use with type 3 and type 4 wind turbine models.
@@ -46,9 +48,6 @@ class WindPlantReactiveControlIEC(IdentifiedObject):
       WindPlantReactiveControlIEC.xrefmax). It is a project-dependent parameter.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # WindDynamicsLookupTable : list = field(default_factory=list)  # Type M:1..n in CIM
     # *Association not used*
@@ -74,11 +73,11 @@ class WindPlantReactiveControlIEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindPlantReactiveControlIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindPlantReactiveControlIEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -89,67 +88,67 @@ class WindPlantReactiveControlIEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "WindDynamicsLookupTable": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindPlantIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dxrefmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dxrefmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kiwpx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kiwpxmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kiwpxmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpwpx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kwpqref": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kwpqu": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tuqfilt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "twppfiltq": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "twpqfiltq": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "twpufiltq": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "txft": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "txfv": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "uwpqdip": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "windPlantQcontrolModesType": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xrefmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xrefmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

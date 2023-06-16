@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcANS(ExcitationSystemDynamics):
     """
     Italian excitation system. It represents static field voltage or excitation current feedback excitation system.
@@ -30,9 +32,6 @@ class ExcANS(ExcitationSystemDynamics):
     tb: Exciter time constant (TB) (>= 0).  Typical value = 0,04.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     k3: float = 0.0  # Type #Float in CIM
     k2: float = 0.0  # Type #Float in CIM
     kce: float = 0.0  # Type #Float in CIM
@@ -50,11 +49,10 @@ class ExcANS(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcANS\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcANS"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -65,49 +63,49 @@ class ExcANS(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "k3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kce": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "blint": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kvfif": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ifmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ifmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "krvecc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

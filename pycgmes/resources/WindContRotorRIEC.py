@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindContRotorRIEC(IdentifiedObject):
     """
     Rotor resistance control model. Reference: IEC 61400-27-1:2015, 5.6.5.3.
@@ -26,9 +28,6 @@ class WindContRotorRIEC(IdentifiedObject):
       associated.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     kirr: float = 0.0  # Type #PU in CIM
     komegafilt: float = 0.0  # Type #Float in CIM
     kpfilt: float = 0.0  # Type #Float in CIM
@@ -44,11 +43,11 @@ class WindContRotorRIEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindContRotorRIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindContRotorRIEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -59,37 +58,37 @@ class WindContRotorRIEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "kirr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "komegafilt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpfilt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kprr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "rmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tomegafiltrr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpfiltrr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindDynamicsLookupTable": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindGenTurbineType2IEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .EquivalentEquipment import EquivalentEquipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class EquivalentInjection(EquivalentEquipment):
     """
     This class represents equivalent injections (generation or load).  Voltage regulation is allowed only at the point
@@ -46,9 +48,6 @@ class EquivalentInjection(EquivalentEquipment):
       Starting value for steady state solutions.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     maxP: float = 0.0  # Type #ActivePower in CIM
     maxQ: float = 0.0  # Type #ReactivePower in CIM
     minP: float = 0.0  # Type #ActivePower in CIM
@@ -68,11 +67,11 @@ class EquivalentInjection(EquivalentEquipment):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=EquivalentInjection\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=EquivalentInjection"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -83,57 +82,57 @@ class EquivalentInjection(EquivalentEquipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "maxP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "maxQ": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "minP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "minQ": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "regulationCapability": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ReactiveCapabilityCurve": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "r": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "r0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "r2": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "x": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "x0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "x2": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "regulationStatus": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "regulationTarget": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "p": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "q": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }

@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemResource import PowerSystemResource
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class RegulatingControl(PowerSystemResource):
     """
     Specifies a set of equipment that works together to control a power system quantity such as voltage or flow.  Remote
@@ -52,9 +54,6 @@ class RegulatingControl(PowerSystemResource):
     minAllowedTargetValue: Minimum allowed target value (RegulatingControl.targetValue).
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # RegulationSchedule : list = field(default_factory=list)  # Type M:0..n in CIM
     # *Association not used*
@@ -71,11 +70,11 @@ class RegulatingControl(PowerSystemResource):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=RegulatingControl\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=RegulatingControl"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -86,41 +85,41 @@ class RegulatingControl(PowerSystemResource):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "RegulationSchedule": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "RegulatingCondEq": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "mode": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "Terminal": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "discrete": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "enabled": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "targetDeadband": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "targetValue": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "targetValueUnitMultiplier": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "maxAllowedTargetValue": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "minAllowedTargetValue": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }

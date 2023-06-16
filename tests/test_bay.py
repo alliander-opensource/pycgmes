@@ -8,6 +8,7 @@ from pycgmes.resources import (
     IdentifiedObject,
     PowerSystemResource,
 )
+from pycgmes.resources.Base import Profile
 
 
 class TestBay:
@@ -34,7 +35,6 @@ class TestBay:
         expected = textwrap.dedent(
             """
         class=Bay
-        serializationProfile={}
         description=
         energyIdentCodeEic=
         mRID=
@@ -43,20 +43,19 @@ class TestBay:
         VoltageLevel=None
         """
         )[
-            1:
-        ]  # The first character is a newline, which is not in str()
+            1:-1
+        ]  # The first and last characters are newlines, which are not in str()
         assert str(Bay()) == expected
 
     def test_bay_has_expected_profiles(self):
-        profiles = Base().profiles
         expected = {
             "class": [
-                profiles.EQBD.value,
-                profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "VoltageLevel": [
-                profiles.EQBD.value,
-                profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
         }
         assert expected == Bay().possible_profiles

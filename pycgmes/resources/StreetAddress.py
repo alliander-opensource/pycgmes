@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class StreetAddress(Base):
     """
     General purpose street and postal address information.
@@ -20,9 +22,6 @@ class StreetAddress(Base):
     language: The language in which the address is specified, using ISO 639-1 two digit language code.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     streetDetail: float = 0.0  # Type #StreetDetail in CIM
     townDetail: float = 0.0  # Type #TownDetail in CIM
     status: float = 0.0  # Type #Status in CIM
@@ -32,11 +31,10 @@ class StreetAddress(Base):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=StreetAddress\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=StreetAddress"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -47,25 +45,25 @@ class StreetAddress(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             # Attributes
             "streetDetail": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "townDetail": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "status": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "postalCode": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "poBox": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
             "language": [
-                self.profiles.GL.value,
+                Profile.GL.value,
             ],
         }

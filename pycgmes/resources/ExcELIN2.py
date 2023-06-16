@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcELIN2(ExcitationSystemDynamics):
     """
     Detailed excitation system ELIN (VATECH).  This model represents an all-static excitation system. A PI voltage
@@ -48,9 +50,6 @@ class ExcELIN2(ExcitationSystemDynamics):
     efdbas: Gain (Efdbas).  Typical value = 0,1.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     k1: float = 0.0  # Type #PU in CIM
     k1ec: float = 0.0  # Type #PU in CIM
     kd1: float = 0.0  # Type #PU in CIM
@@ -81,11 +80,10 @@ class ExcELIN2(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcELIN2\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcELIN2"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -96,88 +94,88 @@ class ExcELIN2(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "k1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k1ec": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kd1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tb1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pid1max": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "iefmax2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ketb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "upmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "upmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ke2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ve1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "seve1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ve2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "seve2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tr4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "iefmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "iefmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efdbas": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

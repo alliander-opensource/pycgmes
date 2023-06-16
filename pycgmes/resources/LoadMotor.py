@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class LoadMotor(IdentifiedObject):
     """
     Aggregate induction motor load. This model is used to represent a fraction of an ordinary load as "induction motor
@@ -44,9 +46,6 @@ class LoadMotor(IdentifiedObject):
     tbkr: Circuit breaker operating time (Tbkr) (>= 0).  Typical value = 0,08.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     LoadAggregate: Optional[str] = None  # Type M:1 in CIM
     pfrac: float = 0.0  # Type #Float in CIM
     lfac: float = 0.0  # Type #Float in CIM
@@ -64,11 +63,10 @@ class LoadMotor(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=LoadMotor\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=LoadMotor"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -79,49 +77,49 @@ class LoadMotor(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "LoadAggregate": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pfrac": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "lfac": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ls": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "lp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "lpp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ra": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tpo": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tppo": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "h": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "d": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tv": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tbkr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

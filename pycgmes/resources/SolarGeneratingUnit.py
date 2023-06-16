@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .GeneratingUnit import GeneratingUnit
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class SolarGeneratingUnit(GeneratingUnit):
     """
     A solar thermal generating unit, connected to the grid by means of a rotating machine.  This class does not
@@ -17,18 +19,15 @@ class SolarGeneratingUnit(GeneratingUnit):
     SolarPowerPlant: A solar power plant may have solar generating units.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     SolarPowerPlant: Optional[str] = None  # Type M:0..1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=SolarGeneratingUnit\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=SolarGeneratingUnit"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -39,11 +38,11 @@ class SolarGeneratingUnit(GeneratingUnit):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "SolarPowerPlant": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

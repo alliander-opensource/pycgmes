@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .GeneratingUnit import GeneratingUnit
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ThermalGeneratingUnit(GeneratingUnit):
     """
     A generating unit whose prime mover could be a steam turbine, combustion turbine, or diesel engine.
@@ -19,9 +21,6 @@ class ThermalGeneratingUnit(GeneratingUnit):
     FossilFuels: A thermal generating unit may have one or more fossil fuels.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     CAESPlant: Optional[str] = None  # Type M:0..1 in CIM
     CogenerationPlant: Optional[str] = None  # Type M:0..1 in CIM
     CombinedCyclePlant: Optional[str] = None  # Type M:0..1 in CIM
@@ -30,11 +29,11 @@ class ThermalGeneratingUnit(GeneratingUnit):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ThermalGeneratingUnit\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ThermalGeneratingUnit"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -45,20 +44,20 @@ class ThermalGeneratingUnit(GeneratingUnit):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "CAESPlant": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "CogenerationPlant": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "CombinedCyclePlant": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "FossilFuels": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

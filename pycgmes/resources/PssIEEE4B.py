@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PssIEEE4B(PowerSystemStabilizerDynamics):
     """
     IEEE 421.5-2005 type PSS4B power system stabilizer. The PSS4B model represents a structure based on multiple working
@@ -87,9 +89,6 @@ class PssIEEE4B(PowerSystemStabilizerDynamics):
     vstmin: PSS output minimum limit (VSTmin) (< PssIEEE4B.vstmax).  Typical value = -0,15.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     bwh1: float = 0.0  # Type #Float in CIM
     bwh2: float = 0.0  # Type #Float in CIM
     bwl1: float = 0.0  # Type #Float in CIM
@@ -160,11 +159,10 @@ class PssIEEE4B(PowerSystemStabilizerDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PssIEEE4B\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PssIEEE4B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -175,208 +173,208 @@ class PssIEEE4B(PowerSystemStabilizerDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "bwh1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "bwh2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "bwl1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "bwl2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kh": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kh1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kh11": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kh17": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kh2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki11": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki17": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ki2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kl1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kl11": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kl17": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kl2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "omeganh1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "omeganh2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "omeganl1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "omeganl2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th11": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th12": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "th9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti11": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti12": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ti9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl10": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl11": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl12": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl7": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl8": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tl9": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vhmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vhmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vimax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vimin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vlmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vlmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vstmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vstmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

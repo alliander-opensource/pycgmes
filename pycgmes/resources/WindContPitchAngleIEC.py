@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindContPitchAngleIEC(IdentifiedObject):
     """
     Pitch angle control model. Reference: IEC 61400-27-1:2015, 5.6.5.2.
@@ -27,9 +29,6 @@ class WindContPitchAngleIEC(IdentifiedObject):
     WindTurbineType3IEC: Wind turbine type 3 model with which this pitch control model is associated.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     dthetamax: float = 0.0  # Type #Float in CIM
     dthetamin: float = 0.0  # Type #Float in CIM
     kic: float = 0.0  # Type #PU in CIM
@@ -45,11 +44,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindContPitchAngleIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindContPitchAngleIEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -60,40 +59,40 @@ class WindContPitchAngleIEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "dthetamax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dthetamin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kic": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kiomega": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpomega": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpx": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "thetamax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "thetamin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ttheta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType3IEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

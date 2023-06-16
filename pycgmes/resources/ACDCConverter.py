@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ConductingEquipment import ConductingEquipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ACDCConverter(ConductingEquipment):
     """
     A unit with valves for three phases, together with unit control equipment, essential protective and switching
@@ -54,9 +56,6 @@ class ACDCConverter(ConductingEquipment):
     targetUdc: Target value for DC voltage magnitude. The attribute shall be a positive value.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     baseS: float = 0.0  # Type #ApparentPower in CIM
     idleLoss: float = 0.0  # Type #ActivePower in CIM
     maxUdc: float = 0.0  # Type #Voltage in CIM
@@ -82,11 +81,10 @@ class ACDCConverter(ConductingEquipment):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ACDCConverter\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ACDCConverter"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -97,73 +95,73 @@ class ACDCConverter(ConductingEquipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
-                self.profiles.DY.value,
+                Profile.EQ.value,
+                Profile.SV.value,
+                Profile.SSH.value,
+                Profile.DY.value,
             ],
             # Attributes
             "baseS": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "idleLoss": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "maxUdc": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "minUdc": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "numberOfValves": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ratedUdc": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "resistiveLoss": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "switchingLoss": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "valveU0": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "maxP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "minP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "PccTerminal": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "DCTerminals": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "idc": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "poleLossP": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "uc": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "udc": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "p": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "q": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "targetPpcc": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "targetUdc": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }

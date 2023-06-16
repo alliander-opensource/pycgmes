@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindPlantDynamics(DynamicsFunctionBlock):
     """
     Parent class supporting relationships to wind turbines type 3 and type 4 and wind plant IEC and user-defined wind
@@ -18,20 +20,17 @@ class WindPlantDynamics(DynamicsFunctionBlock):
     WindTurbineType3or4Dynamics: The wind turbine type 3 or type 4 associated with this wind plant.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     RemoteInputSignal: Optional[str] = None  # Type M:0..1 in CIM
     # *Association not used*
     # WindTurbineType3or4Dynamics : list = field(default_factory=list)  # Type M:1..n in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindPlantDynamics\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindPlantDynamics"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -42,13 +41,13 @@ class WindPlantDynamics(DynamicsFunctionBlock):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "RemoteInputSignal": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType3or4Dynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

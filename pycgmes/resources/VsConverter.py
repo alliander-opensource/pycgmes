@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ACDCConverter import ACDCConverter
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class VsConverter(ACDCConverter):
     """
     DC side of the voltage source converter (VSC).
@@ -37,9 +39,6 @@ class VsConverter(ACDCConverter):
     VSCDynamics: Voltage source converter dynamics model used to describe dynamic behaviour of this converter.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     CapabilityCurve: Optional[str] = None  # Type M:0..1 in CIM
     maxModulationIndex: float = 0.0  # Type #Float in CIM
     delta: float = 0.0  # Type #AngleDegrees in CIM
@@ -59,11 +58,10 @@ class VsConverter(ACDCConverter):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=VsConverter\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=VsConverter"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -74,55 +72,55 @@ class VsConverter(ACDCConverter):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
-                self.profiles.DY.value,
+                Profile.EQ.value,
+                Profile.SV.value,
+                Profile.SSH.value,
+                Profile.DY.value,
             ],
             # Attributes
             "CapabilityCurve": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "maxModulationIndex": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "delta": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "uv": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "droop": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "droopCompensation": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "pPccControl": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "qPccControl": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "qShare": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "targetQpcc": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "targetUpcc": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "targetPowerFactorPcc": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "targetPhasePcc": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "targetPWMfactor": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "VSCDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

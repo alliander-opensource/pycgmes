@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .DCEquipmentContainer import DCEquipmentContainer
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class DCConverterUnit(DCEquipmentContainer):
     """
     Indivisible operative unit comprising all equipment between the point of common coupling on the AC side and the
@@ -20,19 +22,16 @@ class DCConverterUnit(DCEquipmentContainer):
     Substation: The containing substation of the DC converter unit.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     operationMode: Optional[str] = None  # Type M:1..1 in CIM
     Substation: Optional[str] = None  # Type M:0..1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=DCConverterUnit\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=DCConverterUnit"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -43,13 +42,13 @@ class DCConverterUnit(DCEquipmentContainer):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "operationMode": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "Substation": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

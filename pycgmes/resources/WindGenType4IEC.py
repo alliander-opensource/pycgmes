@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindGenType4IEC(IdentifiedObject):
     """
     IEC type 4 generator set model. Reference: IEC 61400-27-1:2015, 5.6.3.4.
@@ -20,9 +22,6 @@ class WindGenType4IEC(IdentifiedObject):
     WindTurbineType4bIEC: Wind turbine type 4B model with which this wind generator type 4 model is associated.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     dipmax: float = 0.0  # Type #PU in CIM
     diqmin: float = 0.0  # Type #PU in CIM
     diqmax: float = 0.0  # Type #PU in CIM
@@ -34,11 +33,11 @@ class WindGenType4IEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindGenType4IEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindGenType4IEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -49,25 +48,25 @@ class WindGenType4IEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "dipmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "diqmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "diqmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType4aIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType4bIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

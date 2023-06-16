@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ConductingEquipment import ConductingEquipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class EquivalentEquipment(ConductingEquipment):
     """
     The class represents equivalent objects that are the result of a network reduction. The class is the base for
@@ -17,18 +19,15 @@ class EquivalentEquipment(ConductingEquipment):
     EquivalentNetwork: The equivalent where the reduced model belongs.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     EquivalentNetwork: Optional[str] = None  # Type M:0..1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=EquivalentEquipment\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=EquivalentEquipment"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -39,12 +38,12 @@ class EquivalentEquipment(ConductingEquipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "EquivalentNetwork": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

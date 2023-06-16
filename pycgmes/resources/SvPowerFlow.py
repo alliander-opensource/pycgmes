@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class SvPowerFlow(Base):
     """
     State variable for power flow. Load convention is used for flow direction. This means flow out from the
@@ -21,20 +23,16 @@ class SvPowerFlow(Base):
     Terminal: The terminal associated with the power flow state variable.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     p: float = 0.0  # Type #ActivePower in CIM
     q: float = 0.0  # Type #ReactivePower in CIM
     Terminal: Optional[str] = None  # Type M:1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=SvPowerFlow\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=SvPowerFlow"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -45,16 +43,16 @@ class SvPowerFlow(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             # Attributes
             "p": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "q": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "Terminal": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
         }

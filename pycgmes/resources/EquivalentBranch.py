@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .EquivalentEquipment import EquivalentEquipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class EquivalentBranch(EquivalentEquipment):
     """
     The class represents equivalent branches. In cases where a transformer phase shift is modelled and the
@@ -62,9 +64,6 @@ class EquivalentBranch(EquivalentEquipment):
       the data exchange.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     r: float = 0.0  # Type #Resistance in CIM
     r21: float = 0.0  # Type #Resistance in CIM
     x: float = 0.0  # Type #Reactance in CIM
@@ -84,11 +83,11 @@ class EquivalentBranch(EquivalentEquipment):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=EquivalentBranch\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=EquivalentBranch"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -99,56 +98,56 @@ class EquivalentBranch(EquivalentEquipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
+                Profile.EQ.value,
+                Profile.SC.value,
             ],
             # Attributes
             "r": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "r21": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "x": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "x21": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "negativeR12": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "negativeR21": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "negativeX12": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "negativeX21": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "positiveR12": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "positiveR21": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "positiveX12": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "positiveX21": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "zeroR12": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "zeroR21": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "zeroX12": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "zeroX21": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
         }

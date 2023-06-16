@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class Diagram(IdentifiedObject):
     """
     The diagram being exchanged. The coordinate system is a standard Cartesian coordinate system and the orientation
@@ -29,9 +31,6 @@ class Diagram(IdentifiedObject):
     DiagramStyle: A Diagram may have a DiagramStyle.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     orientation: Optional[str] = None  # Type M:1..1 in CIM
     x1InitialView: float = 0.0  # Type #Float in CIM
     x2InitialView: float = 0.0  # Type #Float in CIM
@@ -43,11 +42,10 @@ class Diagram(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=Diagram\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=Diagram"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -58,28 +56,28 @@ class Diagram(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             # Attributes
             "orientation": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "x1InitialView": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "x2InitialView": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "y1InitialView": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "y2InitialView": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "DiagramElements": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             "DiagramStyle": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
         }

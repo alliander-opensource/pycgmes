@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .WindGenType3IEC import WindGenType3IEC
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindGenType3aIEC(WindGenType3IEC):
     """
     IEC type 3A generator set model. Reference: IEC 61400-27-1:2015, 5.6.3.2.
@@ -17,9 +19,6 @@ class WindGenType3aIEC(WindGenType3IEC):
     WindTurbineType4IEC: Wind turbine type 4 model with which this wind generator type 3A model is associated.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     kpc: float = 0.0  # Type #Float in CIM
     tic: int = 0  # Type #Seconds in CIM
     # *Association not used*
@@ -27,11 +26,11 @@ class WindGenType3aIEC(WindGenType3IEC):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindGenType3aIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindGenType3aIEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -42,16 +41,16 @@ class WindGenType3aIEC(WindGenType3IEC):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "kpc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tic": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType4IEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

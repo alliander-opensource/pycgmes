@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindContQLimIEC(IdentifiedObject):
     """
     Constant Q limitation model. Reference: IEC 61400-27-1:2015, 5.6.5.9.
@@ -18,9 +20,6 @@ class WindContQLimIEC(IdentifiedObject):
       associated.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     qmax: float = 0.0  # Type #PU in CIM
     qmin: float = 0.0  # Type #PU in CIM
     # *Association not used*
@@ -28,11 +27,11 @@ class WindContQLimIEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindContQLimIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindContQLimIEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -43,16 +42,16 @@ class WindContQLimIEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "qmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "qmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType3or4IEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

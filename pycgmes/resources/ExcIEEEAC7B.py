@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcIEEEAC7B(ExcitationSystemDynamics):
     """
     IEEE 421.5-2005 type AC7B model. The model represents excitation systems which consist of an AC alternator with
@@ -48,9 +50,6 @@ class ExcIEEEAC7B(ExcitationSystemDynamics):
       (SE[VE2]) (>= 0).  Typical value = 0,075.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     kpr: float = 0.0  # Type #PU in CIM
     kir: float = 0.0  # Type #PU in CIM
     kdr: float = 0.0  # Type #PU in CIM
@@ -80,11 +79,10 @@ class ExcIEEEAC7B(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcIEEEAC7B\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcIEEEAC7B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -95,85 +93,85 @@ class ExcIEEEAC7B(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "kpr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kir": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kdr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tdr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kpa": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kia": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vamax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vamin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kl": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vfemax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vemin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ke": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kf1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kf2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kf3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ve1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "seve1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ve2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "seve2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IOPoint import IOPoint
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class MeasurementValue(IOPoint):
     """
     The current state for a measurement. A state value is an instance of a measurement from a specific source.
@@ -24,9 +26,6 @@ class MeasurementValue(IOPoint):
       introduction to IEC 61970-301.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     timeStamp: str = ""  # Type #DateTime in CIM
     sensorAccuracy: float = 0.0  # Type #PerCent in CIM
     # *Association not used*
@@ -35,11 +34,11 @@ class MeasurementValue(IOPoint):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=MeasurementValue\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=MeasurementValue"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -50,19 +49,19 @@ class MeasurementValue(IOPoint):
         return {
             # Class itself
             "class": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             # Attributes
             "timeStamp": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "sensorAccuracy": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "MeasurementValueQuality": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
             "MeasurementValueSource": [
-                self.profiles.OP.value,
+                Profile.OP.value,
             ],
         }

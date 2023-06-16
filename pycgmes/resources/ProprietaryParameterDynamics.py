@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Base import Base
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ProprietaryParameterDynamics(Base):
     """
     Supports definition of one or more parameters of several different datatypes for use by proprietary user-defined
@@ -46,9 +48,6 @@ class ProprietaryParameterDynamics(Base):
       integerParameterValue will not be.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     CSCUserDefined: Optional[str] = None  # Type M:0..1 in CIM
     SVCUserDefined: Optional[str] = None  # Type M:0..1 in CIM
     VSCUserDefined: Optional[str] = None  # Type M:0..1 in CIM
@@ -77,11 +76,11 @@ class ProprietaryParameterDynamics(Base):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ProprietaryParameterDynamics\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ProprietaryParameterDynamics"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -92,82 +91,82 @@ class ProprietaryParameterDynamics(Base):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "CSCUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "SVCUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "VSCUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindPlantUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindType1or2UserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindType3or4UserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "SynchronousMachineUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "AsynchronousMachineUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "TurbineGovernorUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "TurbineLoadControllerUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "MechanicalLoadUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ExcitationSystemUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "OverexcitationLimiterUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "UnderexcitationLimiterUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "PowerSystemStabilizerUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "DiscontinuousExcitationControlUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "PFVArControllerType1UserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "VoltageAdjusterUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "PFVArControllerType2UserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "VoltageCompensatorUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "LoadUserDefined": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "parameterNumber": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "booleanParameterValue": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "integerParameterValue": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "floatParameterValue": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

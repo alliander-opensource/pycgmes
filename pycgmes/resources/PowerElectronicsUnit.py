@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Equipment import Equipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PowerElectronicsUnit(Equipment):
     """
     A generating unit or battery or aggregation that connects to the AC network using power electronics rather than
@@ -18,9 +20,6 @@ class PowerElectronicsUnit(Equipment):
     minP: Minimum active power limit. This is the minimum (nameplate) limit for the unit.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # PowerElectronicsConnection : Optional[str] = None  # Type M:1 in CIM
     maxP: float = 0.0  # Type #ActivePower in CIM
@@ -28,11 +27,11 @@ class PowerElectronicsUnit(Equipment):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PowerElectronicsUnit\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PowerElectronicsUnit"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -43,17 +42,17 @@ class PowerElectronicsUnit(Equipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "PowerElectronicsConnection": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "maxP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "minP": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

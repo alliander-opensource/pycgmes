@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class GovSteamBB(TurbineGovernorDynamics):
     """
     European governor model.
@@ -32,9 +34,6 @@ class GovSteamBB(TurbineGovernorDynamics):
       value = false.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     fcut: float = 0.0  # Type #PU in CIM
     ks: float = 0.0  # Type #PU in CIM
     kls: float = 0.0  # Type #PU in CIM
@@ -55,11 +54,10 @@ class GovSteamBB(TurbineGovernorDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=GovSteamBB\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=GovSteamBB"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -70,58 +68,58 @@ class GovSteamBB(TurbineGovernorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "fcut": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kls": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kg": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kp": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tn": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kd": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "td": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t4": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t5": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "k3": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "t6": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "peflag": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

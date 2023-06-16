@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .WindTurbineType1or2Dynamics import WindTurbineType1or2Dynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics):
     """
     Parent class supporting relationships to IEC wind turbines type 1 and type 2 including their control models.
@@ -19,19 +21,16 @@ class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics):
     WindProtectionIEC: Wind turbune protection model associated with this wind generator type 1 or type 2 model.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     WindMechIEC: Optional[str] = None  # Type M:1 in CIM
     WindProtectionIEC: Optional[str] = None  # Type M:1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindTurbineType1or2IEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindTurbineType1or2IEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -42,13 +41,13 @@ class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "WindMechIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindProtectionIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

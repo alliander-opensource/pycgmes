@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .VoltageCompensatorDynamics import VoltageCompensatorDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class VCompIEEEType1(VoltageCompensatorDynamics):
     """
     Terminal voltage transducer and load compensator as defined in IEEE 421.5-2005, 4. This model is common to all
@@ -20,20 +22,16 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
     tr: Time constant which is used for the combined voltage sensing and compensation signal (Tr) (>= 0).
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     rc: float = 0.0  # Type #PU in CIM
     xc: float = 0.0  # Type #PU in CIM
     tr: int = 0  # Type #Seconds in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=VCompIEEEType1\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=VCompIEEEType1"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -44,16 +42,16 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "rc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindMechIEC(IdentifiedObject):
     """
     Two mass model. Reference: IEC 61400-27-1:2015, 5.6.2.1.
@@ -20,9 +22,6 @@ class WindMechIEC(IdentifiedObject):
     WindTurbineType1or2IEC: Wind generator type 1 or type 2 model with which this wind mechanical model is associated.
     WindTurbineType4bIEC: Wind turbine type 4B model with which this wind mechanical model is associated.
     """
-
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
 
     cdrt: float = 0.0  # Type #PU in CIM
     hgen: int = 0  # Type #Seconds in CIM
@@ -37,11 +36,10 @@ class WindMechIEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindMechIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindMechIEC"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -52,28 +50,28 @@ class WindMechIEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "cdrt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "hgen": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "hwtr": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kdrt": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType3IEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType1or2IEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType4bIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

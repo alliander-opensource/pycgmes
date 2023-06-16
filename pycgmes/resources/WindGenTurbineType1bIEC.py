@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .WindTurbineType1or2IEC import WindTurbineType1or2IEC
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindGenTurbineType1bIEC(WindTurbineType1or2IEC):
     """
     Wind turbine IEC type 1B.  Reference: IEC 61400-27-1:2015, 5.5.2.3.
@@ -16,18 +18,15 @@ class WindGenTurbineType1bIEC(WindTurbineType1or2IEC):
     WindPitchContPowerIEC: Pitch control power model associated with this wind turbine type 1B model.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     WindPitchContPowerIEC: Optional[str] = None  # Type M:1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindGenTurbineType1bIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindGenTurbineType1bIEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -38,10 +37,10 @@ class WindGenTurbineType1bIEC(WindTurbineType1or2IEC):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "WindPitchContPowerIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

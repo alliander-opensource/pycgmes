@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcIEEEDC2A(ExcitationSystemDynamics):
     """
     IEEE 421.5-2005 type DC2A model. This model represents field-controlled DC commutator exciters with continuously
@@ -38,9 +40,6 @@ class ExcIEEEDC2A(ExcitationSystemDynamics):
     vrmin: Minimum voltage regulator output (VRMIN) (< 0 and < ExcIEEEDC2A.vrmax).  Typical value = -4,9.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     efd1: float = 0.0  # Type #PU in CIM
     efd2: float = 0.0  # Type #PU in CIM
     exclim: float = 0.0  # Type #PU in CIM
@@ -60,11 +59,10 @@ class ExcIEEEDC2A(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcIEEEDC2A\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcIEEEDC2A"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -75,55 +73,55 @@ class ExcIEEEDC2A(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "efd1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efd2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "exclim": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ka": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ke": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "kf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "seefd1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "seefd2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tb": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tc": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "te": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "uelin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vrmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

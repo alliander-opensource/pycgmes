@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindTurbineType3or4Dynamics(DynamicsFunctionBlock):
     """
     Parent class supporting relationships to wind turbines type 3 and type 4 and wind plant including their control
@@ -20,20 +22,17 @@ class WindTurbineType3or4Dynamics(DynamicsFunctionBlock):
     WindPlantDynamics: The wind plant with which the wind turbines type 3 or type 4 are associated.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     PowerElectronicsConnection: Optional[str] = None  # Type M:1 in CIM
     RemoteInputSignal: Optional[str] = None  # Type M:0..1 in CIM
     WindPlantDynamics: Optional[str] = None  # Type M:0..1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindTurbineType3or4Dynamics\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindTurbineType3or4Dynamics"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -44,16 +43,16 @@ class WindTurbineType3or4Dynamics(DynamicsFunctionBlock):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "PowerElectronicsConnection": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "RemoteInputSignal": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindPlantDynamics": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

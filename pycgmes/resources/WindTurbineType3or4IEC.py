@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .WindTurbineType3or4Dynamics import WindTurbineType3or4Dynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
     """
     Parent class supporting relationships to IEC wind turbines type 3 and type 4 including their control models.
@@ -21,9 +23,6 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
     WindRefFrameRotIEC: Reference frame rotation model associated with this wind turbine type 3 or type 4 model.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     WindContCurrLimIEC: Optional[str] = None  # Type M:1 in CIM
     WIndContQIEC: Optional[str] = None  # Type M:1 in CIM
     WindContQLimIEC: Optional[str] = None  # Type M:0..1 in CIM
@@ -33,11 +32,11 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindTurbineType3or4IEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindTurbineType3or4IEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -48,25 +47,25 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "WindContCurrLimIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WIndContQIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindContQLimIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindContQPQULimIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindProtectionIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindRefFrameRotIEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .PowerSystemResource import PowerSystemResource
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class TapChanger(PowerSystemResource):
     """
     Mechanism for changing transformer winding tap positions.
@@ -40,9 +42,6 @@ class TapChanger(PowerSystemResource):
       greater than lowStep and equal to or less than highStep.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # TapSchedules : list = field(default_factory=list)  # Type M:0..n in CIM
     highStep: int = 0  # Type #Integer in CIM
@@ -59,11 +58,10 @@ class TapChanger(PowerSystemResource):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=TapChanger\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=TapChanger"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -74,42 +72,42 @@ class TapChanger(PowerSystemResource):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
+                Profile.EQ.value,
+                Profile.SV.value,
+                Profile.SSH.value,
             ],
             # Attributes
             "TapSchedules": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "highStep": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "lowStep": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ltcFlag": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "neutralStep": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "neutralU": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "normalStep": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "TapChangerControl": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "SvTapStep": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
             "controlEnabled": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
             "step": [
-                self.profiles.SSH.value,
+                Profile.SSH.value,
             ],
         }

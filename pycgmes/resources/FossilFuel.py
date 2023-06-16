@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class FossilFuel(IdentifiedObject):
     """
     The fossil fuel consumed by the non-nuclear thermal generating unit.   For example, coal, oil, gas, etc.   These are
@@ -18,19 +20,15 @@ class FossilFuel(IdentifiedObject):
     ThermalGeneratingUnit: A thermal generating unit may have one or more fossil fuels.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     fossilFuelType: Optional[str] = None  # Type M:1..1 in CIM
     ThermalGeneratingUnit: Optional[str] = None  # Type M:1 in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=FossilFuel\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=FossilFuel"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -41,13 +39,13 @@ class FossilFuel(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "fossilFuelType": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ThermalGeneratingUnit": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

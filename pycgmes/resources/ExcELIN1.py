@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ExcELIN1(ExcitationSystemDynamics):
     """
     Static PI transformer fed excitation system ELIN (VATECH) - simplified model.  This model represents an all-static
@@ -33,9 +35,6 @@ class ExcELIN1(ExcitationSystemDynamics):
     smax: Stabilizer limit output (smax).  Typical value = 0,1.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     tfi: int = 0  # Type #Seconds in CIM
     tnu: int = 0  # Type #Seconds in CIM
     vpu: float = 0.0  # Type #PU in CIM
@@ -54,11 +53,10 @@ class ExcELIN1(ExcitationSystemDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ExcELIN1\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ExcELIN1"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -69,52 +67,52 @@ class ExcELIN1(ExcitationSystemDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "tfi": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tnu": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vpu": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vpi": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "vpnf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dpnf": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "tsw": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efmin": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "efmax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "xe": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ks2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ts1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "ts2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "smax": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

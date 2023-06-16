@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class WindAeroTwoDimIEC(IdentifiedObject):
     """
     Two-dimensional aerodynamic model.   Reference: IEC 61400-27-1:2015, 5.6.1.3.
@@ -24,9 +26,6 @@ class WindAeroTwoDimIEC(IdentifiedObject):
     WindTurbineType3IEC: Wind turbine type 3 model with which this wind aerodynamic model is associated.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     dpomega: float = 0.0  # Type #PU in CIM
     dptheta: float = 0.0  # Type #PU in CIM
     dpv1: float = 0.0  # Type #PU in CIM
@@ -39,11 +38,11 @@ class WindAeroTwoDimIEC(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=WindAeroTwoDimIEC\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=WindAeroTwoDimIEC"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -54,31 +53,31 @@ class WindAeroTwoDimIEC(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "dpomega": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dptheta": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "dpv1": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "omegazero": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "pavail": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "thetazero": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "thetav2": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "WindTurbineType3IEC": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

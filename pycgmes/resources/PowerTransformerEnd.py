@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .TransformerEnd import TransformerEnd
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class PowerTransformerEnd(TransformerEnd):
     """
     A PowerTransformerEnd is associated with each Terminal of a PowerTransformer. The impedance values r, r0, x, and x0
@@ -52,9 +54,6 @@ class PowerTransformerEnd(TransformerEnd):
     x0: Zero sequence series reactance of the transformer end.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     PowerTransformer: Optional[str] = None  # Type M:1..1 in CIM
     b: float = 0.0  # Type #Susceptance in CIM
     connectionKind: Optional[str] = None  # Type M:0..1 in CIM
@@ -71,11 +70,11 @@ class PowerTransformerEnd(TransformerEnd):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=PowerTransformerEnd\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=PowerTransformerEnd"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -86,47 +85,47 @@ class PowerTransformerEnd(TransformerEnd):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
+                Profile.EQ.value,
+                Profile.SC.value,
             ],
             # Attributes
             "PowerTransformer": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "b": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "connectionKind": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ratedS": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "g": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "ratedU": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "r": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "x": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "b0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "phaseAngleClock": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "g0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "r0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "x0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
         }

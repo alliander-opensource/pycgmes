@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ConductingEquipment import ConductingEquipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class EarthFaultCompensator(ConductingEquipment):
     """
     A conducting equipment used to represent a connection to ground which is typically used to compensate earth faults.
@@ -17,18 +19,15 @@ class EarthFaultCompensator(ConductingEquipment):
     r: Nominal resistance of device.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     r: float = 0.0  # Type #Resistance in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=EarthFaultCompensator\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=EarthFaultCompensator"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -39,11 +38,11 @@ class EarthFaultCompensator(ConductingEquipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
+                Profile.EQ.value,
+                Profile.SC.value,
             ],
             # Attributes
             "r": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
         }

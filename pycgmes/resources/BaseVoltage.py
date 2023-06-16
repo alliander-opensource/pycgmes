@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class BaseVoltage(IdentifiedObject):
     """
     Defines a system base voltage which is referenced.
@@ -21,9 +23,6 @@ class BaseVoltage(IdentifiedObject):
     TransformerEnds: Transformer ends at the base voltage.  This is essential for PU calculation.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # TopologicalNode : list = field(default_factory=list)  # Type M:0..n in CIM
     nominalVoltage: float = 0.0  # Type #Voltage in CIM
@@ -36,11 +35,10 @@ class BaseVoltage(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=BaseVoltage\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=BaseVoltage"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -51,26 +49,26 @@ class BaseVoltage(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.TP.value,
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.TP.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "TopologicalNode": [
-                self.profiles.TP.value,
+                Profile.TP.value,
             ],
             "nominalVoltage": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "VoltageLevel": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "ConductingEquipment": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "TransformerEnds": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

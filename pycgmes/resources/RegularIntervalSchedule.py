@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .BasicIntervalSchedule import BasicIntervalSchedule
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class RegularIntervalSchedule(BasicIntervalSchedule):
     """
     The schedule has time points where the time between them is constant.
@@ -17,9 +19,6 @@ class RegularIntervalSchedule(BasicIntervalSchedule):
     endTime: The time for the last time point.  The value can be a time of day, not a specific date.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # TimePoints : list = field(default_factory=list)  # Type M:1..n in CIM
     timeStep: int = 0  # Type #Seconds in CIM
@@ -27,11 +26,11 @@ class RegularIntervalSchedule(BasicIntervalSchedule):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=RegularIntervalSchedule\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=RegularIntervalSchedule"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -42,16 +41,16 @@ class RegularIntervalSchedule(BasicIntervalSchedule):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "TimePoints": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "timeStep": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "endTime": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class LoadResponseCharacteristic(IdentifiedObject):
     """
     Models the characteristic response of the load demand due to changes in system conditions such as voltage and
@@ -45,9 +47,6 @@ class LoadResponseCharacteristic(IdentifiedObject):
     qVoltageExponent: Exponent of per unit voltage effecting reactive power.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # EnergyConsumer : list = field(default_factory=list)  # Type M:0..n in CIM
     exponentModel: bool = False  # Type #Boolean in CIM
@@ -64,11 +63,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=LoadResponseCharacteristic\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=LoadResponseCharacteristic"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -79,43 +78,43 @@ class LoadResponseCharacteristic(IdentifiedObject):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "EnergyConsumer": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "exponentModel": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "pConstantCurrent": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "pConstantImpedance": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "pConstantPower": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "pFrequencyExponent": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "pVoltageExponent": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "qConstantCurrent": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "qConstantImpedance": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "qConstantPower": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "qFrequencyExponent": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "qVoltageExponent": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

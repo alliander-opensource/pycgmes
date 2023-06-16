@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .Equipment import Equipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class ConductingEquipment(Equipment):
     """
     The parts of the AC power system that are designed to carry current or that are conductively connected through
@@ -21,9 +23,6 @@ class ConductingEquipment(Equipment):
     SvStatus: The status state variable associated with this conducting equipment.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # Terminals : list = field(default_factory=list)  # Type M:0..n in CIM
     BaseVoltage: Optional[str] = None  # Type M:0..1 in CIM
@@ -32,11 +31,11 @@ class ConductingEquipment(Equipment):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=ConductingEquipment\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=ConductingEquipment"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -47,23 +46,23 @@ class ConductingEquipment(Equipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
-                self.profiles.SV.value,
-                self.profiles.SSH.value,
-                self.profiles.DY.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
+                Profile.SC.value,
+                Profile.SV.value,
+                Profile.SSH.value,
+                Profile.DY.value,
             ],
             # Attributes
             "Terminals": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
-                self.profiles.DY.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
+                Profile.DY.value,
             ],
             "BaseVoltage": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "SvStatus": [
-                self.profiles.SV.value,
+                Profile.SV.value,
             ],
         }

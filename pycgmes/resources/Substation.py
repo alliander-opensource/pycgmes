@@ -1,14 +1,16 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
+
+from dataclasses import fields
 from functools import cached_property
 from typing import Optional
-
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .EquipmentContainer import EquipmentContainer
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class Substation(EquipmentContainer):
     """
     A collection of equipment for purposes other than generation or utilization, through which electric energy in bulk
@@ -19,9 +21,6 @@ class Substation(EquipmentContainer):
     DCConverterUnit: The DC converter unit belonging of the substation.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     Region: Optional[str] = None  # Type M:1 in CIM
     # *Association not used*
     # VoltageLevels : list = field(default_factory=list)  # Type M:0..n in CIM
@@ -30,11 +29,10 @@ class Substation(EquipmentContainer):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=Substation\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=Substation"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -45,19 +43,19 @@ class Substation(EquipmentContainer):
         return {
             # Class itself
             "class": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             # Attributes
             "Region": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "VoltageLevels": [
-                self.profiles.EQBD.value,
-                self.profiles.EQ.value,
+                Profile.EQBD.value,
+                Profile.EQ.value,
             ],
             "DCConverterUnit": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
         }

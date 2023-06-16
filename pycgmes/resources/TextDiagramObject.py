@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .DiagramObject import DiagramObject
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class TextDiagramObject(DiagramObject):
     """
     A diagram object for placing free-text or text derived from an associated domain object.
@@ -15,18 +17,15 @@ class TextDiagramObject(DiagramObject):
     text: The text that is displayed by this text diagram object.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     text: str = ""  # Type #String in CIM
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=TextDiagramObject\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=TextDiagramObject"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -37,10 +36,10 @@ class TextDiagramObject(DiagramObject):
         return {
             # Class itself
             "class": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
             # Attributes
             "text": [
-                self.profiles.DL.value,
+                Profile.DL.value,
             ],
         }

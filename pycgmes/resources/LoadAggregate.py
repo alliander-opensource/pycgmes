@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .LoadDynamics import LoadDynamics
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class LoadAggregate(LoadDynamics):
     """
     Aggregate loads are used to represent all or part of the real and reactive load from one or more loads in the static
@@ -22,9 +24,6 @@ class LoadAggregate(LoadDynamics):
     LoadStatic: Aggregate static load associated with this aggregate load.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     # *Association not used*
     # LoadMotor : Optional[str] = None  # Type M:0..1 in CIM
     # *Association not used*
@@ -32,11 +31,10 @@ class LoadAggregate(LoadDynamics):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=LoadAggregate\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=LoadAggregate"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -47,13 +45,13 @@ class LoadAggregate(LoadDynamics):
         return {
             # Class itself
             "class": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             # Attributes
             "LoadMotor": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
             "LoadStatic": [
-                self.profiles.DY.value,
+                Profile.DY.value,
             ],
         }

@@ -1,13 +1,15 @@
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
-from dataclasses import dataclass, field
-from functools import cached_property
 
+from dataclasses import fields
+from functools import cached_property
+from pydantic.dataclasses import dataclass
+from .Base import DataclassConfig, Profile
 from .ConductingEquipment import ConductingEquipment
 
 
-@dataclass
+@dataclass(config=DataclassConfig)
 class SeriesCompensator(ConductingEquipment):
     """
     A Series Compensator is a series capacitor or reactor or an AC transmission line without charging susceptance.  It
@@ -26,9 +28,6 @@ class SeriesCompensator(ConductingEquipment):
       calculations and exchanged only if SeriesCompensator.varistorPresent is true.
     """
 
-    # Not real data, but used by export
-    serializationProfile: dict = field(default_factory=dict, init=False)
-
     r: float = 0.0  # Type #Resistance in CIM
     x: float = 0.0  # Type #Reactance in CIM
     r0: float = 0.0  # Type #Resistance in CIM
@@ -39,11 +38,11 @@ class SeriesCompensator(ConductingEquipment):
 
     def __str__(self) -> str:
         """Returns the string represention of this element."""
-        str_ = "class=SeriesCompensator\n"
-        attributes = self.__dict__
-        for key, val in attributes.items():
-            str_ = str_ + key + f"={val}\n"
-        return str_
+
+        return "\n".join(
+            ["class=SeriesCompensator"]
+            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
+        )
 
     @cached_property
     def possible_profiles(self) -> dict[str, list]:
@@ -54,29 +53,29 @@ class SeriesCompensator(ConductingEquipment):
         return {
             # Class itself
             "class": [
-                self.profiles.EQ.value,
-                self.profiles.SC.value,
+                Profile.EQ.value,
+                Profile.SC.value,
             ],
             # Attributes
             "r": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "x": [
-                self.profiles.EQ.value,
+                Profile.EQ.value,
             ],
             "r0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "x0": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "varistorPresent": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "varistorRatedCurrent": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
             "varistorVoltageThreshold": [
-                self.profiles.SC.value,
+                Profile.SC.value,
             ],
         }
