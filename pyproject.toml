@@ -56,7 +56,7 @@ priority = "primary" # Means it is the first source tried.
 line-length = 120
 
 [tool.coverage.run]
-# Coverage is here by default, but not going to uniot test 500+ generated classes. So mostly useless.
+# Coverage is here by default, but not going to unit test 500+ generated classes. So mostly useless.
 include = ["pycgmes/*"]
 omit = []
 
