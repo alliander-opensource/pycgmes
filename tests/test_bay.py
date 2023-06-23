@@ -37,13 +37,13 @@ class TestBay:
     def test_bay_has_expected_str(self):
         expected = textwrap.dedent(
             """
-        class=Bay
         description=
         energyIdentCodeEic=
         mRID=
         name=
         shortName=
         VoltageLevel=None
+        __class__=Bay
         """
         )[
             1:-1  # The first and last characters are newlines, which are not in str()

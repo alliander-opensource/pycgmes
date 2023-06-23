@@ -56,14 +56,13 @@ priority = "primary" # Means it is the first source tried.
 line-length = 120
 
 [tool.coverage.run]
-# Coverage is here by default, but not going to unit test 500+ generated classes. So mostly useless.
+# I would love to only cover Bay (this is the one used by the tests) and still load all the others
+# to check that there is no syntax error.
 include = ["pycgmes/*"]
 omit = []
 
 [tool.coverage.report]
-# Low coverage. Should split between dataclasses (won't be fully covered) and
-# the rest (should be well covered).
-fail_under = 70
+fail_under = 85
 exclude_also = [ # Regexp of lines (or first line of block) which do not count for coverage.
     # __main__ block is never tested.
     "if __name__ == .__main__.:",
