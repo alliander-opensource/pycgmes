@@ -28,6 +28,12 @@ classifiers = [
 python = "^3.10"
 poetry = ">=1.5.0" # key 'priority' in source
 pydantic = "*" # Used for dataclasses
+rdflib = "^6.3.2"
+pyshacl = "^0.23.0"
+rdfpandas = "^1.1.6"
+networkx = "^3.1"
+matplotlib = "^3.7.1"
+pandas = "^2.0.2"
 
 [tool.poetry.group.dev.dependencies]
 bandit = { extras = ["toml"], version = "*" } # Security checks
