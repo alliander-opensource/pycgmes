@@ -64,7 +64,7 @@ class TestBay:
         ],
     )
     def test_bay_has_expected_attributes(self, profile, attribute_names):
-        assert attribute_names == {a.name for a in Bay().cgmes_attributes_in_profile(Profile[profile])}
+        assert attribute_names == {a.name for a in Bay().cgmes_attribute_names_in_profile(Profile[profile])}
 
     def test_param_casting(self):
         # An int is castable to string, and it happens.
