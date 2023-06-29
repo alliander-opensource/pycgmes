@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -43,104 +43,152 @@ class ExcIEEEST3A(ExcitationSystemDynamics):
     vgmax: Maximum inner loop feedback voltage (VGMax) (>= 0).  Typical value = 5,8.
     """
 
-    vimax: float = 0.0  # Type #PU in CIM
-    vimin: float = 0.0  # Type #PU in CIM
-    ka: float = 0.0  # Type #PU in CIM
-    ta: int = 0  # Type #Seconds in CIM
-    tb: int = 0  # Type #Seconds in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    vrmax: float = 0.0  # Type #PU in CIM
-    vrmin: float = 0.0  # Type #PU in CIM
-    km: float = 0.0  # Type #PU in CIM
-    tm: int = 0  # Type #Seconds in CIM
-    vmmax: float = 0.0  # Type #PU in CIM
-    vmmin: float = 0.0  # Type #PU in CIM
-    kg: float = 0.0  # Type #PU in CIM
-    kp: float = 0.0  # Type #PU in CIM
-    thetap: float = 0.0  # Type #AngleDegrees in CIM
-    ki: float = 0.0  # Type #PU in CIM
-    kc: float = 0.0  # Type #PU in CIM
-    xl: float = 0.0  # Type #PU in CIM
-    vbmax: float = 0.0  # Type #PU in CIM
-    vgmax: float = 0.0  # Type #PU in CIM
+    vimax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    vimin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcIEEEST3A"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ka: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ta: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    km: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tm: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vmmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vmmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kg: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    thetap: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xl: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vbmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vgmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "vimax": [
-                Profile.DY.value,
-            ],
-            "vimin": [
-                Profile.DY.value,
-            ],
-            "ka": [
-                Profile.DY.value,
-            ],
-            "ta": [
-                Profile.DY.value,
-            ],
-            "tb": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "vrmax": [
-                Profile.DY.value,
-            ],
-            "vrmin": [
-                Profile.DY.value,
-            ],
-            "km": [
-                Profile.DY.value,
-            ],
-            "tm": [
-                Profile.DY.value,
-            ],
-            "vmmax": [
-                Profile.DY.value,
-            ],
-            "vmmin": [
-                Profile.DY.value,
-            ],
-            "kg": [
-                Profile.DY.value,
-            ],
-            "kp": [
-                Profile.DY.value,
-            ],
-            "thetap": [
-                Profile.DY.value,
-            ],
-            "ki": [
-                Profile.DY.value,
-            ],
-            "kc": [
-                Profile.DY.value,
-            ],
-            "xl": [
-                Profile.DY.value,
-            ],
-            "vbmax": [
-                Profile.DY.value,
-            ],
-            "vgmax": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

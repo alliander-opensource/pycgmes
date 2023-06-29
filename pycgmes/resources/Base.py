@@ -5,10 +5,10 @@
 Parent element of all CGMES elements
 """
 import importlib
-from dataclasses import fields
+from dataclasses import Field, fields
 from enum import Enum
 from functools import cache, cached_property
-from typing import Any
+from typing import Any, TypeAlias
 
 # Drop in dataclass replacement, allowing easier json dump and validation in the future.
 from pydantic.dataclasses import dataclass
@@ -100,12 +100,9 @@ class Base:
     """
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         raise NotImplementedError("Method not implemented because not relevant in Base.")
 
-    # Note about the type: in python <3.11, you cannot type yet with sSelf.
-    # It is possible to either from __future__ import annotations, or to
-    # use the class name in quotes, as done here. See forward reference in PEP 484.
     @staticmethod
     def parse_json_as(attrs: dict[str, Any]) -> "Base":
         """
@@ -121,7 +118,7 @@ class Base:
         # Works because the module and the class have the same name.
         return getattr(mod, subclass)(**data_attrs)
 
-    def to_dict(self) -> dict[str, Any]:
+    def to_dict(self) -> dict[str, "CgmesAttributeTypes"]:
         """
         Returns the class as dict, with:
         - only public attributes
@@ -129,5 +126,70 @@ class Base:
 
         """
         attrs = {f.name: getattr(self, f.name) for f in fields(self)}
-        attrs["__class__"] = self.__class__.__name__
+        attrs["__class__"] = self.resource_name
         return attrs
+
+    @cached_property
+    def resource_name(self) -> str:
+        """Returns the resource type."""
+        return self.__class__.__name__
+
+    def cgmes_attribute_names_in_profile(self, profile: Profile | None) -> set[Field]:
+        """
+        Returns all fields accross the parent tree which are in the profile in parameter.
+
+        Mostly useful during export to find all the attributes relevant to one profile only.
+
+        mRID will not be present as a resource attribute in the rdf, it will appear in the id of a resource,
+        so is skipped. For instance
+
+        <cim:ConnectivityNode rdf:ID="{Here the mRID}">
+            <cim:ConnectivityNode.ConnectivityNodeContainer>blah</cim:ConnectivityNode.ConnectivityNodeContainer>
+            {here the mRID will not appear}
+        </cim:ConnectivityNode>
+
+        If profile is None, returns all.
+        """
+        return {
+            f
+            for f in fields(self)
+            # The field is defined as a pydantic.Field, not a dataclass.field,
+            # so access to metadata is a tad different. Furthermore, mypy is confused by extra.
+            if (profile is None or profile in f.default.extra["in_profiles"])  # type: ignore[union-attr]
+            if f.name != "mRID"
+        }
+
+    def cgmes_attributes_in_profile(self, profile: Profile | None) -> dict[str, "CgmesAttributeTypes"]:
+        """
+        Returns all attribute values as a dict: fully qualified name => value.
+        Fully qualified names is in the form class_name.attribute_name, where class_name is the
+        (possibly parent) class where the attribute is defined.
+
+        This is used mostly in export, where the attributes need to be written in the form:
+        <cim:IdentifiedObject.name>3022308-EL-M01-145-SC3</cim:IdentifiedObject.name>
+        with thus the parent class included in the attribute name.
+        """
+        # What will be returned, has the qualname as key...
+        qual_attrs: dict[str, "CgmesAttributeTypes"] = {}
+        # .. but we check existence with the unqualified (short) name.
+        seen_attrs = set()
+
+        for parent in reversed(self.__class__.__mro__[:-1]):
+            for f in fields(parent):
+                shortname = f.name
+                qualname = f"{parent.__name__}.{shortname}"
+                if f not in self.cgmes_attribute_names_in_profile(profile) or shortname in seen_attrs:
+                    # Wrong profile or already found from a parent.
+                    continue
+                else:
+                    qual_attrs[qualname] = getattr(self, shortname)
+                    seen_attrs.add(shortname)
+
+        return qual_attrs
+
+    def __str__(self) -> str:
+        """Returns the string represention of this resource."""
+        return "\n".join([f"{k}={v}" for k, v in self.to_dict().items()])
+
+
+CgmesAttributeTypes: TypeAlias = str | int | float | Base | list | None

@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -28,68 +28,73 @@ class RemoteInputSignal(IdentifiedObject):
     WindTurbineType3or4Dynamics: Wind turbine type 3 or type 4 models using this remote input signal.
     """
 
-    Terminal: Optional[str] = None  # Type M:1 in CIM
-    remoteSignalType: Optional[str] = None  # Type M:1..1 in CIM
-    DiscontinuousExcitationControlDynamics: Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # WindTurbineType1or2Dynamics : Optional[str] = None  # Type M:0..1 in CIM
-    PowerSystemStabilizerDynamics: Optional[str] = None  # Type M:0..1 in CIM
-    UnderexcitationLimiterDynamics: Optional[str] = None  # Type M:0..1 in CIM
-    PFVArControllerType1Dynamics: Optional[str] = None  # Type M:0..1 in CIM
-    VoltageCompensatorDynamics: Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # WindPlantDynamics : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # WindTurbineType3or4Dynamics : Optional[str] = None  # Type M:0..1 in CIM
+    Terminal: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    remoteSignalType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=RemoteInputSignal"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    DiscontinuousExcitationControlDynamics: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType1or2Dynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    PowerSystemStabilizerDynamics: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    UnderexcitationLimiterDynamics: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    PFVArControllerType1Dynamics: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    VoltageCompensatorDynamics: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindPlantDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType3or4Dynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "Terminal": [
-                Profile.DY.value,
-            ],
-            "remoteSignalType": [
-                Profile.DY.value,
-            ],
-            "DiscontinuousExcitationControlDynamics": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType1or2Dynamics": [
-                Profile.DY.value,
-            ],
-            "PowerSystemStabilizerDynamics": [
-                Profile.DY.value,
-            ],
-            "UnderexcitationLimiterDynamics": [
-                Profile.DY.value,
-            ],
-            "PFVArControllerType1Dynamics": [
-                Profile.DY.value,
-            ],
-            "VoltageCompensatorDynamics": [
-                Profile.DY.value,
-            ],
-            "WindPlantDynamics": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType3or4Dynamics": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

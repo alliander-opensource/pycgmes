@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .EarthFaultCompensator import EarthFaultCompensator
@@ -30,53 +30,62 @@ class PetersenCoil(EarthFaultCompensator):
       based on nominal voltage divided by position current.
     """
 
-    mode: Optional[str] = None  # Type M:1..1 in CIM
-    nominalU: float = 0.0  # Type #Voltage in CIM
-    offsetCurrent: float = 0.0  # Type #CurrentFlow in CIM
-    positionCurrent: float = 0.0  # Type #CurrentFlow in CIM
-    xGroundMax: float = 0.0  # Type #Reactance in CIM
-    xGroundMin: float = 0.0  # Type #Reactance in CIM
-    xGroundNominal: float = 0.0  # Type #Reactance in CIM
+    mode: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    nominalU: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PetersenCoil"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    offsetCurrent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    positionCurrent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    xGroundMax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    xGroundMin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    xGroundNominal: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-            ],
-            # Attributes
-            "mode": [
-                Profile.SC.value,
-            ],
-            "nominalU": [
-                Profile.SC.value,
-            ],
-            "offsetCurrent": [
-                Profile.SC.value,
-            ],
-            "positionCurrent": [
-                Profile.SC.value,
-            ],
-            "xGroundMax": [
-                Profile.SC.value,
-            ],
-            "xGroundMin": [
-                Profile.SC.value,
-            ],
-            "xGroundNominal": [
-                Profile.SC.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
         }

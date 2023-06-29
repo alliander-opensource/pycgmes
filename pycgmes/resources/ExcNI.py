@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -28,64 +28,82 @@ class ExcNI(ExcitationSystemDynamics):
       current capability.   Typical value = 5.
     """
 
-    busFedSelector: bool = False  # Type #Boolean in CIM
-    tr: int = 0  # Type #Seconds in CIM
-    ka: float = 0.0  # Type #PU in CIM
-    ta: int = 0  # Type #Seconds in CIM
-    vrmax: float = 0.0  # Type #PU in CIM
-    vrmin: float = 0.0  # Type #PU in CIM
-    kf: float = 0.0  # Type #PU in CIM
-    tf2: int = 0  # Type #Seconds in CIM
-    tf1: int = 0  # Type #Seconds in CIM
-    r: float = 0.0  # Type #PU in CIM
+    busFedSelector: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tr: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcNI"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ka: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ta: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    r: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "busFedSelector": [
-                Profile.DY.value,
-            ],
-            "tr": [
-                Profile.DY.value,
-            ],
-            "ka": [
-                Profile.DY.value,
-            ],
-            "ta": [
-                Profile.DY.value,
-            ],
-            "vrmax": [
-                Profile.DY.value,
-            ],
-            "vrmin": [
-                Profile.DY.value,
-            ],
-            "kf": [
-                Profile.DY.value,
-            ],
-            "tf2": [
-                Profile.DY.value,
-            ],
-            "tf1": [
-                Profile.DY.value,
-            ],
-            "r": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

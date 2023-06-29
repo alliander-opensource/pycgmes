@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -38,96 +38,138 @@ class LoadStatic(IdentifiedObject):
     kqf: Frequency deviation coefficient for reactive power (Kqf).  Not used when .staticLoadModelType = constantZ.
     """
 
-    LoadAggregate: Optional[str] = None  # Type M:1 in CIM
-    staticLoadModelType: Optional[str] = None  # Type M:1..1 in CIM
-    kp1: float = 0.0  # Type #Float in CIM
-    kp2: float = 0.0  # Type #Float in CIM
-    kp3: float = 0.0  # Type #Float in CIM
-    kp4: float = 0.0  # Type #Float in CIM
-    ep1: float = 0.0  # Type #Float in CIM
-    ep2: float = 0.0  # Type #Float in CIM
-    ep3: float = 0.0  # Type #Float in CIM
-    kpf: float = 0.0  # Type #Float in CIM
-    kq1: float = 0.0  # Type #Float in CIM
-    kq2: float = 0.0  # Type #Float in CIM
-    kq3: float = 0.0  # Type #Float in CIM
-    kq4: float = 0.0  # Type #Float in CIM
-    eq1: float = 0.0  # Type #Float in CIM
-    eq2: float = 0.0  # Type #Float in CIM
-    eq3: float = 0.0  # Type #Float in CIM
-    kqf: float = 0.0  # Type #Float in CIM
+    LoadAggregate: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    staticLoadModelType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=LoadStatic"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    kp1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kp2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kp3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kp4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ep1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ep2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ep3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kq1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kq2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kq3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kq4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    eq1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    eq2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    eq3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kqf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "LoadAggregate": [
-                Profile.DY.value,
-            ],
-            "staticLoadModelType": [
-                Profile.DY.value,
-            ],
-            "kp1": [
-                Profile.DY.value,
-            ],
-            "kp2": [
-                Profile.DY.value,
-            ],
-            "kp3": [
-                Profile.DY.value,
-            ],
-            "kp4": [
-                Profile.DY.value,
-            ],
-            "ep1": [
-                Profile.DY.value,
-            ],
-            "ep2": [
-                Profile.DY.value,
-            ],
-            "ep3": [
-                Profile.DY.value,
-            ],
-            "kpf": [
-                Profile.DY.value,
-            ],
-            "kq1": [
-                Profile.DY.value,
-            ],
-            "kq2": [
-                Profile.DY.value,
-            ],
-            "kq3": [
-                Profile.DY.value,
-            ],
-            "kq4": [
-                Profile.DY.value,
-            ],
-            "eq1": [
-                Profile.DY.value,
-            ],
-            "eq2": [
-                Profile.DY.value,
-            ],
-            "eq3": [
-                Profile.DY.value,
-            ],
-            "kqf": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

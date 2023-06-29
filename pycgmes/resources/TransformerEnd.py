@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -30,59 +30,63 @@ class TransformerEnd(IdentifiedObject):
     xground: (for Yn and Zn connections) Reactive part of neutral impedance where `grounded` is true.
     """
 
-    BaseVoltage: Optional[str] = None  # Type M:1 in CIM
-    # *Association not used*
-    # PhaseTapChanger : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # RatioTapChanger : Optional[str] = None  # Type M:0..1 in CIM
-    Terminal: Optional[str] = None  # Type M:1..1 in CIM
-    endNumber: int = 0  # Type #Integer in CIM
-    rground: float = 0.0  # Type #Resistance in CIM
-    grounded: bool = False  # Type #Boolean in CIM
-    xground: float = 0.0  # Type #Reactance in CIM
+    BaseVoltage: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # PhaseTapChanger : Optional[str] = Field(default=None, in_profiles = [Profile.EQ, ])
 
-        return "\n".join(
-            ["class=TransformerEnd"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # RatioTapChanger : Optional[str] = Field(default=None, in_profiles = [Profile.EQ, ])
+
+    Terminal: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    endNumber: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    rground: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    grounded: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    xground: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-            ],
-            # Attributes
-            "BaseVoltage": [
-                Profile.EQ.value,
-            ],
-            "PhaseTapChanger": [
-                Profile.EQ.value,
-            ],
-            "RatioTapChanger": [
-                Profile.EQ.value,
-            ],
-            "Terminal": [
-                Profile.EQ.value,
-            ],
-            "endNumber": [
-                Profile.EQ.value,
-            ],
-            "rground": [
-                Profile.SC.value,
-            ],
-            "grounded": [
-                Profile.SC.value,
-            ],
-            "xground": [
-                Profile.SC.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
         }

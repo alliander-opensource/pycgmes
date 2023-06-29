@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .EnergyConnection import EnergyConnection
@@ -41,82 +41,112 @@ class EnergySource(EnergyConnection):
       attribute shall be a positive value or zero.
     """
 
-    EnergySchedulingType: Optional[str] = None  # Type M:0..1 in CIM
-    nominalVoltage: float = 0.0  # Type #Voltage in CIM
-    pMin: float = 0.0  # Type #ActivePower in CIM
-    pMax: float = 0.0  # Type #ActivePower in CIM
-    r: float = 0.0  # Type #Resistance in CIM
-    r0: float = 0.0  # Type #Resistance in CIM
-    rn: float = 0.0  # Type #Resistance in CIM
-    x: float = 0.0  # Type #Reactance in CIM
-    x0: float = 0.0  # Type #Reactance in CIM
-    xn: float = 0.0  # Type #Reactance in CIM
-    activePower: float = 0.0  # Type #ActivePower in CIM
-    reactivePower: float = 0.0  # Type #ReactivePower in CIM
-    voltageAngle: float = 0.0  # Type #AngleRadians in CIM
-    voltageMagnitude: float = 0.0  # Type #Voltage in CIM
+    EnergySchedulingType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    nominalVoltage: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=EnergySource"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    pMin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    pMax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    r: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    r0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    rn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    xn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    activePower: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    reactivePower: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    voltageAngle: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    voltageMagnitude: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "EnergySchedulingType": [
-                Profile.EQ.value,
-            ],
-            "nominalVoltage": [
-                Profile.EQ.value,
-            ],
-            "pMin": [
-                Profile.EQ.value,
-            ],
-            "pMax": [
-                Profile.EQ.value,
-            ],
-            "r": [
-                Profile.SC.value,
-            ],
-            "r0": [
-                Profile.SC.value,
-            ],
-            "rn": [
-                Profile.SC.value,
-            ],
-            "x": [
-                Profile.SC.value,
-            ],
-            "x0": [
-                Profile.SC.value,
-            ],
-            "xn": [
-                Profile.SC.value,
-            ],
-            "activePower": [
-                Profile.SSH.value,
-            ],
-            "reactivePower": [
-                Profile.SSH.value,
-            ],
-            "voltageAngle": [
-                Profile.SSH.value,
-            ],
-            "voltageMagnitude": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
+            Profile.SSH,
         }

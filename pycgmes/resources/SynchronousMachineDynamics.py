@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .RotatingMachineDynamics import RotatingMachineDynamics
@@ -36,59 +36,43 @@ class SynchronousMachineDynamics(RotatingMachineDynamics):
     GenICompensationForGenJ: Compensation of voltage compensator`s generator for current flow out of this  generator.
     """
 
-    SynchronousMachine: Optional[str] = None  # Type M:1 in CIM
-    # *Association not used*
-    # CrossCompoundTurbineGovernorDyanmics : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # CrossCompoundTurbineGovernorDynamics : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # MechanicalLoadDynamics : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # ExcitationSystemDynamics : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # TurbineGovernorDynamics : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # GenICompensationForGenJ : list = field(default_factory=list)  # Type M:0..n in CIM
+    SynchronousMachine: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # CrossCompoundTurbineGovernorDyanmics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ]) # noqa: E501
 
-        return "\n".join(
-            ["class=SynchronousMachineDynamics"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # CrossCompoundTurbineGovernorDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ]) # noqa: E501
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # MechanicalLoadDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # ExcitationSystemDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # TurbineGovernorDynamics : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # GenICompensationForGenJ : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "SynchronousMachine": [
-                Profile.DY.value,
-            ],
-            "CrossCompoundTurbineGovernorDyanmics": [
-                Profile.DY.value,
-            ],
-            "CrossCompoundTurbineGovernorDynamics": [
-                Profile.DY.value,
-            ],
-            "MechanicalLoadDynamics": [
-                Profile.DY.value,
-            ],
-            "ExcitationSystemDynamics": [
-                Profile.DY.value,
-            ],
-            "TurbineGovernorDynamics": [
-                Profile.DY.value,
-            ],
-            "GenICompensationForGenJ": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

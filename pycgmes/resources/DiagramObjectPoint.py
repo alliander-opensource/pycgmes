@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Base import Base
@@ -25,49 +25,54 @@ class DiagramObjectPoint(Base):
     zPosition: The Z coordinate of this point.
     """
 
-    DiagramObject: Optional[str] = None  # Type M:1 in CIM
-    DiagramObjectGluePoint: Optional[str] = None  # Type M:0..1 in CIM
-    sequenceNumber: int = 0  # Type #Integer in CIM
-    xPosition: float = 0.0  # Type #Float in CIM
-    yPosition: float = 0.0  # Type #Float in CIM
-    zPosition: float = 0.0  # Type #Float in CIM
+    DiagramObject: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    DiagramObjectGluePoint: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
 
-        return "\n".join(
-            ["class=DiagramObjectPoint"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    sequenceNumber: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    xPosition: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    yPosition: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    zPosition: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DL.value,
-            ],
-            # Attributes
-            "DiagramObject": [
-                Profile.DL.value,
-            ],
-            "DiagramObjectGluePoint": [
-                Profile.DL.value,
-            ],
-            "sequenceNumber": [
-                Profile.DL.value,
-            ],
-            "xPosition": [
-                Profile.DL.value,
-            ],
-            "yPosition": [
-                Profile.DL.value,
-            ],
-            "zPosition": [
-                Profile.DL.value,
-            ],
+            Profile.DL,
         }

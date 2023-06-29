@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
@@ -51,160 +51,250 @@ class PssPTIST3(PowerSystemStabilizerDynamics):
     ncr: Number of counts until reset after limit function is triggered (NCR).
     """
 
-    m: float = 0.0  # Type #PU in CIM
-    tf: int = 0  # Type #Seconds in CIM
-    tp: int = 0  # Type #Seconds in CIM
-    t1: int = 0  # Type #Seconds in CIM
-    t2: int = 0  # Type #Seconds in CIM
-    t3: int = 0  # Type #Seconds in CIM
-    t4: int = 0  # Type #Seconds in CIM
-    k: float = 0.0  # Type #PU in CIM
-    dtf: int = 0  # Type #Seconds in CIM
-    dtc: int = 0  # Type #Seconds in CIM
-    dtp: int = 0  # Type #Seconds in CIM
-    t5: int = 0  # Type #Seconds in CIM
-    t6: int = 0  # Type #Seconds in CIM
-    a0: float = 0.0  # Type #PU in CIM
-    a1: float = 0.0  # Type #PU in CIM
-    a2: float = 0.0  # Type #PU in CIM
-    b0: float = 0.0  # Type #PU in CIM
-    b1: float = 0.0  # Type #PU in CIM
-    b2: float = 0.0  # Type #PU in CIM
-    a3: float = 0.0  # Type #PU in CIM
-    a4: float = 0.0  # Type #PU in CIM
-    a5: float = 0.0  # Type #PU in CIM
-    b3: float = 0.0  # Type #PU in CIM
-    b4: float = 0.0  # Type #PU in CIM
-    b5: float = 0.0  # Type #PU in CIM
-    athres: float = 0.0  # Type #PU in CIM
-    dl: float = 0.0  # Type #PU in CIM
-    al: float = 0.0  # Type #PU in CIM
-    lthres: float = 0.0  # Type #PU in CIM
-    pmin: float = 0.0  # Type #PU in CIM
-    isw: bool = False  # Type #Boolean in CIM
-    nav: float = 0.0  # Type #Float in CIM
-    ncl: float = 0.0  # Type #Float in CIM
-    ncr: float = 0.0  # Type #Float in CIM
+    m: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tf: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PssPTIST3"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    tp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dtf: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dtc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dtp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t5: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t6: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    b0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    b1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    b2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a5: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    b3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    b4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    b5: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    athres: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dl: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    al: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    lthres: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    isw: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    nav: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ncl: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ncr: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "m": [
-                Profile.DY.value,
-            ],
-            "tf": [
-                Profile.DY.value,
-            ],
-            "tp": [
-                Profile.DY.value,
-            ],
-            "t1": [
-                Profile.DY.value,
-            ],
-            "t2": [
-                Profile.DY.value,
-            ],
-            "t3": [
-                Profile.DY.value,
-            ],
-            "t4": [
-                Profile.DY.value,
-            ],
-            "k": [
-                Profile.DY.value,
-            ],
-            "dtf": [
-                Profile.DY.value,
-            ],
-            "dtc": [
-                Profile.DY.value,
-            ],
-            "dtp": [
-                Profile.DY.value,
-            ],
-            "t5": [
-                Profile.DY.value,
-            ],
-            "t6": [
-                Profile.DY.value,
-            ],
-            "a0": [
-                Profile.DY.value,
-            ],
-            "a1": [
-                Profile.DY.value,
-            ],
-            "a2": [
-                Profile.DY.value,
-            ],
-            "b0": [
-                Profile.DY.value,
-            ],
-            "b1": [
-                Profile.DY.value,
-            ],
-            "b2": [
-                Profile.DY.value,
-            ],
-            "a3": [
-                Profile.DY.value,
-            ],
-            "a4": [
-                Profile.DY.value,
-            ],
-            "a5": [
-                Profile.DY.value,
-            ],
-            "b3": [
-                Profile.DY.value,
-            ],
-            "b4": [
-                Profile.DY.value,
-            ],
-            "b5": [
-                Profile.DY.value,
-            ],
-            "athres": [
-                Profile.DY.value,
-            ],
-            "dl": [
-                Profile.DY.value,
-            ],
-            "al": [
-                Profile.DY.value,
-            ],
-            "lthres": [
-                Profile.DY.value,
-            ],
-            "pmin": [
-                Profile.DY.value,
-            ],
-            "isw": [
-                Profile.DY.value,
-            ],
-            "nav": [
-                Profile.DY.value,
-            ],
-            "ncl": [
-                Profile.DY.value,
-            ],
-            "ncr": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

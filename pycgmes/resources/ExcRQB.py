@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -31,76 +31,103 @@ class ExcRQB(ExcitationSystemDynamics):
     tf: Exciter time constant (TF) (>= 0).  Typical value = 0,01.
     """
 
-    ki0: float = 0.0  # Type #Float in CIM
-    ki1: float = 0.0  # Type #Float in CIM
-    te: int = 0  # Type #Seconds in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    klir: float = 0.0  # Type #Float in CIM
-    ucmin: float = 0.0  # Type #PU in CIM
-    ucmax: float = 0.0  # Type #PU in CIM
-    lus: float = 0.0  # Type #PU in CIM
-    klus: float = 0.0  # Type #Float in CIM
-    mesu: int = 0  # Type #Seconds in CIM
-    t4m: int = 0  # Type #Seconds in CIM
-    lsat: float = 0.0  # Type #PU in CIM
-    tf: int = 0  # Type #Seconds in CIM
+    ki0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    ki1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcRQB"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    te: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    klir: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ucmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ucmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    lus: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    klus: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    mesu: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4m: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    lsat: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "ki0": [
-                Profile.DY.value,
-            ],
-            "ki1": [
-                Profile.DY.value,
-            ],
-            "te": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "klir": [
-                Profile.DY.value,
-            ],
-            "ucmin": [
-                Profile.DY.value,
-            ],
-            "ucmax": [
-                Profile.DY.value,
-            ],
-            "lus": [
-                Profile.DY.value,
-            ],
-            "klus": [
-                Profile.DY.value,
-            ],
-            "mesu": [
-                Profile.DY.value,
-            ],
-            "t4m": [
-                Profile.DY.value,
-            ],
-            "lsat": [
-                Profile.DY.value,
-            ],
-            "tf": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

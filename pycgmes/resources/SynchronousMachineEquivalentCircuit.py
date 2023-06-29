@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .SynchronousMachineDetailed import SynchronousMachineDetailed
@@ -44,69 +44,89 @@ class SynchronousMachineEquivalentCircuit(SynchronousMachineDetailed):
     x2q: Quadrature-axis damper 2 winding leakage reactance.
     """
 
-    xad: float = 0.0  # Type #PU in CIM
-    rfd: float = 0.0  # Type #PU in CIM
-    xfd: float = 0.0  # Type #PU in CIM
-    r1d: float = 0.0  # Type #PU in CIM
-    x1d: float = 0.0  # Type #PU in CIM
-    xf1d: float = 0.0  # Type #PU in CIM
-    xaq: float = 0.0  # Type #PU in CIM
-    r1q: float = 0.0  # Type #PU in CIM
-    x1q: float = 0.0  # Type #PU in CIM
-    r2q: float = 0.0  # Type #PU in CIM
-    x2q: float = 0.0  # Type #PU in CIM
+    xad: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    rfd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=SynchronousMachineEquivalentCircuit"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    xfd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    r1d: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    x1d: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xf1d: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xaq: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    r1q: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    x1q: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    r2q: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    x2q: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "xad": [
-                Profile.DY.value,
-            ],
-            "rfd": [
-                Profile.DY.value,
-            ],
-            "xfd": [
-                Profile.DY.value,
-            ],
-            "r1d": [
-                Profile.DY.value,
-            ],
-            "x1d": [
-                Profile.DY.value,
-            ],
-            "xf1d": [
-                Profile.DY.value,
-            ],
-            "xaq": [
-                Profile.DY.value,
-            ],
-            "r1q": [
-                Profile.DY.value,
-            ],
-            "x1q": [
-                Profile.DY.value,
-            ],
-            "r2q": [
-                Profile.DY.value,
-            ],
-            "x2q": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

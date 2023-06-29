@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -35,84 +35,117 @@ class ExcELIN1(ExcitationSystemDynamics):
     smax: Stabilizer limit output (smax).  Typical value = 0,1.
     """
 
-    tfi: int = 0  # Type #Seconds in CIM
-    tnu: int = 0  # Type #Seconds in CIM
-    vpu: float = 0.0  # Type #PU in CIM
-    vpi: float = 0.0  # Type #PU in CIM
-    vpnf: float = 0.0  # Type #PU in CIM
-    dpnf: float = 0.0  # Type #PU in CIM
-    tsw: int = 0  # Type #Seconds in CIM
-    efmin: float = 0.0  # Type #PU in CIM
-    efmax: float = 0.0  # Type #PU in CIM
-    xe: float = 0.0  # Type #PU in CIM
-    ks1: float = 0.0  # Type #PU in CIM
-    ks2: float = 0.0  # Type #PU in CIM
-    ts1: int = 0  # Type #Seconds in CIM
-    ts2: int = 0  # Type #Seconds in CIM
-    smax: float = 0.0  # Type #PU in CIM
+    tfi: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tnu: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcELIN1"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    vpu: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vpi: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vpnf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dpnf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tsw: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    efmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    efmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xe: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ks1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ks2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ts1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ts2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    smax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "tfi": [
-                Profile.DY.value,
-            ],
-            "tnu": [
-                Profile.DY.value,
-            ],
-            "vpu": [
-                Profile.DY.value,
-            ],
-            "vpi": [
-                Profile.DY.value,
-            ],
-            "vpnf": [
-                Profile.DY.value,
-            ],
-            "dpnf": [
-                Profile.DY.value,
-            ],
-            "tsw": [
-                Profile.DY.value,
-            ],
-            "efmin": [
-                Profile.DY.value,
-            ],
-            "efmax": [
-                Profile.DY.value,
-            ],
-            "xe": [
-                Profile.DY.value,
-            ],
-            "ks1": [
-                Profile.DY.value,
-            ],
-            "ks2": [
-                Profile.DY.value,
-            ],
-            "ts1": [
-                Profile.DY.value,
-            ],
-            "ts2": [
-                Profile.DY.value,
-            ],
-            "smax": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

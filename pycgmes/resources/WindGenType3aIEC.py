@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .WindGenType3IEC import WindGenType3IEC
@@ -19,38 +19,30 @@ class WindGenType3aIEC(WindGenType3IEC):
     WindTurbineType4IEC: Wind turbine type 4 model with which this wind generator type 3A model is associated.
     """
 
-    kpc: float = 0.0  # Type #Float in CIM
-    tic: int = 0  # Type #Seconds in CIM
+    kpc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tic: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
     # *Association not used*
-    # WindTurbineType4IEC : Optional[str] = None  # Type M:0..1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=WindGenType3aIEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType4IEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "kpc": [
-                Profile.DY.value,
-            ],
-            "tic": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType4IEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

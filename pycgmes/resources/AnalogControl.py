@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Control import Control
@@ -20,36 +20,33 @@ class AnalogControl(Control):
     AnalogValue: The MeasurementValue that is controlled.
     """
 
-    maxValue: float = 0.0  # Type #Float in CIM
-    minValue: float = 0.0  # Type #Float in CIM
-    AnalogValue: Optional[str] = None  # Type M:1 in CIM
+    maxValue: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    minValue: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
 
-        return "\n".join(
-            ["class=AnalogControl"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    AnalogValue: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.OP.value,
-            ],
-            # Attributes
-            "maxValue": [
-                Profile.OP.value,
-            ],
-            "minValue": [
-                Profile.OP.value,
-            ],
-            "AnalogValue": [
-                Profile.OP.value,
-            ],
+            Profile.OP,
         }

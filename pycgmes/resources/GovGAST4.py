@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
@@ -27,68 +27,89 @@ class GovGAST4(TurbineGovernorDynamics):
     mnef: Fuel flow maximum negative error value (MNef).  Typical value = -0,05.
     """
 
-    bp: float = 0.0  # Type #PU in CIM
-    ty: int = 0  # Type #Seconds in CIM
-    ta: int = 0  # Type #Seconds in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    tcm: int = 0  # Type #Seconds in CIM
-    ktm: float = 0.0  # Type #PU in CIM
-    tm: int = 0  # Type #Seconds in CIM
-    rymx: float = 0.0  # Type #PU in CIM
-    rymn: float = 0.0  # Type #PU in CIM
-    mxef: float = 0.0  # Type #PU in CIM
-    mnef: float = 0.0  # Type #PU in CIM
+    bp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    ty: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovGAST4"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ta: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tcm: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ktm: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tm: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rymx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rymn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    mxef: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    mnef: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "bp": [
-                Profile.DY.value,
-            ],
-            "ty": [
-                Profile.DY.value,
-            ],
-            "ta": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "tcm": [
-                Profile.DY.value,
-            ],
-            "ktm": [
-                Profile.DY.value,
-            ],
-            "tm": [
-                Profile.DY.value,
-            ],
-            "rymx": [
-                Profile.DY.value,
-            ],
-            "rymn": [
-                Profile.DY.value,
-            ],
-            "mxef": [
-                Profile.DY.value,
-            ],
-            "mnef": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

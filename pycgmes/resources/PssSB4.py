@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
@@ -27,68 +27,89 @@ class PssSB4(PowerSystemStabilizerDynamics):
     vsmin: Limiter (Vsmin) (< PssSB4.vsmax).  Typical value = -0,062.
     """
 
-    tt: int = 0  # Type #Seconds in CIM
-    kx: float = 0.0  # Type #PU in CIM
-    tx2: int = 0  # Type #Seconds in CIM
-    ta: int = 0  # Type #Seconds in CIM
-    tx1: int = 0  # Type #Seconds in CIM
-    tb: int = 0  # Type #Seconds in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    td: int = 0  # Type #Seconds in CIM
-    te: int = 0  # Type #Seconds in CIM
-    vsmax: float = 0.0  # Type #PU in CIM
-    vsmin: float = 0.0  # Type #PU in CIM
+    tt: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    kx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PssSB4"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    tx2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ta: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tx1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    td: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    te: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "tt": [
-                Profile.DY.value,
-            ],
-            "kx": [
-                Profile.DY.value,
-            ],
-            "tx2": [
-                Profile.DY.value,
-            ],
-            "ta": [
-                Profile.DY.value,
-            ],
-            "tx1": [
-                Profile.DY.value,
-            ],
-            "tb": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "td": [
-                Profile.DY.value,
-            ],
-            "te": [
-                Profile.DY.value,
-            ],
-            "vsmax": [
-                Profile.DY.value,
-            ],
-            "vsmin": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

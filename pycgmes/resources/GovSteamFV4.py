@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
@@ -68,228 +68,369 @@ class GovSteamFV4(TurbineGovernorDynamics):
     ksh: Pressure loss due to flow friction in the boiler tubes (Ksh).  Typical value = 0,08.
     """
 
-    kf1: float = 0.0  # Type #PU in CIM
-    kf3: float = 0.0  # Type #PU in CIM
-    lps: float = 0.0  # Type #PU in CIM
-    lpi: float = 0.0  # Type #PU in CIM
-    mxef: float = 0.0  # Type #PU in CIM
-    mnef: float = 0.0  # Type #PU in CIM
-    crmx: float = 0.0  # Type #PU in CIM
-    crmn: float = 0.0  # Type #PU in CIM
-    kpt: float = 0.0  # Type #PU in CIM
-    kit: float = 0.0  # Type #PU in CIM
-    rvgmx: float = 0.0  # Type #PU in CIM
-    rvgmn: float = 0.0  # Type #PU in CIM
-    svmx: float = 0.0  # Type #Float in CIM
-    svmn: float = 0.0  # Type #Float in CIM
-    srmx: float = 0.0  # Type #PU in CIM
-    srmn: float = 0.0  # Type #PU in CIM
-    kpp: float = 0.0  # Type #PU in CIM
-    kip: float = 0.0  # Type #PU in CIM
-    rsmimx: float = 0.0  # Type #PU in CIM
-    rsmimn: float = 0.0  # Type #PU in CIM
-    kmp1: float = 0.0  # Type #PU in CIM
-    kmp2: float = 0.0  # Type #PU in CIM
-    srsmp: float = 0.0  # Type #PU in CIM
-    ta: int = 0  # Type #Seconds in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    ty: int = 0  # Type #Seconds in CIM
-    yhpmx: float = 0.0  # Type #PU in CIM
-    yhpmn: float = 0.0  # Type #PU in CIM
-    tam: int = 0  # Type #Seconds in CIM
-    tcm: int = 0  # Type #Seconds in CIM
-    ympmx: float = 0.0  # Type #PU in CIM
-    ympmn: float = 0.0  # Type #PU in CIM
-    y: float = 0.0  # Type #PU in CIM
-    thp: int = 0  # Type #Seconds in CIM
-    trh: int = 0  # Type #Seconds in CIM
-    tmp: int = 0  # Type #Seconds in CIM
-    khp: float = 0.0  # Type #PU in CIM
-    pr1: float = 0.0  # Type #PU in CIM
-    pr2: float = 0.0  # Type #PU in CIM
-    psmn: float = 0.0  # Type #PU in CIM
-    kpc: float = 0.0  # Type #PU in CIM
-    kic: float = 0.0  # Type #PU in CIM
-    kdc: float = 0.0  # Type #PU in CIM
-    tdc: int = 0  # Type #Seconds in CIM
-    cpsmx: float = 0.0  # Type #PU in CIM
-    cpsmn: float = 0.0  # Type #PU in CIM
-    krc: float = 0.0  # Type #PU in CIM
-    tf1: int = 0  # Type #Seconds in CIM
-    tf2: int = 0  # Type #Seconds in CIM
-    tv: int = 0  # Type #Seconds in CIM
-    ksh: float = 0.0  # Type #PU in CIM
+    kf1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    kf3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovSteamFV4"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    lps: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    lpi: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    mxef: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    mnef: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    crmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    crmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpt: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kit: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rvgmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rvgmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    svmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    svmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    srmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    srmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kip: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rsmimx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rsmimn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kmp1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kmp2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    srsmp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ta: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ty: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    yhpmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    yhpmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tam: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tcm: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ympmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ympmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    y: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    thp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    trh: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tmp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    khp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pr1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pr2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    psmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kic: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kdc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tdc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    cpsmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    cpsmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    krc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tv: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ksh: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "kf1": [
-                Profile.DY.value,
-            ],
-            "kf3": [
-                Profile.DY.value,
-            ],
-            "lps": [
-                Profile.DY.value,
-            ],
-            "lpi": [
-                Profile.DY.value,
-            ],
-            "mxef": [
-                Profile.DY.value,
-            ],
-            "mnef": [
-                Profile.DY.value,
-            ],
-            "crmx": [
-                Profile.DY.value,
-            ],
-            "crmn": [
-                Profile.DY.value,
-            ],
-            "kpt": [
-                Profile.DY.value,
-            ],
-            "kit": [
-                Profile.DY.value,
-            ],
-            "rvgmx": [
-                Profile.DY.value,
-            ],
-            "rvgmn": [
-                Profile.DY.value,
-            ],
-            "svmx": [
-                Profile.DY.value,
-            ],
-            "svmn": [
-                Profile.DY.value,
-            ],
-            "srmx": [
-                Profile.DY.value,
-            ],
-            "srmn": [
-                Profile.DY.value,
-            ],
-            "kpp": [
-                Profile.DY.value,
-            ],
-            "kip": [
-                Profile.DY.value,
-            ],
-            "rsmimx": [
-                Profile.DY.value,
-            ],
-            "rsmimn": [
-                Profile.DY.value,
-            ],
-            "kmp1": [
-                Profile.DY.value,
-            ],
-            "kmp2": [
-                Profile.DY.value,
-            ],
-            "srsmp": [
-                Profile.DY.value,
-            ],
-            "ta": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "ty": [
-                Profile.DY.value,
-            ],
-            "yhpmx": [
-                Profile.DY.value,
-            ],
-            "yhpmn": [
-                Profile.DY.value,
-            ],
-            "tam": [
-                Profile.DY.value,
-            ],
-            "tcm": [
-                Profile.DY.value,
-            ],
-            "ympmx": [
-                Profile.DY.value,
-            ],
-            "ympmn": [
-                Profile.DY.value,
-            ],
-            "y": [
-                Profile.DY.value,
-            ],
-            "thp": [
-                Profile.DY.value,
-            ],
-            "trh": [
-                Profile.DY.value,
-            ],
-            "tmp": [
-                Profile.DY.value,
-            ],
-            "khp": [
-                Profile.DY.value,
-            ],
-            "pr1": [
-                Profile.DY.value,
-            ],
-            "pr2": [
-                Profile.DY.value,
-            ],
-            "psmn": [
-                Profile.DY.value,
-            ],
-            "kpc": [
-                Profile.DY.value,
-            ],
-            "kic": [
-                Profile.DY.value,
-            ],
-            "kdc": [
-                Profile.DY.value,
-            ],
-            "tdc": [
-                Profile.DY.value,
-            ],
-            "cpsmx": [
-                Profile.DY.value,
-            ],
-            "cpsmn": [
-                Profile.DY.value,
-            ],
-            "krc": [
-                Profile.DY.value,
-            ],
-            "tf1": [
-                Profile.DY.value,
-            ],
-            "tf2": [
-                Profile.DY.value,
-            ],
-            "tv": [
-                Profile.DY.value,
-            ],
-            "ksh": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .OverexcitationLimiterDynamics import OverexcitationLimiterDynamics
@@ -22,40 +22,40 @@ class OverexcLim2(OverexcitationLimiterDynamics):
     ifdlim: Limit value of rated field current (IFDLIM).  Typical value = 1,05.
     """
 
-    koi: float = 0.0  # Type #PU in CIM
-    voimax: float = 0.0  # Type #PU in CIM
-    voimin: float = 0.0  # Type #PU in CIM
-    ifdlim: float = 0.0  # Type #PU in CIM
+    koi: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    voimax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=OverexcLim2"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    voimin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ifdlim: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "koi": [
-                Profile.DY.value,
-            ],
-            "voimax": [
-                Profile.DY.value,
-            ],
-            "voimin": [
-                Profile.DY.value,
-            ],
-            "ifdlim": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

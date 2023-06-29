@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
@@ -41,112 +41,166 @@ class GovHydroPID2(TurbineGovernorDynamics):
     feedbackSignal: Feedback signal type flag (Flag). true = use gate position feedback signal false = use Pe.
     """
 
-    mwbase: float = 0.0  # Type #ActivePower in CIM
-    treg: int = 0  # Type #Seconds in CIM
-    rperm: float = 0.0  # Type #PU in CIM
-    kp: float = 0.0  # Type #PU in CIM
-    ki: float = 0.0  # Type #Float in CIM
-    kd: float = 0.0  # Type #PU in CIM
-    ta: int = 0  # Type #Seconds in CIM
-    tb: int = 0  # Type #Seconds in CIM
-    velmax: float = 0.0  # Type #Float in CIM
-    velmin: float = 0.0  # Type #Float in CIM
-    gmax: float = 0.0  # Type #PU in CIM
-    gmin: float = 0.0  # Type #PU in CIM
-    tw: int = 0  # Type #Seconds in CIM
-    d: float = 0.0  # Type #PU in CIM
-    g0: float = 0.0  # Type #PU in CIM
-    g1: float = 0.0  # Type #PU in CIM
-    p1: float = 0.0  # Type #PU in CIM
-    g2: float = 0.0  # Type #PU in CIM
-    p2: float = 0.0  # Type #PU in CIM
-    p3: float = 0.0  # Type #PU in CIM
-    atw: float = 0.0  # Type #PU in CIM
-    feedbackSignal: bool = False  # Type #Boolean in CIM
+    mwbase: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    treg: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovHydroPID2"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    rperm: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ta: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    velmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    velmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    d: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    g0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    g1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    g2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    atw: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    feedbackSignal: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "mwbase": [
-                Profile.DY.value,
-            ],
-            "treg": [
-                Profile.DY.value,
-            ],
-            "rperm": [
-                Profile.DY.value,
-            ],
-            "kp": [
-                Profile.DY.value,
-            ],
-            "ki": [
-                Profile.DY.value,
-            ],
-            "kd": [
-                Profile.DY.value,
-            ],
-            "ta": [
-                Profile.DY.value,
-            ],
-            "tb": [
-                Profile.DY.value,
-            ],
-            "velmax": [
-                Profile.DY.value,
-            ],
-            "velmin": [
-                Profile.DY.value,
-            ],
-            "gmax": [
-                Profile.DY.value,
-            ],
-            "gmin": [
-                Profile.DY.value,
-            ],
-            "tw": [
-                Profile.DY.value,
-            ],
-            "d": [
-                Profile.DY.value,
-            ],
-            "g0": [
-                Profile.DY.value,
-            ],
-            "g1": [
-                Profile.DY.value,
-            ],
-            "p1": [
-                Profile.DY.value,
-            ],
-            "g2": [
-                Profile.DY.value,
-            ],
-            "p2": [
-                Profile.DY.value,
-            ],
-            "p3": [
-                Profile.DY.value,
-            ],
-            "atw": [
-                Profile.DY.value,
-            ],
-            "feedbackSignal": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

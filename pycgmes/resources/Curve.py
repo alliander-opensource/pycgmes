@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -23,45 +23,44 @@ class Curve(IdentifiedObject):
     CurveDatas: The point data values that define this curve.
     """
 
-    curveStyle: Optional[str] = None  # Type M:1..1 in CIM
-    xUnit: Optional[str] = None  # Type M:1..1 in CIM
-    y1Unit: Optional[str] = None  # Type M:1..1 in CIM
-    y2Unit: Optional[str] = None  # Type M:0..1 in CIM
+    curveStyle: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    xUnit: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    y1Unit: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    y2Unit: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
     # *Association not used*
-    # CurveDatas : list = field(default_factory=list)  # Type M:1..n in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=Curve"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
+    # CurveDatas : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-            ],
-            # Attributes
-            "curveStyle": [
-                Profile.EQ.value,
-            ],
-            "xUnit": [
-                Profile.EQ.value,
-            ],
-            "y1Unit": [
-                Profile.EQ.value,
-            ],
-            "y2Unit": [
-                Profile.EQ.value,
-            ],
-            "CurveDatas": [
-                Profile.EQ.value,
-            ],
+            Profile.EQ,
         }

@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ConductingEquipment import ConductingEquipment
@@ -56,112 +56,159 @@ class ACDCConverter(ConductingEquipment):
     targetUdc: Target value for DC voltage magnitude. The attribute shall be a positive value.
     """
 
-    baseS: float = 0.0  # Type #ApparentPower in CIM
-    idleLoss: float = 0.0  # Type #ActivePower in CIM
-    maxUdc: float = 0.0  # Type #Voltage in CIM
-    minUdc: float = 0.0  # Type #Voltage in CIM
-    numberOfValves: int = 0  # Type #Integer in CIM
-    ratedUdc: float = 0.0  # Type #Voltage in CIM
-    resistiveLoss: float = 0.0  # Type #Resistance in CIM
-    switchingLoss: float = 0.0  # Type #ActivePowerPerCurrentFlow in CIM
-    valveU0: float = 0.0  # Type #Voltage in CIM
-    maxP: float = 0.0  # Type #ActivePower in CIM
-    minP: float = 0.0  # Type #ActivePower in CIM
-    PccTerminal: Optional[str] = None  # Type M:0..1 in CIM
+    baseS: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    idleLoss: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    maxUdc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    minUdc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    numberOfValves: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ratedUdc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    resistiveLoss: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    switchingLoss: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    valveU0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    maxP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    minP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    PccTerminal: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
     # *Association not used*
-    # DCTerminals : list = field(default_factory=list)  # Type M:0..n in CIM
-    idc: float = 0.0  # Type #CurrentFlow in CIM
-    poleLossP: float = 0.0  # Type #ActivePower in CIM
-    uc: float = 0.0  # Type #Voltage in CIM
-    udc: float = 0.0  # Type #Voltage in CIM
-    p: float = 0.0  # Type #ActivePower in CIM
-    q: float = 0.0  # Type #ReactivePower in CIM
-    targetPpcc: float = 0.0  # Type #ActivePower in CIM
-    targetUdc: float = 0.0  # Type #Voltage in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # DCTerminals : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    idc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SV,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ACDCConverter"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    poleLossP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SV,
+        ],
+    )
+
+    uc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SV,
+        ],
+    )
+
+    udc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SV,
+        ],
+    )
+
+    p: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    q: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    targetPpcc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    targetUdc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SV.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-            ],
-            # Attributes
-            "baseS": [
-                Profile.EQ.value,
-            ],
-            "idleLoss": [
-                Profile.EQ.value,
-            ],
-            "maxUdc": [
-                Profile.EQ.value,
-            ],
-            "minUdc": [
-                Profile.EQ.value,
-            ],
-            "numberOfValves": [
-                Profile.EQ.value,
-            ],
-            "ratedUdc": [
-                Profile.EQ.value,
-            ],
-            "resistiveLoss": [
-                Profile.EQ.value,
-            ],
-            "switchingLoss": [
-                Profile.EQ.value,
-            ],
-            "valveU0": [
-                Profile.EQ.value,
-            ],
-            "maxP": [
-                Profile.EQ.value,
-            ],
-            "minP": [
-                Profile.EQ.value,
-            ],
-            "PccTerminal": [
-                Profile.EQ.value,
-            ],
-            "DCTerminals": [
-                Profile.EQ.value,
-            ],
-            "idc": [
-                Profile.SV.value,
-            ],
-            "poleLossP": [
-                Profile.SV.value,
-            ],
-            "uc": [
-                Profile.SV.value,
-            ],
-            "udc": [
-                Profile.SV.value,
-            ],
-            "p": [
-                Profile.SSH.value,
-            ],
-            "q": [
-                Profile.SSH.value,
-            ],
-            "targetPpcc": [
-                Profile.SSH.value,
-            ],
-            "targetUdc": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SV,
+            Profile.SSH,
+            Profile.DY,
         }

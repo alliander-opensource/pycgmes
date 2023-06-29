@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Base import Base
@@ -21,40 +21,40 @@ class Status(Base):
     reason: Reason code or explanation for why an object went to the current status `value`.
     """
 
-    value: str = ""  # Type #String in CIM
-    dateTime: str = ""  # Type #DateTime in CIM
-    remark: str = ""  # Type #String in CIM
-    reason: str = ""  # Type #String in CIM
+    value: str = Field(
+        default="",
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    dateTime: str = Field(
+        default="",
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
 
-        return "\n".join(
-            ["class=Status"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    remark: str = Field(
+        default="",
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
+
+    reason: str = Field(
+        default="",
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.GL.value,
-            ],
-            # Attributes
-            "value": [
-                Profile.GL.value,
-            ],
-            "dateTime": [
-                Profile.GL.value,
-            ],
-            "remark": [
-                Profile.GL.value,
-            ],
-            "reason": [
-                Profile.GL.value,
-            ],
+            Profile.GL,
         }

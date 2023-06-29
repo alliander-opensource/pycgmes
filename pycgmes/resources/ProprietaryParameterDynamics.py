@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Base import Base
@@ -48,125 +48,187 @@ class ProprietaryParameterDynamics(Base):
       integerParameterValue will not be.
     """
 
-    CSCUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    SVCUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    VSCUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    WindPlantUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    WindType1or2UserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    WindType3or4UserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    SynchronousMachineUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    AsynchronousMachineUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    TurbineGovernorUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    TurbineLoadControllerUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    MechanicalLoadUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    ExcitationSystemUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    OverexcitationLimiterUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    UnderexcitationLimiterUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    PowerSystemStabilizerUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    DiscontinuousExcitationControlUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    PFVArControllerType1UserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    VoltageAdjusterUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    PFVArControllerType2UserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    VoltageCompensatorUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    LoadUserDefined: Optional[str] = None  # Type M:0..1 in CIM
-    parameterNumber: int = 0  # Type #Integer in CIM
-    booleanParameterValue: bool = False  # Type #Boolean in CIM
-    integerParameterValue: int = 0  # Type #Integer in CIM
-    floatParameterValue: float = 0.0  # Type #Float in CIM
+    CSCUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    SVCUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ProprietaryParameterDynamics"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    VSCUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindPlantUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindType1or2UserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindType3or4UserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    SynchronousMachineUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    AsynchronousMachineUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    TurbineGovernorUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    TurbineLoadControllerUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    MechanicalLoadUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ExcitationSystemUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    OverexcitationLimiterUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    UnderexcitationLimiterUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    PowerSystemStabilizerUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    DiscontinuousExcitationControlUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    PFVArControllerType1UserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    VoltageAdjusterUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    PFVArControllerType2UserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    VoltageCompensatorUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    LoadUserDefined: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    parameterNumber: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    booleanParameterValue: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    integerParameterValue: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    floatParameterValue: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "CSCUserDefined": [
-                Profile.DY.value,
-            ],
-            "SVCUserDefined": [
-                Profile.DY.value,
-            ],
-            "VSCUserDefined": [
-                Profile.DY.value,
-            ],
-            "WindPlantUserDefined": [
-                Profile.DY.value,
-            ],
-            "WindType1or2UserDefined": [
-                Profile.DY.value,
-            ],
-            "WindType3or4UserDefined": [
-                Profile.DY.value,
-            ],
-            "SynchronousMachineUserDefined": [
-                Profile.DY.value,
-            ],
-            "AsynchronousMachineUserDefined": [
-                Profile.DY.value,
-            ],
-            "TurbineGovernorUserDefined": [
-                Profile.DY.value,
-            ],
-            "TurbineLoadControllerUserDefined": [
-                Profile.DY.value,
-            ],
-            "MechanicalLoadUserDefined": [
-                Profile.DY.value,
-            ],
-            "ExcitationSystemUserDefined": [
-                Profile.DY.value,
-            ],
-            "OverexcitationLimiterUserDefined": [
-                Profile.DY.value,
-            ],
-            "UnderexcitationLimiterUserDefined": [
-                Profile.DY.value,
-            ],
-            "PowerSystemStabilizerUserDefined": [
-                Profile.DY.value,
-            ],
-            "DiscontinuousExcitationControlUserDefined": [
-                Profile.DY.value,
-            ],
-            "PFVArControllerType1UserDefined": [
-                Profile.DY.value,
-            ],
-            "VoltageAdjusterUserDefined": [
-                Profile.DY.value,
-            ],
-            "PFVArControllerType2UserDefined": [
-                Profile.DY.value,
-            ],
-            "VoltageCompensatorUserDefined": [
-                Profile.DY.value,
-            ],
-            "LoadUserDefined": [
-                Profile.DY.value,
-            ],
-            "parameterNumber": [
-                Profile.DY.value,
-            ],
-            "booleanParameterValue": [
-                Profile.DY.value,
-            ],
-            "integerParameterValue": [
-                Profile.DY.value,
-            ],
-            "floatParameterValue": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

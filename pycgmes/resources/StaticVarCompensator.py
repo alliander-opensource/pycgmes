@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .RegulatingCondEq import RegulatingCondEq
@@ -35,56 +35,60 @@ class StaticVarCompensator(RegulatingCondEq):
       Static Var Compensator.
     """
 
-    capacitiveRating: float = 0.0  # Type #Reactance in CIM
-    inductiveRating: float = 0.0  # Type #Reactance in CIM
-    slope: float = 0.0  # Type #VoltagePerReactivePower in CIM
-    sVCControlMode: Optional[str] = None  # Type M:0..1 in CIM
-    voltageSetPoint: float = 0.0  # Type #Voltage in CIM
-    q: float = 0.0  # Type #ReactivePower in CIM
+    capacitiveRating: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    inductiveRating: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    slope: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    sVCControlMode: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    voltageSetPoint: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    q: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
     # *Association not used*
-    # StaticVarCompensatorDynamics : Optional[str] = None  # Type M:0..1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=StaticVarCompensator"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # StaticVarCompensatorDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-            ],
-            # Attributes
-            "capacitiveRating": [
-                Profile.EQ.value,
-            ],
-            "inductiveRating": [
-                Profile.EQ.value,
-            ],
-            "slope": [
-                Profile.EQ.value,
-            ],
-            "sVCControlMode": [
-                Profile.EQ.value,
-            ],
-            "voltageSetPoint": [
-                Profile.EQ.value,
-            ],
-            "q": [
-                Profile.SSH.value,
-            ],
-            "StaticVarCompensatorDynamics": [
-                Profile.DY.value,
-            ],
+            Profile.EQ,
+            Profile.SSH,
+            Profile.DY,
         }

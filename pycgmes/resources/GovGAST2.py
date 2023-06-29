@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
@@ -50,152 +50,236 @@ class GovGAST2(TurbineGovernorDynamics):
     tc: Temperature control (Tc).  Unit = [SYMBOL REMOVED]F or [SYMBOL REMOVED]C depending on parameters Af1 and Bf1.
     """
 
-    mwbase: float = 0.0  # Type #ActivePower in CIM
-    w: float = 0.0  # Type #PU in CIM
-    x: int = 0  # Type #Seconds in CIM
-    y: int = 0  # Type #Seconds in CIM
-    z: int = 0  # Type #Integer in CIM
-    etd: int = 0  # Type #Seconds in CIM
-    tcd: int = 0  # Type #Seconds in CIM
-    trate: float = 0.0  # Type #ActivePower in CIM
-    t: int = 0  # Type #Seconds in CIM
-    tmax: float = 0.0  # Type #PU in CIM
-    tmin: float = 0.0  # Type #PU in CIM
-    ecr: int = 0  # Type #Seconds in CIM
-    k3: float = 0.0  # Type #PU in CIM
-    a: float = 0.0  # Type #Float in CIM
-    b: float = 0.0  # Type #Float in CIM
-    c: float = 0.0  # Type #Float in CIM
-    tf: int = 0  # Type #Seconds in CIM
-    kf: float = 0.0  # Type #PU in CIM
-    k5: float = 0.0  # Type #PU in CIM
-    k4: float = 0.0  # Type #PU in CIM
-    t3: int = 0  # Type #Seconds in CIM
-    t4: int = 0  # Type #Seconds in CIM
-    tt: int = 0  # Type #Seconds in CIM
-    t5: int = 0  # Type #Seconds in CIM
-    af1: float = 0.0  # Type #PU in CIM
-    bf1: float = 0.0  # Type #PU in CIM
-    af2: float = 0.0  # Type #PU in CIM
-    bf2: float = 0.0  # Type #PU in CIM
-    cf2: float = 0.0  # Type #PU in CIM
-    tr: float = 0.0  # Type #Temperature in CIM
-    k6: float = 0.0  # Type #PU in CIM
-    tc: float = 0.0  # Type #Temperature in CIM
+    mwbase: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    w: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovGAST2"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    x: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    y: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    z: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    etd: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tcd: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    trate: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ecr: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    b: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    c: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k5: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tt: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t5: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    af1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    bf1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    af2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    bf2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    cf2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tr: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k6: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "mwbase": [
-                Profile.DY.value,
-            ],
-            "w": [
-                Profile.DY.value,
-            ],
-            "x": [
-                Profile.DY.value,
-            ],
-            "y": [
-                Profile.DY.value,
-            ],
-            "z": [
-                Profile.DY.value,
-            ],
-            "etd": [
-                Profile.DY.value,
-            ],
-            "tcd": [
-                Profile.DY.value,
-            ],
-            "trate": [
-                Profile.DY.value,
-            ],
-            "t": [
-                Profile.DY.value,
-            ],
-            "tmax": [
-                Profile.DY.value,
-            ],
-            "tmin": [
-                Profile.DY.value,
-            ],
-            "ecr": [
-                Profile.DY.value,
-            ],
-            "k3": [
-                Profile.DY.value,
-            ],
-            "a": [
-                Profile.DY.value,
-            ],
-            "b": [
-                Profile.DY.value,
-            ],
-            "c": [
-                Profile.DY.value,
-            ],
-            "tf": [
-                Profile.DY.value,
-            ],
-            "kf": [
-                Profile.DY.value,
-            ],
-            "k5": [
-                Profile.DY.value,
-            ],
-            "k4": [
-                Profile.DY.value,
-            ],
-            "t3": [
-                Profile.DY.value,
-            ],
-            "t4": [
-                Profile.DY.value,
-            ],
-            "tt": [
-                Profile.DY.value,
-            ],
-            "t5": [
-                Profile.DY.value,
-            ],
-            "af1": [
-                Profile.DY.value,
-            ],
-            "bf1": [
-                Profile.DY.value,
-            ],
-            "af2": [
-                Profile.DY.value,
-            ],
-            "bf2": [
-                Profile.DY.value,
-            ],
-            "cf2": [
-                Profile.DY.value,
-            ],
-            "tr": [
-                Profile.DY.value,
-            ],
-            "k6": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

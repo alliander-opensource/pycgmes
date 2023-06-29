@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Equipment import Equipment
@@ -52,103 +52,136 @@ class GeneratingUnit(Equipment):
     """
 
     # *Association not used*
-    # ControlAreaGeneratingUnit : list = field(default_factory=list)  # Type M:0..n in CIM
-    genControlSource: Optional[str] = None  # Type M:0..1 in CIM
-    governorSCD: float = 0.0  # Type #PerCent in CIM
-    longPF: float = 0.0  # Type #Float in CIM
-    maximumAllowableSpinningReserve: float = 0.0  # Type #ActivePower in CIM
-    maxOperatingP: float = 0.0  # Type #ActivePower in CIM
-    minOperatingP: float = 0.0  # Type #ActivePower in CIM
-    nominalP: float = 0.0  # Type #ActivePower in CIM
-    ratedGrossMaxP: float = 0.0  # Type #ActivePower in CIM
-    ratedGrossMinP: float = 0.0  # Type #ActivePower in CIM
-    ratedNetMaxP: float = 0.0  # Type #ActivePower in CIM
-    shortPF: float = 0.0  # Type #Float in CIM
-    startupCost: float = 0.0  # Type #Money in CIM
-    variableCost: float = 0.0  # Type #Money in CIM
-    startupTime: int = 0  # Type #Seconds in CIM
-    totalEfficiency: float = 0.0  # Type #PerCent in CIM
-    # *Association not used*
-    # GrossToNetActivePowerCurves : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # RotatingMachine : list = field(default_factory=list)  # Type M:1..n in CIM
-    normalPF: float = 0.0  # Type #Float in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # ControlAreaGeneratingUnit : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    genControlSource: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GeneratingUnit"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    governorSCD: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    longPF: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    maximumAllowableSpinningReserve: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    maxOperatingP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    minOperatingP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    nominalP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ratedGrossMaxP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ratedGrossMinP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ratedNetMaxP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    shortPF: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    startupCost: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    variableCost: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    startupTime: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    totalEfficiency: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # GrossToNetActivePowerCurves : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    # *Association not used*
+    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
+    # RotatingMachine : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    normalPF: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "ControlAreaGeneratingUnit": [
-                Profile.EQ.value,
-            ],
-            "genControlSource": [
-                Profile.EQ.value,
-            ],
-            "governorSCD": [
-                Profile.EQ.value,
-            ],
-            "longPF": [
-                Profile.EQ.value,
-            ],
-            "maximumAllowableSpinningReserve": [
-                Profile.EQ.value,
-            ],
-            "maxOperatingP": [
-                Profile.EQ.value,
-            ],
-            "minOperatingP": [
-                Profile.EQ.value,
-            ],
-            "nominalP": [
-                Profile.EQ.value,
-            ],
-            "ratedGrossMaxP": [
-                Profile.EQ.value,
-            ],
-            "ratedGrossMinP": [
-                Profile.EQ.value,
-            ],
-            "ratedNetMaxP": [
-                Profile.EQ.value,
-            ],
-            "shortPF": [
-                Profile.EQ.value,
-            ],
-            "startupCost": [
-                Profile.EQ.value,
-            ],
-            "variableCost": [
-                Profile.EQ.value,
-            ],
-            "startupTime": [
-                Profile.EQ.value,
-            ],
-            "totalEfficiency": [
-                Profile.EQ.value,
-            ],
-            "GrossToNetActivePowerCurves": [
-                Profile.EQ.value,
-            ],
-            "RotatingMachine": [
-                Profile.EQ.value,
-            ],
-            "normalPF": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SSH,
         }

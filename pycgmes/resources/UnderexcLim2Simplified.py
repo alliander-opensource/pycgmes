@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
@@ -25,53 +25,61 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
     vuimax: Maximum error signal (VUIMAX) (> UnderexcLim2Simplified.vuimin).  Typical value = 1.
     """
 
-    q0: float = 0.0  # Type #PU in CIM
-    q1: float = 0.0  # Type #PU in CIM
-    p0: float = 0.0  # Type #PU in CIM
-    p1: float = 0.0  # Type #PU in CIM
-    kui: float = 0.0  # Type #PU in CIM
-    vuimin: float = 0.0  # Type #PU in CIM
-    vuimax: float = 0.0  # Type #PU in CIM
+    q0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    q1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=UnderexcLim2Simplified"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    p0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kui: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vuimin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vuimax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "q0": [
-                Profile.DY.value,
-            ],
-            "q1": [
-                Profile.DY.value,
-            ],
-            "p0": [
-                Profile.DY.value,
-            ],
-            "p1": [
-                Profile.DY.value,
-            ],
-            "kui": [
-                Profile.DY.value,
-            ],
-            "vuimin": [
-                Profile.DY.value,
-            ],
-            "vuimax": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

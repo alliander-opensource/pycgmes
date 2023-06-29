@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -29,72 +29,96 @@ class ExcHU(ExcitationSystemDynamics):
     ke: Voltage base conversion constant (Ke).  Typical value = 4,666.
     """
 
-    tr: int = 0  # Type #Seconds in CIM
-    te: int = 0  # Type #Seconds in CIM
-    imin: float = 0.0  # Type #PU in CIM
-    imax: float = 0.0  # Type #PU in CIM
-    ae: float = 0.0  # Type #PU in CIM
-    emin: float = 0.0  # Type #PU in CIM
-    emax: float = 0.0  # Type #PU in CIM
-    ki: float = 0.0  # Type #Float in CIM
-    ai: float = 0.0  # Type #PU in CIM
-    ti: int = 0  # Type #Seconds in CIM
-    atr: float = 0.0  # Type #PU in CIM
-    ke: float = 0.0  # Type #Float in CIM
+    tr: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    te: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcHU"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    imin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    imax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ae: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    emin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    emax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ai: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    atr: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ke: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "tr": [
-                Profile.DY.value,
-            ],
-            "te": [
-                Profile.DY.value,
-            ],
-            "imin": [
-                Profile.DY.value,
-            ],
-            "imax": [
-                Profile.DY.value,
-            ],
-            "ae": [
-                Profile.DY.value,
-            ],
-            "emin": [
-                Profile.DY.value,
-            ],
-            "emax": [
-                Profile.DY.value,
-            ],
-            "ki": [
-                Profile.DY.value,
-            ],
-            "ai": [
-                Profile.DY.value,
-            ],
-            "ti": [
-                Profile.DY.value,
-            ],
-            "atr": [
-                Profile.DY.value,
-            ],
-            "ke": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

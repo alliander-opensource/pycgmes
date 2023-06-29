@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -49,106 +49,145 @@ class WindPlantReactiveControlIEC(IdentifiedObject):
     """
 
     # *Association not used*
-    # WindDynamicsLookupTable : list = field(default_factory=list)  # Type M:1..n in CIM
+    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
+    # WindDynamicsLookupTable : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+
     # *Association not used*
-    # WindPlantIEC : Optional[str] = None  # Type M:1 in CIM
-    dxrefmax: float = 0.0  # Type #PU in CIM
-    dxrefmin: float = 0.0  # Type #PU in CIM
-    kiwpx: float = 0.0  # Type #Float in CIM
-    kiwpxmax: float = 0.0  # Type #PU in CIM
-    kiwpxmin: float = 0.0  # Type #PU in CIM
-    kpwpx: float = 0.0  # Type #Float in CIM
-    kwpqref: float = 0.0  # Type #PU in CIM
-    kwpqu: float = 0.0  # Type #PU in CIM
-    tuqfilt: int = 0  # Type #Seconds in CIM
-    twppfiltq: int = 0  # Type #Seconds in CIM
-    twpqfiltq: int = 0  # Type #Seconds in CIM
-    twpufiltq: int = 0  # Type #Seconds in CIM
-    txft: int = 0  # Type #Seconds in CIM
-    txfv: int = 0  # Type #Seconds in CIM
-    uwpqdip: float = 0.0  # Type #PU in CIM
-    windPlantQcontrolModesType: Optional[str] = None  # Type M:1..1 in CIM
-    xrefmax: float = 0.0  # Type #PU in CIM
-    xrefmin: float = 0.0  # Type #PU in CIM
+    # Type M:1 in CIM  # pylint: disable-next=line-too-long
+    # WindPlantIEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    dxrefmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=WindPlantReactiveControlIEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    dxrefmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kiwpx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kiwpxmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kiwpxmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpwpx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kwpqref: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kwpqu: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tuqfilt: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    twppfiltq: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    twpqfiltq: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    twpufiltq: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    txft: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    txfv: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    uwpqdip: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    windPlantQcontrolModesType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xrefmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xrefmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "WindDynamicsLookupTable": [
-                Profile.DY.value,
-            ],
-            "WindPlantIEC": [
-                Profile.DY.value,
-            ],
-            "dxrefmax": [
-                Profile.DY.value,
-            ],
-            "dxrefmin": [
-                Profile.DY.value,
-            ],
-            "kiwpx": [
-                Profile.DY.value,
-            ],
-            "kiwpxmax": [
-                Profile.DY.value,
-            ],
-            "kiwpxmin": [
-                Profile.DY.value,
-            ],
-            "kpwpx": [
-                Profile.DY.value,
-            ],
-            "kwpqref": [
-                Profile.DY.value,
-            ],
-            "kwpqu": [
-                Profile.DY.value,
-            ],
-            "tuqfilt": [
-                Profile.DY.value,
-            ],
-            "twppfiltq": [
-                Profile.DY.value,
-            ],
-            "twpqfiltq": [
-                Profile.DY.value,
-            ],
-            "twpufiltq": [
-                Profile.DY.value,
-            ],
-            "txft": [
-                Profile.DY.value,
-            ],
-            "txfv": [
-                Profile.DY.value,
-            ],
-            "uwpqdip": [
-                Profile.DY.value,
-            ],
-            "windPlantQcontrolModesType": [
-                Profile.DY.value,
-            ],
-            "xrefmax": [
-                Profile.DY.value,
-            ],
-            "xrefmin": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

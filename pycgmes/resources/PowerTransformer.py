@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ConductingEquipment import ConductingEquipment
@@ -47,54 +47,58 @@ class PowerTransformer(ConductingEquipment):
     """
 
     # *Association not used*
-    # PowerTransformerEnd : list = field(default_factory=list)  # Type M:0..n in CIM
-    beforeShCircuitHighestOperatingCurrent: float = 0.0  # Type #CurrentFlow in CIM
-    beforeShCircuitHighestOperatingVoltage: float = 0.0  # Type #Voltage in CIM
-    beforeShortCircuitAnglePf: float = 0.0  # Type #AngleDegrees in CIM
-    highSideMinOperatingU: float = 0.0  # Type #Voltage in CIM
-    isPartOfGeneratorUnit: bool = False  # Type #Boolean in CIM
-    operationalValuesConsidered: bool = False  # Type #Boolean in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # PowerTransformerEnd : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    beforeShCircuitHighestOperatingCurrent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PowerTransformer"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    beforeShCircuitHighestOperatingVoltage: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    beforeShortCircuitAnglePf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    highSideMinOperatingU: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    isPartOfGeneratorUnit: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    operationalValuesConsidered: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-            ],
-            # Attributes
-            "PowerTransformerEnd": [
-                Profile.EQ.value,
-            ],
-            "beforeShCircuitHighestOperatingCurrent": [
-                Profile.SC.value,
-            ],
-            "beforeShCircuitHighestOperatingVoltage": [
-                Profile.SC.value,
-            ],
-            "beforeShortCircuitAnglePf": [
-                Profile.SC.value,
-            ],
-            "highSideMinOperatingU": [
-                Profile.SC.value,
-            ],
-            "isPartOfGeneratorUnit": [
-                Profile.SC.value,
-            ],
-            "operationalValuesConsidered": [
-                Profile.SC.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
         }

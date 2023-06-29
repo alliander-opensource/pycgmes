@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .WindGenType3IEC import WindGenType3IEC
@@ -22,41 +22,36 @@ class WindGenType3bIEC(WindGenType3IEC):
     """
 
     # *Association not used*
-    # WindDynamicsLookupTable : list = field(default_factory=list)  # Type M:1..n in CIM
-    mwtcwp: bool = False  # Type #Boolean in CIM
-    tg: int = 0  # Type #Seconds in CIM
-    two: int = 0  # Type #Seconds in CIM
+    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
+    # WindDynamicsLookupTable : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    mwtcwp: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=WindGenType3bIEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    tg: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    two: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "WindDynamicsLookupTable": [
-                Profile.DY.value,
-            ],
-            "mwtcwp": [
-                Profile.DY.value,
-            ],
-            "tg": [
-                Profile.DY.value,
-            ],
-            "two": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

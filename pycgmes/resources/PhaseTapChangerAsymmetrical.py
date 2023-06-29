@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PhaseTapChangerNonLinear import PhaseTapChangerNonLinear
@@ -24,30 +24,20 @@ class PhaseTapChangerAsymmetrical(PhaseTapChangerNonLinear):
       -150 degrees to 150 degrees excluding 0.
     """
 
-    windingConnectionAngle: float = 0.0  # Type #AngleDegrees in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=PhaseTapChangerAsymmetrical"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    windingConnectionAngle: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "windingConnectionAngle": [
-                Profile.EQ.value,
-            ],
+            Profile.EQ,
+            Profile.SSH,
         }

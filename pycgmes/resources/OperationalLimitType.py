@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -29,45 +29,43 @@ class OperationalLimitType(IdentifiedObject):
     """
 
     # *Association not used*
-    # OperationalLimit : list = field(default_factory=list)  # Type M:0..n in CIM
-    acceptableDuration: int = 0  # Type #Seconds in CIM
-    direction: Optional[str] = None  # Type M:1..1 in CIM
-    isInfiniteDuration: bool = False  # Type #Boolean in CIM
-    kind: Optional[str] = None  # Type M:1..1 in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # OperationalLimit : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    acceptableDuration: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=OperationalLimitType"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    direction: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    isInfiniteDuration: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    kind: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-            ],
-            # Attributes
-            "OperationalLimit": [
-                Profile.EQ.value,
-            ],
-            "acceptableDuration": [
-                Profile.EQ.value,
-            ],
-            "direction": [
-                Profile.EQ.value,
-            ],
-            "isInfiniteDuration": [
-                Profile.EQ.value,
-            ],
-            "kind": [
-                Profile.EQ.value,
-            ],
+            Profile.EQ,
         }

@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -33,80 +33,110 @@ class ExcIEEEST6B(ExcitationSystemDynamics):
     vrmin: Minimum voltage regulator output (VRMIN) (< 0).  Typical value = -3,85.
     """
 
-    ilr: float = 0.0  # Type #PU in CIM
-    kci: float = 0.0  # Type #PU in CIM
-    kff: float = 0.0  # Type #PU in CIM
-    kg: float = 0.0  # Type #PU in CIM
-    kia: float = 0.0  # Type #PU in CIM
-    klr: float = 0.0  # Type #PU in CIM
-    km: float = 0.0  # Type #PU in CIM
-    kpa: float = 0.0  # Type #PU in CIM
-    oelin: Optional[str] = None  # Type M:1..1 in CIM
-    tg: int = 0  # Type #Seconds in CIM
-    vamax: float = 0.0  # Type #PU in CIM
-    vamin: float = 0.0  # Type #PU in CIM
-    vrmax: float = 0.0  # Type #PU in CIM
-    vrmin: float = 0.0  # Type #PU in CIM
+    ilr: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    kci: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcIEEEST6B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    kff: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kg: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kia: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    klr: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    km: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpa: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    oelin: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tg: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vamax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vamin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "ilr": [
-                Profile.DY.value,
-            ],
-            "kci": [
-                Profile.DY.value,
-            ],
-            "kff": [
-                Profile.DY.value,
-            ],
-            "kg": [
-                Profile.DY.value,
-            ],
-            "kia": [
-                Profile.DY.value,
-            ],
-            "klr": [
-                Profile.DY.value,
-            ],
-            "km": [
-                Profile.DY.value,
-            ],
-            "kpa": [
-                Profile.DY.value,
-            ],
-            "oelin": [
-                Profile.DY.value,
-            ],
-            "tg": [
-                Profile.DY.value,
-            ],
-            "vamax": [
-                Profile.DY.value,
-            ],
-            "vamin": [
-                Profile.DY.value,
-            ],
-            "vrmax": [
-                Profile.DY.value,
-            ],
-            "vrmin": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

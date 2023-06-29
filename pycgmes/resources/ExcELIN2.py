@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -50,132 +50,201 @@ class ExcELIN2(ExcitationSystemDynamics):
     efdbas: Gain (Efdbas).  Typical value = 0,1.
     """
 
-    k1: float = 0.0  # Type #PU in CIM
-    k1ec: float = 0.0  # Type #PU in CIM
-    kd1: float = 0.0  # Type #PU in CIM
-    tb1: int = 0  # Type #Seconds in CIM
-    pid1max: float = 0.0  # Type #PU in CIM
-    ti1: float = 0.0  # Type #PU in CIM
-    iefmax2: float = 0.0  # Type #PU in CIM
-    k2: float = 0.0  # Type #PU in CIM
-    ketb: float = 0.0  # Type #PU in CIM
-    upmax: float = 0.0  # Type #PU in CIM
-    upmin: float = 0.0  # Type #PU in CIM
-    te: int = 0  # Type #Seconds in CIM
-    xp: float = 0.0  # Type #PU in CIM
-    te2: int = 0  # Type #Seconds in CIM
-    ke2: float = 0.0  # Type #PU in CIM
-    ve1: float = 0.0  # Type #PU in CIM
-    seve1: float = 0.0  # Type #PU in CIM
-    ve2: float = 0.0  # Type #PU in CIM
-    seve2: float = 0.0  # Type #PU in CIM
-    tr4: int = 0  # Type #Seconds in CIM
-    k3: float = 0.0  # Type #PU in CIM
-    ti3: int = 0  # Type #Seconds in CIM
-    k4: float = 0.0  # Type #PU in CIM
-    ti4: int = 0  # Type #Seconds in CIM
-    iefmax: float = 0.0  # Type #PU in CIM
-    iefmin: float = 0.0  # Type #PU in CIM
-    efdbas: float = 0.0  # Type #PU in CIM
+    k1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    k1ec: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcELIN2"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    kd1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tb1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pid1max: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    iefmax2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ketb: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    upmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    upmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    te: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    te2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ke2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ve1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    seve1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ve2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    seve2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tr4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    iefmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    iefmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    efdbas: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "k1": [
-                Profile.DY.value,
-            ],
-            "k1ec": [
-                Profile.DY.value,
-            ],
-            "kd1": [
-                Profile.DY.value,
-            ],
-            "tb1": [
-                Profile.DY.value,
-            ],
-            "pid1max": [
-                Profile.DY.value,
-            ],
-            "ti1": [
-                Profile.DY.value,
-            ],
-            "iefmax2": [
-                Profile.DY.value,
-            ],
-            "k2": [
-                Profile.DY.value,
-            ],
-            "ketb": [
-                Profile.DY.value,
-            ],
-            "upmax": [
-                Profile.DY.value,
-            ],
-            "upmin": [
-                Profile.DY.value,
-            ],
-            "te": [
-                Profile.DY.value,
-            ],
-            "xp": [
-                Profile.DY.value,
-            ],
-            "te2": [
-                Profile.DY.value,
-            ],
-            "ke2": [
-                Profile.DY.value,
-            ],
-            "ve1": [
-                Profile.DY.value,
-            ],
-            "seve1": [
-                Profile.DY.value,
-            ],
-            "ve2": [
-                Profile.DY.value,
-            ],
-            "seve2": [
-                Profile.DY.value,
-            ],
-            "tr4": [
-                Profile.DY.value,
-            ],
-            "k3": [
-                Profile.DY.value,
-            ],
-            "ti3": [
-                Profile.DY.value,
-            ],
-            "k4": [
-                Profile.DY.value,
-            ],
-            "ti4": [
-                Profile.DY.value,
-            ],
-            "iefmax": [
-                Profile.DY.value,
-            ],
-            "iefmin": [
-                Profile.DY.value,
-            ],
-            "efdbas": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

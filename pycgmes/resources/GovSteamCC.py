@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .CrossCompoundTurbineGovernorDynamics import CrossCompoundTurbineGovernorDynamics
@@ -33,92 +33,131 @@ class GovSteamCC(CrossCompoundTurbineGovernorDynamics):
     dlp: LP damping factor (Dlp).  Typical value = 0.
     """
 
-    mwbase: float = 0.0  # Type #ActivePower in CIM
-    pmaxhp: float = 0.0  # Type #PU in CIM
-    rhp: float = 0.0  # Type #PU in CIM
-    t1hp: int = 0  # Type #Seconds in CIM
-    t3hp: int = 0  # Type #Seconds in CIM
-    t4hp: int = 0  # Type #Seconds in CIM
-    t5hp: int = 0  # Type #Seconds in CIM
-    fhp: float = 0.0  # Type #PU in CIM
-    dhp: float = 0.0  # Type #PU in CIM
-    pmaxlp: float = 0.0  # Type #PU in CIM
-    rlp: float = 0.0  # Type #PU in CIM
-    t1lp: int = 0  # Type #Seconds in CIM
-    t3lp: int = 0  # Type #Seconds in CIM
-    t4lp: int = 0  # Type #Seconds in CIM
-    t5lp: int = 0  # Type #Seconds in CIM
-    flp: float = 0.0  # Type #PU in CIM
-    dlp: float = 0.0  # Type #PU in CIM
+    mwbase: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    pmaxhp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovSteamCC"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    rhp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t1hp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t3hp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4hp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t5hp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fhp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dhp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmaxlp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rlp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t1lp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t3lp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4lp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t5lp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    flp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dlp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "mwbase": [
-                Profile.DY.value,
-            ],
-            "pmaxhp": [
-                Profile.DY.value,
-            ],
-            "rhp": [
-                Profile.DY.value,
-            ],
-            "t1hp": [
-                Profile.DY.value,
-            ],
-            "t3hp": [
-                Profile.DY.value,
-            ],
-            "t4hp": [
-                Profile.DY.value,
-            ],
-            "t5hp": [
-                Profile.DY.value,
-            ],
-            "fhp": [
-                Profile.DY.value,
-            ],
-            "dhp": [
-                Profile.DY.value,
-            ],
-            "pmaxlp": [
-                Profile.DY.value,
-            ],
-            "rlp": [
-                Profile.DY.value,
-            ],
-            "t1lp": [
-                Profile.DY.value,
-            ],
-            "t3lp": [
-                Profile.DY.value,
-            ],
-            "t4lp": [
-                Profile.DY.value,
-            ],
-            "t5lp": [
-                Profile.DY.value,
-            ],
-            "flp": [
-                Profile.DY.value,
-            ],
-            "dlp": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

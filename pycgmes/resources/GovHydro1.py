@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
@@ -30,80 +30,110 @@ class GovHydro1(TurbineGovernorDynamics):
     hdam: Turbine nominal head (hdam).  Typical value = 1.
     """
 
-    mwbase: float = 0.0  # Type #ActivePower in CIM
-    rperm: float = 0.0  # Type #PU in CIM
-    rtemp: float = 0.0  # Type #PU in CIM
-    tr: int = 0  # Type #Seconds in CIM
-    tf: int = 0  # Type #Seconds in CIM
-    tg: int = 0  # Type #Seconds in CIM
-    velm: float = 0.0  # Type #Float in CIM
-    gmax: float = 0.0  # Type #PU in CIM
-    gmin: float = 0.0  # Type #PU in CIM
-    tw: int = 0  # Type #Seconds in CIM
-    at: float = 0.0  # Type #PU in CIM
-    dturb: float = 0.0  # Type #PU in CIM
-    qnl: float = 0.0  # Type #PU in CIM
-    hdam: float = 0.0  # Type #PU in CIM
+    mwbase: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    rperm: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovHydro1"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    rtemp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tr: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tg: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    velm: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    at: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dturb: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    qnl: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    hdam: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "mwbase": [
-                Profile.DY.value,
-            ],
-            "rperm": [
-                Profile.DY.value,
-            ],
-            "rtemp": [
-                Profile.DY.value,
-            ],
-            "tr": [
-                Profile.DY.value,
-            ],
-            "tf": [
-                Profile.DY.value,
-            ],
-            "tg": [
-                Profile.DY.value,
-            ],
-            "velm": [
-                Profile.DY.value,
-            ],
-            "gmax": [
-                Profile.DY.value,
-            ],
-            "gmin": [
-                Profile.DY.value,
-            ],
-            "tw": [
-                Profile.DY.value,
-            ],
-            "at": [
-                Profile.DY.value,
-            ],
-            "dturb": [
-                Profile.DY.value,
-            ],
-            "qnl": [
-                Profile.DY.value,
-            ],
-            "hdam": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

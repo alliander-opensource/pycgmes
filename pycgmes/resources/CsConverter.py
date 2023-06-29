@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ACDCConverter import ACDCConverter
@@ -63,88 +63,117 @@ class CsConverter(ACDCConverter):
     CSCDynamics: Current source converter dynamics model used to describe dynamic behaviour of this converter.
     """
 
-    maxAlpha: float = 0.0  # Type #AngleDegrees in CIM
-    maxGamma: float = 0.0  # Type #AngleDegrees in CIM
-    maxIdc: float = 0.0  # Type #CurrentFlow in CIM
-    minAlpha: float = 0.0  # Type #AngleDegrees in CIM
-    minGamma: float = 0.0  # Type #AngleDegrees in CIM
-    minIdc: float = 0.0  # Type #CurrentFlow in CIM
-    ratedIdc: float = 0.0  # Type #CurrentFlow in CIM
-    alpha: float = 0.0  # Type #AngleDegrees in CIM
-    gamma: float = 0.0  # Type #AngleDegrees in CIM
-    operatingMode: Optional[str] = None  # Type M:1..1 in CIM
-    pPccControl: Optional[str] = None  # Type M:1..1 in CIM
-    targetAlpha: float = 0.0  # Type #AngleDegrees in CIM
-    targetGamma: float = 0.0  # Type #AngleDegrees in CIM
-    targetIdc: float = 0.0  # Type #CurrentFlow in CIM
+    maxAlpha: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    maxGamma: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    maxIdc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    minAlpha: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    minGamma: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    minIdc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ratedIdc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    alpha: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SV,
+        ],
+    )
+
+    gamma: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SV,
+        ],
+    )
+
+    operatingMode: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    pPccControl: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    targetAlpha: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    targetGamma: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    targetIdc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
     # *Association not used*
-    # CSCDynamics : Optional[str] = None  # Type M:0..1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=CsConverter"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # CSCDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SV.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-            ],
-            # Attributes
-            "maxAlpha": [
-                Profile.EQ.value,
-            ],
-            "maxGamma": [
-                Profile.EQ.value,
-            ],
-            "maxIdc": [
-                Profile.EQ.value,
-            ],
-            "minAlpha": [
-                Profile.EQ.value,
-            ],
-            "minGamma": [
-                Profile.EQ.value,
-            ],
-            "minIdc": [
-                Profile.EQ.value,
-            ],
-            "ratedIdc": [
-                Profile.EQ.value,
-            ],
-            "alpha": [
-                Profile.SV.value,
-            ],
-            "gamma": [
-                Profile.SV.value,
-            ],
-            "operatingMode": [
-                Profile.SSH.value,
-            ],
-            "pPccControl": [
-                Profile.SSH.value,
-            ],
-            "targetAlpha": [
-                Profile.SSH.value,
-            ],
-            "targetGamma": [
-                Profile.SSH.value,
-            ],
-            "targetIdc": [
-                Profile.SSH.value,
-            ],
-            "CSCDynamics": [
-                Profile.DY.value,
-            ],
+            Profile.EQ,
+            Profile.SV,
+            Profile.SSH,
+            Profile.DY,
         }

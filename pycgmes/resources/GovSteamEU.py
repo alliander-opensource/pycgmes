@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
@@ -51,164 +51,257 @@ class GovSteamEU(TurbineGovernorDynamics):
     tb: Boiler time constant (Tb) (>= 0).  Typical value = 100.
     """
 
-    mwbase: float = 0.0  # Type #ActivePower in CIM
-    tp: int = 0  # Type #Seconds in CIM
-    ke: float = 0.0  # Type #PU in CIM
-    tip: int = 0  # Type #Seconds in CIM
-    tdp: int = 0  # Type #Seconds in CIM
-    tfp: int = 0  # Type #Seconds in CIM
-    tf: int = 0  # Type #Seconds in CIM
-    kfcor: float = 0.0  # Type #PU in CIM
-    db1: float = 0.0  # Type #PU in CIM
-    wfmax: float = 0.0  # Type #PU in CIM
-    wfmin: float = 0.0  # Type #PU in CIM
-    pmax: float = 0.0  # Type #PU in CIM
-    ten: int = 0  # Type #Seconds in CIM
-    tw: int = 0  # Type #Seconds in CIM
-    komegacor: float = 0.0  # Type #PU in CIM
-    db2: float = 0.0  # Type #PU in CIM
-    wwmax: float = 0.0  # Type #PU in CIM
-    wwmin: float = 0.0  # Type #PU in CIM
-    wmax1: float = 0.0  # Type #PU in CIM
-    wmax2: float = 0.0  # Type #PU in CIM
-    tvhp: int = 0  # Type #Seconds in CIM
-    cho: float = 0.0  # Type #Float in CIM
-    chc: float = 0.0  # Type #Float in CIM
-    hhpmax: float = 0.0  # Type #PU in CIM
-    tvip: int = 0  # Type #Seconds in CIM
-    cio: float = 0.0  # Type #PU in CIM
-    cic: float = 0.0  # Type #PU in CIM
-    simx: float = 0.0  # Type #PU in CIM
-    thp: int = 0  # Type #Seconds in CIM
-    trh: int = 0  # Type #Seconds in CIM
-    tlp: int = 0  # Type #Seconds in CIM
-    prhmax: float = 0.0  # Type #PU in CIM
-    khp: float = 0.0  # Type #PU in CIM
-    klp: float = 0.0  # Type #PU in CIM
-    tb: int = 0  # Type #Seconds in CIM
+    mwbase: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovSteamEU"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ke: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tip: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tdp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tfp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kfcor: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    db1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    wfmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    wfmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ten: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    komegacor: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    db2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    wwmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    wwmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    wmax1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    wmax2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tvhp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    cho: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    chc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    hhpmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tvip: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    cio: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    cic: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    simx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    thp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    trh: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tlp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    prhmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    khp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    klp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "mwbase": [
-                Profile.DY.value,
-            ],
-            "tp": [
-                Profile.DY.value,
-            ],
-            "ke": [
-                Profile.DY.value,
-            ],
-            "tip": [
-                Profile.DY.value,
-            ],
-            "tdp": [
-                Profile.DY.value,
-            ],
-            "tfp": [
-                Profile.DY.value,
-            ],
-            "tf": [
-                Profile.DY.value,
-            ],
-            "kfcor": [
-                Profile.DY.value,
-            ],
-            "db1": [
-                Profile.DY.value,
-            ],
-            "wfmax": [
-                Profile.DY.value,
-            ],
-            "wfmin": [
-                Profile.DY.value,
-            ],
-            "pmax": [
-                Profile.DY.value,
-            ],
-            "ten": [
-                Profile.DY.value,
-            ],
-            "tw": [
-                Profile.DY.value,
-            ],
-            "komegacor": [
-                Profile.DY.value,
-            ],
-            "db2": [
-                Profile.DY.value,
-            ],
-            "wwmax": [
-                Profile.DY.value,
-            ],
-            "wwmin": [
-                Profile.DY.value,
-            ],
-            "wmax1": [
-                Profile.DY.value,
-            ],
-            "wmax2": [
-                Profile.DY.value,
-            ],
-            "tvhp": [
-                Profile.DY.value,
-            ],
-            "cho": [
-                Profile.DY.value,
-            ],
-            "chc": [
-                Profile.DY.value,
-            ],
-            "hhpmax": [
-                Profile.DY.value,
-            ],
-            "tvip": [
-                Profile.DY.value,
-            ],
-            "cio": [
-                Profile.DY.value,
-            ],
-            "cic": [
-                Profile.DY.value,
-            ],
-            "simx": [
-                Profile.DY.value,
-            ],
-            "thp": [
-                Profile.DY.value,
-            ],
-            "trh": [
-                Profile.DY.value,
-            ],
-            "tlp": [
-                Profile.DY.value,
-            ],
-            "prhmax": [
-                Profile.DY.value,
-            ],
-            "khp": [
-                Profile.DY.value,
-            ],
-            "klp": [
-                Profile.DY.value,
-            ],
-            "tb": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

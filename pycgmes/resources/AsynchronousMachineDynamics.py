@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .RotatingMachineDynamics import RotatingMachineDynamics
@@ -25,44 +25,31 @@ class AsynchronousMachineDynamics(RotatingMachineDynamics):
     WindTurbineType1or2Dynamics: Wind generator type 1 or type 2 model associated with this asynchronous machine model.
     """
 
-    AsynchronousMachine: Optional[str] = None  # Type M:1 in CIM
-    # *Association not used*
-    # TurbineGovernorDynamics : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # MechanicalLoadDynamics : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # WindTurbineType1or2Dynamics : Optional[str] = None  # Type M:0..1 in CIM
+    AsynchronousMachine: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # TurbineGovernorDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
-        return "\n".join(
-            ["class=AsynchronousMachineDynamics"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # MechanicalLoadDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType1or2Dynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "AsynchronousMachine": [
-                Profile.DY.value,
-            ],
-            "TurbineGovernorDynamics": [
-                Profile.DY.value,
-            ],
-            "MechanicalLoadDynamics": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType1or2Dynamics": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

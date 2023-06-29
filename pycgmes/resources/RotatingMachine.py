@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .RegulatingCondEq import RegulatingCondEq
@@ -30,57 +30,61 @@ class RotatingMachine(RegulatingCondEq):
       value for a steady state solution.
     """
 
-    GeneratingUnit: Optional[str] = None  # Type M:0..1 in CIM
+    GeneratingUnit: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
     # *Association not used*
-    # HydroPump : Optional[str] = None  # Type M:0..1 in CIM
-    ratedPowerFactor: float = 0.0  # Type #Float in CIM
-    ratedS: float = 0.0  # Type #ApparentPower in CIM
-    ratedU: float = 0.0  # Type #Voltage in CIM
-    p: float = 0.0  # Type #ActivePower in CIM
-    q: float = 0.0  # Type #ReactivePower in CIM
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # HydroPump : Optional[str] = Field(default=None, in_profiles = [Profile.EQ, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    ratedPowerFactor: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=RotatingMachine"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ratedS: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ratedU: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    p: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    q: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-            ],
-            # Attributes
-            "GeneratingUnit": [
-                Profile.EQ.value,
-            ],
-            "HydroPump": [
-                Profile.EQ.value,
-            ],
-            "ratedPowerFactor": [
-                Profile.EQ.value,
-            ],
-            "ratedS": [
-                Profile.EQ.value,
-            ],
-            "ratedU": [
-                Profile.EQ.value,
-            ],
-            "p": [
-                Profile.SSH.value,
-            ],
-            "q": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
+            Profile.SSH,
+            Profile.DY,
         }

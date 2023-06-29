@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -22,51 +22,48 @@ class WindGenType4IEC(IdentifiedObject):
     WindTurbineType4bIEC: Wind turbine type 4B model with which this wind generator type 4 model is associated.
     """
 
-    dipmax: float = 0.0  # Type #PU in CIM
-    diqmin: float = 0.0  # Type #PU in CIM
-    diqmax: float = 0.0  # Type #PU in CIM
-    tg: int = 0  # Type #Seconds in CIM
-    # *Association not used*
-    # WindTurbineType4aIEC : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # WindTurbineType4bIEC : Optional[str] = None  # Type M:0..1 in CIM
+    dipmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    diqmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=WindGenType4IEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    diqmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tg: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType4aIEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType4bIEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "dipmax": [
-                Profile.DY.value,
-            ],
-            "diqmin": [
-                Profile.DY.value,
-            ],
-            "diqmax": [
-                Profile.DY.value,
-            ],
-            "tg": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType4aIEC": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType4bIEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

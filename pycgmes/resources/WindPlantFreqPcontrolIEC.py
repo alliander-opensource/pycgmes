@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -44,94 +44,124 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
     """
 
     # *Association not used*
-    # WindDynamicsLookupTable : list = field(default_factory=list)  # Type M:1..n in CIM
-    dprefmax: float = 0.0  # Type #PU in CIM
-    dprefmin: float = 0.0  # Type #PU in CIM
-    dpwprefmax: float = 0.0  # Type #PU in CIM
-    dpwprefmin: float = 0.0  # Type #PU in CIM
-    prefmax: float = 0.0  # Type #PU in CIM
-    prefmin: float = 0.0  # Type #PU in CIM
-    kiwpp: float = 0.0  # Type #Float in CIM
-    kiwppmax: float = 0.0  # Type #PU in CIM
-    kiwppmin: float = 0.0  # Type #PU in CIM
-    kpwpp: float = 0.0  # Type #Float in CIM
-    kwppref: float = 0.0  # Type #PU in CIM
-    tpft: int = 0  # Type #Seconds in CIM
-    tpfv: int = 0  # Type #Seconds in CIM
-    twpffiltp: int = 0  # Type #Seconds in CIM
-    twppfiltp: int = 0  # Type #Seconds in CIM
+    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
+    # WindDynamicsLookupTable : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+
+    dprefmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dprefmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dpwprefmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dpwprefmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    prefmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    prefmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kiwpp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kiwppmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kiwppmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpwpp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kwppref: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpft: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpfv: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    twpffiltp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    twppfiltp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
     # *Association not used*
-    # WindPlantIEC : Optional[str] = None  # Type M:1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=WindPlantFreqPcontrolIEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:1 in CIM  # pylint: disable-next=line-too-long
+    # WindPlantIEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "WindDynamicsLookupTable": [
-                Profile.DY.value,
-            ],
-            "dprefmax": [
-                Profile.DY.value,
-            ],
-            "dprefmin": [
-                Profile.DY.value,
-            ],
-            "dpwprefmax": [
-                Profile.DY.value,
-            ],
-            "dpwprefmin": [
-                Profile.DY.value,
-            ],
-            "prefmax": [
-                Profile.DY.value,
-            ],
-            "prefmin": [
-                Profile.DY.value,
-            ],
-            "kiwpp": [
-                Profile.DY.value,
-            ],
-            "kiwppmax": [
-                Profile.DY.value,
-            ],
-            "kiwppmin": [
-                Profile.DY.value,
-            ],
-            "kpwpp": [
-                Profile.DY.value,
-            ],
-            "kwppref": [
-                Profile.DY.value,
-            ],
-            "tpft": [
-                Profile.DY.value,
-            ],
-            "tpfv": [
-                Profile.DY.value,
-            ],
-            "twpffiltp": [
-                Profile.DY.value,
-            ],
-            "twppfiltp": [
-                Profile.DY.value,
-            ],
-            "WindPlantIEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

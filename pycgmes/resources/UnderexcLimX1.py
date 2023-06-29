@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
@@ -22,48 +22,54 @@ class UnderexcLimX1(UnderexcitationLimiterDynamics):
     k: Minimum excitation limit slope (K) (> 0).
     """
 
-    kf2: float = 0.0  # Type #PU in CIM
-    tf2: int = 0  # Type #Seconds in CIM
-    km: float = 0.0  # Type #PU in CIM
-    tm: int = 0  # Type #Seconds in CIM
-    melmax: float = 0.0  # Type #PU in CIM
-    k: float = 0.0  # Type #PU in CIM
+    kf2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tf2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=UnderexcLimX1"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    km: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tm: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    melmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "kf2": [
-                Profile.DY.value,
-            ],
-            "tf2": [
-                Profile.DY.value,
-            ],
-            "km": [
-                Profile.DY.value,
-            ],
-            "tm": [
-                Profile.DY.value,
-            ],
-            "melmax": [
-                Profile.DY.value,
-            ],
-            "k": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

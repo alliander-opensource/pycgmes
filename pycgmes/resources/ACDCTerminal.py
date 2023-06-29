@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -34,53 +34,48 @@ class ACDCTerminal(IdentifiedObject):
       isolator.
     """
 
-    sequenceNumber: int = 0  # Type #Integer in CIM
-    # *Association not used*
-    # OperationalLimitSet : list = field(default_factory=list)  # Type M:0..n in CIM
-    BusNameMarker: Optional[str] = None  # Type M:0..1 in CIM
-    connected: bool = False  # Type #Boolean in CIM
-    # *Association not used*
-    # Measurements : list = field(default_factory=list)  # Type M:0..n in CIM
+    sequenceNumber: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # OperationalLimitSet : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
-        return "\n".join(
-            ["class=ACDCTerminal"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    BusNameMarker: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    connected: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # Measurements : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.TP.value,
-                Profile.EQBD.value,
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SV.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-                Profile.OP.value,
-            ],
-            # Attributes
-            "sequenceNumber": [
-                Profile.EQ.value,
-            ],
-            "OperationalLimitSet": [
-                Profile.EQ.value,
-            ],
-            "BusNameMarker": [
-                Profile.EQ.value,
-            ],
-            "connected": [
-                Profile.SSH.value,
-            ],
-            "Measurements": [
-                Profile.OP.value,
-            ],
+            Profile.TP,
+            Profile.EQBD,
+            Profile.EQ,
+            Profile.SC,
+            Profile.SV,
+            Profile.SSH,
+            Profile.DY,
+            Profile.OP,
         }

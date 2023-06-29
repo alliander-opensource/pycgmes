@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -20,42 +20,37 @@ class WindContPType4aIEC(IdentifiedObject):
     WindTurbineType4aIEC: Wind turbine type 4A model with which this wind control P type 4A model is associated.
     """
 
-    dpmaxp4a: float = 0.0  # Type #PU in CIM
-    tpordp4a: int = 0  # Type #Seconds in CIM
-    tufiltp4a: int = 0  # Type #Seconds in CIM
+    dpmaxp4a: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpordp4a: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tufiltp4a: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
     # *Association not used*
-    # WindTurbineType4aIEC : Optional[str] = None  # Type M:1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=WindContPType4aIEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType4aIEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "dpmaxp4a": [
-                Profile.DY.value,
-            ],
-            "tpordp4a": [
-                Profile.DY.value,
-            ],
-            "tufiltp4a": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType4aIEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
@@ -32,85 +32,117 @@ class UnderexcLimIEEE1(UnderexcitationLimiterDynamics):
     vulmin: UEL output minimum limit (VULMIN) (< UnderexcLimIEEE1.vulmax).  Typical value = -18.
     """
 
-    kur: float = 0.0  # Type #PU in CIM
-    kuc: float = 0.0  # Type #PU in CIM
-    kuf: float = 0.0  # Type #PU in CIM
-    vurmax: float = 0.0  # Type #PU in CIM
-    vucmax: float = 0.0  # Type #PU in CIM
-    kui: float = 0.0  # Type #PU in CIM
-    kul: float = 0.0  # Type #PU in CIM
-    vuimax: float = 0.0  # Type #PU in CIM
-    vuimin: float = 0.0  # Type #PU in CIM
-    tu1: int = 0  # Type #Seconds in CIM
-    tu2: int = 0  # Type #Seconds in CIM
-    tu3: int = 0  # Type #Seconds in CIM
-    tu4: int = 0  # Type #Seconds in CIM
-    vulmax: float = 0.0  # Type #PU in CIM
-    vulmin: float = 0.0  # Type #PU in CIM
+    kur: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    kuc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=UnderexcLimIEEE1"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    kuf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vurmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vucmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kui: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kul: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vuimax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vuimin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tu1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tu2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tu3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tu4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vulmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vulmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "kur": [
-                Profile.DY.value,
-            ],
-            "kuc": [
-                Profile.DY.value,
-            ],
-            "kuf": [
-                Profile.DY.value,
-            ],
-            "vurmax": [
-                Profile.DY.value,
-            ],
-            "vucmax": [
-                Profile.DY.value,
-            ],
-            "kui": [
-                Profile.DY.value,
-            ],
-            "kul": [
-                Profile.DY.value,
-            ],
-            "vuimax": [
-                Profile.DY.value,
-            ],
-            "vuimin": [
-                Profile.DY.value,
-            ],
-            "tu1": [
-                Profile.DY.value,
-            ],
-            "tu2": [
-                Profile.DY.value,
-            ],
-            "tu3": [
-                Profile.DY.value,
-            ],
-            "tu4": [
-                Profile.DY.value,
-            ],
-            "vulmax": [
-                Profile.DY.value,
-            ],
-            "vulmin": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .DiscontinuousExcitationControlDynamics import DiscontinuousExcitationControlDynamics
@@ -22,45 +22,47 @@ class DiscExcContIEEEDEC2A(DiscontinuousExcitationControlDynamics):
     vdmax: Limiter (VDMAX) (> DiscExcContIEEEDEC2A.vdmin).
     """
 
-    vk: float = 0.0  # Type #PU in CIM
-    td1: int = 0  # Type #Seconds in CIM
-    td2: int = 0  # Type #Seconds in CIM
-    vdmin: float = 0.0  # Type #PU in CIM
-    vdmax: float = 0.0  # Type #PU in CIM
+    vk: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    td1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=DiscExcContIEEEDEC2A"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    td2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vdmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vdmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "vk": [
-                Profile.DY.value,
-            ],
-            "td1": [
-                Profile.DY.value,
-            ],
-            "td2": [
-                Profile.DY.value,
-            ],
-            "vdmin": [
-                Profile.DY.value,
-            ],
-            "vdmax": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

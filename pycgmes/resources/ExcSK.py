@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -54,152 +54,236 @@ class ExcSK(ExcitationSystemDynamics):
     yp: Maximum output (Yp).  Typical value = 1.
     """
 
-    efdmax: float = 0.0  # Type #PU in CIM
-    efdmin: float = 0.0  # Type #PU in CIM
-    emax: float = 0.0  # Type #PU in CIM
-    emin: float = 0.0  # Type #PU in CIM
-    k: float = 0.0  # Type #PU in CIM
-    k1: float = 0.0  # Type #PU in CIM
-    k2: float = 0.0  # Type #PU in CIM
-    kc: float = 0.0  # Type #PU in CIM
-    kce: float = 0.0  # Type #PU in CIM
-    kd: float = 0.0  # Type #PU in CIM
-    kgob: float = 0.0  # Type #PU in CIM
-    kp: float = 0.0  # Type #PU in CIM
-    kqi: float = 0.0  # Type #PU in CIM
-    kqob: float = 0.0  # Type #PU in CIM
-    kqp: float = 0.0  # Type #PU in CIM
-    nq: float = 0.0  # Type #PU in CIM
-    qconoff: bool = False  # Type #Boolean in CIM
-    qz: float = 0.0  # Type #PU in CIM
-    remote: bool = False  # Type #Boolean in CIM
-    sbase: float = 0.0  # Type #ApparentPower in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    te: int = 0  # Type #Seconds in CIM
-    ti: int = 0  # Type #Seconds in CIM
-    tp: int = 0  # Type #Seconds in CIM
-    tr: int = 0  # Type #Seconds in CIM
-    uimax: float = 0.0  # Type #PU in CIM
-    uimin: float = 0.0  # Type #PU in CIM
-    urmax: float = 0.0  # Type #PU in CIM
-    urmin: float = 0.0  # Type #PU in CIM
-    vtmax: float = 0.0  # Type #PU in CIM
-    vtmin: float = 0.0  # Type #PU in CIM
-    yp: float = 0.0  # Type #PU in CIM
+    efdmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    efdmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcSK"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    emax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    emin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kce: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kgob: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kqi: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kqob: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kqp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    nq: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    qconoff: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    qz: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    remote: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    sbase: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    te: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tr: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    uimax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    uimin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    urmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    urmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vtmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vtmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    yp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "efdmax": [
-                Profile.DY.value,
-            ],
-            "efdmin": [
-                Profile.DY.value,
-            ],
-            "emax": [
-                Profile.DY.value,
-            ],
-            "emin": [
-                Profile.DY.value,
-            ],
-            "k": [
-                Profile.DY.value,
-            ],
-            "k1": [
-                Profile.DY.value,
-            ],
-            "k2": [
-                Profile.DY.value,
-            ],
-            "kc": [
-                Profile.DY.value,
-            ],
-            "kce": [
-                Profile.DY.value,
-            ],
-            "kd": [
-                Profile.DY.value,
-            ],
-            "kgob": [
-                Profile.DY.value,
-            ],
-            "kp": [
-                Profile.DY.value,
-            ],
-            "kqi": [
-                Profile.DY.value,
-            ],
-            "kqob": [
-                Profile.DY.value,
-            ],
-            "kqp": [
-                Profile.DY.value,
-            ],
-            "nq": [
-                Profile.DY.value,
-            ],
-            "qconoff": [
-                Profile.DY.value,
-            ],
-            "qz": [
-                Profile.DY.value,
-            ],
-            "remote": [
-                Profile.DY.value,
-            ],
-            "sbase": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "te": [
-                Profile.DY.value,
-            ],
-            "ti": [
-                Profile.DY.value,
-            ],
-            "tp": [
-                Profile.DY.value,
-            ],
-            "tr": [
-                Profile.DY.value,
-            ],
-            "uimax": [
-                Profile.DY.value,
-            ],
-            "uimin": [
-                Profile.DY.value,
-            ],
-            "urmax": [
-                Profile.DY.value,
-            ],
-            "urmin": [
-                Profile.DY.value,
-            ],
-            "vtmax": [
-                Profile.DY.value,
-            ],
-            "vtmin": [
-                Profile.DY.value,
-            ],
-            "yp": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

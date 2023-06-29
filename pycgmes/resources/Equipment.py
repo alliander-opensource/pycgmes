@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemResource import PowerSystemResource
@@ -34,50 +34,49 @@ class Equipment(PowerSystemResource):
       is treated by network applications as if it is not in the model.
     """
 
-    EquipmentContainer: Optional[str] = None  # Type M:0..1 in CIM
-    aggregate: bool = False  # Type #Boolean in CIM
-    normallyInService: bool = False  # Type #Boolean in CIM
+    EquipmentContainer: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
+
+    aggregate: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    normallyInService: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
     # *Association not used*
-    # OperationalLimitSet : list = field(default_factory=list)  # Type M:0..n in CIM
-    inService: bool = False  # Type #Boolean in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # OperationalLimitSet : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=Equipment"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    inService: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-            ],
-            # Attributes
-            "EquipmentContainer": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "aggregate": [
-                Profile.EQ.value,
-            ],
-            "normallyInService": [
-                Profile.EQ.value,
-            ],
-            "OperationalLimitSet": [
-                Profile.EQ.value,
-            ],
-            "inService": [
-                Profile.SSH.value,
-            ],
+            Profile.EQBD,
+            Profile.EQ,
+            Profile.SC,
+            Profile.SSH,
+            Profile.DY,
         }

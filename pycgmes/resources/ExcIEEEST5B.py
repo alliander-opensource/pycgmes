@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -36,92 +36,131 @@ class ExcIEEEST5B(ExcitationSystemDynamics):
     tub2: UEL lag time constant (TUB2) (>= 0).  Typical value = 0,05.
     """
 
-    kr: float = 0.0  # Type #PU in CIM
-    t1: int = 0  # Type #Seconds in CIM
-    kc: float = 0.0  # Type #PU in CIM
-    vrmax: float = 0.0  # Type #PU in CIM
-    vrmin: float = 0.0  # Type #PU in CIM
-    tc1: int = 0  # Type #Seconds in CIM
-    tb1: int = 0  # Type #Seconds in CIM
-    tc2: int = 0  # Type #Seconds in CIM
-    tb2: int = 0  # Type #Seconds in CIM
-    toc1: int = 0  # Type #Seconds in CIM
-    tob1: int = 0  # Type #Seconds in CIM
-    toc2: int = 0  # Type #Seconds in CIM
-    tob2: int = 0  # Type #Seconds in CIM
-    tuc1: int = 0  # Type #Seconds in CIM
-    tub1: int = 0  # Type #Seconds in CIM
-    tuc2: int = 0  # Type #Seconds in CIM
-    tub2: int = 0  # Type #Seconds in CIM
+    kr: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    t1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcIEEEST5B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    kc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tb1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tb2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    toc1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tob1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    toc2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tob2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tuc1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tub1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tuc2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tub2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "kr": [
-                Profile.DY.value,
-            ],
-            "t1": [
-                Profile.DY.value,
-            ],
-            "kc": [
-                Profile.DY.value,
-            ],
-            "vrmax": [
-                Profile.DY.value,
-            ],
-            "vrmin": [
-                Profile.DY.value,
-            ],
-            "tc1": [
-                Profile.DY.value,
-            ],
-            "tb1": [
-                Profile.DY.value,
-            ],
-            "tc2": [
-                Profile.DY.value,
-            ],
-            "tb2": [
-                Profile.DY.value,
-            ],
-            "toc1": [
-                Profile.DY.value,
-            ],
-            "tob1": [
-                Profile.DY.value,
-            ],
-            "toc2": [
-                Profile.DY.value,
-            ],
-            "tob2": [
-                Profile.DY.value,
-            ],
-            "tuc1": [
-                Profile.DY.value,
-            ],
-            "tub1": [
-                Profile.DY.value,
-            ],
-            "tuc2": [
-                Profile.DY.value,
-            ],
-            "tub2": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

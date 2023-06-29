@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Conductor import Conductor
@@ -35,71 +35,84 @@ class ACLineSegment(Conductor):
     x0: Zero sequence series reactance of the entire line section.
     """
 
-    bch: float = 0.0  # Type #Susceptance in CIM
-    gch: float = 0.0  # Type #Conductance in CIM
-    r: float = 0.0  # Type #Resistance in CIM
-    x: float = 0.0  # Type #Reactance in CIM
-    # *Association not used*
-    # Clamp : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # Cut : list = field(default_factory=list)  # Type M:0..n in CIM
-    b0ch: float = 0.0  # Type #Susceptance in CIM
-    g0ch: float = 0.0  # Type #Conductance in CIM
-    r0: float = 0.0  # Type #Resistance in CIM
-    shortCircuitEndTemperature: float = 0.0  # Type #Temperature in CIM
-    x0: float = 0.0  # Type #Reactance in CIM
+    bch: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    gch: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ACLineSegment"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    r: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    x: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # Clamp : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # Cut : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    b0ch: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    g0ch: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    r0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    shortCircuitEndTemperature: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-            ],
-            # Attributes
-            "bch": [
-                Profile.EQ.value,
-            ],
-            "gch": [
-                Profile.EQ.value,
-            ],
-            "r": [
-                Profile.EQ.value,
-            ],
-            "x": [
-                Profile.EQ.value,
-            ],
-            "Clamp": [
-                Profile.EQ.value,
-            ],
-            "Cut": [
-                Profile.EQ.value,
-            ],
-            "b0ch": [
-                Profile.SC.value,
-            ],
-            "g0ch": [
-                Profile.SC.value,
-            ],
-            "r0": [
-                Profile.SC.value,
-            ],
-            "shortCircuitEndTemperature": [
-                Profile.SC.value,
-            ],
-            "x0": [
-                Profile.SC.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
         }

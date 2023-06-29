@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -46,128 +46,194 @@ class ExcAC3A(ExcitationSystemDynamics):
     vlv: Field voltage used in the minimum field voltage limiter loop (Vlv).  Typical value = 0,79.
     """
 
-    tb: int = 0  # Type #Seconds in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    ka: int = 0  # Type #Seconds in CIM
-    ta: float = 0.0  # Type #PU in CIM
-    vamax: float = 0.0  # Type #PU in CIM
-    vamin: float = 0.0  # Type #PU in CIM
-    te: int = 0  # Type #Seconds in CIM
-    vemin: float = 0.0  # Type #PU in CIM
-    kr: float = 0.0  # Type #PU in CIM
-    kf: float = 0.0  # Type #PU in CIM
-    tf: int = 0  # Type #Seconds in CIM
-    kn: float = 0.0  # Type #PU in CIM
-    efdn: float = 0.0  # Type #PU in CIM
-    kc: float = 0.0  # Type #PU in CIM
-    kd: float = 0.0  # Type #PU in CIM
-    ke: float = 0.0  # Type #PU in CIM
-    klv: float = 0.0  # Type #PU in CIM
-    kf1: float = 0.0  # Type #PU in CIM
-    kf2: float = 0.0  # Type #PU in CIM
-    ks: float = 0.0  # Type #PU in CIM
-    vfemax: float = 0.0  # Type #PU in CIM
-    ve1: float = 0.0  # Type #PU in CIM
-    seve1: float = 0.0  # Type #Float in CIM
-    ve2: float = 0.0  # Type #PU in CIM
-    seve2: float = 0.0  # Type #Float in CIM
-    vlv: float = 0.0  # Type #PU in CIM
+    tb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcAC3A"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ka: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ta: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vamax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vamin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    te: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vemin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kr: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    efdn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ke: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    klv: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kf1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kf2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ks: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vfemax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ve1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    seve1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ve2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    seve2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vlv: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "tb": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "ka": [
-                Profile.DY.value,
-            ],
-            "ta": [
-                Profile.DY.value,
-            ],
-            "vamax": [
-                Profile.DY.value,
-            ],
-            "vamin": [
-                Profile.DY.value,
-            ],
-            "te": [
-                Profile.DY.value,
-            ],
-            "vemin": [
-                Profile.DY.value,
-            ],
-            "kr": [
-                Profile.DY.value,
-            ],
-            "kf": [
-                Profile.DY.value,
-            ],
-            "tf": [
-                Profile.DY.value,
-            ],
-            "kn": [
-                Profile.DY.value,
-            ],
-            "efdn": [
-                Profile.DY.value,
-            ],
-            "kc": [
-                Profile.DY.value,
-            ],
-            "kd": [
-                Profile.DY.value,
-            ],
-            "ke": [
-                Profile.DY.value,
-            ],
-            "klv": [
-                Profile.DY.value,
-            ],
-            "kf1": [
-                Profile.DY.value,
-            ],
-            "kf2": [
-                Profile.DY.value,
-            ],
-            "ks": [
-                Profile.DY.value,
-            ],
-            "vfemax": [
-                Profile.DY.value,
-            ],
-            "ve1": [
-                Profile.DY.value,
-            ],
-            "seve1": [
-                Profile.DY.value,
-            ],
-            "ve2": [
-                Profile.DY.value,
-            ],
-            "seve2": [
-                Profile.DY.value,
-            ],
-            "vlv": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

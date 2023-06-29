@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import field, fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -24,33 +24,26 @@ class TopologicalIsland(IdentifiedObject):
     TopologicalNodes: A topological node belongs to a topological island.
     """
 
-    AngleRefTopologicalNode: Optional[str] = None  # Type M:1 in CIM
-    TopologicalNodes: list = field(default_factory=list)  # Type M:1..n in CIM
+    AngleRefTopologicalNode: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SV,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=TopologicalIsland"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    TopologicalNodes: list = Field(
+        default_factory=list,
+        in_profiles=[
+            Profile.SV,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.SV.value,
-            ],
-            # Attributes
-            "AngleRefTopologicalNode": [
-                Profile.SV.value,
-            ],
-            "TopologicalNodes": [
-                Profile.SV.value,
-            ],
+            Profile.SV,
         }

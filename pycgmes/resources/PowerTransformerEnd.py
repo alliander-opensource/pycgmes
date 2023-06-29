@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TransformerEnd import TransformerEnd
@@ -54,78 +54,104 @@ class PowerTransformerEnd(TransformerEnd):
     x0: Zero sequence series reactance of the transformer end.
     """
 
-    PowerTransformer: Optional[str] = None  # Type M:1..1 in CIM
-    b: float = 0.0  # Type #Susceptance in CIM
-    connectionKind: Optional[str] = None  # Type M:0..1 in CIM
-    ratedS: float = 0.0  # Type #ApparentPower in CIM
-    g: float = 0.0  # Type #Conductance in CIM
-    ratedU: float = 0.0  # Type #Voltage in CIM
-    r: float = 0.0  # Type #Resistance in CIM
-    x: float = 0.0  # Type #Reactance in CIM
-    b0: float = 0.0  # Type #Susceptance in CIM
-    phaseAngleClock: int = 0  # Type #Integer in CIM
-    g0: float = 0.0  # Type #Conductance in CIM
-    r0: float = 0.0  # Type #Resistance in CIM
-    x0: float = 0.0  # Type #Reactance in CIM
+    PowerTransformer: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    b: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PowerTransformerEnd"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    connectionKind: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ratedS: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    g: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ratedU: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    r: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    x: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    b0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    phaseAngleClock: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    g0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    r0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-            ],
-            # Attributes
-            "PowerTransformer": [
-                Profile.EQ.value,
-            ],
-            "b": [
-                Profile.EQ.value,
-            ],
-            "connectionKind": [
-                Profile.EQ.value,
-            ],
-            "ratedS": [
-                Profile.EQ.value,
-            ],
-            "g": [
-                Profile.EQ.value,
-            ],
-            "ratedU": [
-                Profile.EQ.value,
-            ],
-            "r": [
-                Profile.EQ.value,
-            ],
-            "x": [
-                Profile.EQ.value,
-            ],
-            "b0": [
-                Profile.SC.value,
-            ],
-            "phaseAngleClock": [
-                Profile.SC.value,
-            ],
-            "g0": [
-                Profile.SC.value,
-            ],
-            "r0": [
-                Profile.SC.value,
-            ],
-            "x0": [
-                Profile.SC.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
         }

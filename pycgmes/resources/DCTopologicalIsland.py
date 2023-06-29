@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import field, fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -20,29 +20,19 @@ class DCTopologicalIsland(IdentifiedObject):
     DCTopologicalNodes: The DC topological nodes in a DC topological island.
     """
 
-    DCTopologicalNodes: list = field(default_factory=list)  # Type M:1..n in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=DCTopologicalIsland"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    DCTopologicalNodes: list = Field(
+        default_factory=list,
+        in_profiles=[
+            Profile.SV,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.SV.value,
-            ],
-            # Attributes
-            "DCTopologicalNodes": [
-                Profile.SV.value,
-            ],
+            Profile.SV,
         }

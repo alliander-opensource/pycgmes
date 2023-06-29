@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PhaseTapChanger import PhaseTapChanger
@@ -31,38 +31,34 @@ class PhaseTapChangerLinear(PhaseTapChanger):
       PowerTransformerEnd.x shall be used.
     """
 
-    stepPhaseShiftIncrement: float = 0.0  # Type #AngleDegrees in CIM
-    xMax: float = 0.0  # Type #Reactance in CIM
-    xMin: float = 0.0  # Type #Reactance in CIM
+    stepPhaseShiftIncrement: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    xMax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PhaseTapChangerLinear"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    xMin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "stepPhaseShiftIncrement": [
-                Profile.EQ.value,
-            ],
-            "xMax": [
-                Profile.EQ.value,
-            ],
-            "xMin": [
-                Profile.EQ.value,
-            ],
+            Profile.EQ,
+            Profile.SSH,
         }

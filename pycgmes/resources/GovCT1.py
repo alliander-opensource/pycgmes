@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
@@ -73,164 +73,257 @@ class GovCT1(TurbineGovernorDynamics):
     rdown: Maximum rate of load limit decrease (Rdown).  Typical value = -99.
     """
 
-    mwbase: float = 0.0  # Type #ActivePower in CIM
-    r: float = 0.0  # Type #PU in CIM
-    rselect: Optional[str] = None  # Type M:1..1 in CIM
-    tpelec: int = 0  # Type #Seconds in CIM
-    maxerr: float = 0.0  # Type #PU in CIM
-    minerr: float = 0.0  # Type #PU in CIM
-    kpgov: float = 0.0  # Type #PU in CIM
-    kigov: float = 0.0  # Type #PU in CIM
-    kdgov: float = 0.0  # Type #PU in CIM
-    tdgov: int = 0  # Type #Seconds in CIM
-    vmax: float = 0.0  # Type #PU in CIM
-    vmin: float = 0.0  # Type #PU in CIM
-    tact: int = 0  # Type #Seconds in CIM
-    kturb: float = 0.0  # Type #PU in CIM
-    wfnl: float = 0.0  # Type #PU in CIM
-    tb: int = 0  # Type #Seconds in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    wfspd: bool = False  # Type #Boolean in CIM
-    teng: int = 0  # Type #Seconds in CIM
-    tfload: int = 0  # Type #Seconds in CIM
-    kpload: float = 0.0  # Type #PU in CIM
-    kiload: float = 0.0  # Type #PU in CIM
-    ldref: float = 0.0  # Type #PU in CIM
-    dm: float = 0.0  # Type #PU in CIM
-    ropen: float = 0.0  # Type #Float in CIM
-    rclose: float = 0.0  # Type #Float in CIM
-    kimw: float = 0.0  # Type #PU in CIM
-    aset: float = 0.0  # Type #Float in CIM
-    ka: float = 0.0  # Type #PU in CIM
-    ta: int = 0  # Type #Seconds in CIM
-    db: float = 0.0  # Type #PU in CIM
-    tsa: int = 0  # Type #Seconds in CIM
-    tsb: int = 0  # Type #Seconds in CIM
-    rup: float = 0.0  # Type #PU in CIM
-    rdown: float = 0.0  # Type #PU in CIM
+    mwbase: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    r: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovCT1"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    rselect: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpelec: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    maxerr: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    minerr: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpgov: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kigov: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kdgov: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tdgov: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tact: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kturb: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    wfnl: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    wfspd: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    teng: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tfload: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpload: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kiload: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ldref: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dm: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ropen: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rclose: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kimw: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    aset: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ka: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ta: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    db: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tsa: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tsb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rup: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rdown: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "mwbase": [
-                Profile.DY.value,
-            ],
-            "r": [
-                Profile.DY.value,
-            ],
-            "rselect": [
-                Profile.DY.value,
-            ],
-            "tpelec": [
-                Profile.DY.value,
-            ],
-            "maxerr": [
-                Profile.DY.value,
-            ],
-            "minerr": [
-                Profile.DY.value,
-            ],
-            "kpgov": [
-                Profile.DY.value,
-            ],
-            "kigov": [
-                Profile.DY.value,
-            ],
-            "kdgov": [
-                Profile.DY.value,
-            ],
-            "tdgov": [
-                Profile.DY.value,
-            ],
-            "vmax": [
-                Profile.DY.value,
-            ],
-            "vmin": [
-                Profile.DY.value,
-            ],
-            "tact": [
-                Profile.DY.value,
-            ],
-            "kturb": [
-                Profile.DY.value,
-            ],
-            "wfnl": [
-                Profile.DY.value,
-            ],
-            "tb": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "wfspd": [
-                Profile.DY.value,
-            ],
-            "teng": [
-                Profile.DY.value,
-            ],
-            "tfload": [
-                Profile.DY.value,
-            ],
-            "kpload": [
-                Profile.DY.value,
-            ],
-            "kiload": [
-                Profile.DY.value,
-            ],
-            "ldref": [
-                Profile.DY.value,
-            ],
-            "dm": [
-                Profile.DY.value,
-            ],
-            "ropen": [
-                Profile.DY.value,
-            ],
-            "rclose": [
-                Profile.DY.value,
-            ],
-            "kimw": [
-                Profile.DY.value,
-            ],
-            "aset": [
-                Profile.DY.value,
-            ],
-            "ka": [
-                Profile.DY.value,
-            ],
-            "ta": [
-                Profile.DY.value,
-            ],
-            "db": [
-                Profile.DY.value,
-            ],
-            "tsa": [
-                Profile.DY.value,
-            ],
-            "tsb": [
-                Profile.DY.value,
-            ],
-            "rup": [
-                Profile.DY.value,
-            ],
-            "rdown": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

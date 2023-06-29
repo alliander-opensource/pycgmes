@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -23,55 +23,52 @@ class WindMechIEC(IdentifiedObject):
     WindTurbineType4bIEC: Wind turbine type 4B model with which this wind mechanical model is associated.
     """
 
-    cdrt: float = 0.0  # Type #PU in CIM
-    hgen: int = 0  # Type #Seconds in CIM
-    hwtr: int = 0  # Type #Seconds in CIM
-    kdrt: float = 0.0  # Type #PU in CIM
-    # *Association not used*
-    # WindTurbineType3IEC : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # WindTurbineType1or2IEC : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # WindTurbineType4bIEC : Optional[str] = None  # Type M:0..1 in CIM
+    cdrt: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    hgen: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=WindMechIEC"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    hwtr: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kdrt: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType3IEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType1or2IEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType4bIEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "cdrt": [
-                Profile.DY.value,
-            ],
-            "hgen": [
-                Profile.DY.value,
-            ],
-            "hwtr": [
-                Profile.DY.value,
-            ],
-            "kdrt": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType3IEC": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType1or2IEC": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType4bIEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

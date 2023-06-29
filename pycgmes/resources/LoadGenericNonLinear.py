@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .LoadDynamics import LoadDynamics
@@ -26,53 +26,61 @@ class LoadGenericNonLinear(LoadDynamics):
     bt: Transient voltage index for reactive power (BT).
     """
 
-    genericNonLinearLoadModelType: Optional[str] = None  # Type M:1..1 in CIM
-    tp: int = 0  # Type #Seconds in CIM
-    tq: int = 0  # Type #Seconds in CIM
-    ls: float = 0.0  # Type #Float in CIM
-    lt: float = 0.0  # Type #Float in CIM
-    bs: float = 0.0  # Type #Float in CIM
-    bt: float = 0.0  # Type #Float in CIM
+    genericNonLinearLoadModelType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=LoadGenericNonLinear"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    tq: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ls: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    lt: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    bs: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    bt: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "genericNonLinearLoadModelType": [
-                Profile.DY.value,
-            ],
-            "tp": [
-                Profile.DY.value,
-            ],
-            "tq": [
-                Profile.DY.value,
-            ],
-            "ls": [
-                Profile.DY.value,
-            ],
-            "lt": [
-                Profile.DY.value,
-            ],
-            "bs": [
-                Profile.DY.value,
-            ],
-            "bt": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

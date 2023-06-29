@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -31,53 +31,58 @@ class Diagram(IdentifiedObject):
     DiagramStyle: A Diagram may have a DiagramStyle.
     """
 
-    orientation: Optional[str] = None  # Type M:1..1 in CIM
-    x1InitialView: float = 0.0  # Type #Float in CIM
-    x2InitialView: float = 0.0  # Type #Float in CIM
-    y1InitialView: float = 0.0  # Type #Float in CIM
-    y2InitialView: float = 0.0  # Type #Float in CIM
+    orientation: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    x1InitialView: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    x2InitialView: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    y1InitialView: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    y2InitialView: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
     # *Association not used*
-    # DiagramElements : list = field(default_factory=list)  # Type M:0..n in CIM
-    DiagramStyle: Optional[str] = None  # Type M:0..1 in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # DiagramElements : list = Field(default_factory=list, in_profiles = [Profile.DL, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=Diagram"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    DiagramStyle: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DL.value,
-            ],
-            # Attributes
-            "orientation": [
-                Profile.DL.value,
-            ],
-            "x1InitialView": [
-                Profile.DL.value,
-            ],
-            "x2InitialView": [
-                Profile.DL.value,
-            ],
-            "y1InitialView": [
-                Profile.DL.value,
-            ],
-            "y2InitialView": [
-                Profile.DL.value,
-            ],
-            "DiagramElements": [
-                Profile.DL.value,
-            ],
-            "DiagramStyle": [
-                Profile.DL.value,
-            ],
+            Profile.DL,
         }

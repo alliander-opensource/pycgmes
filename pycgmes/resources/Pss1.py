@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
@@ -32,84 +32,117 @@ class Pss1(PowerSystemStabilizerDynamics):
       than Pmin). Typical value = true.
     """
 
-    komega: float = 0.0  # Type #Float in CIM
-    kf: float = 0.0  # Type #Float in CIM
-    kpe: float = 0.0  # Type #Float in CIM
-    pmin: float = 0.0  # Type #PU in CIM
-    ks: float = 0.0  # Type #Float in CIM
-    vsmn: float = 0.0  # Type #PU in CIM
-    vsmx: float = 0.0  # Type #PU in CIM
-    tpe: int = 0  # Type #Seconds in CIM
-    t5: int = 0  # Type #Seconds in CIM
-    t6: int = 0  # Type #Seconds in CIM
-    t7: int = 0  # Type #Seconds in CIM
-    t8: int = 0  # Type #Seconds in CIM
-    t9: int = 0  # Type #Seconds in CIM
-    t10: int = 0  # Type #Seconds in CIM
-    vadat: bool = False  # Type #Boolean in CIM
+    komega: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    kf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=Pss1"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    kpe: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ks: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpe: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t5: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t6: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t7: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t8: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t9: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t10: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vadat: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "komega": [
-                Profile.DY.value,
-            ],
-            "kf": [
-                Profile.DY.value,
-            ],
-            "kpe": [
-                Profile.DY.value,
-            ],
-            "pmin": [
-                Profile.DY.value,
-            ],
-            "ks": [
-                Profile.DY.value,
-            ],
-            "vsmn": [
-                Profile.DY.value,
-            ],
-            "vsmx": [
-                Profile.DY.value,
-            ],
-            "tpe": [
-                Profile.DY.value,
-            ],
-            "t5": [
-                Profile.DY.value,
-            ],
-            "t6": [
-                Profile.DY.value,
-            ],
-            "t7": [
-                Profile.DY.value,
-            ],
-            "t8": [
-                Profile.DY.value,
-            ],
-            "t9": [
-                Profile.DY.value,
-            ],
-            "t10": [
-                Profile.DY.value,
-            ],
-            "vadat": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }
