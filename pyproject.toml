@@ -57,7 +57,7 @@ line-length = 120
 
 [tool.coverage.run]
 # I would love to only cover Bay (this is the one used by the tests) and still load all the others
-# to check that there is no syntax error.
+# to check that there is no syntax error. But not sure how to do it cleanly, so not done.
 include = ["pycgmes/*"]
 omit = []
 
@@ -77,6 +77,7 @@ pretty = true
 non_interactive = true # Do not ask for confirmations to install stubs
 install_types = true # Install stubs if required
 check_untyped_defs = true # Checks what it can even in files without annotation
+plugins = ["pydantic.mypy"]
 
 [tool.bandit]
 targets = ["pycgmes"]
