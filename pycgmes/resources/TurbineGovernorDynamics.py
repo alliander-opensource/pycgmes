@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
@@ -25,38 +25,30 @@ class TurbineGovernorDynamics(DynamicsFunctionBlock):
     TurbineLoadControllerDynamics: Turbine load controller providing input to this turbine-governor.
     """
 
-    SynchronousMachineDynamics: Optional[str] = None  # Type M:0..1 in CIM
-    AsynchronousMachineDynamics: Optional[str] = None  # Type M:0..1 in CIM
+    SynchronousMachineDynamics: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    AsynchronousMachineDynamics: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
     # *Association not used*
-    # TurbineLoadControllerDynamics : Optional[str] = None  # Type M:0..1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=TurbineGovernorDynamics"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # TurbineLoadControllerDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "SynchronousMachineDynamics": [
-                Profile.DY.value,
-            ],
-            "AsynchronousMachineDynamics": [
-                Profile.DY.value,
-            ],
-            "TurbineLoadControllerDynamics": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .GeneratingUnit import GeneratingUnit
@@ -21,43 +21,38 @@ class ThermalGeneratingUnit(GeneratingUnit):
     FossilFuels: A thermal generating unit may have one or more fossil fuels.
     """
 
-    CAESPlant: Optional[str] = None  # Type M:0..1 in CIM
-    CogenerationPlant: Optional[str] = None  # Type M:0..1 in CIM
-    CombinedCyclePlant: Optional[str] = None  # Type M:0..1 in CIM
+    CAESPlant: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    CogenerationPlant: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    CombinedCyclePlant: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
     # *Association not used*
-    # FossilFuels : list = field(default_factory=list)  # Type M:0..n in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=ThermalGeneratingUnit"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # FossilFuels : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "CAESPlant": [
-                Profile.EQ.value,
-            ],
-            "CogenerationPlant": [
-                Profile.EQ.value,
-            ],
-            "CombinedCyclePlant": [
-                Profile.EQ.value,
-            ],
-            "FossilFuels": [
-                Profile.EQ.value,
-            ],
+            Profile.EQ,
+            Profile.SSH,
         }

@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .EquivalentEquipment import EquivalentEquipment
@@ -64,90 +64,125 @@ class EquivalentBranch(EquivalentEquipment):
       the data exchange.
     """
 
-    r: float = 0.0  # Type #Resistance in CIM
-    r21: float = 0.0  # Type #Resistance in CIM
-    x: float = 0.0  # Type #Reactance in CIM
-    x21: float = 0.0  # Type #Reactance in CIM
-    negativeR12: float = 0.0  # Type #Resistance in CIM
-    negativeR21: float = 0.0  # Type #Resistance in CIM
-    negativeX12: float = 0.0  # Type #Reactance in CIM
-    negativeX21: float = 0.0  # Type #Reactance in CIM
-    positiveR12: float = 0.0  # Type #Resistance in CIM
-    positiveR21: float = 0.0  # Type #Resistance in CIM
-    positiveX12: float = 0.0  # Type #Reactance in CIM
-    positiveX21: float = 0.0  # Type #Reactance in CIM
-    zeroR12: float = 0.0  # Type #Resistance in CIM
-    zeroR21: float = 0.0  # Type #Resistance in CIM
-    zeroX12: float = 0.0  # Type #Reactance in CIM
-    zeroX21: float = 0.0  # Type #Reactance in CIM
+    r: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    r21: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=EquivalentBranch"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    x: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    x21: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    negativeR12: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    negativeR21: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    negativeX12: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    negativeX21: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    positiveR12: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    positiveR21: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    positiveX12: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    positiveX21: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    zeroR12: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    zeroR21: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    zeroX12: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    zeroX21: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-            ],
-            # Attributes
-            "r": [
-                Profile.EQ.value,
-            ],
-            "r21": [
-                Profile.EQ.value,
-            ],
-            "x": [
-                Profile.EQ.value,
-            ],
-            "x21": [
-                Profile.EQ.value,
-            ],
-            "negativeR12": [
-                Profile.SC.value,
-            ],
-            "negativeR21": [
-                Profile.SC.value,
-            ],
-            "negativeX12": [
-                Profile.SC.value,
-            ],
-            "negativeX21": [
-                Profile.SC.value,
-            ],
-            "positiveR12": [
-                Profile.SC.value,
-            ],
-            "positiveR21": [
-                Profile.SC.value,
-            ],
-            "positiveX12": [
-                Profile.SC.value,
-            ],
-            "positiveX21": [
-                Profile.SC.value,
-            ],
-            "zeroR12": [
-                Profile.SC.value,
-            ],
-            "zeroR21": [
-                Profile.SC.value,
-            ],
-            "zeroX12": [
-                Profile.SC.value,
-            ],
-            "zeroX21": [
-                Profile.SC.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
         }

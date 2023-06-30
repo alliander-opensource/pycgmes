@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .AsynchronousMachineDynamics import AsynchronousMachineDynamics
@@ -31,45 +31,47 @@ class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics):
     xlr2: Damper 2 winding leakage reactance.
     """
 
-    xm: float = 0.0  # Type #PU in CIM
-    rr1: float = 0.0  # Type #PU in CIM
-    xlr1: float = 0.0  # Type #PU in CIM
-    rr2: float = 0.0  # Type #PU in CIM
-    xlr2: float = 0.0  # Type #PU in CIM
+    xm: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    rr1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=AsynchronousMachineEquivalentCircuit"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    xlr1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rr2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xlr2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "xm": [
-                Profile.DY.value,
-            ],
-            "rr1": [
-                Profile.DY.value,
-            ],
-            "xlr1": [
-                Profile.DY.value,
-            ],
-            "rr2": [
-                Profile.DY.value,
-            ],
-            "xlr2": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ConductingEquipment import ConductingEquipment
@@ -31,56 +31,57 @@ class Switch(ConductingEquipment):
       The resulting state is closed.
     """
 
-    normalOpen: bool = False  # Type #Boolean in CIM
-    ratedCurrent: float = 0.0  # Type #CurrentFlow in CIM
-    retained: bool = False  # Type #Boolean in CIM
-    # *Association not used*
-    # SwitchSchedules : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # SvSwitch : list = field(default_factory=list)  # Type M:0..n in CIM
-    open: bool = False  # Type #Boolean in CIM
-    locked: bool = False  # Type #Boolean in CIM
+    normalOpen: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    ratedCurrent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=Switch"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    retained: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # SwitchSchedules : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # SvSwitch : list = Field(default_factory=list, in_profiles = [Profile.SV, ])
+
+    open: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    locked: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SV.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "normalOpen": [
-                Profile.EQ.value,
-            ],
-            "ratedCurrent": [
-                Profile.EQ.value,
-            ],
-            "retained": [
-                Profile.EQ.value,
-            ],
-            "SwitchSchedules": [
-                Profile.EQ.value,
-            ],
-            "SvSwitch": [
-                Profile.SV.value,
-            ],
-            "open": [
-                Profile.SSH.value,
-            ],
-            "locked": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SV,
+            Profile.SSH,
         }

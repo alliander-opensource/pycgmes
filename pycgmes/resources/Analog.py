@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Measurement import Measurement
@@ -21,38 +21,27 @@ class Analog(Measurement):
     LimitSets: A measurement may have zero or more limit ranges defined for it.
     """
 
-    positiveFlowIn: bool = False  # Type #Boolean in CIM
-    # *Association not used*
-    # AnalogValues : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # LimitSets : list = field(default_factory=list)  # Type M:0..n in CIM
+    positiveFlowIn: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # AnalogValues : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
 
-        return "\n".join(
-            ["class=Analog"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # LimitSets : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.OP.value,
-            ],
-            # Attributes
-            "positiveFlowIn": [
-                Profile.OP.value,
-            ],
-            "AnalogValues": [
-                Profile.OP.value,
-            ],
-            "LimitSets": [
-                Profile.OP.value,
-            ],
+            Profile.OP,
         }

@@ -1,5 +1,8 @@
 import textwrap
 
+import pytest
+from pydantic import ValidationError
+
 from pycgmes.resources import (
     Base,
     Bay,
@@ -34,28 +37,40 @@ class TestBay:
     def test_bay_has_expected_str(self):
         expected = textwrap.dedent(
             """
-        class=Bay
         description=
         energyIdentCodeEic=
         mRID=
         name=
         shortName=
         VoltageLevel=None
+        __class__=Bay
         """
         )[
-            1:-1
-        ]  # The first and last characters are newlines, which are not in str()
+            1:-1  # The first and last characters are newlines, which are not in str()
+        ]
         assert str(Bay()) == expected
 
     def test_bay_has_expected_profiles(self):
-        expected = {
-            "class": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "VoltageLevel": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-        }
+        expected = {Profile.EQBD, Profile.EQ}
+
         assert expected == Bay().possible_profiles
+
+    @pytest.mark.parametrize(
+        "profile, attribute_names",
+        [
+            # Different profiles will have different attributes.
+            ("EQ", {"description", "VoltageLevel", "energyIdentCodeEic", "shortName", "name"}),
+            ("SV", {"name"}),
+        ],
+    )
+    def test_bay_has_expected_attributes(self, profile, attribute_names):
+        assert attribute_names == {a.name for a in Bay().cgmes_attribute_names_in_profile(Profile[profile])}
+
+    def test_param_casting(self):
+        # An int is castable to string, and it happens.
+        assert Bay(VoltageLevel=42).VoltageLevel == "42"
+
+    def test_param_validation(self):
+        # mRID is not allowed to be None
+        with pytest.raises(ValidationError):
+            Bay(mRID=None)

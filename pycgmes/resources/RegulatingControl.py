@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemResource import PowerSystemResource
@@ -55,71 +55,83 @@ class RegulatingControl(PowerSystemResource):
     """
 
     # *Association not used*
-    # RegulationSchedule : list = field(default_factory=list)  # Type M:0..n in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # RegulationSchedule : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
     # *Association not used*
-    # RegulatingCondEq : list = field(default_factory=list)  # Type M:0..n in CIM
-    mode: Optional[str] = None  # Type M:1..1 in CIM
-    Terminal: Optional[str] = None  # Type M:1..1 in CIM
-    discrete: bool = False  # Type #Boolean in CIM
-    enabled: bool = False  # Type #Boolean in CIM
-    targetDeadband: float = 0.0  # Type #Float in CIM
-    targetValue: float = 0.0  # Type #Float in CIM
-    targetValueUnitMultiplier: Optional[str] = None  # Type M:1..1 in CIM
-    maxAllowedTargetValue: float = 0.0  # Type #Float in CIM
-    minAllowedTargetValue: float = 0.0  # Type #Float in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # RegulatingCondEq : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    mode: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=RegulatingControl"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    Terminal: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    discrete: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    enabled: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    targetDeadband: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    targetValue: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    targetValueUnitMultiplier: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    maxAllowedTargetValue: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    minAllowedTargetValue: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "RegulationSchedule": [
-                Profile.EQ.value,
-            ],
-            "RegulatingCondEq": [
-                Profile.EQ.value,
-            ],
-            "mode": [
-                Profile.EQ.value,
-            ],
-            "Terminal": [
-                Profile.EQ.value,
-            ],
-            "discrete": [
-                Profile.SSH.value,
-            ],
-            "enabled": [
-                Profile.SSH.value,
-            ],
-            "targetDeadband": [
-                Profile.SSH.value,
-            ],
-            "targetValue": [
-                Profile.SSH.value,
-            ],
-            "targetValueUnitMultiplier": [
-                Profile.SSH.value,
-            ],
-            "maxAllowedTargetValue": [
-                Profile.SSH.value,
-            ],
-            "minAllowedTargetValue": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SSH,
         }

@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .MeasurementValue import MeasurementValue
@@ -19,34 +19,23 @@ class AccumulatorValue(MeasurementValue):
     AccumulatorReset: The command that resets the accumulator value.
     """
 
-    Accumulator: Optional[str] = None  # Type M:1 in CIM
+    Accumulator: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
+
     # *Association not used*
-    # AccumulatorReset : Optional[str] = None  # Type M:0..1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=AccumulatorValue"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # AccumulatorReset : Optional[str] = Field(default=None, in_profiles = [Profile.OP, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.OP.value,
-            ],
-            # Attributes
-            "Accumulator": [
-                Profile.OP.value,
-            ],
-            "AccumulatorReset": [
-                Profile.OP.value,
-            ],
+            Profile.OP,
         }

@@ -2,7 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
@@ -25,43 +24,27 @@ class ValueAliasSet(IdentifiedObject):
     """
 
     # *Association not used*
-    # Commands : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # Discretes : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # RaiseLowerCommands : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # Values : list = field(default_factory=list)  # Type M:1..n in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # Commands : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # Discretes : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
 
-        return "\n".join(
-            ["class=ValueAliasSet"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # RaiseLowerCommands : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+
+    # *Association not used*
+    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
+    # Values : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.OP.value,
-            ],
-            # Attributes
-            "Commands": [
-                Profile.OP.value,
-            ],
-            "Discretes": [
-                Profile.OP.value,
-            ],
-            "RaiseLowerCommands": [
-                Profile.OP.value,
-            ],
-            "Values": [
-                Profile.OP.value,
-            ],
+            Profile.OP,
         }

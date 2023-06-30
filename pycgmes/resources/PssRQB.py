@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
@@ -27,64 +27,82 @@ class PssRQB(PowerSystemStabilizerDynamics):
     t4f: Lead lag time constant (T4F) (>= 0). Typical value = 0,045.
     """
 
-    ki2: float = 0.0  # Type #Float in CIM
-    ki3: float = 0.0  # Type #Float in CIM
-    ki4: float = 0.0  # Type #Float in CIM
-    t4m: int = 0  # Type #Seconds in CIM
-    tomd: int = 0  # Type #Seconds in CIM
-    tomsl: int = 0  # Type #Seconds in CIM
-    t4mom: int = 0  # Type #Seconds in CIM
-    sibv: float = 0.0  # Type #PU in CIM
-    kdpm: float = 0.0  # Type #Float in CIM
-    t4f: int = 0  # Type #Seconds in CIM
+    ki2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    ki3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PssRQB"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ki4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4m: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tomd: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tomsl: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4mom: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    sibv: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kdpm: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4f: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "ki2": [
-                Profile.DY.value,
-            ],
-            "ki3": [
-                Profile.DY.value,
-            ],
-            "ki4": [
-                Profile.DY.value,
-            ],
-            "t4m": [
-                Profile.DY.value,
-            ],
-            "tomd": [
-                Profile.DY.value,
-            ],
-            "tomsl": [
-                Profile.DY.value,
-            ],
-            "t4mom": [
-                Profile.DY.value,
-            ],
-            "sibv": [
-                Profile.DY.value,
-            ],
-            "kdpm": [
-                Profile.DY.value,
-            ],
-            "t4f": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .RegulatingCondEq import RegulatingCondEq
@@ -51,99 +51,140 @@ class ExternalNetworkInjection(RegulatingCondEq):
       value for steady state solutions.
     """
 
-    governorSCD: float = 0.0  # Type #ActivePowerPerFrequency in CIM
-    maxP: float = 0.0  # Type #ActivePower in CIM
-    maxQ: float = 0.0  # Type #ReactivePower in CIM
-    minP: float = 0.0  # Type #ActivePower in CIM
-    minQ: float = 0.0  # Type #ReactivePower in CIM
-    ikSecond: bool = False  # Type #Boolean in CIM
-    maxInitialSymShCCurrent: float = 0.0  # Type #CurrentFlow in CIM
-    maxR0ToX0Ratio: float = 0.0  # Type #Float in CIM
-    maxR1ToX1Ratio: float = 0.0  # Type #Float in CIM
-    maxZ0ToZ1Ratio: float = 0.0  # Type #Float in CIM
-    minInitialSymShCCurrent: float = 0.0  # Type #CurrentFlow in CIM
-    minR0ToX0Ratio: float = 0.0  # Type #Float in CIM
-    minR1ToX1Ratio: float = 0.0  # Type #Float in CIM
-    minZ0ToZ1Ratio: float = 0.0  # Type #Float in CIM
-    voltageFactor: float = 0.0  # Type #PU in CIM
-    referencePriority: int = 0  # Type #Integer in CIM
-    p: float = 0.0  # Type #ActivePower in CIM
-    q: float = 0.0  # Type #ReactivePower in CIM
+    governorSCD: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    maxP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExternalNetworkInjection"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    maxQ: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    minP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    minQ: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ikSecond: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    maxInitialSymShCCurrent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    maxR0ToX0Ratio: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    maxR1ToX1Ratio: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    maxZ0ToZ1Ratio: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    minInitialSymShCCurrent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    minR0ToX0Ratio: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    minR1ToX1Ratio: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    minZ0ToZ1Ratio: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    voltageFactor: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    referencePriority: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    p: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    q: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "governorSCD": [
-                Profile.EQ.value,
-            ],
-            "maxP": [
-                Profile.EQ.value,
-            ],
-            "maxQ": [
-                Profile.EQ.value,
-            ],
-            "minP": [
-                Profile.EQ.value,
-            ],
-            "minQ": [
-                Profile.EQ.value,
-            ],
-            "ikSecond": [
-                Profile.SC.value,
-            ],
-            "maxInitialSymShCCurrent": [
-                Profile.SC.value,
-            ],
-            "maxR0ToX0Ratio": [
-                Profile.SC.value,
-            ],
-            "maxR1ToX1Ratio": [
-                Profile.SC.value,
-            ],
-            "maxZ0ToZ1Ratio": [
-                Profile.SC.value,
-            ],
-            "minInitialSymShCCurrent": [
-                Profile.SC.value,
-            ],
-            "minR0ToX0Ratio": [
-                Profile.SC.value,
-            ],
-            "minR1ToX1Ratio": [
-                Profile.SC.value,
-            ],
-            "minZ0ToZ1Ratio": [
-                Profile.SC.value,
-            ],
-            "voltageFactor": [
-                Profile.SC.value,
-            ],
-            "referencePriority": [
-                Profile.SSH.value,
-            ],
-            "p": [
-                Profile.SSH.value,
-            ],
-            "q": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
+            Profile.SSH,
         }

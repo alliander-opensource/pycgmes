@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -19,38 +19,30 @@ class WindAeroOneDimIEC(IdentifiedObject):
     WindTurbineType3IEC: Wind turbine type 3 model with which this wind aerodynamic model is associated.
     """
 
-    ka: float = 0.0  # Type #Float in CIM
-    thetaomega: float = 0.0  # Type #AngleDegrees in CIM
+    ka: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    thetaomega: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
     # *Association not used*
-    # WindTurbineType3IEC : Optional[str] = None  # Type M:1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=WindAeroOneDimIEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType3IEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "ka": [
-                Profile.DY.value,
-            ],
-            "thetaomega": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType3IEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

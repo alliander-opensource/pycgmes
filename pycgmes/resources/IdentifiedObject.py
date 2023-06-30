@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Base import Base
@@ -29,84 +29,85 @@ class IdentifiedObject(Base):
     DiagramObjects: The diagram objects that are associated with the domain object.
     """
 
-    description: str = ""  # Type #String in CIM
-    energyIdentCodeEic: str = ""  # Type #String in CIM
-    mRID: str = ""  # Type #String in CIM
-    name: str = ""  # Type #String in CIM
-    shortName: str = ""  # Type #String in CIM
+    description: str = Field(
+        default="",
+        in_profiles=[
+            Profile.TP,
+            Profile.DL,
+            Profile.EQBD,
+            Profile.EQ,
+            Profile.DY,
+            Profile.OP,
+        ],
+    )
+
+    energyIdentCodeEic: str = Field(
+        default="",
+        in_profiles=[
+            Profile.TP,
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
+
+    mRID: str = Field(
+        default="",
+        in_profiles=[
+            Profile.TP,
+            Profile.GL,
+            Profile.DL,
+            Profile.EQBD,
+            Profile.EQ,
+            Profile.SC,
+            Profile.SV,
+            Profile.SSH,
+            Profile.DY,
+            Profile.OP,
+        ],
+    )
+
+    name: str = Field(
+        default="",
+        in_profiles=[
+            Profile.TP,
+            Profile.GL,
+            Profile.DL,
+            Profile.EQBD,
+            Profile.EQ,
+            Profile.SV,
+            Profile.DY,
+            Profile.OP,
+        ],
+    )
+
+    shortName: str = Field(
+        default="",
+        in_profiles=[
+            Profile.TP,
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
+
     # *Association not used*
-    # DiagramObjects : list = field(default_factory=list)  # Type M:0..n in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=IdentifiedObject"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # DiagramObjects : list = Field(default_factory=list, in_profiles = [Profile.DL, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.TP.value,
-                Profile.GL.value,
-                Profile.DL.value,
-                Profile.EQBD.value,
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SV.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-                Profile.OP.value,
-            ],
-            # Attributes
-            "description": [
-                Profile.TP.value,
-                Profile.DL.value,
-                Profile.EQBD.value,
-                Profile.EQ.value,
-                Profile.DY.value,
-                Profile.OP.value,
-            ],
-            "energyIdentCodeEic": [
-                Profile.TP.value,
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "mRID": [
-                Profile.TP.value,
-                Profile.GL.value,
-                Profile.DL.value,
-                Profile.EQBD.value,
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SV.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-                Profile.OP.value,
-            ],
-            "name": [
-                Profile.TP.value,
-                Profile.GL.value,
-                Profile.DL.value,
-                Profile.EQBD.value,
-                Profile.EQ.value,
-                Profile.SV.value,
-                Profile.DY.value,
-                Profile.OP.value,
-            ],
-            "shortName": [
-                Profile.TP.value,
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "DiagramObjects": [
-                Profile.DL.value,
-            ],
+            Profile.TP,
+            Profile.GL,
+            Profile.DL,
+            Profile.EQBD,
+            Profile.EQ,
+            Profile.SC,
+            Profile.SV,
+            Profile.SSH,
+            Profile.DY,
+            Profile.OP,
         }

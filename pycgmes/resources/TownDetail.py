@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Base import Base
@@ -21,44 +21,47 @@ class TownDetail(Base):
     country: Name of the country.
     """
 
-    code: str = ""  # Type #String in CIM
-    section: str = ""  # Type #String in CIM
-    name: str = ""  # Type #String in CIM
-    stateOrProvince: str = ""  # Type #String in CIM
-    country: str = ""  # Type #String in CIM
+    code: str = Field(
+        default="",
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    section: str = Field(
+        default="",
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
 
-        return "\n".join(
-            ["class=TownDetail"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    name: str = Field(
+        default="",
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
+
+    stateOrProvince: str = Field(
+        default="",
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
+
+    country: str = Field(
+        default="",
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.GL.value,
-            ],
-            # Attributes
-            "code": [
-                Profile.GL.value,
-            ],
-            "section": [
-                Profile.GL.value,
-            ],
-            "name": [
-                Profile.GL.value,
-            ],
-            "stateOrProvince": [
-                Profile.GL.value,
-            ],
-            "country": [
-                Profile.GL.value,
-            ],
+            Profile.GL,
         }

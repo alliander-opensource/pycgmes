@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -23,44 +23,31 @@ class DCTopologicalNode(IdentifiedObject):
     """
 
     # *Association not used*
-    # DCTerminals : list = field(default_factory=list)  # Type M:0..n in CIM
-    DCEquipmentContainer: Optional[str] = None  # Type M:1 in CIM
-    # *Association not used*
-    # DCNodes : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # DCTopologicalIsland : Optional[str] = None  # Type M:0..1 in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # DCTerminals : list = Field(default_factory=list, in_profiles = [Profile.TP, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    DCEquipmentContainer: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.TP,
+        ],
+    )
 
-        return "\n".join(
-            ["class=DCTopologicalNode"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # DCNodes : list = Field(default_factory=list, in_profiles = [Profile.TP, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # DCTopologicalIsland : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.TP.value,
-                Profile.SV.value,
-            ],
-            # Attributes
-            "DCTerminals": [
-                Profile.TP.value,
-            ],
-            "DCEquipmentContainer": [
-                Profile.TP.value,
-            ],
-            "DCNodes": [
-                Profile.TP.value,
-            ],
-            "DCTopologicalIsland": [
-                Profile.SV.value,
-            ],
+            Profile.TP,
+            Profile.SV,
         }

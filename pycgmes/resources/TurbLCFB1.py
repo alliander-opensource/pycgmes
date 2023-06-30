@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineLoadControllerDynamics import TurbineLoadControllerDynamics
@@ -33,72 +33,96 @@ class TurbLCFB1(TurbineLoadControllerDynamics):
     pmwset: Power controller setpoint (Pmwset) (see parameter detail 1).  Unit = MW. Typical value = 0.
     """
 
-    mwbase: float = 0.0  # Type #ActivePower in CIM
-    speedReferenceGovernor: bool = False  # Type #Boolean in CIM
-    db: float = 0.0  # Type #PU in CIM
-    emax: float = 0.0  # Type #PU in CIM
-    fb: float = 0.0  # Type #PU in CIM
-    kp: float = 0.0  # Type #PU in CIM
-    ki: float = 0.0  # Type #PU in CIM
-    fbf: bool = False  # Type #Boolean in CIM
-    pbf: bool = False  # Type #Boolean in CIM
-    tpelec: int = 0  # Type #Seconds in CIM
-    irmax: float = 0.0  # Type #PU in CIM
-    pmwset: float = 0.0  # Type #ActivePower in CIM
+    mwbase: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    speedReferenceGovernor: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=TurbLCFB1"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    db: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    emax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fb: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fbf: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pbf: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpelec: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    irmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmwset: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "mwbase": [
-                Profile.DY.value,
-            ],
-            "speedReferenceGovernor": [
-                Profile.DY.value,
-            ],
-            "db": [
-                Profile.DY.value,
-            ],
-            "emax": [
-                Profile.DY.value,
-            ],
-            "fb": [
-                Profile.DY.value,
-            ],
-            "kp": [
-                Profile.DY.value,
-            ],
-            "ki": [
-                Profile.DY.value,
-            ],
-            "fbf": [
-                Profile.DY.value,
-            ],
-            "pbf": [
-                Profile.DY.value,
-            ],
-            "tpelec": [
-                Profile.DY.value,
-            ],
-            "irmax": [
-                Profile.DY.value,
-            ],
-            "pmwset": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

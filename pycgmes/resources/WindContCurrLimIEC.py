@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -32,63 +32,69 @@ class WindContCurrLimIEC(IdentifiedObject):
     WindDynamicsLookupTable: The wind dynamics lookup table associated with this current control limitation model.
     """
 
-    imax: float = 0.0  # Type #PU in CIM
-    imaxdip: float = 0.0  # Type #PU in CIM
-    kpqu: float = 0.0  # Type #PU in CIM
-    mdfslim: bool = False  # Type #Boolean in CIM
-    mqpri: bool = False  # Type #Boolean in CIM
-    tufiltcl: int = 0  # Type #Seconds in CIM
-    upqumax: float = 0.0  # Type #PU in CIM
-    # *Association not used*
-    # WindTurbineType3or4IEC : Optional[str] = None  # Type M:1 in CIM
-    # *Association not used*
-    # WindDynamicsLookupTable : list = field(default_factory=list)  # Type M:1..n in CIM
+    imax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    imaxdip: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=WindContCurrLimIEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    kpqu: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    mdfslim: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    mqpri: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tufiltcl: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    upqumax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType3or4IEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    # *Association not used*
+    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
+    # WindDynamicsLookupTable : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "imax": [
-                Profile.DY.value,
-            ],
-            "imaxdip": [
-                Profile.DY.value,
-            ],
-            "kpqu": [
-                Profile.DY.value,
-            ],
-            "mdfslim": [
-                Profile.DY.value,
-            ],
-            "mqpri": [
-                Profile.DY.value,
-            ],
-            "tufiltcl": [
-                Profile.DY.value,
-            ],
-            "upqumax": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType3or4IEC": [
-                Profile.DY.value,
-            ],
-            "WindDynamicsLookupTable": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

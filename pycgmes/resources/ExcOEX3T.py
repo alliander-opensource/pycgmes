@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -35,100 +35,145 @@ class ExcOEX3T(ExcitationSystemDynamics):
     see2: Saturation parameter (SE[E2]).
     """
 
-    t1: int = 0  # Type #Seconds in CIM
-    t2: int = 0  # Type #Seconds in CIM
-    t3: int = 0  # Type #Seconds in CIM
-    t4: int = 0  # Type #Seconds in CIM
-    ka: float = 0.0  # Type #PU in CIM
-    t5: int = 0  # Type #Seconds in CIM
-    t6: int = 0  # Type #Seconds in CIM
-    vrmax: float = 0.0  # Type #PU in CIM
-    vrmin: float = 0.0  # Type #PU in CIM
-    te: int = 0  # Type #Seconds in CIM
-    kf: float = 0.0  # Type #PU in CIM
-    tf: int = 0  # Type #Seconds in CIM
-    kc: float = 0.0  # Type #PU in CIM
-    kd: float = 0.0  # Type #PU in CIM
-    ke: float = 0.0  # Type #PU in CIM
-    e1: float = 0.0  # Type #PU in CIM
-    see1: float = 0.0  # Type #PU in CIM
-    e2: float = 0.0  # Type #PU in CIM
-    see2: float = 0.0  # Type #PU in CIM
+    t1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    t2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcOEX3T"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    t3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ka: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t5: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t6: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    te: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ke: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    e1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    see1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    e2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    see2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "t1": [
-                Profile.DY.value,
-            ],
-            "t2": [
-                Profile.DY.value,
-            ],
-            "t3": [
-                Profile.DY.value,
-            ],
-            "t4": [
-                Profile.DY.value,
-            ],
-            "ka": [
-                Profile.DY.value,
-            ],
-            "t5": [
-                Profile.DY.value,
-            ],
-            "t6": [
-                Profile.DY.value,
-            ],
-            "vrmax": [
-                Profile.DY.value,
-            ],
-            "vrmin": [
-                Profile.DY.value,
-            ],
-            "te": [
-                Profile.DY.value,
-            ],
-            "kf": [
-                Profile.DY.value,
-            ],
-            "tf": [
-                Profile.DY.value,
-            ],
-            "kc": [
-                Profile.DY.value,
-            ],
-            "kd": [
-                Profile.DY.value,
-            ],
-            "ke": [
-                Profile.DY.value,
-            ],
-            "e1": [
-                Profile.DY.value,
-            ],
-            "see1": [
-                Profile.DY.value,
-            ],
-            "e2": [
-                Profile.DY.value,
-            ],
-            "see2": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

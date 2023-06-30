@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PFVArControllerType1Dynamics import PFVArControllerType1Dynamics
@@ -26,57 +26,68 @@ class PFVArType1IEEEPFController(PFVArControllerType1Dynamics):
       PFVArType1IEEEPFController.vvtmax).
     """
 
-    ovex: bool = False  # Type #Boolean in CIM
-    tpfc: int = 0  # Type #Seconds in CIM
-    vitmin: float = 0.0  # Type #PU in CIM
-    vpf: float = 0.0  # Type #PU in CIM
-    vpfcbw: float = 0.0  # Type #Float in CIM
-    vpfref: float = 0.0  # Type #PU in CIM
-    vvtmax: float = 0.0  # Type #PU in CIM
-    vvtmin: float = 0.0  # Type #PU in CIM
+    ovex: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tpfc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PFVArType1IEEEPFController"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    vitmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vpf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vpfcbw: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vpfref: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vvtmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vvtmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "ovex": [
-                Profile.DY.value,
-            ],
-            "tpfc": [
-                Profile.DY.value,
-            ],
-            "vitmin": [
-                Profile.DY.value,
-            ],
-            "vpf": [
-                Profile.DY.value,
-            ],
-            "vpfcbw": [
-                Profile.DY.value,
-            ],
-            "vpfref": [
-                Profile.DY.value,
-            ],
-            "vvtmax": [
-                Profile.DY.value,
-            ],
-            "vvtmin": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

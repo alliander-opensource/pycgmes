@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Base import Base
@@ -26,50 +26,55 @@ class NonlinearShuntCompensatorPoint(Base):
     g0: Zero sequence shunt (charging) conductance per section.
     """
 
-    NonlinearShuntCompensator: Optional[str] = None  # Type M:1 in CIM
-    b: float = 0.0  # Type #Susceptance in CIM
-    g: float = 0.0  # Type #Conductance in CIM
-    sectionNumber: int = 0  # Type #Integer in CIM
-    b0: float = 0.0  # Type #Susceptance in CIM
-    g0: float = 0.0  # Type #Conductance in CIM
+    NonlinearShuntCompensator: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    b: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=NonlinearShuntCompensatorPoint"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    g: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    sectionNumber: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    b0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    g0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-            ],
-            # Attributes
-            "NonlinearShuntCompensator": [
-                Profile.EQ.value,
-            ],
-            "b": [
-                Profile.EQ.value,
-            ],
-            "g": [
-                Profile.EQ.value,
-            ],
-            "sectionNumber": [
-                Profile.EQ.value,
-            ],
-            "b0": [
-                Profile.SC.value,
-            ],
-            "g0": [
-                Profile.SC.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
         }

@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemResource import PowerSystemResource
@@ -42,51 +42,49 @@ class ControlArea(PowerSystemResource):
     pTolerance: Active power net interchange tolerance. The attribute shall be a positive value or zero.
     """
 
-    type: Optional[str] = None  # Type M:1..1 in CIM
-    # *Association not used*
-    # TieFlow : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # ControlAreaGeneratingUnit : list = field(default_factory=list)  # Type M:0..n in CIM
-    EnergyArea: Optional[str] = None  # Type M:1 in CIM
-    netInterchange: float = 0.0  # Type #ActivePower in CIM
-    pTolerance: float = 0.0  # Type #ActivePower in CIM
+    type: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # TieFlow : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
-        return "\n".join(
-            ["class=ControlArea"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # ControlAreaGeneratingUnit : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    EnergyArea: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    netInterchange: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    pTolerance: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "type": [
-                Profile.EQ.value,
-            ],
-            "TieFlow": [
-                Profile.EQ.value,
-            ],
-            "ControlAreaGeneratingUnit": [
-                Profile.EQ.value,
-            ],
-            "EnergyArea": [
-                Profile.EQ.value,
-            ],
-            "netInterchange": [
-                Profile.SSH.value,
-            ],
-            "pTolerance": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SSH,
         }

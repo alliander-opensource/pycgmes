@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import field, fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -24,33 +24,26 @@ class VisibilityLayer(IdentifiedObject):
       it are rendered.
     """
 
-    VisibleObjects: list = field(default_factory=list)  # Type M:1..n in CIM
-    drawingOrder: int = 0  # Type #Integer in CIM
+    VisibleObjects: list = Field(
+        default_factory=list,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=VisibilityLayer"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    drawingOrder: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DL.value,
-            ],
-            # Attributes
-            "VisibleObjects": [
-                Profile.DL.value,
-            ],
-            "drawingOrder": [
-                Profile.DL.value,
-            ],
+            Profile.DL,
         }

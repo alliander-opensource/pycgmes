@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -32,77 +32,103 @@ class WindDynamicsLookupTable(IdentifiedObject):
     WindPitchContPowerIEC: The pitch control power model with which this wind dynamics lookup table is associated.
     """
 
-    WindContCurrLimIEC: Optional[str] = None  # Type M:0..1 in CIM
-    WindContPType3IEC: Optional[str] = None  # Type M:0..1 in CIM
-    WindContQPQULimIEC: Optional[str] = None  # Type M:0..1 in CIM
-    WindContRotorRIEC: Optional[str] = None  # Type M:0..1 in CIM
-    input: float = 0.0  # Type #Float in CIM
-    lookupTableFunctionType: Optional[str] = None  # Type M:1..1 in CIM
-    output: float = 0.0  # Type #Float in CIM
-    sequence: int = 0  # Type #Integer in CIM
-    WindPlantFreqPcontrolIEC: Optional[str] = None  # Type M:0..1 in CIM
-    WindProtectionIEC: Optional[str] = None  # Type M:0..1 in CIM
-    WindPlantReactiveControlIEC: Optional[str] = None  # Type M:0..1 in CIM
-    WindGenType3bIEC: Optional[str] = None  # Type M:0..1 in CIM
-    WindPitchContPowerIEC: Optional[str] = None  # Type M:0..1 in CIM
+    WindContCurrLimIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    WindContPType3IEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=WindDynamicsLookupTable"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    WindContQPQULimIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindContRotorRIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    input: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    lookupTableFunctionType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    output: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    sequence: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindPlantFreqPcontrolIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindProtectionIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindPlantReactiveControlIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindGenType3bIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindPitchContPowerIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "WindContCurrLimIEC": [
-                Profile.DY.value,
-            ],
-            "WindContPType3IEC": [
-                Profile.DY.value,
-            ],
-            "WindContQPQULimIEC": [
-                Profile.DY.value,
-            ],
-            "WindContRotorRIEC": [
-                Profile.DY.value,
-            ],
-            "input": [
-                Profile.DY.value,
-            ],
-            "lookupTableFunctionType": [
-                Profile.DY.value,
-            ],
-            "output": [
-                Profile.DY.value,
-            ],
-            "sequence": [
-                Profile.DY.value,
-            ],
-            "WindPlantFreqPcontrolIEC": [
-                Profile.DY.value,
-            ],
-            "WindProtectionIEC": [
-                Profile.DY.value,
-            ],
-            "WindPlantReactiveControlIEC": [
-                Profile.DY.value,
-            ],
-            "WindGenType3bIEC": [
-                Profile.DY.value,
-            ],
-            "WindPitchContPowerIEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

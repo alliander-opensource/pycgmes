@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .WindTurbineType3or4Dynamics import WindTurbineType3or4Dynamics
@@ -23,49 +23,54 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
     WindRefFrameRotIEC: Reference frame rotation model associated with this wind turbine type 3 or type 4 model.
     """
 
-    WindContCurrLimIEC: Optional[str] = None  # Type M:1 in CIM
-    WIndContQIEC: Optional[str] = None  # Type M:1 in CIM
-    WindContQLimIEC: Optional[str] = None  # Type M:0..1 in CIM
-    WindContQPQULimIEC: Optional[str] = None  # Type M:0..1 in CIM
-    WindProtectionIEC: Optional[str] = None  # Type M:1 in CIM
-    WindRefFrameRotIEC: Optional[str] = None  # Type M:1 in CIM
+    WindContCurrLimIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    WIndContQIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=WindTurbineType3or4IEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    WindContQLimIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindContQPQULimIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindProtectionIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    WindRefFrameRotIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "WindContCurrLimIEC": [
-                Profile.DY.value,
-            ],
-            "WIndContQIEC": [
-                Profile.DY.value,
-            ],
-            "WindContQLimIEC": [
-                Profile.DY.value,
-            ],
-            "WindContQPQULimIEC": [
-                Profile.DY.value,
-            ],
-            "WindProtectionIEC": [
-                Profile.DY.value,
-            ],
-            "WindRefFrameRotIEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

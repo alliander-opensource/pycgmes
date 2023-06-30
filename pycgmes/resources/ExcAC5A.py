@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -36,96 +36,138 @@ class ExcAC5A(ExcitationSystemDynamics):
     a: Coefficient to allow different usage of the model (a).  Typical value = 1.
     """
 
-    ka: float = 0.0  # Type #PU in CIM
-    ks: float = 0.0  # Type #PU in CIM
-    tb: int = 0  # Type #Seconds in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    ta: int = 0  # Type #Seconds in CIM
-    vrmax: float = 0.0  # Type #PU in CIM
-    vrmin: float = 0.0  # Type #PU in CIM
-    ke: float = 0.0  # Type #PU in CIM
-    te: int = 0  # Type #Seconds in CIM
-    kf: float = 0.0  # Type #PU in CIM
-    tf1: int = 0  # Type #Seconds in CIM
-    tf2: int = 0  # Type #Seconds in CIM
-    tf3: int = 0  # Type #Seconds in CIM
-    efd1: float = 0.0  # Type #PU in CIM
-    seefd1: float = 0.0  # Type #Float in CIM
-    efd2: float = 0.0  # Type #PU in CIM
-    seefd2: float = 0.0  # Type #Float in CIM
-    a: float = 0.0  # Type #Float in CIM
+    ka: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    ks: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcAC5A"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    tb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ta: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ke: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    te: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tf3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    efd1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    seefd1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    efd2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    seefd2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "ka": [
-                Profile.DY.value,
-            ],
-            "ks": [
-                Profile.DY.value,
-            ],
-            "tb": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "ta": [
-                Profile.DY.value,
-            ],
-            "vrmax": [
-                Profile.DY.value,
-            ],
-            "vrmin": [
-                Profile.DY.value,
-            ],
-            "ke": [
-                Profile.DY.value,
-            ],
-            "te": [
-                Profile.DY.value,
-            ],
-            "kf": [
-                Profile.DY.value,
-            ],
-            "tf1": [
-                Profile.DY.value,
-            ],
-            "tf2": [
-                Profile.DY.value,
-            ],
-            "tf3": [
-                Profile.DY.value,
-            ],
-            "efd1": [
-                Profile.DY.value,
-            ],
-            "seefd1": [
-                Profile.DY.value,
-            ],
-            "efd2": [
-                Profile.DY.value,
-            ],
-            "seefd2": [
-                Profile.DY.value,
-            ],
-            "a": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

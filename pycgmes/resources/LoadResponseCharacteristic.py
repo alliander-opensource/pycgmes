@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -48,73 +48,92 @@ class LoadResponseCharacteristic(IdentifiedObject):
     """
 
     # *Association not used*
-    # EnergyConsumer : list = field(default_factory=list)  # Type M:0..n in CIM
-    exponentModel: bool = False  # Type #Boolean in CIM
-    pConstantCurrent: float = 0.0  # Type #Float in CIM
-    pConstantImpedance: float = 0.0  # Type #Float in CIM
-    pConstantPower: float = 0.0  # Type #Float in CIM
-    pFrequencyExponent: float = 0.0  # Type #Float in CIM
-    pVoltageExponent: float = 0.0  # Type #Float in CIM
-    qConstantCurrent: float = 0.0  # Type #Float in CIM
-    qConstantImpedance: float = 0.0  # Type #Float in CIM
-    qConstantPower: float = 0.0  # Type #Float in CIM
-    qFrequencyExponent: float = 0.0  # Type #Float in CIM
-    qVoltageExponent: float = 0.0  # Type #Float in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # EnergyConsumer : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    exponentModel: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=LoadResponseCharacteristic"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    pConstantCurrent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    pConstantImpedance: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    pConstantPower: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    pFrequencyExponent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    pVoltageExponent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    qConstantCurrent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    qConstantImpedance: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    qConstantPower: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    qFrequencyExponent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    qVoltageExponent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-            ],
-            # Attributes
-            "EnergyConsumer": [
-                Profile.EQ.value,
-            ],
-            "exponentModel": [
-                Profile.EQ.value,
-            ],
-            "pConstantCurrent": [
-                Profile.EQ.value,
-            ],
-            "pConstantImpedance": [
-                Profile.EQ.value,
-            ],
-            "pConstantPower": [
-                Profile.EQ.value,
-            ],
-            "pFrequencyExponent": [
-                Profile.EQ.value,
-            ],
-            "pVoltageExponent": [
-                Profile.EQ.value,
-            ],
-            "qConstantCurrent": [
-                Profile.EQ.value,
-            ],
-            "qConstantImpedance": [
-                Profile.EQ.value,
-            ],
-            "qConstantPower": [
-                Profile.EQ.value,
-            ],
-            "qFrequencyExponent": [
-                Profile.EQ.value,
-            ],
-            "qVoltageExponent": [
-                Profile.EQ.value,
-            ],
+            Profile.EQ,
         }

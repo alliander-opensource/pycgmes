@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -44,48 +44,54 @@ class Measurement(IdentifiedObject):
     PowerSystemResource: The power system resource that contains the measurement.
     """
 
-    Terminal: Optional[str] = None  # Type M:0..1 in CIM
-    measurementType: str = ""  # Type #String in CIM
-    phases: Optional[str] = None  # Type M:0..1 in CIM
-    unitMultiplier: Optional[str] = None  # Type M:1..1 in CIM
-    unitSymbol: Optional[str] = None  # Type M:1..1 in CIM
-    PowerSystemResource: Optional[str] = None  # Type M:1..1 in CIM
+    Terminal: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    measurementType: str = Field(
+        default="",
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
 
-        return "\n".join(
-            ["class=Measurement"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    phases: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
+
+    unitMultiplier: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
+
+    unitSymbol: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
+
+    PowerSystemResource: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.OP.value,
-            ],
-            # Attributes
-            "Terminal": [
-                Profile.OP.value,
-            ],
-            "measurementType": [
-                Profile.OP.value,
-            ],
-            "phases": [
-                Profile.OP.value,
-            ],
-            "unitMultiplier": [
-                Profile.OP.value,
-            ],
-            "unitSymbol": [
-                Profile.OP.value,
-            ],
-            "PowerSystemResource": [
-                Profile.OP.value,
-            ],
+            Profile.OP,
         }

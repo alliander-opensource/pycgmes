@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PFVArControllerType2Dynamics import PFVArControllerType2Dynamics
@@ -27,53 +27,61 @@ class PFVArType2IEEEPFController(PFVArControllerType2Dynamics):
       action is disabled to allow the limiter to play its role).
     """
 
-    pfref: float = 0.0  # Type #PU in CIM
-    vref: float = 0.0  # Type #PU in CIM
-    vclmt: float = 0.0  # Type #PU in CIM
-    kp: float = 0.0  # Type #PU in CIM
-    ki: float = 0.0  # Type #PU in CIM
-    vs: float = 0.0  # Type #Float in CIM
-    exlon: bool = False  # Type #Boolean in CIM
+    pfref: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    vref: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PFVArType2IEEEPFController"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    vclmt: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vs: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    exlon: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "pfref": [
-                Profile.DY.value,
-            ],
-            "vref": [
-                Profile.DY.value,
-            ],
-            "vclmt": [
-                Profile.DY.value,
-            ],
-            "kp": [
-                Profile.DY.value,
-            ],
-            "ki": [
-                Profile.DY.value,
-            ],
-            "vs": [
-                Profile.DY.value,
-            ],
-            "exlon": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
@@ -102,228 +102,369 @@ class GovHydroWEH(TurbineGovernorDynamics):
       mechanical power on machine MVA rating as a function of turbine flow.
     """
 
-    mwbase: float = 0.0  # Type #ActivePower in CIM
-    rpg: float = 0.0  # Type #Float in CIM
-    rpp: float = 0.0  # Type #Float in CIM
-    tpe: int = 0  # Type #Seconds in CIM
-    kp: float = 0.0  # Type #PU in CIM
-    ki: float = 0.0  # Type #PU in CIM
-    kd: float = 0.0  # Type #PU in CIM
-    td: int = 0  # Type #Seconds in CIM
-    tp: int = 0  # Type #Seconds in CIM
-    tdv: int = 0  # Type #Seconds in CIM
-    tg: int = 0  # Type #Seconds in CIM
-    gtmxop: float = 0.0  # Type #PU in CIM
-    gtmxcl: float = 0.0  # Type #PU in CIM
-    gmax: float = 0.0  # Type #PU in CIM
-    gmin: float = 0.0  # Type #PU in CIM
-    dturb: float = 0.0  # Type #PU in CIM
-    tw: int = 0  # Type #Seconds in CIM
-    db: float = 0.0  # Type #PU in CIM
-    dpv: float = 0.0  # Type #PU in CIM
-    dicn: float = 0.0  # Type #PU in CIM
-    feedbackSignal: bool = False  # Type #Boolean in CIM
-    gv1: float = 0.0  # Type #PU in CIM
-    gv2: float = 0.0  # Type #PU in CIM
-    gv3: float = 0.0  # Type #PU in CIM
-    gv4: float = 0.0  # Type #PU in CIM
-    gv5: float = 0.0  # Type #PU in CIM
-    fl1: float = 0.0  # Type #PU in CIM
-    fl2: float = 0.0  # Type #PU in CIM
-    fl3: float = 0.0  # Type #PU in CIM
-    fl4: float = 0.0  # Type #PU in CIM
-    fl5: float = 0.0  # Type #PU in CIM
-    fp1: float = 0.0  # Type #PU in CIM
-    fp2: float = 0.0  # Type #PU in CIM
-    fp3: float = 0.0  # Type #PU in CIM
-    fp4: float = 0.0  # Type #PU in CIM
-    fp5: float = 0.0  # Type #PU in CIM
-    fp6: float = 0.0  # Type #PU in CIM
-    fp7: float = 0.0  # Type #PU in CIM
-    fp8: float = 0.0  # Type #PU in CIM
-    fp9: float = 0.0  # Type #PU in CIM
-    fp10: float = 0.0  # Type #PU in CIM
-    pmss1: float = 0.0  # Type #PU in CIM
-    pmss2: float = 0.0  # Type #PU in CIM
-    pmss3: float = 0.0  # Type #PU in CIM
-    pmss4: float = 0.0  # Type #PU in CIM
-    pmss5: float = 0.0  # Type #PU in CIM
-    pmss6: float = 0.0  # Type #PU in CIM
-    pmss7: float = 0.0  # Type #PU in CIM
-    pmss8: float = 0.0  # Type #PU in CIM
-    pmss9: float = 0.0  # Type #PU in CIM
-    pmss10: float = 0.0  # Type #PU in CIM
+    mwbase: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    rpg: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovHydroWEH"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    rpp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpe: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    td: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tp: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tdv: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tg: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gtmxop: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gtmxcl: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dturb: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    db: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dpv: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dicn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    feedbackSignal: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gv1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gv2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gv3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gv4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    gv5: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fl1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fl2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fl3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fl4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fl5: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fp1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fp2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fp3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fp4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fp5: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fp6: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fp7: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fp8: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fp9: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    fp10: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmss1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmss2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmss3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmss4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmss5: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmss6: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmss7: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmss8: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmss9: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmss10: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "mwbase": [
-                Profile.DY.value,
-            ],
-            "rpg": [
-                Profile.DY.value,
-            ],
-            "rpp": [
-                Profile.DY.value,
-            ],
-            "tpe": [
-                Profile.DY.value,
-            ],
-            "kp": [
-                Profile.DY.value,
-            ],
-            "ki": [
-                Profile.DY.value,
-            ],
-            "kd": [
-                Profile.DY.value,
-            ],
-            "td": [
-                Profile.DY.value,
-            ],
-            "tp": [
-                Profile.DY.value,
-            ],
-            "tdv": [
-                Profile.DY.value,
-            ],
-            "tg": [
-                Profile.DY.value,
-            ],
-            "gtmxop": [
-                Profile.DY.value,
-            ],
-            "gtmxcl": [
-                Profile.DY.value,
-            ],
-            "gmax": [
-                Profile.DY.value,
-            ],
-            "gmin": [
-                Profile.DY.value,
-            ],
-            "dturb": [
-                Profile.DY.value,
-            ],
-            "tw": [
-                Profile.DY.value,
-            ],
-            "db": [
-                Profile.DY.value,
-            ],
-            "dpv": [
-                Profile.DY.value,
-            ],
-            "dicn": [
-                Profile.DY.value,
-            ],
-            "feedbackSignal": [
-                Profile.DY.value,
-            ],
-            "gv1": [
-                Profile.DY.value,
-            ],
-            "gv2": [
-                Profile.DY.value,
-            ],
-            "gv3": [
-                Profile.DY.value,
-            ],
-            "gv4": [
-                Profile.DY.value,
-            ],
-            "gv5": [
-                Profile.DY.value,
-            ],
-            "fl1": [
-                Profile.DY.value,
-            ],
-            "fl2": [
-                Profile.DY.value,
-            ],
-            "fl3": [
-                Profile.DY.value,
-            ],
-            "fl4": [
-                Profile.DY.value,
-            ],
-            "fl5": [
-                Profile.DY.value,
-            ],
-            "fp1": [
-                Profile.DY.value,
-            ],
-            "fp2": [
-                Profile.DY.value,
-            ],
-            "fp3": [
-                Profile.DY.value,
-            ],
-            "fp4": [
-                Profile.DY.value,
-            ],
-            "fp5": [
-                Profile.DY.value,
-            ],
-            "fp6": [
-                Profile.DY.value,
-            ],
-            "fp7": [
-                Profile.DY.value,
-            ],
-            "fp8": [
-                Profile.DY.value,
-            ],
-            "fp9": [
-                Profile.DY.value,
-            ],
-            "fp10": [
-                Profile.DY.value,
-            ],
-            "pmss1": [
-                Profile.DY.value,
-            ],
-            "pmss2": [
-                Profile.DY.value,
-            ],
-            "pmss3": [
-                Profile.DY.value,
-            ],
-            "pmss4": [
-                Profile.DY.value,
-            ],
-            "pmss5": [
-                Profile.DY.value,
-            ],
-            "pmss6": [
-                Profile.DY.value,
-            ],
-            "pmss7": [
-                Profile.DY.value,
-            ],
-            "pmss8": [
-                Profile.DY.value,
-            ],
-            "pmss9": [
-                Profile.DY.value,
-            ],
-            "pmss10": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

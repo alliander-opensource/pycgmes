@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -23,41 +23,37 @@ class Location(IdentifiedObject):
       `Location.CoordinateSystem`.
     """
 
-    CoordinateSystem: Optional[str] = None  # Type M:1 in CIM
-    mainAddress: float = 0.0  # Type #StreetAddress in CIM
-    PowerSystemResources: Optional[str] = None  # Type M:1 in CIM
+    CoordinateSystem: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
+
+    mainAddress: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
+
+    PowerSystemResources: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.GL,
+        ],
+    )
+
     # *Association not used*
-    # PositionPoints : list = field(default_factory=list)  # Type M:0..n in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=Location"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # PositionPoints : list = Field(default_factory=list, in_profiles = [Profile.GL, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.GL.value,
-            ],
-            # Attributes
-            "CoordinateSystem": [
-                Profile.GL.value,
-            ],
-            "mainAddress": [
-                Profile.GL.value,
-            ],
-            "PowerSystemResources": [
-                Profile.GL.value,
-            ],
-            "PositionPoints": [
-                Profile.GL.value,
-            ],
+            Profile.GL,
         }

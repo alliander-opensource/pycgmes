@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Equipment import Equipment
@@ -24,45 +24,31 @@ class ConductingEquipment(Equipment):
     """
 
     # *Association not used*
-    # Terminals : list = field(default_factory=list)  # Type M:0..n in CIM
-    BaseVoltage: Optional[str] = None  # Type M:0..1 in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # Terminals : list = Field(default_factory=list, in_profiles = [Profile.EQBD, Profile.EQ, Profile.DY, ]) # noqa: E501
+
+    BaseVoltage: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
     # *Association not used*
-    # SvStatus : Optional[str] = None  # Type M:0..1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=ConductingEquipment"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # SvStatus : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SV.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-            ],
-            # Attributes
-            "Terminals": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-                Profile.DY.value,
-            ],
-            "BaseVoltage": [
-                Profile.EQ.value,
-            ],
-            "SvStatus": [
-                Profile.SV.value,
-            ],
+            Profile.EQBD,
+            Profile.EQ,
+            Profile.SC,
+            Profile.SV,
+            Profile.SSH,
+            Profile.DY,
         }

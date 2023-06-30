@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -29,70 +29,86 @@ class WindContPitchAngleIEC(IdentifiedObject):
     WindTurbineType3IEC: Wind turbine type 3 model with which this pitch control model is associated.
     """
 
-    dthetamax: float = 0.0  # Type #Float in CIM
-    dthetamin: float = 0.0  # Type #Float in CIM
-    kic: float = 0.0  # Type #PU in CIM
-    kiomega: float = 0.0  # Type #PU in CIM
-    kpc: float = 0.0  # Type #PU in CIM
-    kpomega: float = 0.0  # Type #PU in CIM
-    kpx: float = 0.0  # Type #PU in CIM
-    thetamax: float = 0.0  # Type #AngleDegrees in CIM
-    thetamin: float = 0.0  # Type #AngleDegrees in CIM
-    ttheta: int = 0  # Type #Seconds in CIM
+    dthetamax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dthetamin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kic: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kiomega: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpomega: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    thetamax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    thetamin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ttheta: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
     # *Association not used*
-    # WindTurbineType3IEC : Optional[str] = None  # Type M:1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=WindContPitchAngleIEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType3IEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "dthetamax": [
-                Profile.DY.value,
-            ],
-            "dthetamin": [
-                Profile.DY.value,
-            ],
-            "kic": [
-                Profile.DY.value,
-            ],
-            "kiomega": [
-                Profile.DY.value,
-            ],
-            "kpc": [
-                Profile.DY.value,
-            ],
-            "kpomega": [
-                Profile.DY.value,
-            ],
-            "kpx": [
-                Profile.DY.value,
-            ],
-            "thetamax": [
-                Profile.DY.value,
-            ],
-            "thetamin": [
-                Profile.DY.value,
-            ],
-            "ttheta": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType3IEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

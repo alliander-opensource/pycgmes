@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
@@ -60,185 +60,292 @@ class UnderexcLimIEEE2(UnderexcitationLimiterDynamics):
       = 2.
     """
 
-    tuv: int = 0  # Type #Seconds in CIM
-    tup: int = 0  # Type #Seconds in CIM
-    tuq: int = 0  # Type #Seconds in CIM
-    kui: float = 0.0  # Type #PU in CIM
-    kul: float = 0.0  # Type #PU in CIM
-    vuimax: float = 0.0  # Type #PU in CIM
-    vuimin: float = 0.0  # Type #PU in CIM
-    kuf: float = 0.0  # Type #PU in CIM
-    kfb: float = 0.0  # Type #PU in CIM
-    tul: int = 0  # Type #Seconds in CIM
-    tu1: int = 0  # Type #Seconds in CIM
-    tu2: int = 0  # Type #Seconds in CIM
-    tu3: int = 0  # Type #Seconds in CIM
-    tu4: int = 0  # Type #Seconds in CIM
-    vulmax: float = 0.0  # Type #PU in CIM
-    vulmin: float = 0.0  # Type #PU in CIM
-    p0: float = 0.0  # Type #PU in CIM
-    q0: float = 0.0  # Type #PU in CIM
-    p1: float = 0.0  # Type #PU in CIM
-    q1: float = 0.0  # Type #PU in CIM
-    p2: float = 0.0  # Type #PU in CIM
-    q2: float = 0.0  # Type #PU in CIM
-    p3: float = 0.0  # Type #PU in CIM
-    q3: float = 0.0  # Type #PU in CIM
-    p4: float = 0.0  # Type #PU in CIM
-    q4: float = 0.0  # Type #PU in CIM
-    p5: float = 0.0  # Type #PU in CIM
-    q5: float = 0.0  # Type #PU in CIM
-    p6: float = 0.0  # Type #PU in CIM
-    q6: float = 0.0  # Type #PU in CIM
-    p7: float = 0.0  # Type #PU in CIM
-    q7: float = 0.0  # Type #PU in CIM
-    p8: float = 0.0  # Type #PU in CIM
-    q8: float = 0.0  # Type #PU in CIM
-    p9: float = 0.0  # Type #PU in CIM
-    q9: float = 0.0  # Type #PU in CIM
-    p10: float = 0.0  # Type #PU in CIM
-    q10: float = 0.0  # Type #PU in CIM
-    k1: float = 0.0  # Type #Float in CIM
-    k2: float = 0.0  # Type #Float in CIM
+    tuv: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tup: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=UnderexcLimIEEE2"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    tuq: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kui: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kul: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vuimax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vuimin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kuf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kfb: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tul: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tu1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tu2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tu3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tu4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vulmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vulmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p5: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q5: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p6: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q6: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p7: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q7: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p8: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q8: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p9: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q9: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    p10: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    q10: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "tuv": [
-                Profile.DY.value,
-            ],
-            "tup": [
-                Profile.DY.value,
-            ],
-            "tuq": [
-                Profile.DY.value,
-            ],
-            "kui": [
-                Profile.DY.value,
-            ],
-            "kul": [
-                Profile.DY.value,
-            ],
-            "vuimax": [
-                Profile.DY.value,
-            ],
-            "vuimin": [
-                Profile.DY.value,
-            ],
-            "kuf": [
-                Profile.DY.value,
-            ],
-            "kfb": [
-                Profile.DY.value,
-            ],
-            "tul": [
-                Profile.DY.value,
-            ],
-            "tu1": [
-                Profile.DY.value,
-            ],
-            "tu2": [
-                Profile.DY.value,
-            ],
-            "tu3": [
-                Profile.DY.value,
-            ],
-            "tu4": [
-                Profile.DY.value,
-            ],
-            "vulmax": [
-                Profile.DY.value,
-            ],
-            "vulmin": [
-                Profile.DY.value,
-            ],
-            "p0": [
-                Profile.DY.value,
-            ],
-            "q0": [
-                Profile.DY.value,
-            ],
-            "p1": [
-                Profile.DY.value,
-            ],
-            "q1": [
-                Profile.DY.value,
-            ],
-            "p2": [
-                Profile.DY.value,
-            ],
-            "q2": [
-                Profile.DY.value,
-            ],
-            "p3": [
-                Profile.DY.value,
-            ],
-            "q3": [
-                Profile.DY.value,
-            ],
-            "p4": [
-                Profile.DY.value,
-            ],
-            "q4": [
-                Profile.DY.value,
-            ],
-            "p5": [
-                Profile.DY.value,
-            ],
-            "q5": [
-                Profile.DY.value,
-            ],
-            "p6": [
-                Profile.DY.value,
-            ],
-            "q6": [
-                Profile.DY.value,
-            ],
-            "p7": [
-                Profile.DY.value,
-            ],
-            "q7": [
-                Profile.DY.value,
-            ],
-            "p8": [
-                Profile.DY.value,
-            ],
-            "q8": [
-                Profile.DY.value,
-            ],
-            "p9": [
-                Profile.DY.value,
-            ],
-            "q9": [
-                Profile.DY.value,
-            ],
-            "p10": [
-                Profile.DY.value,
-            ],
-            "q10": [
-                Profile.DY.value,
-            ],
-            "k1": [
-                Profile.DY.value,
-            ],
-            "k2": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

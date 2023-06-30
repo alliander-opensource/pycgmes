@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -48,66 +48,76 @@ class DiagramObject(IdentifiedObject):
       originating system.
     """
 
-    Diagram: Optional[str] = None  # Type M:1 in CIM
-    drawingOrder: int = 0  # Type #Integer in CIM
-    isPolygon: bool = False  # Type #Boolean in CIM
-    offsetX: float = 0.0  # Type #Float in CIM
-    offsetY: float = 0.0  # Type #Float in CIM
-    rotation: float = 0.0  # Type #AngleDegrees in CIM
-    IdentifiedObject: Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # DiagramObjectPoints : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # VisibilityLayers : list = field(default_factory=list)  # Type M:0..n in CIM
-    DiagramObjectStyle: Optional[str] = None  # Type M:0..1 in CIM
+    Diagram: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    drawingOrder: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
 
-        return "\n".join(
-            ["class=DiagramObject"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    isPolygon: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    offsetX: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    offsetY: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    rotation: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    IdentifiedObject: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # DiagramObjectPoints : list = Field(default_factory=list, in_profiles = [Profile.DL, ])
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # VisibilityLayers : list = Field(default_factory=list, in_profiles = [Profile.DL, ])
+
+    DiagramObjectStyle: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DL,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DL.value,
-            ],
-            # Attributes
-            "Diagram": [
-                Profile.DL.value,
-            ],
-            "drawingOrder": [
-                Profile.DL.value,
-            ],
-            "isPolygon": [
-                Profile.DL.value,
-            ],
-            "offsetX": [
-                Profile.DL.value,
-            ],
-            "offsetY": [
-                Profile.DL.value,
-            ],
-            "rotation": [
-                Profile.DL.value,
-            ],
-            "IdentifiedObject": [
-                Profile.DL.value,
-            ],
-            "DiagramObjectPoints": [
-                Profile.DL.value,
-            ],
-            "VisibilityLayers": [
-                Profile.DL.value,
-            ],
-            "DiagramObjectStyle": [
-                Profile.DL.value,
-            ],
+            Profile.DL,
         }

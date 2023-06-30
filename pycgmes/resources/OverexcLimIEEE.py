@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .OverexcitationLimiterDynamics import OverexcitationLimiterDynamics
@@ -26,48 +26,54 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics):
     kramp: OEL ramped limit rate (KRAMP).  Unit = PU / s.  Typical value = 10.
     """
 
-    itfpu: float = 0.0  # Type #PU in CIM
-    ifdmax: float = 0.0  # Type #PU in CIM
-    ifdlim: float = 0.0  # Type #PU in CIM
-    hyst: float = 0.0  # Type #PU in CIM
-    kcd: float = 0.0  # Type #PU in CIM
-    kramp: float = 0.0  # Type #Float in CIM
+    itfpu: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    ifdmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=OverexcLimIEEE"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ifdlim: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    hyst: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kcd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kramp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "itfpu": [
-                Profile.DY.value,
-            ],
-            "ifdmax": [
-                Profile.DY.value,
-            ],
-            "ifdlim": [
-                Profile.DY.value,
-            ],
-            "hyst": [
-                Profile.DY.value,
-            ],
-            "kcd": [
-                Profile.DY.value,
-            ],
-            "kramp": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

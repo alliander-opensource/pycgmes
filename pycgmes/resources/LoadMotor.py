@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -46,80 +46,110 @@ class LoadMotor(IdentifiedObject):
     tbkr: Circuit breaker operating time (Tbkr) (>= 0).  Typical value = 0,08.
     """
 
-    LoadAggregate: Optional[str] = None  # Type M:1 in CIM
-    pfrac: float = 0.0  # Type #Float in CIM
-    lfac: float = 0.0  # Type #Float in CIM
-    ls: float = 0.0  # Type #PU in CIM
-    lp: float = 0.0  # Type #PU in CIM
-    lpp: float = 0.0  # Type #PU in CIM
-    ra: float = 0.0  # Type #PU in CIM
-    tpo: int = 0  # Type #Seconds in CIM
-    tppo: int = 0  # Type #Seconds in CIM
-    h: int = 0  # Type #Seconds in CIM
-    d: float = 0.0  # Type #Float in CIM
-    vt: float = 0.0  # Type #PU in CIM
-    tv: int = 0  # Type #Seconds in CIM
-    tbkr: int = 0  # Type #Seconds in CIM
+    LoadAggregate: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    pfrac: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=LoadMotor"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    lfac: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ls: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    lp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    lpp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ra: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpo: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tppo: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    h: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    d: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vt: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tv: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tbkr: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "LoadAggregate": [
-                Profile.DY.value,
-            ],
-            "pfrac": [
-                Profile.DY.value,
-            ],
-            "lfac": [
-                Profile.DY.value,
-            ],
-            "ls": [
-                Profile.DY.value,
-            ],
-            "lp": [
-                Profile.DY.value,
-            ],
-            "lpp": [
-                Profile.DY.value,
-            ],
-            "ra": [
-                Profile.DY.value,
-            ],
-            "tpo": [
-                Profile.DY.value,
-            ],
-            "tppo": [
-                Profile.DY.value,
-            ],
-            "h": [
-                Profile.DY.value,
-            ],
-            "d": [
-                Profile.DY.value,
-            ],
-            "vt": [
-                Profile.DY.value,
-            ],
-            "tv": [
-                Profile.DY.value,
-            ],
-            "tbkr": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

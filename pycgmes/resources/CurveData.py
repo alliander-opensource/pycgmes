@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .Base import Base
@@ -22,40 +22,40 @@ class CurveData(Base):
     y2value: The data value of the second Y-axis variable (if present), depending on the Y-axis units.
     """
 
-    Curve: Optional[str] = None  # Type M:1 in CIM
-    xvalue: float = 0.0  # Type #Float in CIM
-    y1value: float = 0.0  # Type #Float in CIM
-    y2value: float = 0.0  # Type #Float in CIM
+    Curve: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    xvalue: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=CurveData"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    y1value: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    y2value: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-            ],
-            # Attributes
-            "Curve": [
-                Profile.EQ.value,
-            ],
-            "xvalue": [
-                Profile.EQ.value,
-            ],
-            "y1value": [
-                Profile.EQ.value,
-            ],
-            "y2value": [
-                Profile.EQ.value,
-            ],
+            Profile.EQ,
         }

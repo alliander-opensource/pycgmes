@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -32,64 +32,82 @@ class MutualCoupling(IdentifiedObject):
       first and second terminals of a mutual coupling should point to different AC line segments.
     """
 
-    b0ch: float = 0.0  # Type #Susceptance in CIM
-    distance11: float = 0.0  # Type #Length in CIM
-    distance12: float = 0.0  # Type #Length in CIM
-    distance21: float = 0.0  # Type #Length in CIM
-    distance22: float = 0.0  # Type #Length in CIM
-    g0ch: float = 0.0  # Type #Conductance in CIM
-    r0: float = 0.0  # Type #Resistance in CIM
-    x0: float = 0.0  # Type #Reactance in CIM
-    Second_Terminal: Optional[str] = None  # Type M:1 in CIM
-    First_Terminal: Optional[str] = None  # Type M:1 in CIM
+    b0ch: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    distance11: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
-        return "\n".join(
-            ["class=MutualCoupling"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    distance12: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    distance21: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    distance22: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    g0ch: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    r0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    Second_Terminal: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    First_Terminal: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.SC.value,
-            ],
-            # Attributes
-            "b0ch": [
-                Profile.SC.value,
-            ],
-            "distance11": [
-                Profile.SC.value,
-            ],
-            "distance12": [
-                Profile.SC.value,
-            ],
-            "distance21": [
-                Profile.SC.value,
-            ],
-            "distance22": [
-                Profile.SC.value,
-            ],
-            "g0ch": [
-                Profile.SC.value,
-            ],
-            "r0": [
-                Profile.SC.value,
-            ],
-            "x0": [
-                Profile.SC.value,
-            ],
-            "Second_Terminal": [
-                Profile.SC.value,
-            ],
-            "First_Terminal": [
-                Profile.SC.value,
-            ],
+            Profile.SC,
         }

@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemResource import PowerSystemResource
@@ -43,71 +43,84 @@ class TapChanger(PowerSystemResource):
     """
 
     # *Association not used*
-    # TapSchedules : list = field(default_factory=list)  # Type M:0..n in CIM
-    highStep: int = 0  # Type #Integer in CIM
-    lowStep: int = 0  # Type #Integer in CIM
-    ltcFlag: bool = False  # Type #Boolean in CIM
-    neutralStep: int = 0  # Type #Integer in CIM
-    neutralU: float = 0.0  # Type #Voltage in CIM
-    normalStep: int = 0  # Type #Integer in CIM
-    TapChangerControl: Optional[str] = None  # Type M:0..1 in CIM
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # TapSchedules : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    highStep: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    lowStep: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ltcFlag: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    neutralStep: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    neutralU: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    normalStep: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    TapChangerControl: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
     # *Association not used*
-    # SvTapStep : Optional[str] = None  # Type M:0..1 in CIM
-    controlEnabled: bool = False  # Type #Boolean in CIM
-    step: float = 0.0  # Type #Float in CIM
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # SvTapStep : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    controlEnabled: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
-        return "\n".join(
-            ["class=TapChanger"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    step: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SV.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "TapSchedules": [
-                Profile.EQ.value,
-            ],
-            "highStep": [
-                Profile.EQ.value,
-            ],
-            "lowStep": [
-                Profile.EQ.value,
-            ],
-            "ltcFlag": [
-                Profile.EQ.value,
-            ],
-            "neutralStep": [
-                Profile.EQ.value,
-            ],
-            "neutralU": [
-                Profile.EQ.value,
-            ],
-            "normalStep": [
-                Profile.EQ.value,
-            ],
-            "TapChangerControl": [
-                Profile.EQ.value,
-            ],
-            "SvTapStep": [
-                Profile.SV.value,
-            ],
-            "controlEnabled": [
-                Profile.SSH.value,
-            ],
-            "step": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SV,
+            Profile.SSH,
         }

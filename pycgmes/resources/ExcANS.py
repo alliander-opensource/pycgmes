@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -32,80 +32,110 @@ class ExcANS(ExcitationSystemDynamics):
     tb: Exciter time constant (TB) (>= 0).  Typical value = 0,04.
     """
 
-    k3: float = 0.0  # Type #Float in CIM
-    k2: float = 0.0  # Type #Float in CIM
-    kce: float = 0.0  # Type #Float in CIM
-    t3: int = 0  # Type #Seconds in CIM
-    t2: int = 0  # Type #Seconds in CIM
-    t1: int = 0  # Type #Seconds in CIM
-    blint: int = 0  # Type #Integer in CIM
-    kvfif: int = 0  # Type #Integer in CIM
-    ifmn: float = 0.0  # Type #PU in CIM
-    ifmx: float = 0.0  # Type #PU in CIM
-    vrmn: float = 0.0  # Type #PU in CIM
-    vrmx: float = 0.0  # Type #PU in CIM
-    krvecc: int = 0  # Type #Integer in CIM
-    tb: int = 0  # Type #Seconds in CIM
+    k3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    k2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcANS"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    kce: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    blint: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kvfif: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ifmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ifmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    krvecc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "k3": [
-                Profile.DY.value,
-            ],
-            "k2": [
-                Profile.DY.value,
-            ],
-            "kce": [
-                Profile.DY.value,
-            ],
-            "t3": [
-                Profile.DY.value,
-            ],
-            "t2": [
-                Profile.DY.value,
-            ],
-            "t1": [
-                Profile.DY.value,
-            ],
-            "blint": [
-                Profile.DY.value,
-            ],
-            "kvfif": [
-                Profile.DY.value,
-            ],
-            "ifmn": [
-                Profile.DY.value,
-            ],
-            "ifmx": [
-                Profile.DY.value,
-            ],
-            "vrmn": [
-                Profile.DY.value,
-            ],
-            "vrmx": [
-                Profile.DY.value,
-            ],
-            "krvecc": [
-                Profile.DY.value,
-            ],
-            "tb": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

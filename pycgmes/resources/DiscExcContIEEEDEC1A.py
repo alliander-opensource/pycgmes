@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .DiscontinuousExcitationControlDynamics import DiscontinuousExcitationControlDynamics
@@ -36,97 +36,138 @@ class DiscExcContIEEEDEC1A(DiscontinuousExcitationControlDynamics):
     vanmax: Limiter for Van (VANMAX).
     """
 
-    vtlmt: float = 0.0  # Type #PU in CIM
-    vomax: float = 0.0  # Type #PU in CIM
-    vomin: float = 0.0  # Type #PU in CIM
-    ketl: float = 0.0  # Type #PU in CIM
-    vtc: float = 0.0  # Type #PU in CIM
-    val: float = 0.0  # Type #PU in CIM
-    esc: float = 0.0  # Type #PU in CIM
-    kan: float = 0.0  # Type #PU in CIM
-    tan: int = 0  # Type #Seconds in CIM
-    tw5: int = 0  # Type #Seconds in CIM
-    vsmax: float = 0.0  # Type #PU in CIM
-    vsmin: float = 0.0  # Type #PU in CIM
-    td: int = 0  # Type #Seconds in CIM
-    tl1: int = 0  # Type #Seconds in CIM
-    tl2: int = 0  # Type #Seconds in CIM
-    vtm: float = 0.0  # Type #PU in CIM
-    vtn: float = 0.0  # Type #PU in CIM
-    vanmax: float = 0.0  # Type #PU in CIM
+    vtlmt: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    vomax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=DiscExcContIEEEDEC1A"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    vomin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ketl: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vtc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    val: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    esc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kan: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tan: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw5: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    td: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vtm: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vtn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vanmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "vtlmt": [
-                Profile.DY.value,
-            ],
-            "vomax": [
-                Profile.DY.value,
-            ],
-            "vomin": [
-                Profile.DY.value,
-            ],
-            "ketl": [
-                Profile.DY.value,
-            ],
-            "vtc": [
-                Profile.DY.value,
-            ],
-            "val": [
-                Profile.DY.value,
-            ],
-            "esc": [
-                Profile.DY.value,
-            ],
-            "kan": [
-                Profile.DY.value,
-            ],
-            "tan": [
-                Profile.DY.value,
-            ],
-            "tw5": [
-                Profile.DY.value,
-            ],
-            "vsmax": [
-                Profile.DY.value,
-            ],
-            "vsmin": [
-                Profile.DY.value,
-            ],
-            "td": [
-                Profile.DY.value,
-            ],
-            "tl1": [
-                Profile.DY.value,
-            ],
-            "tl2": [
-                Profile.DY.value,
-            ],
-            "vtm": [
-                Profile.DY.value,
-            ],
-            "vtn": [
-                Profile.DY.value,
-            ],
-            "vanmax": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

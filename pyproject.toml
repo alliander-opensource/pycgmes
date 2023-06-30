@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "pycgmes"
 # Note that trying to reupload the same version will fail.
-version = "0.1.2"
+version = "0.9.9"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["uno <uno@alliander.com>"]
 readme = "README.md"
@@ -56,14 +56,13 @@ priority = "primary" # Means it is the first source tried.
 line-length = 120
 
 [tool.coverage.run]
-# Coverage is here by default, but not going to uniot test 500+ generated classes. So mostly useless.
+# I would love to only cover Bay (this is the one used by the tests) and still load all the others
+# to check that there is no syntax error. But not sure how to do it cleanly, so not done.
 include = ["pycgmes/*"]
 omit = []
 
 [tool.coverage.report]
-# Low coverage. Should split between dataclasses (won't be fully covered) and
-# the rest (should be well covered).
-fail_under = 70
+fail_under = 85
 exclude_also = [ # Regexp of lines (or first line of block) which do not count for coverage.
     # __main__ block is never tested.
     "if __name__ == .__main__.:",
@@ -78,6 +77,7 @@ pretty = true
 non_interactive = true # Do not ask for confirmations to install stubs
 install_types = true # Install stubs if required
 check_untyped_defs = true # Checks what it can even in files without annotation
+plugins = ["pydantic.mypy"]
 
 [tool.bandit]
 targets = ["pycgmes"]

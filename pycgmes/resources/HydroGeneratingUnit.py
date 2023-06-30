@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .GeneratingUnit import GeneratingUnit
@@ -21,42 +21,41 @@ class HydroGeneratingUnit(GeneratingUnit):
     HydroPowerPlant: The hydro generating unit belongs to a hydro power plant.
     """
 
-    energyConversionCapability: Optional[str] = None  # Type M:0..1 in CIM
-    dropHeight: float = 0.0  # Type #Length in CIM
-    turbineType: Optional[str] = None  # Type M:0..1 in CIM
-    HydroPowerPlant: Optional[str] = None  # Type M:0..1 in CIM
+    energyConversionCapability: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    dropHeight: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=HydroGeneratingUnit"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    turbineType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    HydroPowerPlant: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "energyConversionCapability": [
-                Profile.EQ.value,
-            ],
-            "dropHeight": [
-                Profile.EQ.value,
-            ],
-            "turbineType": [
-                Profile.EQ.value,
-            ],
-            "HydroPowerPlant": [
-                Profile.EQ.value,
-            ],
+            Profile.EQ,
+            Profile.SSH,
         }

@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -22,43 +22,34 @@ class WindContQPQULimIEC(IdentifiedObject):
     WindDynamicsLookupTable: The wind dynamics lookup table associated with this QP and QU limitation model.
     """
 
-    tpfiltql: int = 0  # Type #Seconds in CIM
-    tufiltql: int = 0  # Type #Seconds in CIM
-    # *Association not used*
-    # WindTurbineType3or4IEC : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # WindDynamicsLookupTable : list = field(default_factory=list)  # Type M:1..n in CIM
+    tpfiltql: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tufiltql: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=WindContQPQULimIEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType3or4IEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    # *Association not used*
+    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
+    # WindDynamicsLookupTable : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "tpfiltql": [
-                Profile.DY.value,
-            ],
-            "tufiltql": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType3or4IEC": [
-                Profile.DY.value,
-            ],
-            "WindDynamicsLookupTable": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

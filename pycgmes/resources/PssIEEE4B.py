@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
@@ -89,292 +89,481 @@ class PssIEEE4B(PowerSystemStabilizerDynamics):
     vstmin: PSS output minimum limit (VSTmin) (< PssIEEE4B.vstmax).  Typical value = -0,15.
     """
 
-    bwh1: float = 0.0  # Type #Float in CIM
-    bwh2: float = 0.0  # Type #Float in CIM
-    bwl1: float = 0.0  # Type #Float in CIM
-    bwl2: float = 0.0  # Type #Float in CIM
-    kh: float = 0.0  # Type #PU in CIM
-    kh1: float = 0.0  # Type #PU in CIM
-    kh11: float = 0.0  # Type #PU in CIM
-    kh17: float = 0.0  # Type #PU in CIM
-    kh2: float = 0.0  # Type #PU in CIM
-    ki: float = 0.0  # Type #PU in CIM
-    ki1: float = 0.0  # Type #PU in CIM
-    ki11: float = 0.0  # Type #PU in CIM
-    ki17: float = 0.0  # Type #PU in CIM
-    ki2: float = 0.0  # Type #PU in CIM
-    kl: float = 0.0  # Type #PU in CIM
-    kl1: float = 0.0  # Type #PU in CIM
-    kl11: float = 0.0  # Type #PU in CIM
-    kl17: float = 0.0  # Type #PU in CIM
-    kl2: float = 0.0  # Type #PU in CIM
-    omeganh1: float = 0.0  # Type #Float in CIM
-    omeganh2: float = 0.0  # Type #Float in CIM
-    omeganl1: float = 0.0  # Type #Float in CIM
-    omeganl2: float = 0.0  # Type #Float in CIM
-    th1: int = 0  # Type #Seconds in CIM
-    th10: int = 0  # Type #Seconds in CIM
-    th11: int = 0  # Type #Seconds in CIM
-    th12: int = 0  # Type #Seconds in CIM
-    th2: int = 0  # Type #Seconds in CIM
-    th3: int = 0  # Type #Seconds in CIM
-    th4: int = 0  # Type #Seconds in CIM
-    th5: int = 0  # Type #Seconds in CIM
-    th6: int = 0  # Type #Seconds in CIM
-    th7: int = 0  # Type #Seconds in CIM
-    th8: int = 0  # Type #Seconds in CIM
-    th9: int = 0  # Type #Seconds in CIM
-    ti1: int = 0  # Type #Seconds in CIM
-    ti10: int = 0  # Type #Seconds in CIM
-    ti11: int = 0  # Type #Seconds in CIM
-    ti12: int = 0  # Type #Seconds in CIM
-    ti2: int = 0  # Type #Seconds in CIM
-    ti3: int = 0  # Type #Seconds in CIM
-    ti4: int = 0  # Type #Seconds in CIM
-    ti5: int = 0  # Type #Seconds in CIM
-    ti6: int = 0  # Type #Seconds in CIM
-    ti7: int = 0  # Type #Seconds in CIM
-    ti8: int = 0  # Type #Seconds in CIM
-    ti9: int = 0  # Type #Seconds in CIM
-    tl1: int = 0  # Type #Seconds in CIM
-    tl10: int = 0  # Type #Seconds in CIM
-    tl11: int = 0  # Type #Seconds in CIM
-    tl12: int = 0  # Type #Seconds in CIM
-    tl2: int = 0  # Type #Seconds in CIM
-    tl3: int = 0  # Type #Seconds in CIM
-    tl4: int = 0  # Type #Seconds in CIM
-    tl5: int = 0  # Type #Seconds in CIM
-    tl6: int = 0  # Type #Seconds in CIM
-    tl7: int = 0  # Type #Seconds in CIM
-    tl8: int = 0  # Type #Seconds in CIM
-    tl9: int = 0  # Type #Seconds in CIM
-    vhmax: float = 0.0  # Type #PU in CIM
-    vhmin: float = 0.0  # Type #PU in CIM
-    vimax: float = 0.0  # Type #PU in CIM
-    vimin: float = 0.0  # Type #PU in CIM
-    vlmax: float = 0.0  # Type #PU in CIM
-    vlmin: float = 0.0  # Type #PU in CIM
-    vstmax: float = 0.0  # Type #PU in CIM
-    vstmin: float = 0.0  # Type #PU in CIM
+    bwh1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    bwh2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PssIEEE4B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    bwl1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    bwl2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kh: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kh1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kh11: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kh17: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kh2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki11: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki17: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ki2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kl: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kl1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kl11: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kl17: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kl2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    omeganh1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    omeganh2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    omeganl1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    omeganl2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th10: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th11: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th12: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th5: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th6: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th7: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th8: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th9: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti10: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti11: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti12: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti5: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti6: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti7: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti8: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ti9: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl10: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl11: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl12: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl5: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl6: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl7: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl8: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tl9: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vhmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vhmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vimax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vimin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vlmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vlmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vstmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vstmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "bwh1": [
-                Profile.DY.value,
-            ],
-            "bwh2": [
-                Profile.DY.value,
-            ],
-            "bwl1": [
-                Profile.DY.value,
-            ],
-            "bwl2": [
-                Profile.DY.value,
-            ],
-            "kh": [
-                Profile.DY.value,
-            ],
-            "kh1": [
-                Profile.DY.value,
-            ],
-            "kh11": [
-                Profile.DY.value,
-            ],
-            "kh17": [
-                Profile.DY.value,
-            ],
-            "kh2": [
-                Profile.DY.value,
-            ],
-            "ki": [
-                Profile.DY.value,
-            ],
-            "ki1": [
-                Profile.DY.value,
-            ],
-            "ki11": [
-                Profile.DY.value,
-            ],
-            "ki17": [
-                Profile.DY.value,
-            ],
-            "ki2": [
-                Profile.DY.value,
-            ],
-            "kl": [
-                Profile.DY.value,
-            ],
-            "kl1": [
-                Profile.DY.value,
-            ],
-            "kl11": [
-                Profile.DY.value,
-            ],
-            "kl17": [
-                Profile.DY.value,
-            ],
-            "kl2": [
-                Profile.DY.value,
-            ],
-            "omeganh1": [
-                Profile.DY.value,
-            ],
-            "omeganh2": [
-                Profile.DY.value,
-            ],
-            "omeganl1": [
-                Profile.DY.value,
-            ],
-            "omeganl2": [
-                Profile.DY.value,
-            ],
-            "th1": [
-                Profile.DY.value,
-            ],
-            "th10": [
-                Profile.DY.value,
-            ],
-            "th11": [
-                Profile.DY.value,
-            ],
-            "th12": [
-                Profile.DY.value,
-            ],
-            "th2": [
-                Profile.DY.value,
-            ],
-            "th3": [
-                Profile.DY.value,
-            ],
-            "th4": [
-                Profile.DY.value,
-            ],
-            "th5": [
-                Profile.DY.value,
-            ],
-            "th6": [
-                Profile.DY.value,
-            ],
-            "th7": [
-                Profile.DY.value,
-            ],
-            "th8": [
-                Profile.DY.value,
-            ],
-            "th9": [
-                Profile.DY.value,
-            ],
-            "ti1": [
-                Profile.DY.value,
-            ],
-            "ti10": [
-                Profile.DY.value,
-            ],
-            "ti11": [
-                Profile.DY.value,
-            ],
-            "ti12": [
-                Profile.DY.value,
-            ],
-            "ti2": [
-                Profile.DY.value,
-            ],
-            "ti3": [
-                Profile.DY.value,
-            ],
-            "ti4": [
-                Profile.DY.value,
-            ],
-            "ti5": [
-                Profile.DY.value,
-            ],
-            "ti6": [
-                Profile.DY.value,
-            ],
-            "ti7": [
-                Profile.DY.value,
-            ],
-            "ti8": [
-                Profile.DY.value,
-            ],
-            "ti9": [
-                Profile.DY.value,
-            ],
-            "tl1": [
-                Profile.DY.value,
-            ],
-            "tl10": [
-                Profile.DY.value,
-            ],
-            "tl11": [
-                Profile.DY.value,
-            ],
-            "tl12": [
-                Profile.DY.value,
-            ],
-            "tl2": [
-                Profile.DY.value,
-            ],
-            "tl3": [
-                Profile.DY.value,
-            ],
-            "tl4": [
-                Profile.DY.value,
-            ],
-            "tl5": [
-                Profile.DY.value,
-            ],
-            "tl6": [
-                Profile.DY.value,
-            ],
-            "tl7": [
-                Profile.DY.value,
-            ],
-            "tl8": [
-                Profile.DY.value,
-            ],
-            "tl9": [
-                Profile.DY.value,
-            ],
-            "vhmax": [
-                Profile.DY.value,
-            ],
-            "vhmin": [
-                Profile.DY.value,
-            ],
-            "vimax": [
-                Profile.DY.value,
-            ],
-            "vimin": [
-                Profile.DY.value,
-            ],
-            "vlmax": [
-                Profile.DY.value,
-            ],
-            "vlmin": [
-                Profile.DY.value,
-            ],
-            "vstmax": [
-                Profile.DY.value,
-            ],
-            "vstmin": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

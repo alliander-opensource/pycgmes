@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -23,36 +23,33 @@ class TieFlow(IdentifiedObject):
       of ControlArea for further explanation of how TieFlow.positiveFlowIn is used.
     """
 
-    ControlArea: Optional[str] = None  # Type M:1 in CIM
-    Terminal: Optional[str] = None  # Type M:1 in CIM
-    positiveFlowIn: bool = False  # Type #Boolean in CIM
+    ControlArea: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    Terminal: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=TieFlow"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    positiveFlowIn: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-            ],
-            # Attributes
-            "ControlArea": [
-                Profile.EQ.value,
-            ],
-            "Terminal": [
-                Profile.EQ.value,
-            ],
-            "positiveFlowIn": [
-                Profile.EQ.value,
-            ],
+            Profile.EQ,
         }

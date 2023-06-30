@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .RotatingMachine import RotatingMachine
@@ -35,73 +35,89 @@ class AsynchronousMachine(RotatingMachine):
       asynchronous machine.
     """
 
-    nominalFrequency: float = 0.0  # Type #Frequency in CIM
-    nominalSpeed: float = 0.0  # Type #RotationSpeed in CIM
-    converterFedDrive: bool = False  # Type #Boolean in CIM
-    efficiency: float = 0.0  # Type #PerCent in CIM
-    iaIrRatio: float = 0.0  # Type #Float in CIM
-    polePairNumber: int = 0  # Type #Integer in CIM
-    ratedMechanicalPower: float = 0.0  # Type #ActivePower in CIM
-    reversible: bool = False  # Type #Boolean in CIM
-    rxLockedRotorRatio: float = 0.0  # Type #Float in CIM
-    asynchronousMachineType: Optional[str] = None  # Type M:1..1 in CIM
+    nominalFrequency: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    nominalSpeed: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    converterFedDrive: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    efficiency: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    iaIrRatio: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    polePairNumber: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    ratedMechanicalPower: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    reversible: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    rxLockedRotorRatio: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    asynchronousMachineType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
     # *Association not used*
-    # AsynchronousMachineDynamics : Optional[str] = None  # Type M:0..1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=AsynchronousMachine"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # AsynchronousMachineDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-            ],
-            # Attributes
-            "nominalFrequency": [
-                Profile.EQ.value,
-            ],
-            "nominalSpeed": [
-                Profile.EQ.value,
-            ],
-            "converterFedDrive": [
-                Profile.SC.value,
-            ],
-            "efficiency": [
-                Profile.SC.value,
-            ],
-            "iaIrRatio": [
-                Profile.SC.value,
-            ],
-            "polePairNumber": [
-                Profile.SC.value,
-            ],
-            "ratedMechanicalPower": [
-                Profile.SC.value,
-            ],
-            "reversible": [
-                Profile.SC.value,
-            ],
-            "rxLockedRotorRatio": [
-                Profile.SC.value,
-            ],
-            "asynchronousMachineType": [
-                Profile.SSH.value,
-            ],
-            "AsynchronousMachineDynamics": [
-                Profile.DY.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
+            Profile.SSH,
+            Profile.DY,
         }

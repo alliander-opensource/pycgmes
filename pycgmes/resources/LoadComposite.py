@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .LoadDynamics import LoadDynamics
@@ -29,68 +29,89 @@ class LoadComposite(LoadDynamics):
       value = 0,5.
     """
 
-    epvs: float = 0.0  # Type #Float in CIM
-    epfs: float = 0.0  # Type #Float in CIM
-    eqvs: float = 0.0  # Type #Float in CIM
-    eqfs: float = 0.0  # Type #Float in CIM
-    epvd: float = 0.0  # Type #Float in CIM
-    epfd: float = 0.0  # Type #Float in CIM
-    eqvd: float = 0.0  # Type #Float in CIM
-    eqfd: float = 0.0  # Type #Float in CIM
-    lfac: float = 0.0  # Type #Float in CIM
-    h: int = 0  # Type #Seconds in CIM
-    pfrac: float = 0.0  # Type #Float in CIM
+    epvs: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    epfs: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=LoadComposite"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    eqvs: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    eqfs: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    epvd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    epfd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    eqvd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    eqfd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    lfac: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    h: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pfrac: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "epvs": [
-                Profile.DY.value,
-            ],
-            "epfs": [
-                Profile.DY.value,
-            ],
-            "eqvs": [
-                Profile.DY.value,
-            ],
-            "eqfs": [
-                Profile.DY.value,
-            ],
-            "epvd": [
-                Profile.DY.value,
-            ],
-            "epfd": [
-                Profile.DY.value,
-            ],
-            "eqvd": [
-                Profile.DY.value,
-            ],
-            "eqfd": [
-                Profile.DY.value,
-            ],
-            "lfac": [
-                Profile.DY.value,
-            ],
-            "h": [
-                Profile.DY.value,
-            ],
-            "pfrac": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

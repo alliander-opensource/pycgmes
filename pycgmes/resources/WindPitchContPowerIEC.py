@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -28,67 +28,72 @@ class WindPitchContPowerIEC(IdentifiedObject):
     """
 
     # *Association not used*
-    # WindDynamicsLookupTable : list = field(default_factory=list)  # Type M:1..n in CIM
-    # *Association not used*
-    # WindGenTurbineType1bIEC : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # WindGenTurbineType2IEC : Optional[str] = None  # Type M:0..1 in CIM
-    dpmax: float = 0.0  # Type #PU in CIM
-    dpmin: float = 0.0  # Type #PU in CIM
-    pmin: float = 0.0  # Type #PU in CIM
-    pset: float = 0.0  # Type #PU in CIM
-    t1: int = 0  # Type #Seconds in CIM
-    tr: int = 0  # Type #Seconds in CIM
-    uuvrt: float = 0.0  # Type #PU in CIM
+    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
+    # WindDynamicsLookupTable : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindGenTurbineType1bIEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
-        return "\n".join(
-            ["class=WindPitchContPowerIEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # WindGenTurbineType2IEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+
+    dpmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dpmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pset: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tr: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    uuvrt: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "WindDynamicsLookupTable": [
-                Profile.DY.value,
-            ],
-            "WindGenTurbineType1bIEC": [
-                Profile.DY.value,
-            ],
-            "WindGenTurbineType2IEC": [
-                Profile.DY.value,
-            ],
-            "dpmax": [
-                Profile.DY.value,
-            ],
-            "dpmin": [
-                Profile.DY.value,
-            ],
-            "pmin": [
-                Profile.DY.value,
-            ],
-            "pset": [
-                Profile.DY.value,
-            ],
-            "t1": [
-                Profile.DY.value,
-            ],
-            "tr": [
-                Profile.DY.value,
-            ],
-            "uuvrt": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

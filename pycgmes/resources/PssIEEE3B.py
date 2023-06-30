@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
@@ -37,92 +37,131 @@ class PssIEEE3B(PowerSystemStabilizerDynamics):
     vstmin: Stabilizer output minimum limit (Vstmin) (< PssIEEE3B.vstmax).  Typical value = -0,1.
     """
 
-    t1: int = 0  # Type #Seconds in CIM
-    t2: int = 0  # Type #Seconds in CIM
-    tw1: int = 0  # Type #Seconds in CIM
-    tw2: int = 0  # Type #Seconds in CIM
-    tw3: int = 0  # Type #Seconds in CIM
-    ks1: float = 0.0  # Type #PU in CIM
-    ks2: float = 0.0  # Type #PU in CIM
-    a1: float = 0.0  # Type #PU in CIM
-    a2: float = 0.0  # Type #PU in CIM
-    a3: float = 0.0  # Type #PU in CIM
-    a4: float = 0.0  # Type #PU in CIM
-    a5: float = 0.0  # Type #PU in CIM
-    a6: float = 0.0  # Type #PU in CIM
-    a7: float = 0.0  # Type #PU in CIM
-    a8: float = 0.0  # Type #PU in CIM
-    vstmax: float = 0.0  # Type #PU in CIM
-    vstmin: float = 0.0  # Type #PU in CIM
+    t1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    t2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PssIEEE3B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    tw1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ks1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ks2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a5: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a6: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a7: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    a8: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vstmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vstmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "t1": [
-                Profile.DY.value,
-            ],
-            "t2": [
-                Profile.DY.value,
-            ],
-            "tw1": [
-                Profile.DY.value,
-            ],
-            "tw2": [
-                Profile.DY.value,
-            ],
-            "tw3": [
-                Profile.DY.value,
-            ],
-            "ks1": [
-                Profile.DY.value,
-            ],
-            "ks2": [
-                Profile.DY.value,
-            ],
-            "a1": [
-                Profile.DY.value,
-            ],
-            "a2": [
-                Profile.DY.value,
-            ],
-            "a3": [
-                Profile.DY.value,
-            ],
-            "a4": [
-                Profile.DY.value,
-            ],
-            "a5": [
-                Profile.DY.value,
-            ],
-            "a6": [
-                Profile.DY.value,
-            ],
-            "a7": [
-                Profile.DY.value,
-            ],
-            "a8": [
-                Profile.DY.value,
-            ],
-            "vstmax": [
-                Profile.DY.value,
-            ],
-            "vstmin": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

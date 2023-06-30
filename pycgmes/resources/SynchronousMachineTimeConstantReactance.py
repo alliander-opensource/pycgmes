@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .SynchronousMachineDetailed import SynchronousMachineDetailed
@@ -54,81 +54,110 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
     tc: Damping time constant for `Canay` reactance (>= 0).  Typical value = 0.
     """
 
-    rotorType: Optional[str] = None  # Type M:0..1 in CIM
-    modelType: Optional[str] = None  # Type M:1..1 in CIM
-    ks: float = 0.0  # Type #Float in CIM
-    xDirectSync: float = 0.0  # Type #PU in CIM
-    xDirectTrans: float = 0.0  # Type #PU in CIM
-    xDirectSubtrans: float = 0.0  # Type #PU in CIM
-    xQuadSync: float = 0.0  # Type #PU in CIM
-    xQuadTrans: float = 0.0  # Type #PU in CIM
-    xQuadSubtrans: float = 0.0  # Type #PU in CIM
-    tpdo: int = 0  # Type #Seconds in CIM
-    tppdo: int = 0  # Type #Seconds in CIM
-    tpqo: int = 0  # Type #Seconds in CIM
-    tppqo: int = 0  # Type #Seconds in CIM
-    tc: int = 0  # Type #Seconds in CIM
+    rotorType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    modelType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=SynchronousMachineTimeConstantReactance"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ks: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xDirectSync: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xDirectTrans: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xDirectSubtrans: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xQuadSync: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xQuadTrans: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xQuadSubtrans: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpdo: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tppdo: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpqo: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tppqo: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "rotorType": [
-                Profile.DY.value,
-            ],
-            "modelType": [
-                Profile.DY.value,
-            ],
-            "ks": [
-                Profile.DY.value,
-            ],
-            "xDirectSync": [
-                Profile.DY.value,
-            ],
-            "xDirectTrans": [
-                Profile.DY.value,
-            ],
-            "xDirectSubtrans": [
-                Profile.DY.value,
-            ],
-            "xQuadSync": [
-                Profile.DY.value,
-            ],
-            "xQuadTrans": [
-                Profile.DY.value,
-            ],
-            "xQuadSubtrans": [
-                Profile.DY.value,
-            ],
-            "tpdo": [
-                Profile.DY.value,
-            ],
-            "tppdo": [
-                Profile.DY.value,
-            ],
-            "tpqo": [
-                Profile.DY.value,
-            ],
-            "tppqo": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerElectronicsUnit import PowerElectronicsUnit
@@ -21,37 +21,34 @@ class BatteryUnit(PowerElectronicsUnit):
       BatteryUnit.ratedE.
     """
 
-    ratedE: float = 0.0  # Type #RealEnergy in CIM
-    batteryState: Optional[str] = None  # Type M:1..1 in CIM
-    storedE: float = 0.0  # Type #RealEnergy in CIM
+    ratedE: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    batteryState: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
-        return "\n".join(
-            ["class=BatteryUnit"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    storedE: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "ratedE": [
-                Profile.EQ.value,
-            ],
-            "batteryState": [
-                Profile.SSH.value,
-            ],
-            "storedE": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SSH,
         }

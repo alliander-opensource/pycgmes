@@ -53,12 +53,17 @@ if "black" in COMMAND_LINE_TARGETS:
 # Quality target.
 if "ruff" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
     # Replaces isort, autoflake and probably pylint eventually.
-    cmd = f"ruff {_SUBJECT}"
-    if _CHECK_ONLY:
-        cmd += " --no-fix"
-    else:
-        cmd += " --fix"
-    _exec(cmd)
+    for param in ["", "--extend-select RUF100"]:
+        # RUF100 means: remove #noqa when not relevant.
+        # A lot are adding during generation because due to comments, some lines can be too long. They do not all
+        # end up being too long, so let's clean up the not relevant one.
+        cmd = f"ruff {_SUBJECT} {param}"
+        if _CHECK_ONLY:
+            cmd += " --no-fix"
+        else:
+            cmd += " --fix"
+        _exec(cmd)
+
 
 if "lock" in COMMAND_LINE_TARGETS:
     _exec("poetry lock --check")

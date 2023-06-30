@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
@@ -37,108 +37,159 @@ class GovGAST3(TurbineGovernorDynamics):
     mnef: Fuel flow maximum negative error value (MNef).  Typical value = -0,05.
     """
 
-    bp: float = 0.0  # Type #PU in CIM
-    tg: int = 0  # Type #Seconds in CIM
-    rcmx: float = 0.0  # Type #PU in CIM
-    rcmn: float = 0.0  # Type #PU in CIM
-    ky: float = 0.0  # Type #Float in CIM
-    ty: int = 0  # Type #Seconds in CIM
-    tac: int = 0  # Type #Seconds in CIM
-    kac: float = 0.0  # Type #Float in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    bca: float = 0.0  # Type #Float in CIM
-    kca: float = 0.0  # Type #Float in CIM
-    dtc: float = 0.0  # Type #Temperature in CIM
-    ka: float = 0.0  # Type #PU in CIM
-    tsi: int = 0  # Type #Seconds in CIM
-    ksi: float = 0.0  # Type #Float in CIM
-    ttc: int = 0  # Type #Seconds in CIM
-    tfen: float = 0.0  # Type #Temperature in CIM
-    td: int = 0  # Type #Seconds in CIM
-    tt: float = 0.0  # Type #Temperature in CIM
-    mxef: float = 0.0  # Type #PU in CIM
-    mnef: float = 0.0  # Type #PU in CIM
+    bp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tg: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovGAST3"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    rcmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rcmn: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ky: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ty: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tac: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kac: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    bca: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kca: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    dtc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ka: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tsi: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ksi: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ttc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tfen: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    td: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tt: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    mxef: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    mnef: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "bp": [
-                Profile.DY.value,
-            ],
-            "tg": [
-                Profile.DY.value,
-            ],
-            "rcmx": [
-                Profile.DY.value,
-            ],
-            "rcmn": [
-                Profile.DY.value,
-            ],
-            "ky": [
-                Profile.DY.value,
-            ],
-            "ty": [
-                Profile.DY.value,
-            ],
-            "tac": [
-                Profile.DY.value,
-            ],
-            "kac": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "bca": [
-                Profile.DY.value,
-            ],
-            "kca": [
-                Profile.DY.value,
-            ],
-            "dtc": [
-                Profile.DY.value,
-            ],
-            "ka": [
-                Profile.DY.value,
-            ],
-            "tsi": [
-                Profile.DY.value,
-            ],
-            "ksi": [
-                Profile.DY.value,
-            ],
-            "ttc": [
-                Profile.DY.value,
-            ],
-            "tfen": [
-                Profile.DY.value,
-            ],
-            "td": [
-                Profile.DY.value,
-            ],
-            "tt": [
-                Profile.DY.value,
-            ],
-            "mxef": [
-                Profile.DY.value,
-            ],
-            "mnef": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

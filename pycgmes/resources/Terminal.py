@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ACDCTerminal import ACDCTerminal
@@ -41,95 +41,86 @@ class Terminal(ACDCTerminal):
     RemoteInputSignal: Input signal coming from this terminal.
     """
 
-    TopologicalNode: Optional[str] = None  # Type M:0..1 in CIM
-    ConductingEquipment: Optional[str] = None  # Type M:1 in CIM
-    ConnectivityNode: Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # ConverterDCSides : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # AuxiliaryEquipment : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # RegulatingControl : list = field(default_factory=list)  # Type M:0..n in CIM
-    phases: Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # TransformerEnd : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # TieFlow : list = field(default_factory=list)  # Type M:0..2 in CIM
-    # *Association not used*
-    # HasSecondMutualCoupling : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # HasFirstMutualCoupling : list = field(default_factory=list)  # Type M:0..n in CIM
-    # *Association not used*
-    # SvPowerFlow : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # RemoteInputSignal : list = field(default_factory=list)  # Type M:0..n in CIM
+    TopologicalNode: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.TP,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    ConductingEquipment: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=Terminal"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ConnectivityNode: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # ConverterDCSides : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # AuxiliaryEquipment : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # RegulatingControl : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    phases: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # TransformerEnd : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    # *Association not used*
+    # Type M:0..2 in CIM  # pylint: disable-next=line-too-long
+    # TieFlow : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # HasSecondMutualCoupling : list = Field(default_factory=list, in_profiles = [Profile.SC, ])
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # HasFirstMutualCoupling : list = Field(default_factory=list, in_profiles = [Profile.SC, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # SvPowerFlow : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # RemoteInputSignal : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.TP.value,
-                Profile.EQBD.value,
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SV.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-                Profile.OP.value,
-            ],
-            # Attributes
-            "TopologicalNode": [
-                Profile.TP.value,
-            ],
-            "ConductingEquipment": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-                Profile.DY.value,
-            ],
-            "ConnectivityNode": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "ConverterDCSides": [
-                Profile.EQ.value,
-            ],
-            "AuxiliaryEquipment": [
-                Profile.EQ.value,
-            ],
-            "RegulatingControl": [
-                Profile.EQ.value,
-            ],
-            "phases": [
-                Profile.EQ.value,
-            ],
-            "TransformerEnd": [
-                Profile.EQ.value,
-            ],
-            "TieFlow": [
-                Profile.EQ.value,
-            ],
-            "HasSecondMutualCoupling": [
-                Profile.SC.value,
-            ],
-            "HasFirstMutualCoupling": [
-                Profile.SC.value,
-            ],
-            "SvPowerFlow": [
-                Profile.SV.value,
-            ],
-            "RemoteInputSignal": [
-                Profile.DY.value,
-            ],
+            Profile.TP,
+            Profile.EQBD,
+            Profile.EQ,
+            Profile.SC,
+            Profile.SV,
+            Profile.SSH,
+            Profile.DY,
+            Profile.OP,
         }

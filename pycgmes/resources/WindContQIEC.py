@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -44,121 +44,177 @@ class WindContQIEC(IdentifiedObject):
     WindTurbineType3or4IEC: Wind turbine type 3 or type 4 model with which this reactive control model is associated.
     """
 
-    iqh1: float = 0.0  # Type #PU in CIM
-    iqmax: float = 0.0  # Type #PU in CIM
-    iqmin: float = 0.0  # Type #PU in CIM
-    iqpost: float = 0.0  # Type #PU in CIM
-    kiq: float = 0.0  # Type #PU in CIM
-    kiu: float = 0.0  # Type #PU in CIM
-    kpq: float = 0.0  # Type #PU in CIM
-    kpu: float = 0.0  # Type #PU in CIM
-    kqv: float = 0.0  # Type #PU in CIM
-    tpfiltq: int = 0  # Type #Seconds in CIM
-    rdroop: float = 0.0  # Type #PU in CIM
-    tufiltq: int = 0  # Type #Seconds in CIM
-    tpost: int = 0  # Type #Seconds in CIM
-    tqord: int = 0  # Type #Seconds in CIM
-    udb1: float = 0.0  # Type #PU in CIM
-    udb2: float = 0.0  # Type #PU in CIM
-    umax: float = 0.0  # Type #PU in CIM
-    umin: float = 0.0  # Type #PU in CIM
-    uqdip: float = 0.0  # Type #PU in CIM
-    uref0: float = 0.0  # Type #PU in CIM
-    windQcontrolModesType: Optional[str] = None  # Type M:1..1 in CIM
-    windUVRTQcontrolModesType: Optional[str] = None  # Type M:1..1 in CIM
-    xdroop: float = 0.0  # Type #PU in CIM
+    iqh1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    iqmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    iqmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    iqpost: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kiq: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kiu: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpq: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kpu: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kqv: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpfiltq: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rdroop: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tufiltq: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tpost: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tqord: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    udb1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    udb2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    umax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    umin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    uqdip: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    uref0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    windQcontrolModesType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    windUVRTQcontrolModesType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    xdroop: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
     # *Association not used*
-    # WindTurbineType3or4IEC : Optional[str] = None  # Type M:1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=WindContQIEC"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:1 in CIM  # pylint: disable-next=line-too-long
+    # WindTurbineType3or4IEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "iqh1": [
-                Profile.DY.value,
-            ],
-            "iqmax": [
-                Profile.DY.value,
-            ],
-            "iqmin": [
-                Profile.DY.value,
-            ],
-            "iqpost": [
-                Profile.DY.value,
-            ],
-            "kiq": [
-                Profile.DY.value,
-            ],
-            "kiu": [
-                Profile.DY.value,
-            ],
-            "kpq": [
-                Profile.DY.value,
-            ],
-            "kpu": [
-                Profile.DY.value,
-            ],
-            "kqv": [
-                Profile.DY.value,
-            ],
-            "tpfiltq": [
-                Profile.DY.value,
-            ],
-            "rdroop": [
-                Profile.DY.value,
-            ],
-            "tufiltq": [
-                Profile.DY.value,
-            ],
-            "tpost": [
-                Profile.DY.value,
-            ],
-            "tqord": [
-                Profile.DY.value,
-            ],
-            "udb1": [
-                Profile.DY.value,
-            ],
-            "udb2": [
-                Profile.DY.value,
-            ],
-            "umax": [
-                Profile.DY.value,
-            ],
-            "umin": [
-                Profile.DY.value,
-            ],
-            "uqdip": [
-                Profile.DY.value,
-            ],
-            "uref0": [
-                Profile.DY.value,
-            ],
-            "windQcontrolModesType": [
-                Profile.DY.value,
-            ],
-            "windUVRTQcontrolModesType": [
-                Profile.DY.value,
-            ],
-            "xdroop": [
-                Profile.DY.value,
-            ],
-            "WindTurbineType3or4IEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

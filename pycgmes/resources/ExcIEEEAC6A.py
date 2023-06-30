@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -45,112 +45,166 @@ class ExcIEEEAC6A(ExcitationSystemDynamics):
       (SE[VE2]) (>= 0).  Typical value = 0,044.
     """
 
-    ka: float = 0.0  # Type #PU in CIM
-    ta: int = 0  # Type #Seconds in CIM
-    tk: int = 0  # Type #Seconds in CIM
-    tb: int = 0  # Type #Seconds in CIM
-    tc: int = 0  # Type #Seconds in CIM
-    vamax: float = 0.0  # Type #PU in CIM
-    vamin: float = 0.0  # Type #PU in CIM
-    vrmax: float = 0.0  # Type #PU in CIM
-    vrmin: float = 0.0  # Type #PU in CIM
-    te: int = 0  # Type #Seconds in CIM
-    kh: float = 0.0  # Type #PU in CIM
-    tj: int = 0  # Type #Seconds in CIM
-    th: int = 0  # Type #Seconds in CIM
-    vfelim: float = 0.0  # Type #PU in CIM
-    vhmax: float = 0.0  # Type #PU in CIM
-    kc: float = 0.0  # Type #PU in CIM
-    kd: float = 0.0  # Type #PU in CIM
-    ke: float = 0.0  # Type #PU in CIM
-    ve1: float = 0.0  # Type #PU in CIM
-    seve1: float = 0.0  # Type #Float in CIM
-    ve2: float = 0.0  # Type #PU in CIM
-    seve2: float = 0.0  # Type #Float in CIM
+    ka: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    ta: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcIEEEAC6A"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    tk: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tc: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vamax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vamin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vrmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    te: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kh: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tj: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    th: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vfelim: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vhmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kc: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ke: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ve1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    seve1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ve2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    seve2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "ka": [
-                Profile.DY.value,
-            ],
-            "ta": [
-                Profile.DY.value,
-            ],
-            "tk": [
-                Profile.DY.value,
-            ],
-            "tb": [
-                Profile.DY.value,
-            ],
-            "tc": [
-                Profile.DY.value,
-            ],
-            "vamax": [
-                Profile.DY.value,
-            ],
-            "vamin": [
-                Profile.DY.value,
-            ],
-            "vrmax": [
-                Profile.DY.value,
-            ],
-            "vrmin": [
-                Profile.DY.value,
-            ],
-            "te": [
-                Profile.DY.value,
-            ],
-            "kh": [
-                Profile.DY.value,
-            ],
-            "tj": [
-                Profile.DY.value,
-            ],
-            "th": [
-                Profile.DY.value,
-            ],
-            "vfelim": [
-                Profile.DY.value,
-            ],
-            "vhmax": [
-                Profile.DY.value,
-            ],
-            "kc": [
-                Profile.DY.value,
-            ],
-            "kd": [
-                Profile.DY.value,
-            ],
-            "ke": [
-                Profile.DY.value,
-            ],
-            "ve1": [
-                Profile.DY.value,
-            ],
-            "seve1": [
-                Profile.DY.value,
-            ],
-            "ve2": [
-                Profile.DY.value,
-            ],
-            "seve2": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

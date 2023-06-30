@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ConductingEquipment import ConductingEquipment
@@ -28,54 +28,62 @@ class SeriesCompensator(ConductingEquipment):
       calculations and exchanged only if SeriesCompensator.varistorPresent is true.
     """
 
-    r: float = 0.0  # Type #Resistance in CIM
-    x: float = 0.0  # Type #Reactance in CIM
-    r0: float = 0.0  # Type #Resistance in CIM
-    x0: float = 0.0  # Type #Reactance in CIM
-    varistorPresent: bool = False  # Type #Boolean in CIM
-    varistorRatedCurrent: float = 0.0  # Type #CurrentFlow in CIM
-    varistorVoltageThreshold: float = 0.0  # Type #Voltage in CIM
+    r: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    x: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=SeriesCompensator"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    r0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    varistorPresent: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    varistorRatedCurrent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    varistorVoltageThreshold: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-            ],
-            # Attributes
-            "r": [
-                Profile.EQ.value,
-            ],
-            "x": [
-                Profile.EQ.value,
-            ],
-            "r0": [
-                Profile.SC.value,
-            ],
-            "x0": [
-                Profile.SC.value,
-            ],
-            "varistorPresent": [
-                Profile.SC.value,
-            ],
-            "varistorRatedCurrent": [
-                Profile.SC.value,
-            ],
-            "varistorVoltageThreshold": [
-                Profile.SC.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
         }

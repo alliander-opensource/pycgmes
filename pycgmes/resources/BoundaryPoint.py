@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemResource import PowerSystemResource
@@ -51,70 +51,85 @@ class BoundaryPoint(PowerSystemResource):
     ConnectivityNode: The connectivity node that is designated as a boundary point.
     """
 
-    fromEndIsoCode: str = ""  # Type #String in CIM
-    fromEndName: str = ""  # Type #String in CIM
-    fromEndNameTso: str = ""  # Type #String in CIM
-    toEndIsoCode: str = ""  # Type #String in CIM
-    toEndName: str = ""  # Type #String in CIM
-    toEndNameTso: str = ""  # Type #String in CIM
-    isDirectCurrent: bool = False  # Type #Boolean in CIM
-    isExcludedFromAreaInterchange: bool = False  # Type #Boolean in CIM
-    ConnectivityNode: Optional[str] = None  # Type M:1 in CIM
+    fromEndIsoCode: str = Field(
+        default="",
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    fromEndName: str = Field(
+        default="",
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=BoundaryPoint"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    fromEndNameTso: str = Field(
+        default="",
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
+
+    toEndIsoCode: str = Field(
+        default="",
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
+
+    toEndName: str = Field(
+        default="",
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
+
+    toEndNameTso: str = Field(
+        default="",
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
+
+    isDirectCurrent: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
+
+    isExcludedFromAreaInterchange: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
+
+    ConnectivityNode: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQBD,
+            Profile.EQ,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            # Attributes
-            "fromEndIsoCode": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "fromEndName": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "fromEndNameTso": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "toEndIsoCode": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "toEndName": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "toEndNameTso": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "isDirectCurrent": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "isExcludedFromAreaInterchange": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
-            "ConnectivityNode": [
-                Profile.EQBD.value,
-                Profile.EQ.value,
-            ],
+            Profile.EQBD,
+            Profile.EQ,
         }

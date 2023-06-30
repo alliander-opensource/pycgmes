@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
@@ -47,132 +47,201 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
     vstmin: Stabilizer output minimum limit (Vstmin) (< PssIEEE2B.vstmax).  Typical value = -0,1.
     """
 
-    inputSignal1Type: Optional[str] = None  # Type M:1..1 in CIM
-    inputSignal2Type: Optional[str] = None  # Type M:1..1 in CIM
-    vsi1max: float = 0.0  # Type #PU in CIM
-    vsi1min: float = 0.0  # Type #PU in CIM
-    tw1: int = 0  # Type #Seconds in CIM
-    tw2: int = 0  # Type #Seconds in CIM
-    vsi2max: float = 0.0  # Type #PU in CIM
-    vsi2min: float = 0.0  # Type #PU in CIM
-    tw3: int = 0  # Type #Seconds in CIM
-    tw4: int = 0  # Type #Seconds in CIM
-    t1: int = 0  # Type #Seconds in CIM
-    t2: int = 0  # Type #Seconds in CIM
-    t3: int = 0  # Type #Seconds in CIM
-    t4: int = 0  # Type #Seconds in CIM
-    t6: int = 0  # Type #Seconds in CIM
-    t7: int = 0  # Type #Seconds in CIM
-    t8: int = 0  # Type #Seconds in CIM
-    t9: int = 0  # Type #Seconds in CIM
-    t10: int = 0  # Type #Seconds in CIM
-    t11: int = 0  # Type #Seconds in CIM
-    ks1: float = 0.0  # Type #PU in CIM
-    ks2: float = 0.0  # Type #PU in CIM
-    ks3: float = 0.0  # Type #PU in CIM
-    n: int = 0  # Type #Integer in CIM
-    m: int = 0  # Type #Integer in CIM
-    vstmax: float = 0.0  # Type #PU in CIM
-    vstmin: float = 0.0  # Type #PU in CIM
+    inputSignal1Type: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    inputSignal2Type: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PssIEEE2B"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    vsi1max: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsi1min: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsi2max: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsi2min: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tw4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t6: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t7: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t8: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t9: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t10: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t11: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ks1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ks2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    ks3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    n: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    m: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vstmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vstmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "inputSignal1Type": [
-                Profile.DY.value,
-            ],
-            "inputSignal2Type": [
-                Profile.DY.value,
-            ],
-            "vsi1max": [
-                Profile.DY.value,
-            ],
-            "vsi1min": [
-                Profile.DY.value,
-            ],
-            "tw1": [
-                Profile.DY.value,
-            ],
-            "tw2": [
-                Profile.DY.value,
-            ],
-            "vsi2max": [
-                Profile.DY.value,
-            ],
-            "vsi2min": [
-                Profile.DY.value,
-            ],
-            "tw3": [
-                Profile.DY.value,
-            ],
-            "tw4": [
-                Profile.DY.value,
-            ],
-            "t1": [
-                Profile.DY.value,
-            ],
-            "t2": [
-                Profile.DY.value,
-            ],
-            "t3": [
-                Profile.DY.value,
-            ],
-            "t4": [
-                Profile.DY.value,
-            ],
-            "t6": [
-                Profile.DY.value,
-            ],
-            "t7": [
-                Profile.DY.value,
-            ],
-            "t8": [
-                Profile.DY.value,
-            ],
-            "t9": [
-                Profile.DY.value,
-            ],
-            "t10": [
-                Profile.DY.value,
-            ],
-            "t11": [
-                Profile.DY.value,
-            ],
-            "ks1": [
-                Profile.DY.value,
-            ],
-            "ks2": [
-                Profile.DY.value,
-            ],
-            "ks3": [
-                Profile.DY.value,
-            ],
-            "n": [
-                Profile.DY.value,
-            ],
-            "m": [
-                Profile.DY.value,
-            ],
-            "vstmax": [
-                Profile.DY.value,
-            ],
-            "vstmin": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .RotatingMachine import RotatingMachine
@@ -60,121 +60,173 @@ class SynchronousMachine(RotatingMachine):
       synchronous machine.
     """
 
-    InitialReactiveCapabilityCurve: Optional[str] = None  # Type M:0..1 in CIM
-    maxQ: float = 0.0  # Type #ReactivePower in CIM
-    minQ: float = 0.0  # Type #ReactivePower in CIM
-    qPercent: float = 0.0  # Type #PerCent in CIM
-    type: Optional[str] = None  # Type M:1..1 in CIM
-    earthing: bool = False  # Type #Boolean in CIM
-    earthingStarPointR: float = 0.0  # Type #Resistance in CIM
-    earthingStarPointX: float = 0.0  # Type #Reactance in CIM
-    ikk: float = 0.0  # Type #CurrentFlow in CIM
-    mu: float = 0.0  # Type #Float in CIM
-    x0: float = 0.0  # Type #Reactance in CIM
-    r0: float = 0.0  # Type #Resistance in CIM
-    x2: float = 0.0  # Type #Reactance in CIM
-    r2: float = 0.0  # Type #Resistance in CIM
-    r: float = 0.0  # Type #Resistance in CIM
-    satDirectSubtransX: float = 0.0  # Type #PU in CIM
-    satDirectSyncX: float = 0.0  # Type #PU in CIM
-    satDirectTransX: float = 0.0  # Type #PU in CIM
-    shortCircuitRotorType: Optional[str] = None  # Type M:0..1 in CIM
-    voltageRegulationRange: float = 0.0  # Type #PerCent in CIM
-    operatingMode: Optional[str] = None  # Type M:1..1 in CIM
-    referencePriority: int = 0  # Type #Integer in CIM
+    InitialReactiveCapabilityCurve: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    maxQ: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    minQ: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    qPercent: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    type: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    earthing: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    earthingStarPointR: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    earthingStarPointX: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    ikk: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    mu: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    r0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    r2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    r: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    satDirectSubtransX: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    satDirectSyncX: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    satDirectTransX: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    shortCircuitRotorType: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    voltageRegulationRange: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    operatingMode: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    referencePriority: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
     # *Association not used*
-    # SynchronousMachineDynamics : Optional[str] = None  # Type M:0..1 in CIM
-
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=SynchronousMachine"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # SynchronousMachineDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SSH.value,
-                Profile.DY.value,
-            ],
-            # Attributes
-            "InitialReactiveCapabilityCurve": [
-                Profile.EQ.value,
-            ],
-            "maxQ": [
-                Profile.EQ.value,
-            ],
-            "minQ": [
-                Profile.EQ.value,
-            ],
-            "qPercent": [
-                Profile.EQ.value,
-            ],
-            "type": [
-                Profile.EQ.value,
-            ],
-            "earthing": [
-                Profile.SC.value,
-            ],
-            "earthingStarPointR": [
-                Profile.SC.value,
-            ],
-            "earthingStarPointX": [
-                Profile.SC.value,
-            ],
-            "ikk": [
-                Profile.SC.value,
-            ],
-            "mu": [
-                Profile.SC.value,
-            ],
-            "x0": [
-                Profile.SC.value,
-            ],
-            "r0": [
-                Profile.SC.value,
-            ],
-            "x2": [
-                Profile.SC.value,
-            ],
-            "r2": [
-                Profile.SC.value,
-            ],
-            "r": [
-                Profile.SC.value,
-            ],
-            "satDirectSubtransX": [
-                Profile.SC.value,
-            ],
-            "satDirectSyncX": [
-                Profile.SC.value,
-            ],
-            "satDirectTransX": [
-                Profile.SC.value,
-            ],
-            "shortCircuitRotorType": [
-                Profile.SC.value,
-            ],
-            "voltageRegulationRange": [
-                Profile.SC.value,
-            ],
-            "operatingMode": [
-                Profile.SSH.value,
-            ],
-            "referencePriority": [
-                Profile.SSH.value,
-            ],
-            "SynchronousMachineDynamics": [
-                Profile.DY.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
+            Profile.SSH,
+            Profile.DY,
         }

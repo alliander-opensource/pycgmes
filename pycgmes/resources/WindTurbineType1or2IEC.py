@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .WindTurbineType1or2Dynamics import WindTurbineType1or2Dynamics
@@ -21,33 +21,26 @@ class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics):
     WindProtectionIEC: Wind turbune protection model associated with this wind generator type 1 or type 2 model.
     """
 
-    WindMechIEC: Optional[str] = None  # Type M:1 in CIM
-    WindProtectionIEC: Optional[str] = None  # Type M:1 in CIM
+    WindMechIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=WindTurbineType1or2IEC"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    WindProtectionIEC: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "WindMechIEC": [
-                Profile.DY.value,
-            ],
-            "WindProtectionIEC": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

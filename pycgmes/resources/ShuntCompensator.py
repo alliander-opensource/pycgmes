@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .RegulatingCondEq import RegulatingCondEq
@@ -39,61 +39,68 @@ class ShuntCompensator(RegulatingCondEq):
       NonlinearShuntCompenstorPoint-s.
     """
 
-    aVRDelay: int = 0  # Type #Seconds in CIM
-    grounded: bool = False  # Type #Boolean in CIM
-    maximumSections: int = 0  # Type #Integer in CIM
-    nomU: float = 0.0  # Type #Voltage in CIM
-    normalSections: int = 0  # Type #Integer in CIM
-    voltageSensitivity: float = 0.0  # Type #VoltagePerReactivePower in CIM
+    aVRDelay: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    grounded: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    maximumSections: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    nomU: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    normalSections: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    voltageSensitivity: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
     # *Association not used*
-    # SvShuntCompensatorSections : Optional[str] = None  # Type M:0..1 in CIM
-    sections: float = 0.0  # Type #Float in CIM
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # SvShuntCompensatorSections : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=ShuntCompensator"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    sections: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SV.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "aVRDelay": [
-                Profile.EQ.value,
-            ],
-            "grounded": [
-                Profile.EQ.value,
-            ],
-            "maximumSections": [
-                Profile.EQ.value,
-            ],
-            "nomU": [
-                Profile.EQ.value,
-            ],
-            "normalSections": [
-                Profile.EQ.value,
-            ],
-            "voltageSensitivity": [
-                Profile.EQ.value,
-            ],
-            "SvShuntCompensatorSections": [
-                Profile.SV.value,
-            ],
-            "sections": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
+            Profile.SV,
+            Profile.SSH,
         }

@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
@@ -32,76 +32,103 @@ class PssSH(PowerSystemStabilizerDynamics):
     vsmin: Output minimum limit (Vsmin) (< PssSH.vsmax).  Typical value = -0,1.
     """
 
-    k: float = 0.0  # Type #PU in CIM
-    k0: float = 0.0  # Type #PU in CIM
-    k1: float = 0.0  # Type #PU in CIM
-    k2: float = 0.0  # Type #PU in CIM
-    k3: float = 0.0  # Type #PU in CIM
-    k4: float = 0.0  # Type #PU in CIM
-    td: int = 0  # Type #Seconds in CIM
-    t1: int = 0  # Type #Seconds in CIM
-    t2: int = 0  # Type #Seconds in CIM
-    t3: int = 0  # Type #Seconds in CIM
-    t4: int = 0  # Type #Seconds in CIM
-    vsmax: float = 0.0  # Type #PU in CIM
-    vsmin: float = 0.0  # Type #PU in CIM
+    k: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    k0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=PssSH"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    k1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k4: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    td: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vsmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "k": [
-                Profile.DY.value,
-            ],
-            "k0": [
-                Profile.DY.value,
-            ],
-            "k1": [
-                Profile.DY.value,
-            ],
-            "k2": [
-                Profile.DY.value,
-            ],
-            "k3": [
-                Profile.DY.value,
-            ],
-            "k4": [
-                Profile.DY.value,
-            ],
-            "td": [
-                Profile.DY.value,
-            ],
-            "t1": [
-                Profile.DY.value,
-            ],
-            "t2": [
-                Profile.DY.value,
-            ],
-            "t3": [
-                Profile.DY.value,
-            ],
-            "t4": [
-                Profile.DY.value,
-            ],
-            "vsmax": [
-                Profile.DY.value,
-            ],
-            "vsmin": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

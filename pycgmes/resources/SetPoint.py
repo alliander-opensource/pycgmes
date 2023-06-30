@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .AnalogControl import AnalogControl
@@ -18,32 +18,26 @@ class SetPoint(AnalogControl):
     value: The value representing the actuator output.
     """
 
-    normalValue: float = 0.0  # Type #Float in CIM
-    value: float = 0.0  # Type #Float in CIM
+    normalValue: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
-
-        return "\n".join(
-            ["class=SetPoint"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    value: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.OP,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.OP.value,
-            ],
-            # Attributes
-            "normalValue": [
-                Profile.OP.value,
-            ],
-            "value": [
-                Profile.OP.value,
-            ],
+            Profile.OP,
         }

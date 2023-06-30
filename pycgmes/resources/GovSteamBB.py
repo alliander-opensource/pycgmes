@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
@@ -34,92 +34,131 @@ class GovSteamBB(TurbineGovernorDynamics):
       value = false.
     """
 
-    fcut: float = 0.0  # Type #PU in CIM
-    ks: float = 0.0  # Type #PU in CIM
-    kls: float = 0.0  # Type #PU in CIM
-    kg: float = 0.0  # Type #PU in CIM
-    t1: int = 0  # Type #Seconds in CIM
-    kp: float = 0.0  # Type #PU in CIM
-    tn: int = 0  # Type #Seconds in CIM
-    kd: float = 0.0  # Type #PU in CIM
-    td: int = 0  # Type #Seconds in CIM
-    pmax: float = 0.0  # Type #PU in CIM
-    pmin: float = 0.0  # Type #PU in CIM
-    t4: int = 0  # Type #Seconds in CIM
-    k2: float = 0.0  # Type #PU in CIM
-    t5: int = 0  # Type #Seconds in CIM
-    k3: float = 0.0  # Type #PU in CIM
-    t6: int = 0  # Type #Seconds in CIM
-    peflag: bool = False  # Type #Boolean in CIM
+    fcut: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    ks: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=GovSteamBB"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    kls: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kg: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kp: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    tn: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    td: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    pmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t4: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t5: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    k3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t6: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    peflag: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "fcut": [
-                Profile.DY.value,
-            ],
-            "ks": [
-                Profile.DY.value,
-            ],
-            "kls": [
-                Profile.DY.value,
-            ],
-            "kg": [
-                Profile.DY.value,
-            ],
-            "t1": [
-                Profile.DY.value,
-            ],
-            "kp": [
-                Profile.DY.value,
-            ],
-            "tn": [
-                Profile.DY.value,
-            ],
-            "kd": [
-                Profile.DY.value,
-            ],
-            "td": [
-                Profile.DY.value,
-            ],
-            "pmax": [
-                Profile.DY.value,
-            ],
-            "pmin": [
-                Profile.DY.value,
-            ],
-            "t4": [
-                Profile.DY.value,
-            ],
-            "k2": [
-                Profile.DY.value,
-            ],
-            "t5": [
-                Profile.DY.value,
-            ],
-            "k3": [
-                Profile.DY.value,
-            ],
-            "t6": [
-                Profile.DY.value,
-            ],
-            "peflag": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

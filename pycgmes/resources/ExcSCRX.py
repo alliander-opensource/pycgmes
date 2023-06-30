@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
@@ -26,56 +26,68 @@ class ExcSCRX(ExcitationSystemDynamics):
     rcrfd: Ratio of field discharge resistance to field winding resistance ([rc / rfd]).  Typical value = 0.
     """
 
-    tatb: float = 0.0  # Type #Float in CIM
-    tb: int = 0  # Type #Seconds in CIM
-    k: float = 0.0  # Type #PU in CIM
-    te: int = 0  # Type #Seconds in CIM
-    emin: float = 0.0  # Type #PU in CIM
-    emax: float = 0.0  # Type #PU in CIM
-    cswitch: bool = False  # Type #Boolean in CIM
-    rcrfd: float = 0.0  # Type #Float in CIM
+    tatb: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    tb: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=ExcSCRX"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    k: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    te: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    emin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    emax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    cswitch: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    rcrfd: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "tatb": [
-                Profile.DY.value,
-            ],
-            "tb": [
-                Profile.DY.value,
-            ],
-            "k": [
-                Profile.DY.value,
-            ],
-            "te": [
-                Profile.DY.value,
-            ],
-            "emin": [
-                Profile.DY.value,
-            ],
-            "emax": [
-                Profile.DY.value,
-            ],
-            "cswitch": [
-                Profile.DY.value,
-            ],
-            "rcrfd": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

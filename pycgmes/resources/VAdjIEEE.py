@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .VoltageAdjusterDynamics import VoltageAdjusterDynamics
@@ -23,48 +23,54 @@ class VAdjIEEE(VoltageAdjusterDynamics):
     taoff: Time that adjuster pulses are off (TAOFF) (>= 0).  Typical value = 0,5.
     """
 
-    vadjf: float = 0.0  # Type #Float in CIM
-    adjslew: float = 0.0  # Type #Float in CIM
-    vadjmax: float = 0.0  # Type #PU in CIM
-    vadjmin: float = 0.0  # Type #PU in CIM
-    taon: int = 0  # Type #Seconds in CIM
-    taoff: int = 0  # Type #Seconds in CIM
+    vadjf: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    adjslew: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=VAdjIEEE"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    vadjmax: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vadjmin: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    taon: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    taoff: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "vadjf": [
-                Profile.DY.value,
-            ],
-            "adjslew": [
-                Profile.DY.value,
-            ],
-            "vadjmax": [
-                Profile.DY.value,
-            ],
-            "vadjmin": [
-                Profile.DY.value,
-            ],
-            "taon": [
-                Profile.DY.value,
-            ],
-            "taoff": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

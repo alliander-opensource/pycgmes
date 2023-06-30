@@ -2,8 +2,8 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .OverexcitationLimiterDynamics import OverexcitationLimiterDynamics
@@ -29,64 +29,82 @@ class OverexcLimX1(OverexcitationLimiterDynamics):
     vlow: Low voltage limit (VLOW) (> 0).
     """
 
-    efdrated: float = 0.0  # Type #PU in CIM
-    efd1: float = 0.0  # Type #PU in CIM
-    t1: int = 0  # Type #Seconds in CIM
-    efd2: float = 0.0  # Type #PU in CIM
-    t2: int = 0  # Type #Seconds in CIM
-    efd3: float = 0.0  # Type #PU in CIM
-    t3: int = 0  # Type #Seconds in CIM
-    efddes: float = 0.0  # Type #PU in CIM
-    kmx: float = 0.0  # Type #PU in CIM
-    vlow: float = 0.0  # Type #PU in CIM
+    efdrated: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    efd1: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
-        return "\n".join(
-            ["class=OverexcLimX1"] + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    t1: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    efd2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t2: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    efd3: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    t3: int = Field(
+        default=0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    efddes: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    kmx: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
+
+    vlow: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.DY,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.DY.value,
-            ],
-            # Attributes
-            "efdrated": [
-                Profile.DY.value,
-            ],
-            "efd1": [
-                Profile.DY.value,
-            ],
-            "t1": [
-                Profile.DY.value,
-            ],
-            "efd2": [
-                Profile.DY.value,
-            ],
-            "t2": [
-                Profile.DY.value,
-            ],
-            "efd3": [
-                Profile.DY.value,
-            ],
-            "t3": [
-                Profile.DY.value,
-            ],
-            "efddes": [
-                Profile.DY.value,
-            ],
-            "kmx": [
-                Profile.DY.value,
-            ],
-            "vlow": [
-                Profile.DY.value,
-            ],
+            Profile.DY,
         }

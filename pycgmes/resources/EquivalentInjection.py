@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .EquivalentEquipment import EquivalentEquipment
@@ -48,91 +48,126 @@ class EquivalentInjection(EquivalentEquipment):
       Starting value for steady state solutions.
     """
 
-    maxP: float = 0.0  # Type #ActivePower in CIM
-    maxQ: float = 0.0  # Type #ReactivePower in CIM
-    minP: float = 0.0  # Type #ActivePower in CIM
-    minQ: float = 0.0  # Type #ReactivePower in CIM
-    regulationCapability: bool = False  # Type #Boolean in CIM
-    ReactiveCapabilityCurve: Optional[str] = None  # Type M:0..1 in CIM
-    r: float = 0.0  # Type #Resistance in CIM
-    r0: float = 0.0  # Type #Resistance in CIM
-    r2: float = 0.0  # Type #Resistance in CIM
-    x: float = 0.0  # Type #Reactance in CIM
-    x0: float = 0.0  # Type #Reactance in CIM
-    x2: float = 0.0  # Type #Reactance in CIM
-    regulationStatus: bool = False  # Type #Boolean in CIM
-    regulationTarget: float = 0.0  # Type #Voltage in CIM
-    p: float = 0.0  # Type #ActivePower in CIM
-    q: float = 0.0  # Type #ReactivePower in CIM
+    maxP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    maxQ: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
 
-        return "\n".join(
-            ["class=EquivalentInjection"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    minP: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    minQ: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    regulationCapability: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    ReactiveCapabilityCurve: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+
+    r: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    r0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    r2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x0: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    x2: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SC,
+        ],
+    )
+
+    regulationStatus: bool = Field(
+        default=False,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    regulationTarget: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    p: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
+
+    q: float = Field(
+        default=0.0,
+        in_profiles=[
+            Profile.SSH,
+        ],
+    )
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.EQ.value,
-                Profile.SC.value,
-                Profile.SSH.value,
-            ],
-            # Attributes
-            "maxP": [
-                Profile.EQ.value,
-            ],
-            "maxQ": [
-                Profile.EQ.value,
-            ],
-            "minP": [
-                Profile.EQ.value,
-            ],
-            "minQ": [
-                Profile.EQ.value,
-            ],
-            "regulationCapability": [
-                Profile.EQ.value,
-            ],
-            "ReactiveCapabilityCurve": [
-                Profile.EQ.value,
-            ],
-            "r": [
-                Profile.SC.value,
-            ],
-            "r0": [
-                Profile.SC.value,
-            ],
-            "r2": [
-                Profile.SC.value,
-            ],
-            "x": [
-                Profile.SC.value,
-            ],
-            "x0": [
-                Profile.SC.value,
-            ],
-            "x2": [
-                Profile.SC.value,
-            ],
-            "regulationStatus": [
-                Profile.SSH.value,
-            ],
-            "regulationTarget": [
-                Profile.SSH.value,
-            ],
-            "p": [
-                Profile.SSH.value,
-            ],
-            "q": [
-                Profile.SSH.value,
-            ],
+            Profile.EQ,
+            Profile.SC,
+            Profile.SSH,
         }

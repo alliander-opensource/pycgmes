@@ -2,9 +2,9 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/Alliander/uno-cimgen/
 """
 
-from dataclasses import fields
 from functools import cached_property
 from typing import Optional
+from pydantic import Field
 from pydantic.dataclasses import dataclass
 from .Base import DataclassConfig, Profile
 from .IdentifiedObject import IdentifiedObject
@@ -35,68 +35,58 @@ class TopologicalNode(IdentifiedObject):
     TopologicalIsland: A topological node belongs to a topological island.
     """
 
-    BaseVoltage: Optional[str] = None  # Type M:1..1 in CIM
-    # *Association not used*
-    # ConnectivityNodes : list = field(default_factory=list)  # Type M:0..n in CIM
-    ConnectivityNodeContainer: Optional[str] = None  # Type M:1 in CIM
-    # *Association not used*
-    # Terminal : list = field(default_factory=list)  # Type M:1..n in CIM
-    ReportingGroup: Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # SvInjection : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # SvVoltage : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # AngleRefTopologicalIsland : Optional[str] = None  # Type M:0..1 in CIM
-    # *Association not used*
-    # TopologicalIsland : Optional[str] = None  # Type M:0..1 in CIM
+    BaseVoltage: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.TP,
+        ],
+    )
 
-    def __str__(self) -> str:
-        """Returns the string represention of this element."""
+    # *Association not used*
+    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
+    # ConnectivityNodes : list = Field(default_factory=list, in_profiles = [Profile.TP, ])
 
-        return "\n".join(
-            ["class=TopologicalNode"]
-            + [f"{field.name}={getattr(self, field.name)}" for field in fields(self.__class__)]
-        )
+    ConnectivityNodeContainer: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.TP,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
+    # Terminal : list = Field(default_factory=list, in_profiles = [Profile.TP, ])
+
+    ReportingGroup: Optional[str] = Field(
+        default=None,
+        in_profiles=[
+            Profile.TP,
+        ],
+    )
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # SvInjection : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # SvVoltage : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # AngleRefTopologicalIsland : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+
+    # *Association not used*
+    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
+    # TopologicalIsland : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
 
     @cached_property
-    def possible_profiles(self) -> dict[str, list]:
+    def possible_profiles(self) -> set[Profile]:
         """
-        A resource can be used by multiple profiles. This is the list of profiles
-        where this element or its attributes can be found.
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
         """
         return {
-            # Class itself
-            "class": [
-                Profile.TP.value,
-                Profile.SV.value,
-            ],
-            # Attributes
-            "BaseVoltage": [
-                Profile.TP.value,
-            ],
-            "ConnectivityNodes": [
-                Profile.TP.value,
-            ],
-            "ConnectivityNodeContainer": [
-                Profile.TP.value,
-            ],
-            "Terminal": [
-                Profile.TP.value,
-            ],
-            "ReportingGroup": [
-                Profile.TP.value,
-            ],
-            "SvInjection": [
-                Profile.SV.value,
-            ],
-            "SvVoltage": [
-                Profile.SV.value,
-            ],
-            "AngleRefTopologicalIsland": [
-                Profile.SV.value,
-            ],
-            "TopologicalIsland": [
-                Profile.SV.value,
-            ],
+            Profile.TP,
+            Profile.SV,
         }
