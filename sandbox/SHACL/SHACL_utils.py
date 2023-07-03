@@ -29,7 +29,6 @@ def plot_graph(graph: Graph) -> None:
 
 
     plt.show()
-    return
 
 
 def search_df_word(dataframe: pd.DataFrame, keyword: str) -> pd.DataFrame:
@@ -50,16 +49,10 @@ def drop_nan_rows_with_keyword(dataframe: pd.DataFrame, keyword: str) -> pd.Data
     return dataframe
 
 
-def column_value_counts(dataframe: pd.DataFrame, keyword: str) -> pd.DataFrame:
-    value_counts = dataframe[keyword].value_counts()
-    return value_counts
-
-
 def plot_value_counts_pie_chart(value_counts: pd.DataFrame) -> None:
     plt.pie(value_counts, labels=value_counts.index, autopct='%1.0f')
     plt.title(f'Value Counts for {value_counts.index.name}')
     plt.show()
-    return
 
 
 
