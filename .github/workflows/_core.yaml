@@ -139,10 +139,12 @@ jobs:
 
       - name: catch publish error
         if: ${{ inputs.deploy }}
-        # It is valid to only have pycgtmes published, only pycgmes-shacl, ot both.
-        # it is tricky to know when which one should be done, so none of them fails,
-        # but this next step look at the outcome of the 2 publish steps and decide if
-        # something was wrong.
+        # It is valid to only have pycgmes published, only pycgmes-shacl, or both.
+        # Both publish steps could fail if they cannot upload, for instance because a version
+        # number was not bumped.
+        # It is tricky to know when one package should be uploaded, so none of those steps fails,
+        # (continue-on-error: true), but this next step looks at the outcome of the 2 publish steps
+        # and decide if something was wrong (ie, if both failed - that is probably not correct).
         # Note: use outcome, not conclusion, because of continue-on-error
         # see https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context
         run: |

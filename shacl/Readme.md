@@ -1,7 +1,9 @@
-# Whys this directory
+# Why this directory
 
 It contains the SHACL build files, only meant to build a second distribution package.
 The CI & co happen in the main poetry/github files.
+
+The main `pycgmes` package does not have the SHACL files.
 
 # Build
 
