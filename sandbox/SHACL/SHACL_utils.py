@@ -39,9 +39,7 @@ def search_df_word(dataframe: pd.DataFrame, keyword: str) -> pd.DataFrame:
 
 
 def drop_nan_cols(dataframe: pd.DataFrame) -> pd.DataFrame:
-    # Drop columns with only NaN values
-    dataframe = dataframe.dropna(axis=1, how='all')
-    return dataframe
+    return dataframe.dropna(axis=1, how='all')
 
 
 def drop_nan_rows_with_keyword(dataframe: pd.DataFrame, keyword: str) -> pd.DataFrame:
