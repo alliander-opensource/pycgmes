@@ -40,13 +40,13 @@ pylint = "*" # Linter
 pytest = "*"
 SCons = "*" # Command runner
 
-[tool.poetry.group.sandbox.dependencies]
-matplotlib = "^3.7.1"
-networkx = "^3.1"
-pandas = "^2.0.2"
-pyshacl = "^0.23.0"
-rdflib = "^6.3.2"
-rdfpandas = "^1.1.6"
+[tool.poetry.group.notebook.dependencies]
+matplotlib = "*"
+networkx = "*"
+pandas = "*"
+pyshacl = "*"
+rdflib = "*"
+rdfpandas = "*"
 
 # yes, the double [[]] is required
 [[tool.poetry.source]]
