@@ -5,7 +5,7 @@ import sys
 from SCons.Script import COMMAND_LINE_TARGETS
 
 _CHECK_ONLY = "check" in COMMAND_LINE_TARGETS
-_SUBJECT = "pycgmes shacl"
+_SUBJECT = "pycgmes"
 _TEST_SUBJECT = "tests"
 # Full path to an environment bin directory.
 # Not needed if an environment is activated or not used (eg. Jenkins).

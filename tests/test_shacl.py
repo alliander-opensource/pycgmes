@@ -1,14 +1,13 @@
 from pathlib import Path
 
 import pytest
-from shacl.pycgmes import shacl
+
+from pycgmes import shacl
 
 
 class Testshacl:
     def test_shacl_data_path_is_correct(self):
-        assert shacl.get_shacl_file_dir().samefile(
-            Path(__file__).parent.parent / "shacl" / "pycgmes" / "shacl" / "datafiles"
-        )
+        assert shacl.get_shacl_file_dir().samefile(Path(__file__).parent.parent / "pycgmes" / "shacl" / "datafiles")
         assert shacl.get_shacl_file_dir().exists
         assert shacl.get_shacl_file_dir().is_dir()
 

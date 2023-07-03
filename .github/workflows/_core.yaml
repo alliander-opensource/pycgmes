@@ -108,8 +108,9 @@ jobs:
 
       - name: poetry build pycgmes-shacl
         run: |
-          cd SHACL
-          poetry build
+          cd shacl
+          poetry self add poetry-multiproject-plugin
+          poetry build-project --with-top-namespace pycgmes
 
       # PUBLISH NOTE: see comments in the catch step.
       - name: poetry publish pycgmes
@@ -133,7 +134,7 @@ jobs:
           UNO_NEXUS_USER: ${{ secrets.UNO_NEXUS_USER }}
         run: |
           # Config done in previous step
-          cd SHACL
+          cd shacl
           poetry publish --repository internal-uno
 
       - name: catch publish error
