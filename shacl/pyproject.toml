@@ -22,8 +22,8 @@ classifiers = [
     # "License :: OSI Approved :: MIT License",
 ]
 
-include = ["./datafiles"]
-packages = [{ "include" = "__init__.py" }]
+include = ["./pycgmes"]
+packages = [{ "include" = "__init__.py", from = "pycgmes/SHACL" }]
 
 
 [tool.poetry.dependencies]

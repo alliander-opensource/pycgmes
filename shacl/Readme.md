@@ -3,3 +3,5 @@ The CI & co happen in the main poetry/github files.
 
 To build pycgmes-shacl with `poetry build`, you **need to** be in the SHACL directory. Using `-C` will not work
 because of some relative paths.
+
+The weird directory structure (including pycgmes a second time) is to have the distribution package in a good module.
