@@ -33,8 +33,10 @@ Older versions could be found on the [Entsoe site](https://www.entsoe.eu/data/ci
 ### Shacl files
 
 [Shapes constraint Language](https://en.wikipedia.org/wiki/SHACL) is used for validation of the actual content of the
-CGMES files, not just XML validation. They can be found in [SHACL](./SHACL/). This is the new validation standard. OCL
+CGMES files, not just XML validation. They can be found in [shacl](./pycgmes/shacl). This is the new validation standard. OCL
 is referenced, specially with older versions, but Entsoe is moving away from it.
+
+To use them, there is another package `pycmges-shacl`, built from this repo as well.
 
 ### V3 source
 
