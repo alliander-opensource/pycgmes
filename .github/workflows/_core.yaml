@@ -102,6 +102,9 @@ jobs:
       - name: scons coverage
         if: ${{ ! inputs._SKIP_QUALITY }}
         run: poetry run scons coverage
+      - name: check rdf indentation
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: bash ./scripts/check_indent_rdf.sh
 
       - name: poetry build pycgmes
         run: poetry build
