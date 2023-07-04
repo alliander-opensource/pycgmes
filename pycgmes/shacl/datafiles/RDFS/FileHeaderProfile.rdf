@@ -1,21 +1,5 @@
 <?xml version="1.0"?>
-<rdf:RDF
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:fh="http://iec.ch/TC57/61970-552/ModelDescription/Constraints#"
-    xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#"
-    xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:dct="http://purl.org/dc/terms/"
-    xmlns:dm="http://iec.ch/TC57/61970-552/DifferenceModel/1#"
-    xmlns:eu="http://iec.ch/TC57/CIM100-European#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:ido="http://iec.ch/TC57/ns/CIM/IdentifiedObject/constraints/3.0#"
-    xmlns:sh="http://www.w3.org/ns/shacl#"
-    xmlns:dcat="http://www.w3.org/ns/dcat#"
-    xmlns:cim="http://iec.ch/TC57/CIM100#"
-    xmlns:dash="http://datashapes.org/dash#"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-  xml:base="http://iec.ch/TC57/61970-552/ModelDescription/Constraints" > 
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:fh="http://iec.ch/TC57/61970-552/ModelDescription/Constraints#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#" xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dct="http://purl.org/dc/terms/" xmlns:dm="http://iec.ch/TC57/61970-552/DifferenceModel/1#" xmlns:eu="http://iec.ch/TC57/CIM100-European#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:ido="http://iec.ch/TC57/ns/CIM/IdentifiedObject/constraints/3.0#" xmlns:sh="http://www.w3.org/ns/shacl#" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:dash="http://datashapes.org/dash#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xml:base="http://iec.ch/TC57/61970-552/ModelDescription/Constraints">
   <rdf:Description rdf:about="#Model.DependentOn-valueType">
     <sh:in rdf:nodeID="A0"/>
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#PropertyShape"/>
