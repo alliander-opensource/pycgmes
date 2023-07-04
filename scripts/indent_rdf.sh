@@ -11,6 +11,7 @@ fi
 shopt -s globstar # enable the ** construct
 for rdf in  **/*.rdf; do
     echo "$rdf"
+    # xmllint cannot update in place, so output in a temporary file and rename. 
     xmllint --format $rdf --output ${rdf}.2
     mv ${rdf}.2 $rdf
 done

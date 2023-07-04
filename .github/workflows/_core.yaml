@@ -54,6 +54,14 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
+      ####### REMOVE
+      - name: check rdf indentation
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: bash ./scripts/check_indent_rdf.sh
+
+      - name: stop
+        run: exit 1
+      ####### END OF REMOVE
       - name: Setup python
         uses: actions/setup-python@v4
         with:
