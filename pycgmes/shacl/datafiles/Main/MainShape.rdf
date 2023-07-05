@@ -1,22 +1,5 @@
 <?xml version="1.0"?>
-<rdf:RDF
-    xmlns:dl="http://iec.ch/TC57/ns/CIM/DiagramLayout-EU/Constraints#"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:dy="http://iec.ch/TC57/ns/CIM/Dynamics-EU/Constraints#"
-    xmlns:main="http://iec.ch/TC57/ns/CIM/CGMES/Constraints/main/3.0#"
-    xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:dct="http://purl.org/dc/terms/"
-    xmlns:sv="http://iec.ch/TC57/ns/CIM/StateVariables-EU/Constraints#"
-    xmlns:eu="http://iec.ch/TC57/CIM100-European#"
-    xmlns:op="http://iec.ch/TC57/ns/CIM/Operation-EU/Constraints#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:sh="http://www.w3.org/ns/shacl#"
-    xmlns:dcat="http://www.w3.org/ns/dcat#"
-    xmlns:cim="http://iec.ch/TC57/CIM100#"
-    xmlns:dash="http://datashapes.org/dash#"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-  xml:base="http://iec.ch/TC57/ns/CIM/CGMES/Constraints/main/3.0" > 
+<rdf:RDF xmlns:dl="http://iec.ch/TC57/ns/CIM/DiagramLayout-EU/Constraints#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dy="http://iec.ch/TC57/ns/CIM/Dynamics-EU/Constraints#" xmlns:main="http://iec.ch/TC57/ns/CIM/CGMES/Constraints/main/3.0#" xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dct="http://purl.org/dc/terms/" xmlns:sv="http://iec.ch/TC57/ns/CIM/StateVariables-EU/Constraints#" xmlns:eu="http://iec.ch/TC57/CIM100-European#" xmlns:op="http://iec.ch/TC57/ns/CIM/Operation-EU/Constraints#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:sh="http://www.w3.org/ns/shacl#" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:dash="http://datashapes.org/dash#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xml:base="http://iec.ch/TC57/ns/CIM/CGMES/Constraints/main/3.0">
   <rdf:Description rdf:about="http://iec.ch/TC57/ns/CIM/Dynamics-EU/Constraints#EnergyConsumer.LoadDynamics-valueTypeNodeShape">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#NodeShape"/>
     <sh:deactivated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</sh:deactivated>

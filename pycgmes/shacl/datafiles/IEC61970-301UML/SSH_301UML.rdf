@@ -1,18 +1,5 @@
 <?xml version="1.0"?>
-<rdf:RDF
-    xmlns:dct="http://purl.org/dc/terms/"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:eu="http://iec.ch/TC57/CIM100-European#"
-    xmlns:sshu="http://iec.ch/TC57/ns/CIM/SteadyStateHypothesis-EU/constraints/IEC61970-301/3.0#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#"
-    xmlns:sh="http://www.w3.org/ns/shacl#"
-    xmlns:dcat="http://www.w3.org/ns/dcat#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:cim="http://iec.ch/TC57/CIM100#"
-    xmlns:dash="http://datashapes.org/dash#"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-  xml:base="http://iec.ch/TC57/ns/CIM/SteadyStateHypothesis-EU/constraints/IEC61970-301/3.0" > 
+<rdf:RDF xmlns:dct="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:eu="http://iec.ch/TC57/CIM100-European#" xmlns:sshu="http://iec.ch/TC57/ns/CIM/SteadyStateHypothesis-EU/constraints/IEC61970-301/3.0#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#" xmlns:sh="http://www.w3.org/ns/shacl#" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:dash="http://datashapes.org/dash#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xml:base="http://iec.ch/TC57/ns/CIM/SteadyStateHypothesis-EU/constraints/IEC61970-301/3.0">
   <rdf:Description rdf:about="#CsConverter.minGamma-valueRangeTypical">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#PropertyShape"/>
     <sh:description>The attributes minGamma and maxGamma define the range of extinction angles for inverter operation between which no discrete tap changer action takes place. The range is typically 17-20 degrees.</sh:description>
@@ -171,7 +158,7 @@
   <rdf:Description rdf:about="#RegulatingControl.targetDeadband-applicability">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#PropertyShape"/>
     <sh:sparql rdf:resource="#RegulatingControl.targetDeadband-applicabilitySparql"/>
-    <sh:description>This is a deadband used with discrete control to avoid excessive update of controls like tap changers and shunt compensator banks while regulating.…If RegulatingControl.discrete is set to false, the RegulatingControl.targetDeadband is to be ignored.</sh:description>
+    <sh:description>This is a deadband used with discrete control to avoid excessive update of controls like tap changers and shunt compensator banks while regulating.&#x2026;If RegulatingControl.discrete is set to false, the RegulatingControl.targetDeadband is to be ignored.</sh:description>
     <sh:name>C:301:SSH:RegulatingControl.targetDeadband:applicability</sh:name>
     <sh:path rdf:resource="http://iec.ch/TC57/CIM100#RegulatingControl.discrete"/>
     <sh:group rdf:resource="#ValueConstraintsGroup"/>

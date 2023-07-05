@@ -1,18 +1,5 @@
 <?xml version="1.0"?>
-<rdf:RDF
-    xmlns:dct="http://purl.org/dc/terms/"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:eu="http://iec.ch/TC57/CIM100-European#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:eq452="http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/IEC61970-452/3.0#"
-    xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#"
-    xmlns:sh="http://www.w3.org/ns/shacl#"
-    xmlns:dcat="http://www.w3.org/ns/dcat#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:cim="http://iec.ch/TC57/CIM100#"
-    xmlns:dash="http://datashapes.org/dash#"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-  xml:base="http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/IEC61970-452/3.0" > 
+<rdf:RDF xmlns:dct="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:eu="http://iec.ch/TC57/CIM100-European#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:eq452="http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/IEC61970-452/3.0#" xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#" xmlns:sh="http://www.w3.org/ns/shacl#" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:dash="http://datashapes.org/dash#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xml:base="http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/IEC61970-452/3.0">
   <rdf:Description rdf:nodeID="A0">
     <rdf:first>Sunday</rdf:first>
     <rdf:rest rdf:nodeID="A1"/>
@@ -1780,7 +1767,7 @@
   </rdf:Description>
   <rdf:Description rdf:about="#OperationalLimitSet-limitsSparql">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
-    <sh:message>Either OperationalLimitSet.Equipment is not provided for a Terminal that is associated with AuxiliaryEquipment or in case of ConductingEquipment the OperationalLimitSet.Terminal is not one of the the ConductingEquipment’s Terminal-s.</sh:message>
+    <sh:message>Either OperationalLimitSet.Equipment is not provided for a Terminal that is associated with AuxiliaryEquipment or in case of ConductingEquipment the OperationalLimitSet.Terminal is not one of the the ConductingEquipment&#x2019;s Terminal-s.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
     <sh:select>
 	      SELECT DISTINCT $this ?value
@@ -2191,7 +2178,7 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#PropertyShape"/>
     <sh:sparql rdf:resource="#OperationalLimitSet-limitsSparql"/>
     <sh:path rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"/>
-    <sh:description>In case the OperationalLimitSet is the operational limit of the AuxiliaryEquipment, then the association end OperationalLimitSet.Equipment is also required. In the case where OperationalLimitSet.Equipment is associated with an instance of ConductingEquipment, OperationalLimitSet.Terminal shall be one of the ConductingEquipment’s Terminal-s.</sh:description>
+    <sh:description>In case the OperationalLimitSet is the operational limit of the AuxiliaryEquipment, then the association end OperationalLimitSet.Equipment is also required. In the case where OperationalLimitSet.Equipment is associated with an instance of ConductingEquipment, OperationalLimitSet.Terminal shall be one of the ConductingEquipment&#x2019;s Terminal-s.</sh:description>
     <sh:name>C:452:EQ:OperationalLimitSet:limits</sh:name>
     <sh:order rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">34</sh:order>
     <sh:group rdf:resource="#EQ452"/>

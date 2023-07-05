@@ -1,18 +1,5 @@
 <?xml version="1.0"?>
-<rdf:RDF
-    xmlns:dct="http://purl.org/dc/terms/"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:eu="http://iec.ch/TC57/CIM100-European#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:eqn600="http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/IEC61970-600/notSolved/3.0#"
-    xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#"
-    xmlns:sh="http://www.w3.org/ns/shacl#"
-    xmlns:dcat="http://www.w3.org/ns/dcat#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:cim="http://iec.ch/TC57/CIM100#"
-    xmlns:dash="http://datashapes.org/dash#"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-  xml:base="http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/IEC61970-600/notSolved/3.0" > 
+<rdf:RDF xmlns:dct="http://purl.org/dc/terms/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:eu="http://iec.ch/TC57/CIM100-European#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:eqn600="http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/IEC61970-600/notSolved/3.0#" xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#" xmlns:sh="http://www.w3.org/ns/shacl#" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:dash="http://datashapes.org/dash#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xml:base="http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/IEC61970-600/notSolved/3.0">
   <rdf:Description rdf:about="#EquivalentInjection.regulationCapability-notHVDCSparql">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>EquivalentInjection connects to a BoundaryPoint with flag isDirectCurrent=false (meaning this is not HVDC), but either EquivalentInjection.regulationCapability is set to true or there is a ReactiveCapabilityCurve associated.</sh:message>

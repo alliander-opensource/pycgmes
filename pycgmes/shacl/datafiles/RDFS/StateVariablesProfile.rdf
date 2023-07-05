@@ -1,22 +1,5 @@
 <?xml version="1.0"?>
-<rdf:RDF
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:dct="http://purl.org/dc/terms/"
-    xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns:sv="http://iec.ch/TC57/ns/CIM/StateVariables-EU/Constraints#"
-    xmlns:eu="http://iec.ch/TC57/CIM100-European#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:prof="http://iec.ch/TC57/ns/CIM/prof-cim#"
-    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-    xmlns:ido="http://iec.ch/TC57/ns/CIM/IdentifiedObject/constraints/3.0#"
-    xmlns:sh="http://www.w3.org/ns/shacl#"
-    xmlns:dcat="http://www.w3.org/ns/dcat#"
-    xmlns:cim="http://iec.ch/TC57/CIM100#"
-    xmlns:dash="http://datashapes.org/dash#"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-  xml:base="http://iec.ch/TC57/ns/CIM/StateVariables-EU/Constraints" > 
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cims="http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dct="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sv="http://iec.ch/TC57/ns/CIM/StateVariables-EU/Constraints#" xmlns:eu="http://iec.ch/TC57/CIM100-European#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:prof="http://iec.ch/TC57/ns/CIM/prof-cim#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:ido="http://iec.ch/TC57/ns/CIM/IdentifiedObject/constraints/3.0#" xmlns:sh="http://www.w3.org/ns/shacl#" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:dash="http://datashapes.org/dash#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xml:base="http://iec.ch/TC57/ns/CIM/StateVariables-EU/Constraints">
   <rdf:Description rdf:about="#VsConverter.delta-cardinality">
     <sh:minCount rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sh:minCount>
     <sh:severity rdf:resource="http://www.w3.org/ns/shacl#Violation"/>
