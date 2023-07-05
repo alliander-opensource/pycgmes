@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:cim="http://iec.ch/TC57/2013/CIM-schema-cim16#" xmlns:entsoe="http://entsoe.eu/CIM/SchemaExtension/3/1#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+<md:FullModel rdf:about="fromage">
+    <md:Model.created>at some point</md:Model.created>
+    <md:Model.modelingAuthoritySet>Guillaume's honest authority</md:Model.modelingAuthoritySet>
+    <md:Model.profile>Equipment</md:Model.profile>
+</md:FullModel>
+<cim:ACLineSegment rdf:ID="_416289388">
+    <cim:Equipment.EquipmentContainer>_407871476</cim:Equipment.EquipmentContainer>
+</cim:ACLineSegment>
+<cim:Line rdf:ID="_407871476">
+    <cim:IdentifiedObject.name>TEX 10-1V145, V147</cim:IdentifiedObject.name>
+</cim:Line>
+<cim:Substation rdf:ID="_418866779">
+    <cim:IdentifiedObject.name>OS TEXEL</cim:IdentifiedObject.name>
+    <cim:Substation.Region>NL</cim:Substation.Region>
+</cim:Substation>
+<cim:Substation rdf:ID="_410060426">
+    <cim:IdentifiedObject.name>TR BOX TEXEL</cim:IdentifiedObject.name>
+    <cim:Substation.Region>NL</cim:Substation.Region>
+</cim:Substation>
+<cim:BusbarSection rdf:ID="_418866801">
+    <cim:Equipment.EquipmentContainer>_418866795</cim:Equipment.EquipmentContainer>
+</cim:BusbarSection>
+<cim:BusbarSection rdf:ID="_410060448">
+    <cim:Equipment.EquipmentContainer>_410060442</cim:Equipment.EquipmentContainer>
+</cim:BusbarSection>
+<cim:VoltageLevel rdf:ID="_418866795">
+    <cim:VoltageLevel.BaseVoltage>Reference to something from</cim:VoltageLevel.BaseVoltage>
+    <cim:VoltageLevel.Substation>_418866779</cim:VoltageLevel.Substation>
+    <cim:VoltageLevel.highVoltageLimit>12.600000000000001</cim:VoltageLevel.highVoltageLimit>
+    <cim:VoltageLevel.lowVoltageLimit>11.399999999999999</cim:VoltageLevel.lowVoltageLimit>
+</cim:VoltageLevel>
+<cim:VoltageLevel rdf:ID="_410060442">
+    <cim:VoltageLevel.BaseVoltage>Reference to something from</cim:VoltageLevel.BaseVoltage>
+    <cim:VoltageLevel.Substation>_410060426</cim:VoltageLevel.Substation>
+    <cim:VoltageLevel.highVoltageLimit>12.600000000000001</cim:VoltageLevel.highVoltageLimit>
+    <cim:VoltageLevel.lowVoltageLimit>11.399999999999999</cim:VoltageLevel.lowVoltageLimit>
+</cim:VoltageLevel>
+<cim:Bay rdf:ID="_418868484">
+    <cim:Bay.VoltageLevel>_418866795</cim:Bay.VoltageLevel>
+</cim:Bay>
+<cim:Bay rdf:ID="_410060480">
+    <cim:Bay.VoltageLevel>_410060442</cim:Bay.VoltageLevel>
+</cim:Bay>
+<cim:Breaker rdf:ID="_418868520">
+    <cim:IdentifiedObject.name>3022308-EL-M01-145-SC3</cim:IdentifiedObject.name>
+    <cim:Equipment.EquipmentContainer>_418866779</cim:Equipment.EquipmentContainer>
+</cim:Breaker>
+<cim:Disconnector rdf:ID="_410060500">
+    <cim:IdentifiedObject.name>3004913-EL-M01-001-SC1</cim:IdentifiedObject.name>
+    <cim:Equipment.EquipmentContainer>_410060426</cim:Equipment.EquipmentContainer>
+</cim:Disconnector>
+<cim:ConnectivityNode rdf:ID="_d6e94f32-06d6-11ee-a057-00155d828a3a">
+    <cim:ConnectivityNode.ConnectivityNodeContainer>_418866795</cim:ConnectivityNode.ConnectivityNodeContainer>
+</cim:ConnectivityNode>
+<cim:ConnectivityNode rdf:ID="_d6e9509a-06d6-11ee-a057-00155d828a3a">
+    <cim:ConnectivityNode.ConnectivityNodeContainer>_418866795</cim:ConnectivityNode.ConnectivityNodeContainer>
+</cim:ConnectivityNode>
+<cim:ConnectivityNode rdf:ID="_d6e950ea-06d6-11ee-a057-00155d828a3a">
+    <cim:ConnectivityNode.ConnectivityNodeContainer>_410060442</cim:ConnectivityNode.ConnectivityNodeContainer>
+</cim:ConnectivityNode>
+<cim:ConnectivityNode rdf:ID="_d6e9513a-06d6-11ee-a057-00155d828a3a">
+    <cim:ConnectivityNode.ConnectivityNodeContainer>_410060442</cim:ConnectivityNode.ConnectivityNodeContainer>
+</cim:ConnectivityNode>
+<cim:Terminal rdf:ID="_d6e95176-06d6-11ee-a057-00155d828a3a">
+    <cim:ACDCTerminal.sequenceNumber>1</cim:ACDCTerminal.sequenceNumber>
+    <cim:Terminal.ConductingEquipment>_418866801</cim:Terminal.ConductingEquipment>
+    <cim:Terminal.ConnectivityNode>_6943206611057001558283</cim:Terminal.ConnectivityNode>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_d6e951b2-06d6-11ee-a057-00155d828a3a">
+    <cim:ACDCTerminal.sequenceNumber>2</cim:ACDCTerminal.sequenceNumber>
+    <cim:Terminal.ConductingEquipment>_418868520</cim:Terminal.ConductingEquipment>
+    <cim:Terminal.ConnectivityNode>_6943206611057001558283</cim:Terminal.ConnectivityNode>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_d6e951da-06d6-11ee-a057-00155d828a3a">
+    <cim:ACDCTerminal.sequenceNumber>3</cim:ACDCTerminal.sequenceNumber>
+    <cim:Terminal.ConductingEquipment>_418868520</cim:Terminal.ConductingEquipment>
+    <cim:Terminal.ConnectivityNode>_6950906611057001558283</cim:Terminal.ConnectivityNode>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_d6e9520c-06d6-11ee-a057-00155d828a3a">
+    <cim:ACDCTerminal.sequenceNumber>4</cim:ACDCTerminal.sequenceNumber>
+    <cim:Terminal.ConductingEquipment>_416289388</cim:Terminal.ConductingEquipment>
+    <cim:Terminal.ConnectivityNode>_6950906611057001558283</cim:Terminal.ConnectivityNode>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_d6e95234-06d6-11ee-a057-00155d828a3a">
+    <cim:ACDCTerminal.sequenceNumber>1</cim:ACDCTerminal.sequenceNumber>
+    <cim:Terminal.ConductingEquipment>_416289388</cim:Terminal.ConductingEquipment>
+    <cim:Terminal.ConnectivityNode>_695006611057001558283</cim:Terminal.ConnectivityNode>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_d6e95266-06d6-11ee-a057-00155d828a3a">
+    <cim:ACDCTerminal.sequenceNumber>2</cim:ACDCTerminal.sequenceNumber>
+    <cim:Terminal.ConductingEquipment>_410060500</cim:Terminal.ConductingEquipment>
+    <cim:Terminal.ConnectivityNode>_695006611057001558283</cim:Terminal.ConnectivityNode>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_d6e9528e-06d6-11ee-a057-00155d828a3a">
+    <cim:ACDCTerminal.sequenceNumber>3</cim:ACDCTerminal.sequenceNumber>
+    <cim:Terminal.ConductingEquipment>_410060500</cim:Terminal.ConductingEquipment>
+    <cim:Terminal.ConnectivityNode>_6951306611057001558283</cim:Terminal.ConnectivityNode>
+</cim:Terminal>
+<cim:Terminal rdf:ID="_d6e952c0-06d6-11ee-a057-00155d828a3a">
+    <cim:ACDCTerminal.sequenceNumber>4</cim:ACDCTerminal.sequenceNumber>
+    <cim:Terminal.ConductingEquipment>_410060448</cim:Terminal.ConductingEquipment>
+    <cim:Terminal.ConnectivityNode>_6951306611057001558283</cim:Terminal.ConnectivityNode>
+</cim:Terminal>
+</rdf:RDF>
