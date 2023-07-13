@@ -63,30 +63,30 @@
         {&#xD;
         SELECT $this (COUNT(?typeterm) AS ?terms) ?value&#xD;
         WHERE {&#xD;
-        $this ^cim:Terminal.TopologicalNode  ?value.&#xD;
-        ?value rdf:type ?typeterm .&#xD;
-        #FILTER (?typeterm=cim:Terminal).&#xD;
+        $this ^cim:Terminal.TopologicalNode  ?value
+        ?value rdf:type ?typeterm 
+        #FILTER (?typeterm=cim:Terminal)
         }&#xD;
         GROUP BY $this ?typeterm ?value&#xD;
         HAVING (?terms&gt;1)&#xD;
         }&#xD;
       &#xD;
-        $this ^cim:Terminal.TopologicalNode ?term2  .&#xD;
-        ?value cim:Terminal.phases ?value1  .&#xD;
-        OPTIONAL {?term2 cim:Terminal.phases ?value2 } .&#xD;
+        $this ^cim:Terminal.TopologicalNode ?term2  
+        ?value cim:Terminal.phases ?value1  
+        OPTIONAL {?term2 cim:Terminal.phases ?value2 } 
         &#xD;
-        #?term1 cim:Terminal.TopologicalNode $this  .&#xD;
-        #OPTIONAL {?term1 cim:Terminal.phases ?value2 } .&#xD;
-        #?term2 cim:Terminal.TopologicalNode $this  .&#xD;
+        #?term1 cim:Terminal.TopologicalNode $this  
+        #OPTIONAL {?term1 cim:Terminal.phases ?value2 } 
+        #?term2 cim:Terminal.TopologicalNode $this  
         #OPTIONAL {?term2 cim:Terminal.phases ?value1 } .        &#xD;
         #FILTER ((?terms&gt;1 &amp;&amp; bound(?value2) &amp;&amp; ?term1!=?term2 &amp;&amp; (?value1=cim:PhaseCode.ABCN || ?value1=cim:PhaseCode.N) &amp;&amp; (?value2!=cim:PhaseCode.ABCN &amp;&amp; ?value2!=cim:PhaseCode.N)) ||&#xD;
         #(?terms&gt;1 &amp;&amp; bound(?value2) &amp;&amp; ?term1!=?term2 &amp;&amp; (?value1=cim:PhaseCode.ABC) &amp;&amp; (?value2!=cim:PhaseCode.ABC)) ||&#xD;
         #(?terms&gt;1 &amp;&amp; !bound(?value2) &amp;&amp; ?term1!=?term2 &amp;&amp; (?value1=cim:PhaseCode.ABCN || ?value1=cim:PhaseCode.N))&#xD;
-        #) .&#xD;
+        #) 
         FILTER ((?value!=?term2 &amp;&amp; bound(?value2) &amp;&amp; (?value1=cim:PhaseCode.ABCN || ?value1=cim:PhaseCode.N) &amp;&amp; (?value2!=cim:PhaseCode.ABCN &amp;&amp; ?value2!=cim:PhaseCode.N)) ||&#xD;
         (?value!=?term2 &amp;&amp; bound(?value2) &amp;&amp; (?value1=cim:PhaseCode.ABC) &amp;&amp; (?value2!=cim:PhaseCode.ABC)) ||&#xD;
         (?value!=?term2 &amp;&amp; !bound(?value2) &amp;&amp; (?value1=cim:PhaseCode.ABCN || ?value1=cim:PhaseCode.N))&#xD;
-        ) .&#xD;
+        ) 
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A2">

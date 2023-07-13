@@ -39,11 +39,11 @@
     <sh:select>&#xD;
 			SELECT  $this ?value &#xD;
 			WHERE {&#xD;
-             $this $PATH ?value .&#xD;
-             $this cim:SvTapStep.TapChanger ?tapchanger .&#xD;
-             ?tapchanger cim:TapChanger.lowStep ?lowstep .&#xD;
-             ?tapchanger cim:TapChanger.highStep ?highstep .&#xD;
-				FILTER (?value&lt;?lowstep || ?value&gt;?highstep) .&#xD;
+             $this $PATH ?value 
+             $this cim:SvTapStep.TapChanger ?tapchanger 
+             ?tapchanger cim:TapChanger.lowStep ?lowstep 
+             ?tapchanger cim:TapChanger.highStep ?highstep 
+				FILTER (?value&lt;?lowstep || ?value&gt;?highstep) 
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A2">

@@ -27,20 +27,20 @@
     <sh:select>&#xD;
 			SELECT  $this ?value ?terminal ?tieflow&#xD;
 			WHERE {&#xD;
-             ?terminal1 cim:Terminal.ConductingEquipment ?condeq .&#xD;
-             ?terminal1 cim:ACDCTerminal.sequenceNumber 1 .&#xD;
-             ?terminal1 cim:Terminal.ConnectivityNode ?cn1 .&#xD;
+             ?terminal1 cim:Terminal.ConductingEquipment ?condeq 
+             ?terminal1 cim:ACDCTerminal.sequenceNumber 1 
+             ?terminal1 cim:Terminal.ConnectivityNode ?cn1 
              &#xD;
-             OPTIONAL {?terminal2 cim:Terminal.ConductingEquipment ?condeq}.&#xD;
-             OPTIONAL {?terminal2 cim:ACDCTerminal.sequenceNumber 2}.&#xD;
-             OPTIONAL {?terminal2 cim:Terminal.ConnectivityNode ?cn2}.&#xD;
+             OPTIONAL {?terminal2 cim:Terminal.ConductingEquipment ?condeq}
+             OPTIONAL {?terminal2 cim:ACDCTerminal.sequenceNumber 2}
+             OPTIONAL {?terminal2 cim:Terminal.ConnectivityNode ?cn2}
              &#xD;
-             OPTIONAL {$this $PATH ?value}.&#xD;
-             $this eu:BoundaryPoint.ConnectivityNode ?cnbp .&#xD;
-             OPTIONAL {?terminal cim:Terminal.ConnectivityNode ?cnbp }.&#xD;
-             OPTIONAL {?tieflow cim:TieFlow.Terminal ?terminal }.&#xD;
+             OPTIONAL {$this $PATH ?value}
+             $this eu:BoundaryPoint.ConnectivityNode ?cnbp 
+             OPTIONAL {?terminal cim:Terminal.ConnectivityNode ?cnbp }
+             OPTIONAL {?tieflow cim:TieFlow.Terminal ?terminal }
            &#xD;
-				FILTER ((bound(?value) &amp;&amp; ?value=false &amp;&amp; !bound(?tieflow) &amp;&amp; (?cnbp=?cn1 || ?cnbp=?cn2) &amp;&amp; bound(?terminal1) &amp;&amp; bound(?terminal2) &amp;&amp; ?cn1!=?cn2 &amp;&amp; (?terminal=?terminal1 || ?terminal=?terminal2)) || (!bound(?value) &amp;&amp; !bound(?tieflow) &amp;&amp; (?cnbp=?cn1 || ?cnbp=?cn2) &amp;&amp; bound(?terminal1) &amp;&amp; bound(?terminal2) &amp;&amp; ?cn1!=?cn2 &amp;&amp; (?terminal=?terminal1 || ?terminal=?terminal2))|| (bound(?value) &amp;&amp; ?value=true &amp;&amp; bound(?tieflow) &amp;&amp; (?cnbp=?cn1 || ?cnbp=?cn2) &amp;&amp; bound(?terminal1) &amp;&amp; bound(?terminal2) &amp;&amp; ?cn1!=?cn2 &amp;&amp; (?terminal=?terminal1 || ?terminal=?terminal2))) .&#xD;
+				FILTER ((bound(?value) &amp;&amp; ?value=false &amp;&amp; !bound(?tieflow) &amp;&amp; (?cnbp=?cn1 || ?cnbp=?cn2) &amp;&amp; bound(?terminal1) &amp;&amp; bound(?terminal2) &amp;&amp; ?cn1!=?cn2 &amp;&amp; (?terminal=?terminal1 || ?terminal=?terminal2)) || (!bound(?value) &amp;&amp; !bound(?tieflow) &amp;&amp; (?cnbp=?cn1 || ?cnbp=?cn2) &amp;&amp; bound(?terminal1) &amp;&amp; bound(?terminal2) &amp;&amp; ?cn1!=?cn2 &amp;&amp; (?terminal=?terminal1 || ?terminal=?terminal2))|| (bound(?value) &amp;&amp; ?value=true &amp;&amp; bound(?tieflow) &amp;&amp; (?cnbp=?cn1 || ?cnbp=?cn2) &amp;&amp; bound(?terminal1) &amp;&amp; bound(?terminal2) &amp;&amp; ?cn1!=?cn2 &amp;&amp; (?terminal=?terminal1 || ?terminal=?terminal2))) 
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A1">

@@ -64,34 +64,34 @@
           #SELECT $this (COUNT(?smrp) as ?count)&#xD;
           SELECT $this (COUNT(?type) as ?count)&#xD;
           WHERE {&#xD;
-              #?sm cim:SynchronousMachine.referencePriority ?smrp .&#xD;
-              ?sm cim:SynchronousMachine.referencePriority 1 .&#xD;
-              ?sm rdf:type cim:SynchronousMachine .&#xD;
-              ?sm rdf:type ?type .&#xD;
-              #FILTER (?smrp=1).&#xD;
+              #?sm cim:SynchronousMachine.referencePriority ?smrp 
+              ?sm cim:SynchronousMachine.referencePriority 1 
+              ?sm rdf:type cim:SynchronousMachine 
+              ?sm rdf:type ?type 
+              #FILTER (?smrp=1)
             }&#xD;
             GROUP BY $this ?type&#xD;
           }&#xD;
-          ?sm1 cim:SynchronousMachine.referencePriority 1 .&#xD;
-          ?sm1 rdf:type cim:SynchronousMachine .&#xD;
+          ?sm1 cim:SynchronousMachine.referencePriority 1 
+          ?sm1 rdf:type cim:SynchronousMachine 
           &#xD;
           &#xD;
-          OPTIONAL {?sm1 ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode ?tn .&#xD;
-                    ?tn ^cim:TopologicalIsland.TopologicalNodes ?ti .&#xD;
-                    }.&#xD;
-          OPTIONAL {?ti2 cim:TopologicalIsland.AngleRefTopologicalNode ?tn1 .&#xD;
-                     ?tn1 ^cim:TopologicalIsland.TopologicalNodes ?ti1 .&#xD;
-                     }.&#xD;
+          OPTIONAL {?sm1 ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode ?tn 
+                    ?tn ^cim:TopologicalIsland.TopologicalNodes ?ti 
+                    }
+          OPTIONAL {?ti2 cim:TopologicalIsland.AngleRefTopologicalNode ?tn1 
+                     ?tn1 ^cim:TopologicalIsland.TopologicalNodes ?ti1 
+                     }
           &#xD;
-          #OPTIONAL {?sm1 ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?ti }.&#xD;
-          #OPTIONAL {?ti cim:TopologicalIsland.AngleRefTopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?ti1 .&#xD;
+          #OPTIONAL {?sm1 ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?ti }
+          #OPTIONAL {?ti cim:TopologicalIsland.AngleRefTopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?ti1 
           &#xD;
-          #OPTIONAL {?tn ^cim:TopologicalIsland.TopologicalNodes ?ti }.&#xD;
-          #OPTIONAL {?tn1 ^cim:TopologicalIsland.TopologicalNodes ?ti1 }.&#xD;
+          #OPTIONAL {?tn ^cim:TopologicalIsland.TopologicalNodes ?ti }
+          #OPTIONAL {?tn1 ^cim:TopologicalIsland.TopologicalNodes ?ti1 }
           &#xD;
-          BIND("" as ?value).&#xD;
+          BIND("" as ?value)
       &#xD;
-          FILTER (?count!=1 || !bound(?ti) || !bound(?ti1) || (bound(?ti) &amp;&amp; bound(?ti1) &amp;&amp; ?ti!=?ti1)).&#xD;
+          FILTER (?count!=1 || !bound(?ti) || !bound(?ti1) || (bound(?ti) &amp;&amp; bound(?ti1) &amp;&amp; ?ti!=?ti1))
       } &#xD;
       LIMIT 1&#xD;
       </sh:select>

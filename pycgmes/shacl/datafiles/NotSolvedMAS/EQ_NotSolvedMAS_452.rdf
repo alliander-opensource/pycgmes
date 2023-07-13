@@ -12,18 +12,18 @@
     <sh:select>&#xD;
 			SELECT $this ?value&#xD;
 			WHERE {&#xD;
-        $this cim:RegulatingControl.targetValue ?value .&#xD;
-        $this cim:RegulatingControl.mode ?mode .&#xD;
-        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.controlEnabled ?contrenabled .&#xD;
-        $this cim:RegulatingControl.enabled ?enabled .&#xD;
-        $this ^cim:TapChanger.TapChangerControl/cim:RatioTapChanger.stepVoltageIncrement ?svi .&#xD;
-        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.highStep ?highstep .&#xD;
-        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.lowStep ?lowstep .&#xD;
-        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.neutralStep ?neutralstep .&#xD;
-        #$this ^cim:TapChanger.TapChangerControl/cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.BaseVoltage/cim:BaseVoltage.nominalVoltage ?valuenomu .&#xD;
-        $this cim:RegulatingControl.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.ConnectivityNodeContainer/cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage ?valuenomu .&#xD;
+        $this cim:RegulatingControl.targetValue ?value 
+        $this cim:RegulatingControl.mode ?mode 
+        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.controlEnabled ?contrenabled 
+        $this cim:RegulatingControl.enabled ?enabled 
+        $this ^cim:TapChanger.TapChangerControl/cim:RatioTapChanger.stepVoltageIncrement ?svi 
+        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.highStep ?highstep 
+        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.lowStep ?lowstep 
+        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.neutralStep ?neutralstep 
+        #$this ^cim:TapChanger.TapChangerControl/cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.BaseVoltage/cim:BaseVoltage.nominalVoltage ?valuenomu 
+        $this cim:RegulatingControl.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.ConnectivityNodeContainer/cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage ?valuenomu 
         &#xD;
-				FILTER (?mode=cim:RegulatingControlModeKind.voltage &amp;&amp; ?contrenabled=true &amp;&amp; ?enabled=true &amp;&amp; !( ?value/?valuenomu&gt;=(1-(?svi/100)*(?neutralstep-?lowstep)) &amp;&amp; ?value/?valuenomu&lt;=(1+(?svi/100)*(?highstep-?neutralstep)) ) ) .&#xD;
+				FILTER (?mode=cim:RegulatingControlModeKind.voltage &amp;&amp; ?contrenabled=true &amp;&amp; ?enabled=true &amp;&amp; !( ?value/?valuenomu&gt;=(1-(?svi/100)*(?neutralstep-?lowstep)) &amp;&amp; ?value/?valuenomu&lt;=(1+(?svi/100)*(?highstep-?neutralstep)) ) ) 
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#RegulatingControl.targetValue-tapChanger">
