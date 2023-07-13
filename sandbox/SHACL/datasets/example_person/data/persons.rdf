@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:ex="http://example.com/"
-         xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
-
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:ex="http://example.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
   <rdf:Description rdf:about="http://example.com/Alice">
     <rdf:type rdf:resource="http://example.com/Person"/>
     <ex:ssn>987-65-432A</ex:ssn>
   </rdf:Description>
-
   <rdf:Description rdf:about="http://example.com/Bob">
     <rdf:type rdf:resource="http://example.com/Person"/>
     <ex:ssn>123-45-6789</ex:ssn>
     <ex:ssn>124-35-6789</ex:ssn>
   </rdf:Description>
-
   <rdf:Description rdf:about="http://example.com/Calvin">
     <rdf:type rdf:resource="http://example.com/Person"/>
     <ex:birthDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1971-07-07</ex:birthDate>
   </rdf:Description>
-
 </rdf:RDF>
