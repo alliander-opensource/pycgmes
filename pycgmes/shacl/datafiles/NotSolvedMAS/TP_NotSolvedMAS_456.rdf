@@ -55,19 +55,19 @@
     <sh:select>&#xD;
 			SELECT  $this ?value ?cntn1 ?tn1&#xD;
 			WHERE {&#xD;
-             $this $PATH ?value 
-             ?terminal1 cim:Terminal.ConductingEquipment $this 
-             ?terminal1 cim:ACDCTerminal.sequenceNumber 1 
-             OPTIONAL {?terminal1 cim:Terminal.ConnectivityNode ?cn1}
-             OPTIONAL {?terminal1 cim:Terminal.TopologicalNode ?tn1}
-             ?cn1 cim:ConnectivityNode.TopologicalNode ?cntn1 
+             $this $PATH ?value .&#xD;
+             ?terminal1 cim:Terminal.ConductingEquipment $this .&#xD;
+             ?terminal1 cim:ACDCTerminal.sequenceNumber 1 .&#xD;
+             OPTIONAL {?terminal1 cim:Terminal.ConnectivityNode ?cn1}.&#xD;
+             OPTIONAL {?terminal1 cim:Terminal.TopologicalNode ?tn1}.&#xD;
+             ?cn1 cim:ConnectivityNode.TopologicalNode ?cntn1 .&#xD;
              &#xD;
-             ?terminal2 cim:Terminal.ConductingEquipment $this 
-             ?terminal2 cim:ACDCTerminal.sequenceNumber 2 
-             OPTIONAL {?terminal2 cim:Terminal.ConnectivityNode ?cn2}
-             OPTIONAL {?terminal2 cim:Terminal.TopologicalNode ?tn2}
+             ?terminal2 cim:Terminal.ConductingEquipment $this .&#xD;
+             ?terminal2 cim:ACDCTerminal.sequenceNumber 2 .&#xD;
+             OPTIONAL {?terminal2 cim:Terminal.ConnectivityNode ?cn2}.&#xD;
+             OPTIONAL {?terminal2 cim:Terminal.TopologicalNode ?tn2}.&#xD;
              ?cn2 cim:ConnectivityNode.TopologicalNode ?cntn2 .          &#xD;
-				FILTER (?value=true &amp;&amp; (?terminal1!=?terminal2 &amp;&amp; (?tn1=?tn2 || ?cntn1=?cntn2))) 
+				FILTER (?value=true &amp;&amp; (?terminal1!=?terminal2 &amp;&amp; (?tn1=?tn2 || ?cntn1=?cntn2))) .&#xD;
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#IGMTPunsolvedGroup">

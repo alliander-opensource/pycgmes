@@ -73,16 +73,16 @@
     <sh:select>&#xD;
 			SELECT  $this ?value ?terminal ?terminal1 ?terminal2 ?terminal3 ?meastype&#xD;
 			WHERE {&#xD;
-             $this $PATH ?value 
-             OPTIONAL {$this cim:Measurement.Terminal ?terminal}
+             $this $PATH ?value .&#xD;
+             OPTIONAL {$this cim:Measurement.Terminal ?terminal}.&#xD;
              $this cim:Measurement.measurementType ?meastype . &#xD;
              ?terminal1 cim:Terminal.ConductingEquipment ?value ;&#xD;
-                        cim:ACDCTerminal.sequenceNumber 1 
+                        cim:ACDCTerminal.sequenceNumber 1 .&#xD;
              OPTIONAL {?terminal2 cim:Terminal.ConductingEquipment ?value ;&#xD;
                         cim:ACDCTerminal.sequenceNumber 2 .}&#xD;
              OPTIONAL {?terminal3 cim:Terminal.ConductingEquipment ?value ;&#xD;
                         cim:ACDCTerminal.sequenceNumber 3 .}&#xD;
-				FILTER ((bound(?terminal) &amp;&amp; (?meastype="TapPosition" || ?meastype="SwitchPosition" )) || (!bound(?terminal) &amp;&amp; !(?meastype="TapPosition" || ?meastype="SwitchPosition" )) || (bound(?terminal) &amp;&amp; ((?terminal!=?terminal1 &amp;&amp; !bound(?terminal2) &amp;&amp; !bound(?terminal3)) || (bound(?terminal2) &amp;&amp; !bound(?terminal3) &amp;&amp; ?terminal!=?terminal1 &amp;&amp; ?terminal!=?terminal2) || (bound(?terminal2) &amp;&amp; bound(?terminal3) &amp;&amp; ?terminal!=?terminal1 &amp;&amp; ?terminal!=?terminal2 &amp;&amp; ?terminal!=?terminal3)))) 
+				FILTER ((bound(?terminal) &amp;&amp; (?meastype="TapPosition" || ?meastype="SwitchPosition" )) || (!bound(?terminal) &amp;&amp; !(?meastype="TapPosition" || ?meastype="SwitchPosition" )) || (bound(?terminal) &amp;&amp; ((?terminal!=?terminal1 &amp;&amp; !bound(?terminal2) &amp;&amp; !bound(?terminal3)) || (bound(?terminal2) &amp;&amp; !bound(?terminal3) &amp;&amp; ?terminal!=?terminal1 &amp;&amp; ?terminal!=?terminal2) || (bound(?terminal2) &amp;&amp; bound(?terminal3) &amp;&amp; ?terminal!=?terminal1 &amp;&amp; ?terminal!=?terminal2 &amp;&amp; ?terminal!=?terminal3)))) .&#xD;
 			}</sh:select>
   </rdf:Description>
 </rdf:RDF>

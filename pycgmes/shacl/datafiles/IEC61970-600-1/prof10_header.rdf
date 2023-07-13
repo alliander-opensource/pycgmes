@@ -18,8 +18,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type dm:DifferenceModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Operation-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type dm:DifferenceModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Operation-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -37,8 +37,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type dm:DifferenceModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Dynamics-EU/1.0"^^xsd:anyURI
+                  ?this rdf:type dm:DifferenceModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Dynamics-EU/1.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -129,8 +129,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type md:FullModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Operation-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type md:FullModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Operation-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -169,8 +169,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type md:FullModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/CoreEquipment-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type md:FullModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/CoreEquipment-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -204,8 +204,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type md:FullModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/StateVariables-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type md:FullModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/StateVariables-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -227,8 +227,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type dm:DifferenceModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/CoreEquipment-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type dm:DifferenceModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/CoreEquipment-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -278,8 +278,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type md:FullModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/SteadyStateHypothesis-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type md:FullModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/SteadyStateHypothesis-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -305,8 +305,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type dm:DifferenceModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/GeographicalLocation-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type dm:DifferenceModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/GeographicalLocation-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -335,8 +335,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type md:FullModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/GeographicalLocation-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type md:FullModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/GeographicalLocation-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -425,8 +425,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type dm:DifferenceModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/ShortCircuit-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type dm:DifferenceModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/ShortCircuit-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -561,8 +561,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type md:FullModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/DiagramLayout-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type md:FullModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/DiagramLayout-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -613,8 +613,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type md:FullModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Dynamics-EU/1.0"^^xsd:anyURI
+                  ?this rdf:type md:FullModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Dynamics-EU/1.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -648,8 +648,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type md:FullModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Topology-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type md:FullModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Topology-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>
@@ -689,8 +689,8 @@
     <sh:select>&#xD;
                 SELECT DISTINCT ?this&#xD;
                 WHERE {&#xD;
-                  ?this rdf:type md:FullModel   
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/ShortCircuit-EU/3.0"^^xsd:anyURI
+                  ?this rdf:type md:FullModel   .&#xD;
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/ShortCircuit-EU/3.0"^^xsd:anyURI.&#xD;
                 }&#xD;
                 </sh:select>
   </rdf:Description>

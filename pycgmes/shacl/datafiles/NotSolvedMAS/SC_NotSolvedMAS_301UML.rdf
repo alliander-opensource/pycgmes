@@ -7,15 +7,15 @@
     <sh:select>&#xD;
 			SELECT $this ?typeline1 ?typeline2&#xD;
 			WHERE {&#xD;
-        #$this cim:MutualCoupling.First_Terminal ?firstterminal 
-        #$this cim:MutualCoupling.Second_Terminal ?secondterminal 
+        #$this cim:MutualCoupling.First_Terminal ?firstterminal .&#xD;
+        #$this cim:MutualCoupling.Second_Terminal ?secondterminal .&#xD;
         #?firstterminal cim:Terminal.ConductingEquipment ?line1 . &#xD;
         #?secondterminal cim:Terminal.ConductingEquipment ?line2 . &#xD;
-        $this cim:MutualCoupling.First_Terminal/cim:Terminal.ConductingEquipment ?line1 
-        $this cim:MutualCoupling.Second_Terminal/cim:Terminal.ConductingEquipment ?line2 
-        ?line1 rdf:type ?typeline1 
-        ?line2 rdf:type ?typeline2 
-				FILTER (?typeline1 NOT IN (cim:ACLineSegment, cim:Equipment) || ?typeline2 NOT IN (cim:ACLineSegment, cim:Equipment) || ?line1=?line2) 
+        $this cim:MutualCoupling.First_Terminal/cim:Terminal.ConductingEquipment ?line1 .&#xD;
+        $this cim:MutualCoupling.Second_Terminal/cim:Terminal.ConductingEquipment ?line2 .&#xD;
+        ?line1 rdf:type ?typeline1 .&#xD;
+        ?line2 rdf:type ?typeline2 .&#xD;
+				FILTER (?typeline1 NOT IN (cim:ACLineSegment, cim:Equipment) || ?typeline2 NOT IN (cim:ACLineSegment, cim:Equipment) || ?line1=?line2) .&#xD;
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A0">
