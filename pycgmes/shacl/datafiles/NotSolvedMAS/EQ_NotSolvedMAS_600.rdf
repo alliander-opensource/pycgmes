@@ -4,14 +4,14 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>EquivalentInjection connects to a BoundaryPoint with flag isDirectCurrent=false (meaning this is not HVDC), but either EquivalentInjection.regulationCapability is set to true or there is a ReactiveCapabilityCurve associated.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value&#xD;
-			WHERE {&#xD;
-        $this $PATH ?value.&#xD;
-        OPTIONAL {$this cim:EquivalentInjection.ReactiveCapabilityCurve ?curve}.&#xD;
-        OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/^eu:BoundaryPoint.ConnectivityNode ?bp } .&#xD;
-        OPTIONAL {?bp eu:BoundaryPoint.isDirectCurrent ?ishvdc } .&#xD;
-        FILTER (bound(?bp) &amp;&amp; bound(?ishvdc) &amp;&amp; ?ishvdc=false &amp;&amp; (bound(?curve) || ?value=true)) .        &#xD;
+    <sh:select>
+			SELECT  $this ?value
+			WHERE {
+        $this $PATH ?value.
+        OPTIONAL {$this cim:EquivalentInjection.ReactiveCapabilityCurve ?curve}.
+        OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/^eu:BoundaryPoint.ConnectivityNode ?bp } .
+        OPTIONAL {?bp eu:BoundaryPoint.isDirectCurrent ?ishvdc } .
+        FILTER (bound(?bp) &amp;&amp; bound(?ishvdc) &amp;&amp; ?ishvdc=false &amp;&amp; (bound(?curve) || ?value=true)) .        
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="http://iec.ch/TC57/CIM100#">
@@ -50,19 +50,19 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>More that 10% difference of the BaseVoltage.nominalVoltage at the two ends of an ACLineSegment. Voltage 1: {?tp1nv}; Voltage 2: {?tp2nv}</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?tp1nv ?tp2nv&#xD;
-			WHERE {&#xD;
-        ?term1 cim:Terminal.ConductingEquipment $this .&#xD;
-        ?term2 cim:Terminal.ConductingEquipment $this .&#xD;
-        ?term1 cim:ACDCTerminal.sequenceNumber 1.&#xD;
-        ?term2 cim:ACDCTerminal.sequenceNumber 2.&#xD;
-        ?tp1  ^cim:Terminal.TopologicalNode ?term1 .&#xD;
-        ?tp1 cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?tp1nv .&#xD;
-        ?tp2  ^cim:Terminal.TopologicalNode ?term2 .&#xD;
-        ?tp2 cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?tp2nv .&#xD;
-        &#xD;
-        FILTER ((?tp1nv&lt;?tp2nv &amp;&amp; (ABS(?tp1nv-?tp2nv)/?tp1nv)&gt;0.1) || (?tp1nv&gt;?tp2nv &amp;&amp; (ABS(?tp1nv-?tp2nv)/?tp2nv)&gt;0.1)) .        &#xD;
+    <sh:select>
+			SELECT  $this ?tp1nv ?tp2nv
+			WHERE {
+        ?term1 cim:Terminal.ConductingEquipment $this .
+        ?term2 cim:Terminal.ConductingEquipment $this .
+        ?term1 cim:ACDCTerminal.sequenceNumber 1.
+        ?term2 cim:ACDCTerminal.sequenceNumber 2.
+        ?tp1  ^cim:Terminal.TopologicalNode ?term1 .
+        ?tp1 cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?tp1nv .
+        ?tp2  ^cim:Terminal.TopologicalNode ?term2 .
+        ?tp2 cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?tp2nv .
+        
+        FILTER ((?tp1nv&lt;?tp2nv &amp;&amp; (ABS(?tp1nv-?tp2nv)/?tp1nv)&gt;0.1) || (?tp1nv&gt;?tp2nv &amp;&amp; (ABS(?tp1nv-?tp2nv)/?tp2nv)&gt;0.1)) .        
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#BoundaryPoint">
@@ -84,13 +84,13 @@
   <rdf:Description rdf:nodeID="A3">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT ?this&#xD;
-                WHERE {&#xD;
-                  ?this a cim:ConnectivityNode .&#xD;
-                  ?this ^eu:BoundaryPoint.ConnectivityNode/rdf:type eu:BoundaryPoint .&#xD;
-                  &#xD;
-                }&#xD;
+    <sh:select>
+                SELECT ?this
+                WHERE {
+                  ?this a cim:ConnectivityNode .
+                  ?this ^eu:BoundaryPoint.ConnectivityNode/rdf:type eu:BoundaryPoint .
+                  
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#BoundaryPoint-bppl1Bppl2">
@@ -107,22 +107,22 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>ConnectivityNode which is designated as BoundaryPoint does not have EquivalentInjection connected to it.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value&#xD;
-			WHERE {&#xD;
-        $this cim:IdentifiedObject.name ?value .&#xD;
-        &#xD;
-        {&#xD;
-          SELECT $this &#xD;
-          WHERE {&#xD;
-            $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type ?bptype.&#xD;
-            &#xD;
-            FILTER (bound(?bptype) &amp;&amp; ?bptype IN (cim:ACLineSegment , cim:PowerTransformer, cim:DCLineSegment, cim:DCSeriesDevice, cim:DCSwitch, cim:DCDisconnector, cim:DCBreaker, cim:DCChopper, cim:Switch, cim:Disconnector, cim:Fuse, cim:GroundDisconnector, cim:Jumper, cim:Breaker, cim:LoadBreakSwitch, cim:DisconnectingCircuitBreaker, cim:Cut, cim:SeriesCompensator, cim:EquivalentBranch)) .&#xD;
-          }&#xD;
-        }&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:EquivalentInjection &#xD;
-        }.&#xD;
+    <sh:select>
+			SELECT  $this ?value
+			WHERE {
+        $this cim:IdentifiedObject.name ?value .
+        
+        {
+          SELECT $this 
+          WHERE {
+            $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type ?bptype.
+            
+            FILTER (bound(?bptype) &amp;&amp; ?bptype IN (cim:ACLineSegment , cim:PowerTransformer, cim:DCLineSegment, cim:DCSeriesDevice, cim:DCSwitch, cim:DCDisconnector, cim:DCBreaker, cim:DCChopper, cim:Switch, cim:Disconnector, cim:Fuse, cim:GroundDisconnector, cim:Jumper, cim:Breaker, cim:LoadBreakSwitch, cim:DisconnectingCircuitBreaker, cim:Cut, cim:SeriesCompensator, cim:EquivalentBranch)) .
+          }
+        }
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:EquivalentInjection 
+        }.
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#IGMunsolved600EQGroup">
@@ -165,68 +165,68 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>ConnectivityNode which is designated as BoundaryPoint does not have a two-Terminal ConductingEquipment connected to it.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value&#xD;
-			WHERE {&#xD;
-        $this cim:IdentifiedObject.name ?value .&#xD;
-        &#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:ACLineSegment &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:PowerTransformer &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCLineSegment &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCSeriesDevice &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCSwitch &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCDisconnector &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCBreaker &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCChopper &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Switch &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Disconnector &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Fuse &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:GroundDisconnector &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Jumper &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Breaker &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:LoadBreakSwitch &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DisconnectingCircuitBreaker &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Cut &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:SeriesCompensator &#xD;
-        }.&#xD;
-        FILTER NOT EXISTS {&#xD;
-        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:EquivalentBranch &#xD;
-        }.&#xD;
+    <sh:select>
+			SELECT  $this ?value
+			WHERE {
+        $this cim:IdentifiedObject.name ?value .
+        
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:ACLineSegment 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:PowerTransformer 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCLineSegment 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCSeriesDevice 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCSwitch 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCDisconnector 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCBreaker 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DCChopper 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Switch 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Disconnector 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Fuse 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:GroundDisconnector 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Jumper 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Breaker 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:LoadBreakSwitch 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:DisconnectingCircuitBreaker 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:Cut 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:SeriesCompensator 
+        }.
+        FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment/rdf:type cim:EquivalentBranch 
+        }.
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A0">

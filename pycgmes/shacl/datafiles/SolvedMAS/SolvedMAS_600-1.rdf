@@ -53,17 +53,17 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>SvSwitch is not instantiated for a retained Switch (or any of the subtypes) connected to a TopologicalNode which is referenced by a TopologicalIsland.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  DISTINCT $this ?value &#xD;
-			WHERE {&#xD;
-        $this ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService true .&#xD;
-        $this cim:Switch.retained true .&#xD;
-        $this rdf:type ?value .&#xD;
-        $this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland.&#xD;
-        #OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.&#xD;
-        OPTIONAL {$this  ^cim:SvSwitch.Switch  ?svswitch} .&#xD;
-        #FILTER (bound(?topologicalisland) &amp;&amp; !bound(?svswitch)  ).&#xD;
-        FILTER (!bound(?svswitch)  ).&#xD;
+    <sh:select>
+			SELECT  DISTINCT $this ?value 
+			WHERE {
+        $this ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService true .
+        $this cim:Switch.retained true .
+        $this rdf:type ?value .
+        $this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland.
+        #OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.
+        OPTIONAL {$this  ^cim:SvSwitch.Switch  ?svswitch} .
+        #FILTER (bound(?topologicalisland) &amp;&amp; !bound(?svswitch)  ).
+        FILTER (!bound(?svswitch)  ).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvVoltage-SV__4">
@@ -80,16 +80,16 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>SvShuntCompensatorSections is not instantiated for a ShuntCompensator (or any of the subtypes) connected to a TopologicalNode which is referenced by a TopologicalIsland.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  DISTINCT $this ?value &#xD;
-			WHERE {&#xD;
-        $this ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService true .&#xD;
-        $this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland.&#xD;
-        $this rdf:type ?value .&#xD;
-        #OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.&#xD;
-        OPTIONAL {$this  ^cim:SvShuntCompensatorSections.ShuntCompensator  ?svshuntcompsec} .&#xD;
-        #FILTER (bound(?topologicalisland) &amp;&amp; !bound(?svshuntcompsec)  ).&#xD;
-        FILTER (!bound(?svshuntcompsec)  ).&#xD;
+    <sh:select>
+			SELECT  DISTINCT $this ?value 
+			WHERE {
+        $this ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService true .
+        $this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland.
+        $this rdf:type ?value .
+        #OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.
+        OPTIONAL {$this  ^cim:SvShuntCompensatorSections.ShuntCompensator  ?svshuntcompsec} .
+        #FILTER (bound(?topologicalisland) &amp;&amp; !bound(?svshuntcompsec)  ).
+        FILTER (!bound(?svshuntcompsec)  ).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvSwitch-SV__4">
@@ -106,32 +106,32 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>SvVoltage is not instantiated for a TopologicalNode which is referenced by a TopologicalIsland.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this&#xD;
-			WHERE {&#xD;
-        $this  ^cim:TopologicalIsland.TopologicalNodes ?topologicalisland.&#xD;
-        #OPTIONAL {$this  ^cim:TopologicalIsland.TopologicalNodes ?topologicalisland}.&#xD;
-        OPTIONAL {$this  ^cim:SvVoltage.TopologicalNode ?svvoltage} .&#xD;
-&#xD;
-        FILTER (!bound(?svvoltage)).&#xD;
-        #FILTER (bound(?topologicalisland) &amp;&amp; !bound(?svvoltage)).&#xD;
+    <sh:select>
+			SELECT  $this
+			WHERE {
+        $this  ^cim:TopologicalIsland.TopologicalNodes ?topologicalisland.
+        #OPTIONAL {$this  ^cim:TopologicalIsland.TopologicalNodes ?topologicalisland}.
+        OPTIONAL {$this  ^cim:SvVoltage.TopologicalNode ?svvoltage} .
+
+        FILTER (!bound(?svvoltage)).
+        #FILTER (bound(?topologicalisland) &amp;&amp; !bound(?svvoltage)).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvShuntCompensatorSections.sections-SV__4Sparql">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>SvShuntCompensatorSections.sections is not the same as ShuntCompensator.sections for non-regulating ShuntCompensator. SvShuntCompensatorSections.sections is: {?svshuntsec}; ShuntCompensator.sections is: {?value}.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  DISTINCT $this ?value ?svshuntsec&#xD;
-			WHERE {&#xD;
-        $this ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService true .&#xD;
-        $this cim:RegulatingCondEq.controlEnabled ?controlen .&#xD;
-        $this  ^cim:SvShuntCompensatorSections.ShuntCompensator/cim:SvShuntCompensatorSections.sections  ?svshuntsec .&#xD;
-        $this $PATH ?value .&#xD;
-        OPTIONAL {$this  cim:RegulatingCondEq.RegulatingControl/cim:RegulatingControl.enabled ?rcenabled} .&#xD;
-        #OPTIONAL {$this  ^cim:SvShuntCompensatorSections.ShuntCompensator/cim:SvShuntCompensatorSections.sections  ?svshuntsec} .&#xD;
-        #FILTER (bound(?svshuntsec) &amp;&amp; ((?controlen=false &amp;&amp; ?svshuntsec!=?value) || (bound(?rcenabled) &amp;&amp; ?rcenabled=false &amp;&amp; ?svshuntsec!=?value) )  ).&#xD;
-        FILTER ((?controlen=false &amp;&amp; ?svshuntsec!=?value) || (bound(?rcenabled) &amp;&amp; ?rcenabled=false &amp;&amp; ?svshuntsec!=?value)   ).&#xD;
+    <sh:select>
+			SELECT  DISTINCT $this ?value ?svshuntsec
+			WHERE {
+        $this ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService true .
+        $this cim:RegulatingCondEq.controlEnabled ?controlen .
+        $this  ^cim:SvShuntCompensatorSections.ShuntCompensator/cim:SvShuntCompensatorSections.sections  ?svshuntsec .
+        $this $PATH ?value .
+        OPTIONAL {$this  cim:RegulatingCondEq.RegulatingControl/cim:RegulatingControl.enabled ?rcenabled} .
+        #OPTIONAL {$this  ^cim:SvShuntCompensatorSections.ShuntCompensator/cim:SvShuntCompensatorSections.sections  ?svshuntsec} .
+        #FILTER (bound(?svshuntsec) &amp;&amp; ((?controlen=false &amp;&amp; ?svshuntsec!=?value) || (bound(?rcenabled) &amp;&amp; ?rcenabled=false &amp;&amp; ?svshuntsec!=?value) )  ).
+        FILTER ((?controlen=false &amp;&amp; ?svshuntsec!=?value) || (bound(?rcenabled) &amp;&amp; ?rcenabled=false &amp;&amp; ?svshuntsec!=?value)   ).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvShuntCompensatorSections-SV__4">
@@ -148,17 +148,17 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>SvTapStep.position is not the same as TapChanger.step for non-regulating TapChanger. SvTapStep.position is: {?svtapsteppos}; TapChanger.step is: {?value}.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  DISTINCT $this ?value ?svtapsteppos&#xD;
-			WHERE {&#xD;
-        $this (cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.PowerTransformer/^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService)|(cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.PowerTransformer/^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService) true .&#xD;
-        $this cim:TapChanger.controlEnabled ?controlen .&#xD;
-        $this  ^cim:SvTapStep.TapChanger/cim:SvTapStep.position  ?svtapsteppos.&#xD;
-        $this $PATH ?value .&#xD;
-        OPTIONAL {$this  cim:TapChanger.TapChangerControl/cim:RegulatingControl.enabled ?rcenabled} .&#xD;
-        #OPTIONAL {$this  ^cim:SvTapStep.TapChanger/cim:SvTapStep.position  ?svtapsteppos} .&#xD;
-        #FILTER (bound(?svtapsteppos) &amp;&amp; ((?controlen=false &amp;&amp; ?svtapsteppos!=?value) || (bound(?rcenabled) &amp;&amp; ?rcenabled=false &amp;&amp; ?svtapsteppos!=?value) )  ).&#xD;
-        FILTER ((?controlen=false &amp;&amp; ?svtapsteppos!=?value) || (bound(?rcenabled) &amp;&amp; ?rcenabled=false &amp;&amp; ?svtapsteppos!=?value)  ).&#xD;
+    <sh:select>
+			SELECT  DISTINCT $this ?value ?svtapsteppos
+			WHERE {
+        $this (cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.PowerTransformer/^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService)|(cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.PowerTransformer/^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService) true .
+        $this cim:TapChanger.controlEnabled ?controlen .
+        $this  ^cim:SvTapStep.TapChanger/cim:SvTapStep.position  ?svtapsteppos.
+        $this $PATH ?value .
+        OPTIONAL {$this  cim:TapChanger.TapChangerControl/cim:RegulatingControl.enabled ?rcenabled} .
+        #OPTIONAL {$this  ^cim:SvTapStep.TapChanger/cim:SvTapStep.position  ?svtapsteppos} .
+        #FILTER (bound(?svtapsteppos) &amp;&amp; ((?controlen=false &amp;&amp; ?svtapsteppos!=?value) || (bound(?rcenabled) &amp;&amp; ?rcenabled=false &amp;&amp; ?svtapsteppos!=?value) )  ).
+        FILTER ((?controlen=false &amp;&amp; ?svtapsteppos!=?value) || (bound(?rcenabled) &amp;&amp; ?rcenabled=false &amp;&amp; ?svtapsteppos!=?value)  ).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvShuntCompensatorSections.sections-SV__4">
@@ -240,23 +240,23 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>Dangling reference is present in the model. The ID of the class is: {?s}.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  DISTINCT $this ?value ?s &#xD;
-			WHERE {&#xD;
-        #?s !(rdf:type | md:Model.DependentOn | md:Model.Supersedes) ?value .&#xD;
-        ?s !rdf:type ?value .&#xD;
-        BIND (str(?value) AS ?strvalue).&#xD;
-        #OPTIONAL{?s (!rdf:type)/rdf:type ?v} .&#xD;
-        #OPTIONAL{?value  rdf:type ?v}.&#xD;
-        &#xD;
-        #FILTER(!isLiteral(?value) &amp;&amp; CONTAINS(str(?value),"_") &amp;&amp;&#xD;
-        #      !CONTAINS(str(?value),"FullModel") &amp;&amp; !CONTAINS(str(?value),"DifferenceModel")).&#xD;
-        #FILTER(!isLiteral(?value) &amp;&amp; !STRSTARTS(str(?value),"urn:uuid:") &amp;&amp; (CONTAINS(str(?value),"#_") || STRLEN(STRAFTER(str(?value),"#"))&lt;=1) &amp;&amp;&#xD;
-        #      !CONTAINS(str(?value),"FullModel") &amp;&amp; !CONTAINS(str(?value),"DifferenceModel") ).  &#xD;
-        FILTER(isIRI(?value) &amp;&amp; (CONTAINS(?strvalue,"#_") || STRSTARTS(?strvalue,"urn:uuid:") || STRENDS(?strvalue,"#"))).              &#xD;
-        #OPTIONAL{?value  rdf:type ?v}.&#xD;
-        #FILTER (!bound(?v) ).&#xD;
-        FILTER NOT EXISTS {?value rdf:type ?v }.&#xD;
+    <sh:select>
+			SELECT  DISTINCT $this ?value ?s 
+			WHERE {
+        #?s !(rdf:type | md:Model.DependentOn | md:Model.Supersedes) ?value .
+        ?s !rdf:type ?value .
+        BIND (str(?value) AS ?strvalue).
+        #OPTIONAL{?s (!rdf:type)/rdf:type ?v} .
+        #OPTIONAL{?value  rdf:type ?v}.
+        
+        #FILTER(!isLiteral(?value) &amp;&amp; CONTAINS(str(?value),"_") &amp;&amp;
+        #      !CONTAINS(str(?value),"FullModel") &amp;&amp; !CONTAINS(str(?value),"DifferenceModel")).
+        #FILTER(!isLiteral(?value) &amp;&amp; !STRSTARTS(str(?value),"urn:uuid:") &amp;&amp; (CONTAINS(str(?value),"#_") || STRLEN(STRAFTER(str(?value),"#"))&lt;=1) &amp;&amp;
+        #      !CONTAINS(str(?value),"FullModel") &amp;&amp; !CONTAINS(str(?value),"DifferenceModel") ).  
+        FILTER(isIRI(?value) &amp;&amp; (CONTAINS(?strvalue,"#_") || STRSTARTS(?strvalue,"urn:uuid:") || STRENDS(?strvalue,"#"))).              
+        #OPTIONAL{?value  rdf:type ?v}.
+        #FILTER (!bound(?v) ).
+        FILTER NOT EXISTS {?value rdf:type ?v }.
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvTapStep.position-SV__4">
@@ -278,34 +278,34 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>SvStatus is not instantiated for a ConductingEquipment connected to a TopologicalNode which is referenced by a TopologicalIsland.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  DISTINCT $this ?value &#xD;
-			WHERE {&#xD;
-        $this cim:TopologicalIsland.TopologicalNodes ?tn.&#xD;
-        ?tn ^cim:ConnectivityNode.TopologicalNode/^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment ?value.&#xD;
-        OPTIONAL {?value  ^cim:SvStatus.ConductingEquipment  ?svstatus} .&#xD;
-        #$this rdf:type ?value .&#xD;
-        #OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.&#xD;
-        #OPTIONAL {$this  ^cim:SvStatus.ConductingEquipment  ?svstatus} .&#xD;
-        #FILTER (bound(?topologicalisland) &amp;&amp; !bound(?svstatus) &amp;&amp; ?value!=cim:Equipment ).&#xD;
-        FILTER (!bound(?svstatus) &amp;&amp; ?value!=cim:Equipment ).&#xD;
+    <sh:select>
+			SELECT  DISTINCT $this ?value 
+			WHERE {
+        $this cim:TopologicalIsland.TopologicalNodes ?tn.
+        ?tn ^cim:ConnectivityNode.TopologicalNode/^cim:Terminal.ConnectivityNode/cim:Terminal.ConductingEquipment ?value.
+        OPTIONAL {?value  ^cim:SvStatus.ConductingEquipment  ?svstatus} .
+        #$this rdf:type ?value .
+        #OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.
+        #OPTIONAL {$this  ^cim:SvStatus.ConductingEquipment  ?svstatus} .
+        #FILTER (bound(?topologicalisland) &amp;&amp; !bound(?svstatus) &amp;&amp; ?value!=cim:Equipment ).
+        FILTER (!bound(?svstatus) &amp;&amp; ?value!=cim:Equipment ).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvTapStep-SV__4Sparql">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>SvTapStep is not instantiated for a RatioTapChanger or PhaseTapChanger (or any of the subtypes)  connected to a TopologicalNode which is referenced by a TopologicalIsland.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  DISTINCT $this ?value &#xD;
-			WHERE {&#xD;
-        $this (cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.PowerTransformer/^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService)|(cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.PowerTransformer/^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService) true .&#xD;
-        $this  (cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes)|(cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes)  ?topologicalisland .&#xD;
-        $this rdf:type ?value .&#xD;
-        #OPTIONAL {$this cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.&#xD;
-        #OPTIONAL {$this cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.&#xD;
-        OPTIONAL {$this  ^cim:SvTapStep.TapChanger  ?svtapstep} .&#xD;
-        #FILTER (bound(?topologicalisland) &amp;&amp; !bound(?svtapstep)  ).&#xD;
-        FILTER (!bound(?svtapstep)  ).&#xD;
+    <sh:select>
+			SELECT  DISTINCT $this ?value 
+			WHERE {
+        $this (cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.PowerTransformer/^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService)|(cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.PowerTransformer/^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService) true .
+        $this  (cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes)|(cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes)  ?topologicalisland .
+        $this rdf:type ?value .
+        #OPTIONAL {$this cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.
+        #OPTIONAL {$this cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.
+        OPTIONAL {$this  ^cim:SvTapStep.TapChanger  ?svtapstep} .
+        #FILTER (bound(?topologicalisland) &amp;&amp; !bound(?svtapstep)  ).
+        FILTER (!bound(?svtapstep)  ).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#solvedMAS600Group">

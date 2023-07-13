@@ -29,18 +29,18 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The ACLineSegment has different BaseVoltage.nominalVoltage at the two end of the ACLineSegment. Voltage at end 1 is: {?voltage1}. Voltage at end 2 is: {?voltage2}.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT $this ?voltage1 ?voltage2&#xD;
-			WHERE {&#xD;
-        ?terminal1 cim:Terminal.ConductingEquipment $this .&#xD;
-        ?terminal2 cim:Terminal.ConductingEquipment $this .&#xD;
-        ?terminal1 cim:ACDCTerminal.sequenceNumber 1 .&#xD;
-        ?terminal2 cim:ACDCTerminal.sequenceNumber 2 .&#xD;
-        ?terminal1 cim:Terminal.TopologicalNode ?topologicalnode1 .&#xD;
-        ?terminal2 cim:Terminal.TopologicalNode ?topologicalnode2 .&#xD;
-        ?topologicalnode1 cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?voltage1 .&#xD;
-        ?topologicalnode2 cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?voltage2 .&#xD;
-				FILTER (?terminal1 != ?terminal2 &amp;&amp; ?voltage1 != ?voltage2 &amp;&amp; ?topologicalnode1 != ?topologicalnode2) .&#xD;
+    <sh:select>
+			SELECT $this ?voltage1 ?voltage2
+			WHERE {
+        ?terminal1 cim:Terminal.ConductingEquipment $this .
+        ?terminal2 cim:Terminal.ConductingEquipment $this .
+        ?terminal1 cim:ACDCTerminal.sequenceNumber 1 .
+        ?terminal2 cim:ACDCTerminal.sequenceNumber 2 .
+        ?terminal1 cim:Terminal.TopologicalNode ?topologicalnode1 .
+        ?terminal2 cim:Terminal.TopologicalNode ?topologicalnode2 .
+        ?topologicalnode1 cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?voltage1 .
+        ?topologicalnode2 cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?voltage2 .
+				FILTER (?terminal1 != ?terminal2 &amp;&amp; ?voltage1 != ?voltage2 &amp;&amp; ?topologicalnode1 != ?topologicalnode2) .
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="http://iec.ch/TC57/CIM100#">
