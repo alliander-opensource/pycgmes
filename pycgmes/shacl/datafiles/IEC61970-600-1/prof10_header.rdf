@@ -15,12 +15,12 @@
   <rdf:Description rdf:nodeID="A5">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type dm:DifferenceModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Operation-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type dm:DifferenceModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Operation-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A2">
@@ -34,12 +34,12 @@
   <rdf:Description rdf:nodeID="A8">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type dm:DifferenceModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Dynamics-EU/1.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type dm:DifferenceModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Dynamics-EU/1.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A9">
@@ -126,12 +126,12 @@
   <rdf:Description rdf:nodeID="A37">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type md:FullModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Operation-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type md:FullModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Operation-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A38">
@@ -166,12 +166,12 @@
   <rdf:Description rdf:nodeID="A45">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type md:FullModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/CoreEquipment-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type md:FullModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/CoreEquipment-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A46">
@@ -201,12 +201,12 @@
   <rdf:Description rdf:nodeID="A53">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type md:FullModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/StateVariables-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type md:FullModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/StateVariables-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A32">
@@ -224,12 +224,12 @@
   <rdf:Description rdf:nodeID="A56">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type dm:DifferenceModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/CoreEquipment-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type dm:DifferenceModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/CoreEquipment-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="http://iec.ch/TC57/CIM100#">
@@ -275,12 +275,12 @@
   <rdf:Description rdf:nodeID="A66">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type md:FullModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/SteadyStateHypothesis-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type md:FullModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/SteadyStateHypothesis-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#PROF10-EQ">
@@ -302,12 +302,12 @@
   <rdf:Description rdf:nodeID="A67">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type dm:DifferenceModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/GeographicalLocation-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type dm:DifferenceModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/GeographicalLocation-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#DiffModel-DY">
@@ -332,12 +332,12 @@
   <rdf:Description rdf:nodeID="A70">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type md:FullModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/GeographicalLocation-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type md:FullModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/GeographicalLocation-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A71">
@@ -422,12 +422,12 @@
   <rdf:Description rdf:nodeID="A81">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type dm:DifferenceModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/ShortCircuit-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type dm:DifferenceModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/ShortCircuit-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A35">
@@ -558,12 +558,12 @@
   <rdf:Description rdf:nodeID="A100">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type md:FullModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/DiagramLayout-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type md:FullModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/DiagramLayout-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A73">
@@ -610,12 +610,12 @@
   <rdf:Description rdf:nodeID="A85">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type md:FullModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Dynamics-EU/1.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type md:FullModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Dynamics-EU/1.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#Prof10">
@@ -645,12 +645,12 @@
   <rdf:Description rdf:nodeID="A84">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type md:FullModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Topology-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type md:FullModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/Topology-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A87">
@@ -686,12 +686,12 @@
   <rdf:Description rdf:nodeID="A44">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type md:FullModel   .&#xD;
-                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/ShortCircuit-EU/3.0"^^xsd:anyURI.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type md:FullModel   .
+                  ?this md:Model.profile "http://iec.ch/TC57/ns/CIM/ShortCircuit-EU/3.0"^^xsd:anyURI.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A58">

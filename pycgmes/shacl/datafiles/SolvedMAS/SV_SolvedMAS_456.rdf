@@ -69,17 +69,17 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>SvPowerFlow is not instantiated for the required instances of energized (SvStatus.inService=true and the connected ToplogicalNode is part of the TopologicalIsland) equipment.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value &#xD;
-			WHERE {&#xD;
-        $this  ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService  true .&#xD;
-        $this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland .&#xD;
-        $this rdf:type ?value .&#xD;
-        #OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.&#xD;
-        #OPTIONAL {$this  ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService  ?svstatus} .&#xD;
-        OPTIONAL {$this ^cim:Terminal.ConductingEquipment/^cim:SvPowerFlow.Terminal ?svpowerflow }.&#xD;
-        #FILTER (bound(?topologicalisland) &amp;&amp; bound(?svstatus) &amp;&amp; ?svstatus=true &amp;&amp; !bound(?svpowerflow)).&#xD;
-        FILTER (!bound(?svpowerflow)).&#xD;
+    <sh:select>
+			SELECT  $this ?value 
+			WHERE {
+        $this  ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService  true .
+        $this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland .
+        $this rdf:type ?value .
+        #OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.
+        #OPTIONAL {$this  ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService  ?svstatus} .
+        OPTIONAL {$this ^cim:Terminal.ConductingEquipment/^cim:SvPowerFlow.Terminal ?svpowerflow }.
+        #FILTER (bound(?topologicalisland) &amp;&amp; bound(?svstatus) &amp;&amp; ?svstatus=true &amp;&amp; !bound(?svpowerflow)).
+        FILTER (!bound(?svpowerflow)).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A0">
@@ -130,31 +130,31 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The value is &lt;=0.4 pu.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value &#xD;
-			WHERE {&#xD;
-        $this cim:SvVoltage.v ?value .&#xD;
-        $this cim:SvVoltage.ToplogicalNode/^cim:ConnectivityNode.TopologicalNode/^cim:Terminal.ConnectivityNode ?term .&#xD;
-        $this cim:SvVoltage.ToplogicalNode/cim:ToplogicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?nvoltage .&#xD;
-        #OPTIONAL {?limith cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term} .&#xD;
-        #OPTIONAL {?limitl cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term} .&#xD;
-        ##OPTIONAL {?limith rdf:type ?limithtype} .&#xD;
-        ##OPTIONAL {?limitl rdf:type ?limitltype} .&#xD;
-        #OPTIONAL {?limith cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.high} .&#xD;
-        #OPTIONAL {?limitl cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.low} .&#xD;
-        #OPTIONAL {?limith cim:VoltageLimit.value ?vhigh} .&#xD;
-        #OPTIONAL {?limitl cim:VoltageLimit.value ?vlow} .&#xD;
-        OPTIONAL {&#xD;
-                  ?limith cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term .&#xD;
-                  ?limitl cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term .&#xD;
-                  ?limith cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.high .&#xD;
-                  ?limitl cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.low .&#xD;
-                  ?limith cim:VoltageLimit.value ?vhigh .&#xD;
-                  ?limitl cim:VoltageLimit.value ?vlow .&#xD;
-                  }.&#xD;
-       &#xD;
-&#xD;
-        FILTER ( !bound(?vhigh) &amp;&amp; !bound(?vlow) &amp;&amp; (?value/?nvoltage)&lt;=0.4).&#xD;
+    <sh:select>
+			SELECT  $this ?value 
+			WHERE {
+        $this cim:SvVoltage.v ?value .
+        $this cim:SvVoltage.ToplogicalNode/^cim:ConnectivityNode.TopologicalNode/^cim:Terminal.ConnectivityNode ?term .
+        $this cim:SvVoltage.ToplogicalNode/cim:ToplogicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?nvoltage .
+        #OPTIONAL {?limith cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term} .
+        #OPTIONAL {?limitl cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term} .
+        ##OPTIONAL {?limith rdf:type ?limithtype} .
+        ##OPTIONAL {?limitl rdf:type ?limitltype} .
+        #OPTIONAL {?limith cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.high} .
+        #OPTIONAL {?limitl cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.low} .
+        #OPTIONAL {?limith cim:VoltageLimit.value ?vhigh} .
+        #OPTIONAL {?limitl cim:VoltageLimit.value ?vlow} .
+        OPTIONAL {
+                  ?limith cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term .
+                  ?limitl cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term .
+                  ?limith cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.high .
+                  ?limitl cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.low .
+                  ?limith cim:VoltageLimit.value ?vhigh .
+                  ?limitl cim:VoltageLimit.value ?vlow .
+                  }.
+       
+
+        FILTER ( !bound(?vhigh) &amp;&amp; !bound(?vlow) &amp;&amp; (?value/?nvoltage)&lt;=0.4).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvShuntCompensatorSections">
@@ -166,35 +166,35 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The value is outside of the range defined by the ReactiveCapabilityCurve or [GeneratingUnit.minOperatingP, GeneratingUnit.maxOperatingP] when the curve is not present.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value &#xD;
-			WHERE {&#xD;
-        $this ^cim:Terminal.ConductingEquipment/^cim:SvPowerFlow.Terminal/cim:SvPowerFlow.p ?value .&#xD;
-        $this cim:RotatingMachine.GeneratingUnit ?gu .&#xD;
-        ?gu cim:GeneratingUnit.minOperatingP ?minp .&#xD;
-        ?gu cim:GeneratingUnit.maxOperatingP ?maxp .&#xD;
-        OPTIONAL {$this cim:SynchronousMachine.InitialReactiveCapabilityCurve ?rcc } .&#xD;
-               &#xD;
-        {&#xD;
-        SELECT $this (MAX(?xvalue) AS ?maxxvalue)  (MIN(?xvalue) AS ?minxvalue)&#xD;
-          WHERE {&#xD;
-            #OPTIONAL {?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this } .&#xD;
-            OPTIONAL {?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this .&#xD;
-                      ?rcc1 ^cim:CurveData.Curve ?curvedata .&#xD;
-                      ?curvedata rdf:type ?cdtype .&#xD;
-                      ?curvedata cim:CurveData.xvalue ?xvalue .&#xD;
-                      } .&#xD;
-            #?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this .&#xD;
-            #?rcc1 ^cim:CurveData.Curve ?curvedata .&#xD;
-            #?curvedata rdf:type ?cdtype .&#xD;
-            #?curvedata cim:CurveData.xvalue ?xvalue .&#xD;
-            #FILTER (bound(?rcc1) &amp;&amp; ?cdtype=cim:CurveData ) .&#xD;
-          }&#xD;
-          GROUP BY $this ?cdtype&#xD;
-        }&#xD;
-&#xD;
-        #FILTER ( (!bound(?rcc) &amp;&amp; !(?value&gt;=?minp &amp;&amp; ?value&lt;=?maxp)) || (bound(?rcc) &amp;&amp; !(?value&gt;=?minxvalue &amp;&amp; ?value&lt;=?maxxvalue))).&#xD;
-        FILTER ( (!bound(?rcc) &amp;&amp; ((?value!=0 &amp;&amp; (-?value&lt;?minp || -?value&gt;?maxp)) || (?value=0 &amp;&amp; (?value&lt;?minp || ?value&gt;?maxp)))   ) || (bound(?rcc) &amp;&amp; ((?value!=0 &amp;&amp; (-?value&lt;?minxvalue || -?value&gt;?maxxvalue)) || (?value=0 &amp;&amp; (?value&lt;?minxvalue || ?value&gt;?maxxvalue))))).&#xD;
+    <sh:select>
+			SELECT  $this ?value 
+			WHERE {
+        $this ^cim:Terminal.ConductingEquipment/^cim:SvPowerFlow.Terminal/cim:SvPowerFlow.p ?value .
+        $this cim:RotatingMachine.GeneratingUnit ?gu .
+        ?gu cim:GeneratingUnit.minOperatingP ?minp .
+        ?gu cim:GeneratingUnit.maxOperatingP ?maxp .
+        OPTIONAL {$this cim:SynchronousMachine.InitialReactiveCapabilityCurve ?rcc } .
+               
+        {
+        SELECT $this (MAX(?xvalue) AS ?maxxvalue)  (MIN(?xvalue) AS ?minxvalue)
+          WHERE {
+            #OPTIONAL {?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this } .
+            OPTIONAL {?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this .
+                      ?rcc1 ^cim:CurveData.Curve ?curvedata .
+                      ?curvedata rdf:type ?cdtype .
+                      ?curvedata cim:CurveData.xvalue ?xvalue .
+                      } .
+            #?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this .
+            #?rcc1 ^cim:CurveData.Curve ?curvedata .
+            #?curvedata rdf:type ?cdtype .
+            #?curvedata cim:CurveData.xvalue ?xvalue .
+            #FILTER (bound(?rcc1) &amp;&amp; ?cdtype=cim:CurveData ) .
+          }
+          GROUP BY $this ?cdtype
+        }
+
+        #FILTER ( (!bound(?rcc) &amp;&amp; !(?value&gt;=?minp &amp;&amp; ?value&lt;=?maxp)) || (bound(?rcc) &amp;&amp; !(?value&gt;=?minxvalue &amp;&amp; ?value&lt;=?maxxvalue))).
+        FILTER ( (!bound(?rcc) &amp;&amp; ((?value!=0 &amp;&amp; (-?value&lt;?minp || -?value&gt;?maxp)) || (?value=0 &amp;&amp; (?value&lt;?minp || ?value&gt;?maxp)))   ) || (bound(?rcc) &amp;&amp; ((?value!=0 &amp;&amp; (-?value&lt;?minxvalue || -?value&gt;?maxxvalue)) || (?value=0 &amp;&amp; (?value&lt;?minxvalue || ?value&gt;?maxxvalue))))).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A1">
@@ -237,79 +237,79 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The value is outside of the range defined by the ReactiveCapabilityCurve or [SynchronousMachine.minQ, SynchronousMachine.maxQ] when the curve is not present.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value &#xD;
-			WHERE {&#xD;
-        $this ^cim:Terminal.ConductingEquipment/^cim:SvPowerFlow.Terminal/cim:SvPowerFlow.q ?value .&#xD;
-        OPTIONAL {$this cim:SynchronousMachine.minQ ?minq }.&#xD;
-        OPTIONAL {$this cim:SynchronousMachine.maxQ ?maxq }.&#xD;
-        OPTIONAL {$this cim:SynchronousMachine.InitialReactiveCapabilityCurve ?rcc } .&#xD;
-                   &#xD;
-        {&#xD;
-        SELECT $this (MAX(?y2value) AS ?my2value)  (MIN(?y1value) AS ?my1value)&#xD;
-          WHERE {&#xD;
-            #OPTIONAL {?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this } .&#xD;
-            OPTIONAL {?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this.&#xD;
-                      ?rcc1 ^cim:CurveData.Curve ?curvedata .&#xD;
-                      ?curvedata rdf:type ?cdtype .&#xD;
-                      ?curvedata cim:CurveData.y1value ?y1value .&#xD;
-                      ?curvedata cim:CurveData.y2value ?y2value .&#xD;
-                      }.&#xD;
-            #FILTER (bound(?rcc1) &amp;&amp; ?cdtype=cim:CurveData ) .&#xD;
-          }&#xD;
-          GROUP BY $this ?cdtype&#xD;
-        }&#xD;
-&#xD;
-        FILTER ( (!bound(?rcc) &amp;&amp; bound(?minq) &amp;&amp; bound(?maxq) &amp;&amp; ((?value!=0 &amp;&amp; (-?value&lt;?minq || -?value&gt;?maxq)) || (?value=0 &amp;&amp; (?value&lt;?minq || ?value&gt;?maxq)))) || (bound(?rcc) &amp;&amp; ((?value!=0 &amp;&amp; (-?value&lt;?my1value || -?value&gt;?my2value)) || (?value=0 &amp;&amp; (?value&lt;?my1value || ?value&gt;?my2value))))).&#xD;
+    <sh:select>
+			SELECT  $this ?value 
+			WHERE {
+        $this ^cim:Terminal.ConductingEquipment/^cim:SvPowerFlow.Terminal/cim:SvPowerFlow.q ?value .
+        OPTIONAL {$this cim:SynchronousMachine.minQ ?minq }.
+        OPTIONAL {$this cim:SynchronousMachine.maxQ ?maxq }.
+        OPTIONAL {$this cim:SynchronousMachine.InitialReactiveCapabilityCurve ?rcc } .
+                   
+        {
+        SELECT $this (MAX(?y2value) AS ?my2value)  (MIN(?y1value) AS ?my1value)
+          WHERE {
+            #OPTIONAL {?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this } .
+            OPTIONAL {?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this.
+                      ?rcc1 ^cim:CurveData.Curve ?curvedata .
+                      ?curvedata rdf:type ?cdtype .
+                      ?curvedata cim:CurveData.y1value ?y1value .
+                      ?curvedata cim:CurveData.y2value ?y2value .
+                      }.
+            #FILTER (bound(?rcc1) &amp;&amp; ?cdtype=cim:CurveData ) .
+          }
+          GROUP BY $this ?cdtype
+        }
+
+        FILTER ( (!bound(?rcc) &amp;&amp; bound(?minq) &amp;&amp; bound(?maxq) &amp;&amp; ((?value!=0 &amp;&amp; (-?value&lt;?minq || -?value&gt;?maxq)) || (?value=0 &amp;&amp; (?value&lt;?minq || ?value&gt;?maxq)))) || (bound(?rcc) &amp;&amp; ((?value!=0 &amp;&amp; (-?value&lt;?my1value || -?value&gt;?my2value)) || (?value=0 &amp;&amp; (?value&lt;?my1value || ?value&gt;?my2value))))).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvTapStep.position-valueSparql">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The value is not integer for an active discrete regulating control.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value&#xD;
-			WHERE {&#xD;
-        $this $PATH ?value .&#xD;
-        $this cim:SvTapStep.TapChanger/cim:TapChanger.TapChangerControl ?contr .&#xD;
-        #$this cim:SvTapStep.TapChanger ?tapchanger .&#xD;
-        #OPTIONAL {?tapchanger cim:TapChanger.TapChangerControl ?contr}.&#xD;
-        ?contr cim:RegulatingControl.enabled true .&#xD;
-        ?contr cim:RegulatingControl.discrete true . &#xD;
-        FILTER (STRENDS(str(?value), ".") &amp;&amp; !REGEX(STRAFTER(str(?value), "."), "^[0]$", "i")) . &#xD;
-        #?contr cim:RegulatingControl.discrete ?discrete . &#xD;
-        #?contr cim:RegulatingControl.enabled ?enabled .&#xD;
-        #FILTER (STRENDS(str(?value), ".") &amp;&amp; !REGEX(STRAFTER(str(?value), "."), "^[0]$", "i")  &amp;&amp; bound(?contr) &amp;&amp; ?discrete=true &amp;&amp; ?enabled=true) .        &#xD;
+    <sh:select>
+			SELECT  $this ?value
+			WHERE {
+        $this $PATH ?value .
+        $this cim:SvTapStep.TapChanger/cim:TapChanger.TapChangerControl ?contr .
+        #$this cim:SvTapStep.TapChanger ?tapchanger .
+        #OPTIONAL {?tapchanger cim:TapChanger.TapChangerControl ?contr}.
+        ?contr cim:RegulatingControl.enabled true .
+        ?contr cim:RegulatingControl.discrete true . 
+        FILTER (STRENDS(str(?value), ".") &amp;&amp; !REGEX(STRAFTER(str(?value), "."), "^[0]$", "i")) . 
+        #?contr cim:RegulatingControl.discrete ?discrete . 
+        #?contr cim:RegulatingControl.enabled ?enabled .
+        #FILTER (STRENDS(str(?value), ".") &amp;&amp; !REGEX(STRAFTER(str(?value), "."), "^[0]$", "i")  &amp;&amp; bound(?contr) &amp;&amp; ?discrete=true &amp;&amp; ?enabled=true) .        
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvShuntCompensatorSections.sections-valueSparql">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The value is not integer for an active discrete regulating control.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value&#xD;
-			WHERE {&#xD;
-        $this $PATH ?value .&#xD;
-        $this cim:SvShuntCompensatorSections.ShuntCompensator/cim:RegulatingCondEq.RegulatingControl ?contr .&#xD;
-        #$this cim:SvShuntCompensatorSections.ShuntCompensator ?shuntcomp .&#xD;
-        #OPTIONAL {?shuntcomp cim:RegulatingCondEq.RegulatingControl ?contr}.&#xD;
-        #?contr cim:RegulatingControl.discrete ?discrete . &#xD;
-        #?contr cim:RegulatingControl.enabled ?enabled .&#xD;
-        ?contr cim:RegulatingControl.enabled true .&#xD;
-        ?contr cim:RegulatingControl.discrete true . &#xD;
-        FILTER (STRENDS(str(?value), ".") &amp;&amp; !REGEX(STRAFTER(str(?value), "."), "^[0]$", "i") ) . &#xD;
-        #FILTER (STRENDS(str(?value), ".") &amp;&amp; !REGEX(STRAFTER(str(?value), "."), "^[0]$", "i")  &amp;&amp; bound(?contr) &amp;&amp; ?discrete=true &amp;&amp; ?enabled=true) .          &#xD;
+    <sh:select>
+			SELECT  $this ?value
+			WHERE {
+        $this $PATH ?value .
+        $this cim:SvShuntCompensatorSections.ShuntCompensator/cim:RegulatingCondEq.RegulatingControl ?contr .
+        #$this cim:SvShuntCompensatorSections.ShuntCompensator ?shuntcomp .
+        #OPTIONAL {?shuntcomp cim:RegulatingCondEq.RegulatingControl ?contr}.
+        #?contr cim:RegulatingControl.discrete ?discrete . 
+        #?contr cim:RegulatingControl.enabled ?enabled .
+        ?contr cim:RegulatingControl.enabled true .
+        ?contr cim:RegulatingControl.discrete true . 
+        FILTER (STRENDS(str(?value), ".") &amp;&amp; !REGEX(STRAFTER(str(?value), "."), "^[0]$", "i") ) . 
+        #FILTER (STRENDS(str(?value), ".") &amp;&amp; !REGEX(STRAFTER(str(?value), "."), "^[0]$", "i")  &amp;&amp; bound(?contr) &amp;&amp; ?discrete=true &amp;&amp; ?enabled=true) .          
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#SvSwitch-instanceSparql">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>SvSwitch not instantiated.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this&#xD;
-			WHERE {&#xD;
-        OPTIONAL {$this ^cim:SvSwitch.Switch ?svswitch } .&#xD;
-        FILTER (!bound(?svswitch)) .        &#xD;
+    <sh:select>
+			SELECT  $this
+			WHERE {
+        OPTIONAL {$this ^cim:SvSwitch.Switch ?svswitch } .
+        FILTER (!bound(?svswitch)) .        
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A2">
@@ -341,30 +341,30 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The value is outside the defined limits.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value &#xD;
-			WHERE {&#xD;
-        $this cim:SvVoltage.v ?value .&#xD;
-        $this cim:SvVoltage.ToplogicalNode/^cim:ConnectivityNode.TopologicalNode/^cim:Terminal.ConnectivityNode ?term .&#xD;
-        &#xD;
-        ?limith cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term .&#xD;
-        ?limitl cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term .&#xD;
-        ?limith cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.high .&#xD;
-        ?limitl cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.low .&#xD;
-        ?limith cim:VoltageLimit.value ?vhigh .&#xD;
-        ?limitl cim:VoltageLimit.value ?vlow .&#xD;
-        &#xD;
-        #OPTIONAL {?limith cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term} .&#xD;
-        #OPTIONAL {?limitl cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term} .&#xD;
-        ##OPTIONAL {?limith rdf:type ?limithtype} .&#xD;
-        ##OPTIONAL {?limitl rdf:type ?limitltype} .&#xD;
-        #OPTIONAL {?limith cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.high} .&#xD;
-        #OPTIONAL {?limitl cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.low} .&#xD;
-        #OPTIONAL {?limith cim:VoltageLimit.value ?vhigh} .&#xD;
-        #OPTIONAL {?limitl cim:VoltageLimit.value ?vlow} .&#xD;
-       &#xD;
-        FILTER ( ?value&gt;?vhigh || ?value&lt;?vlow).&#xD;
-        #FILTER ( bound(?vhigh) &amp;&amp; bound(?vlow) &amp;&amp; ?value&lt;=?vhigh &amp;&amp; ?value&gt;=?vlow).&#xD;
+    <sh:select>
+			SELECT  $this ?value 
+			WHERE {
+        $this cim:SvVoltage.v ?value .
+        $this cim:SvVoltage.ToplogicalNode/^cim:ConnectivityNode.TopologicalNode/^cim:Terminal.ConnectivityNode ?term .
+        
+        ?limith cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term .
+        ?limitl cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term .
+        ?limith cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.high .
+        ?limitl cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.low .
+        ?limith cim:VoltageLimit.value ?vhigh .
+        ?limitl cim:VoltageLimit.value ?vlow .
+        
+        #OPTIONAL {?limith cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term} .
+        #OPTIONAL {?limitl cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimitSet.Terminal ?term} .
+        ##OPTIONAL {?limith rdf:type ?limithtype} .
+        ##OPTIONAL {?limitl rdf:type ?limitltype} .
+        #OPTIONAL {?limith cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.high} .
+        #OPTIONAL {?limitl cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction cim:OperationalLimitDirectionKind.low} .
+        #OPTIONAL {?limith cim:VoltageLimit.value ?vhigh} .
+        #OPTIONAL {?limitl cim:VoltageLimit.value ?vlow} .
+       
+        FILTER ( ?value&gt;?vhigh || ?value&lt;?vlow).
+        #FILTER ( bound(?vhigh) &amp;&amp; bound(?vlow) &amp;&amp; ?value&lt;=?vhigh &amp;&amp; ?value&gt;=?vlow).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#solved456">

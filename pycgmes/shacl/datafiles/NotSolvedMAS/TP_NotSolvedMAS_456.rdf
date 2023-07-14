@@ -52,22 +52,22 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>Terminal-s of retained Switch (or its subclasses) connect same TopologicalNode (ID via cim:ConnectivityNode.TopologicalNode: {?cntn1}; ID via cim:Terminal.TopologicalNode: {?tn1}).</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value ?cntn1 ?tn1&#xD;
-			WHERE {&#xD;
-             $this $PATH ?value .&#xD;
-             ?terminal1 cim:Terminal.ConductingEquipment $this .&#xD;
-             ?terminal1 cim:ACDCTerminal.sequenceNumber 1 .&#xD;
-             OPTIONAL {?terminal1 cim:Terminal.ConnectivityNode ?cn1}.&#xD;
-             OPTIONAL {?terminal1 cim:Terminal.TopologicalNode ?tn1}.&#xD;
-             ?cn1 cim:ConnectivityNode.TopologicalNode ?cntn1 .&#xD;
-             &#xD;
-             ?terminal2 cim:Terminal.ConductingEquipment $this .&#xD;
-             ?terminal2 cim:ACDCTerminal.sequenceNumber 2 .&#xD;
-             OPTIONAL {?terminal2 cim:Terminal.ConnectivityNode ?cn2}.&#xD;
-             OPTIONAL {?terminal2 cim:Terminal.TopologicalNode ?tn2}.&#xD;
-             ?cn2 cim:ConnectivityNode.TopologicalNode ?cntn2 .          &#xD;
-				FILTER (?value=true &amp;&amp; (?terminal1!=?terminal2 &amp;&amp; (?tn1=?tn2 || ?cntn1=?cntn2))) .&#xD;
+    <sh:select>
+			SELECT  $this ?value ?cntn1 ?tn1
+			WHERE {
+             $this $PATH ?value .
+             ?terminal1 cim:Terminal.ConductingEquipment $this .
+             ?terminal1 cim:ACDCTerminal.sequenceNumber 1 .
+             OPTIONAL {?terminal1 cim:Terminal.ConnectivityNode ?cn1}.
+             OPTIONAL {?terminal1 cim:Terminal.TopologicalNode ?tn1}.
+             ?cn1 cim:ConnectivityNode.TopologicalNode ?cntn1 .
+             
+             ?terminal2 cim:Terminal.ConductingEquipment $this .
+             ?terminal2 cim:ACDCTerminal.sequenceNumber 2 .
+             OPTIONAL {?terminal2 cim:Terminal.ConnectivityNode ?cn2}.
+             OPTIONAL {?terminal2 cim:Terminal.TopologicalNode ?tn2}.
+             ?cn2 cim:ConnectivityNode.TopologicalNode ?cntn2 .          
+				FILTER (?value=true &amp;&amp; (?terminal1!=?terminal2 &amp;&amp; (?tn1=?tn2 || ?cntn1=?cntn2))) .
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#IGMTPunsolvedGroup">

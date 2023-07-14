@@ -46,18 +46,18 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The Terminal is referenced by a RegulatingControl but is not associated with a TopologicalNode.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this &#xD;
-			WHERE {&#xD;
-             #OPTIONAL {$this ^cim:RegulatingControl.Terminal ?rc}.&#xD;
-             #OPTIONAL {$this cim:Terminal.TopologicalNode ?value}.&#xD;
-             #BIND(EXISTS{$this ^cim:RegulatingControl.Terminal/cim:RegulatingControl.enabled true} AS ?enable).&#xD;
-             BIND(EXISTS{$this ^cim:RegulatingControl.Terminal ?rc} AS ?rctrue).&#xD;
-             BIND(EXISTS{$this cim:Terminal.TopologicalNode ?v} AS ?val).&#xD;
-             #$this cim:Terminal.TopologicalNode ?value .&#xD;
-				#FILTER (!bound(?value) &amp;&amp; bound(?rc)) .&#xD;
-        #FILTER (?val=false &amp;&amp; ?enable=true) .&#xD;
-        FILTER (?val=false &amp;&amp; ?rctrue=true) .&#xD;
+    <sh:select>
+			SELECT  $this 
+			WHERE {
+             #OPTIONAL {$this ^cim:RegulatingControl.Terminal ?rc}.
+             #OPTIONAL {$this cim:Terminal.TopologicalNode ?value}.
+             #BIND(EXISTS{$this ^cim:RegulatingControl.Terminal/cim:RegulatingControl.enabled true} AS ?enable).
+             BIND(EXISTS{$this ^cim:RegulatingControl.Terminal ?rc} AS ?rctrue).
+             BIND(EXISTS{$this cim:Terminal.TopologicalNode ?v} AS ?val).
+             #$this cim:Terminal.TopologicalNode ?value .
+				#FILTER (!bound(?value) &amp;&amp; bound(?rc)) .
+        #FILTER (?val=false &amp;&amp; ?enable=true) .
+        FILTER (?val=false &amp;&amp; ?rctrue=true) .
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#Ontology">

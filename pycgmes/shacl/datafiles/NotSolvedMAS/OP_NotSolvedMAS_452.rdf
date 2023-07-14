@@ -70,19 +70,19 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>Either the Terminal associated by Measurement.Terminal is not a terminal of the equipment associated via Measurement.PowerSystemResource or the association is present for Measurement.measurementType TapPosition or SwitchPosition. Details: Associated terminal ID:{?terminal}; Equipment's Terminal 1 ID:{?terminal1}; Equipment's Terminal 2 ID:{?terminal2}; Equipment's Terminal 3 ID:{?terminal3}; Measurement type:{?meastype}.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value ?terminal ?terminal1 ?terminal2 ?terminal3 ?meastype&#xD;
-			WHERE {&#xD;
-             $this $PATH ?value .&#xD;
-             OPTIONAL {$this cim:Measurement.Terminal ?terminal}.&#xD;
-             $this cim:Measurement.measurementType ?meastype . &#xD;
-             ?terminal1 cim:Terminal.ConductingEquipment ?value ;&#xD;
-                        cim:ACDCTerminal.sequenceNumber 1 .&#xD;
-             OPTIONAL {?terminal2 cim:Terminal.ConductingEquipment ?value ;&#xD;
-                        cim:ACDCTerminal.sequenceNumber 2 .}&#xD;
-             OPTIONAL {?terminal3 cim:Terminal.ConductingEquipment ?value ;&#xD;
-                        cim:ACDCTerminal.sequenceNumber 3 .}&#xD;
-				FILTER ((bound(?terminal) &amp;&amp; (?meastype="TapPosition" || ?meastype="SwitchPosition" )) || (!bound(?terminal) &amp;&amp; !(?meastype="TapPosition" || ?meastype="SwitchPosition" )) || (bound(?terminal) &amp;&amp; ((?terminal!=?terminal1 &amp;&amp; !bound(?terminal2) &amp;&amp; !bound(?terminal3)) || (bound(?terminal2) &amp;&amp; !bound(?terminal3) &amp;&amp; ?terminal!=?terminal1 &amp;&amp; ?terminal!=?terminal2) || (bound(?terminal2) &amp;&amp; bound(?terminal3) &amp;&amp; ?terminal!=?terminal1 &amp;&amp; ?terminal!=?terminal2 &amp;&amp; ?terminal!=?terminal3)))) .&#xD;
+    <sh:select>
+			SELECT  $this ?value ?terminal ?terminal1 ?terminal2 ?terminal3 ?meastype
+			WHERE {
+             $this $PATH ?value .
+             OPTIONAL {$this cim:Measurement.Terminal ?terminal}.
+             $this cim:Measurement.measurementType ?meastype . 
+             ?terminal1 cim:Terminal.ConductingEquipment ?value ;
+                        cim:ACDCTerminal.sequenceNumber 1 .
+             OPTIONAL {?terminal2 cim:Terminal.ConductingEquipment ?value ;
+                        cim:ACDCTerminal.sequenceNumber 2 .}
+             OPTIONAL {?terminal3 cim:Terminal.ConductingEquipment ?value ;
+                        cim:ACDCTerminal.sequenceNumber 3 .}
+				FILTER ((bound(?terminal) &amp;&amp; (?meastype="TapPosition" || ?meastype="SwitchPosition" )) || (!bound(?terminal) &amp;&amp; !(?meastype="TapPosition" || ?meastype="SwitchPosition" )) || (bound(?terminal) &amp;&amp; ((?terminal!=?terminal1 &amp;&amp; !bound(?terminal2) &amp;&amp; !bound(?terminal3)) || (bound(?terminal2) &amp;&amp; !bound(?terminal3) &amp;&amp; ?terminal!=?terminal1 &amp;&amp; ?terminal!=?terminal2) || (bound(?terminal2) &amp;&amp; bound(?terminal3) &amp;&amp; ?terminal!=?terminal1 &amp;&amp; ?terminal!=?terminal2 &amp;&amp; ?terminal!=?terminal3)))) .
 			}</sh:select>
   </rdf:Description>
 </rdf:RDF>

@@ -4,18 +4,18 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The terminals are either not related to ACLineSegment or the first and the second terminal associations are not pointing to different ACLineSegments. Type line 1: {?typeline1}. Type line 2: {?typeline2}.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT $this ?typeline1 ?typeline2&#xD;
-			WHERE {&#xD;
-        #$this cim:MutualCoupling.First_Terminal ?firstterminal .&#xD;
-        #$this cim:MutualCoupling.Second_Terminal ?secondterminal .&#xD;
-        #?firstterminal cim:Terminal.ConductingEquipment ?line1 . &#xD;
-        #?secondterminal cim:Terminal.ConductingEquipment ?line2 . &#xD;
-        $this cim:MutualCoupling.First_Terminal/cim:Terminal.ConductingEquipment ?line1 .&#xD;
-        $this cim:MutualCoupling.Second_Terminal/cim:Terminal.ConductingEquipment ?line2 .&#xD;
-        ?line1 rdf:type ?typeline1 .&#xD;
-        ?line2 rdf:type ?typeline2 .&#xD;
-				FILTER (?typeline1 NOT IN (cim:ACLineSegment, cim:Equipment) || ?typeline2 NOT IN (cim:ACLineSegment, cim:Equipment) || ?line1=?line2) .&#xD;
+    <sh:select>
+			SELECT $this ?typeline1 ?typeline2
+			WHERE {
+        #$this cim:MutualCoupling.First_Terminal ?firstterminal .
+        #$this cim:MutualCoupling.Second_Terminal ?secondterminal .
+        #?firstterminal cim:Terminal.ConductingEquipment ?line1 . 
+        #?secondterminal cim:Terminal.ConductingEquipment ?line2 . 
+        $this cim:MutualCoupling.First_Terminal/cim:Terminal.ConductingEquipment ?line1 .
+        $this cim:MutualCoupling.Second_Terminal/cim:Terminal.ConductingEquipment ?line2 .
+        ?line1 rdf:type ?typeline1 .
+        ?line2 rdf:type ?typeline2 .
+				FILTER (?typeline1 NOT IN (cim:ACLineSegment, cim:Equipment) || ?typeline2 NOT IN (cim:ACLineSegment, cim:Equipment) || ?line1=?line2) .
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A0">

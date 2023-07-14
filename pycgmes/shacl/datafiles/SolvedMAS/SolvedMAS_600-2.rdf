@@ -3,12 +3,12 @@
   <rdf:Description rdf:nodeID="A0">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLTarget"/>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-                SELECT DISTINCT ?this&#xD;
-                WHERE {&#xD;
-                  ?this rdf:type cim:TopologicalNode   .&#xD;
-                  ?this ^cim:Terminal.TopologicalNode/^cim:RegulatingControl.Terminal/cim:RegulatingControl.enabled true.&#xD;
-                }&#xD;
+    <sh:select>
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type cim:TopologicalNode   .
+                  ?this ^cim:Terminal.TopologicalNode/^cim:RegulatingControl.Terminal/cim:RegulatingControl.enabled true.
+                }
                 </sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#solvedMAS6002">
@@ -37,46 +37,46 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>Enabled RegulatingControl-s of the same type associated with the same TopologicalNode have different target values. RegulatingControl ID: {?rcfail}.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-    	SELECT $this ?count ?value ?rcfail&#xD;
-			WHERE {&#xD;
-          $this ^cim:Terminal.TopologicalNode/^cim:RegulatingControl.Terminal ?rcfail .&#xD;
-          ?rcfail cim:RegulatingControl.targetValue ?value .&#xD;
-      {&#xD;
-      SELECT $this (count(distinct ?val) as ?count)&#xD;
-      WHERE {&#xD;
-             $this ^cim:Terminal.TopologicalNode/^cim:RegulatingControl.Terminal ?rc .&#xD;
-             ?rc cim:RegulatingControl.enabled true .&#xD;
-             ?rc cim:RegulatingControl.mode ?mode .&#xD;
-             ?rc cim:RegulatingControl.targetValue ?val .   &#xD;
-      }&#xD;
-      GROUP BY $this ?mode&#xD;
-			}&#xD;
-      }&#xD;
-      HAVING (?count&gt;1)&#xD;
-      #LIMIT 1&#xD;
+    <sh:select>
+    	SELECT $this ?count ?value ?rcfail
+			WHERE {
+          $this ^cim:Terminal.TopologicalNode/^cim:RegulatingControl.Terminal ?rcfail .
+          ?rcfail cim:RegulatingControl.targetValue ?value .
+      {
+      SELECT $this (count(distinct ?val) as ?count)
+      WHERE {
+             $this ^cim:Terminal.TopologicalNode/^cim:RegulatingControl.Terminal ?rc .
+             ?rc cim:RegulatingControl.enabled true .
+             ?rc cim:RegulatingControl.mode ?mode .
+             ?rc cim:RegulatingControl.targetValue ?val .   
+      }
+      GROUP BY $this ?mode
+			}
+      }
+      HAVING (?count&gt;1)
+      #LIMIT 1
       </sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#RegulatingControl-pointSparql">
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The controlled point and the controlling equipment are not located in the same TopologicalIsland. TopologicalIsland ID (via RegulatingControl.Terminal):{?topislandterminal} TopologicalIsland ID (via RatioTapChanger):{?topislandterminalratio} TopologicalIsland ID (via PhaseTapChanger):{?topislandterminalphase} TopologicalIsland ID (via ConductingEquipment):{?topislandterminalcondeq}.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-    	SELECT $this ?topislandterminal ?topislandterminalratio ?topislandterminalphase ?topislandterminalcondeq&#xD;
-			WHERE {&#xD;
-          $this cim:RegulatingControl.enabled true .&#xD;
-          $this cim:RegulatingControl.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminal .&#xD;
-          #BIND(EXISTS{$this cim:RegulatingControl.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?tnisland } AS ?tni).&#xD;
-          OPTIONAL {$this ^cim:TapChanger.TapChangerControl/cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminalratio}.&#xD;
-          OPTIONAL {$this ^cim:TapChanger.TapChangerControl/cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminalphase}.&#xD;
-          OPTIONAL {$this ^cim:RegulatingCondEq.RegulatingControl/^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminalcondeq}.&#xD;
-          ##FILTER ( ?tni=true &amp;&amp; ((bound(?topislandterminalratio) &amp;&amp; !bound(?topislandterminalphase) &amp;&amp; !bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalratio!=?topislandterminal) ||&#xD;
-          #(!bound(?topislandterminalratio) &amp;&amp; bound(?topislandterminalphase) &amp;&amp; !bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalphase!=?topislandterminal) ||&#xD;
-          #(!bound(?topislandterminalratio) &amp;&amp; !bound(?topislandterminalphase) &amp;&amp; bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalcondeq!=?topislandterminal) )).&#xD;
-          FILTER ( ((bound(?topislandterminalratio) &amp;&amp; !bound(?topislandterminalphase) &amp;&amp; !bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalratio!=?topislandterminal) ||&#xD;
-          (!bound(?topislandterminalratio) &amp;&amp; bound(?topislandterminalphase) &amp;&amp; !bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalphase!=?topislandterminal) ||&#xD;
-          (!bound(?topislandterminalratio) &amp;&amp; !bound(?topislandterminalphase) &amp;&amp; bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalcondeq!=?topislandterminal) )&#xD;
-          ).&#xD;
+    <sh:select>
+    	SELECT $this ?topislandterminal ?topislandterminalratio ?topislandterminalphase ?topislandterminalcondeq
+			WHERE {
+          $this cim:RegulatingControl.enabled true .
+          $this cim:RegulatingControl.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminal .
+          #BIND(EXISTS{$this cim:RegulatingControl.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?tnisland } AS ?tni).
+          OPTIONAL {$this ^cim:TapChanger.TapChangerControl/cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminalratio}.
+          OPTIONAL {$this ^cim:TapChanger.TapChangerControl/cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminalphase}.
+          OPTIONAL {$this ^cim:RegulatingCondEq.RegulatingControl/^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminalcondeq}.
+          ##FILTER ( ?tni=true &amp;&amp; ((bound(?topislandterminalratio) &amp;&amp; !bound(?topislandterminalphase) &amp;&amp; !bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalratio!=?topislandterminal) ||
+          #(!bound(?topislandterminalratio) &amp;&amp; bound(?topislandterminalphase) &amp;&amp; !bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalphase!=?topislandterminal) ||
+          #(!bound(?topislandterminalratio) &amp;&amp; !bound(?topislandterminalphase) &amp;&amp; bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalcondeq!=?topislandterminal) )).
+          FILTER ( ((bound(?topislandterminalratio) &amp;&amp; !bound(?topislandterminalphase) &amp;&amp; !bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalratio!=?topislandterminal) ||
+          (!bound(?topislandterminalratio) &amp;&amp; bound(?topislandterminalphase) &amp;&amp; !bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalphase!=?topislandterminal) ||
+          (!bound(?topislandterminalratio) &amp;&amp; !bound(?topislandterminalphase) &amp;&amp; bound(?topislandterminalcondeq) &amp;&amp; ?topislandterminalcondeq!=?topislandterminal) )
+          ).
       } </sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#Ontology">

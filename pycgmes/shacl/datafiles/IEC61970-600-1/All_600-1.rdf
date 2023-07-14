@@ -4,15 +4,15 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The ID string is more than 60 characters or the string does not begin with underscore.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value&#xD;
-			WHERE {&#xD;
-          ?value rdf:type ?o.&#xD;
-          #BIND(str(?s) AS ?uuid) .&#xD;
-          #$this rdf:type ?value .&#xD;
-          #BIND(str($this) AS ?uuid) .&#xD;
-          BIND(STRAFTER(str(?value),"#_") AS ?secondpart) .&#xD;
-          FILTER(STRLEN(?secondpart)&gt;59 &amp;&amp; ?secondpart="" &amp;&amp; !REGEX(STR(?uuid), "^urn:uuid:[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$", "i") ).&#xD;
+    <sh:select>
+			SELECT  $this ?value
+			WHERE {
+          ?value rdf:type ?o.
+          #BIND(str(?s) AS ?uuid) .
+          #$this rdf:type ?value .
+          #BIND(str($this) AS ?uuid) .
+          BIND(STRAFTER(str(?value),"#_") AS ?secondpart) .
+          FILTER(STRLEN(?secondpart)&gt;59 &amp;&amp; ?secondpart="" &amp;&amp; !REGEX(STR(?uuid), "^urn:uuid:[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$", "i") ).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A0">
@@ -28,14 +28,14 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>Invalid syntax of ID (rdf:ID or rdf:about).</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value&#xD;
-			WHERE {&#xD;
-          ?value rdf:type ?o.&#xD;
-          BIND(str(?value) AS ?uuid) .&#xD;
-          #BIND(str($this) AS ?uuid) .&#xD;
-          BIND(STRAFTER(?uuid,"#_") AS ?secondpart) .&#xD;
-          FILTER(!REGEX(?secondpart, "^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$", "i") &amp;&amp; !REGEX(STR(?uuid), "^urn:uuid:[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$", "i")).&#xD;
+    <sh:select>
+			SELECT  $this ?value
+			WHERE {
+          ?value rdf:type ?o.
+          BIND(str(?value) AS ?uuid) .
+          #BIND(str($this) AS ?uuid) .
+          BIND(STRAFTER(?uuid,"#_") AS ?secondpart) .
+          FILTER(!REGEX(?secondpart, "^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$", "i") &amp;&amp; !REGEX(STR(?uuid), "^urn:uuid:[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$", "i")).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="http://iec.ch/TC57/CIM100#">
@@ -81,14 +81,14 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>Not an unique identifier.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this (COUNT(?value) AS ?counts) ?value&#xD;
-			WHERE {&#xD;
-          ?value rdf:type ?o.&#xD;
-          FILTER(?o!=cim:Equipment).&#xD;
-			}&#xD;
-      GROUP BY $this ?value&#xD;
-      HAVING(?counts&gt;1)&#xD;
+    <sh:select>
+			SELECT  $this (COUNT(?value) AS ?counts) ?value
+			WHERE {
+          ?value rdf:type ?o.
+          FILTER(?o!=cim:Equipment).
+			}
+      GROUP BY $this ?value
+      HAVING(?counts&gt;1)
       </sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A6">
@@ -162,11 +162,11 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>File header Model.scenarioTime is not a valid UTC date time.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value&#xD;
-			WHERE {&#xD;
-          $this $PATH ?value .&#xD;
-          FILTER(!STRENDS(str(?value),"Z")).&#xD;
+    <sh:select>
+			SELECT  $this ?value
+			WHERE {
+          $this $PATH ?value .
+          FILTER(!STRENDS(str(?value),"Z")).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#Float-specialValues">
@@ -211,11 +211,11 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>File header Model.created is not a valid UTC date time.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value&#xD;
-			WHERE {&#xD;
-          $this $PATH ?value .&#xD;
-          FILTER(!STRENDS(str(?value),"Z")).&#xD;
+    <sh:select>
+			SELECT  $this ?value
+			WHERE {
+          $this $PATH ?value .
+          FILTER(!STRENDS(str(?value),"Z")).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A15">
@@ -252,11 +252,11 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>The property is defined as empty property.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value &#xD;
-			WHERE {&#xD;
-          $this $PATH ?value .&#xD;
-          FILTER(STRLEN(str(?value))=0).&#xD;
+    <sh:select>
+			SELECT  $this ?value 
+			WHERE {
+          $this $PATH ?value .
+          FILTER(STRLEN(str(?value))=0).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:about="#MarpRule">
@@ -306,13 +306,13 @@
     <rdf:type rdf:resource="http://www.w3.org/ns/shacl#SPARQLConstraint"/>
     <sh:message>INF or NaN used in an attributes defined as float or the values is not a numeric value.</sh:message>
     <sh:prefixes rdf:resource="http://iec.ch/TC57/CIM100#"/>
-    <sh:select>&#xD;
-			SELECT  $this ?value&#xD;
-			WHERE {&#xD;
-          ?s ?p ?value .&#xD;
-          #BIND(str($this) AS ?value).&#xD;
-          FILTER(isLiteral(?this) &amp;&amp; DATATYPE(?value)=xsd:float &amp;&amp; (!isNumeric($this) || CONTAINS(?value, "NaN") || CONTAINS(?value, "INF"))).&#xD;
-          #FILTER(!isNumeric($this) || CONTAINS(?value, "NaN") || CONTAINS(?value, "INF")).&#xD;
+    <sh:select>
+			SELECT  $this ?value
+			WHERE {
+          ?s ?p ?value .
+          #BIND(str($this) AS ?value).
+          FILTER(isLiteral(?this) &amp;&amp; DATATYPE(?value)=xsd:float &amp;&amp; (!isNumeric($this) || CONTAINS(?value, "NaN") || CONTAINS(?value, "INF"))).
+          #FILTER(!isNumeric($this) || CONTAINS(?value, "NaN") || CONTAINS(?value, "INF")).
 			}</sh:select>
   </rdf:Description>
   <rdf:Description rdf:nodeID="A17">
