@@ -5,6 +5,10 @@ The CI & co happen in the main poetry/github files.
 
 The main `pycgmes` package does not have the SHACL files.
 
+# Actual Shacl files
+
+They are in the [main tree](../pycgmes/shacl/).
+
 # Build
 
 To be able to build multiple pacakges based om the same source, things need to be a bit different, because:

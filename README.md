@@ -5,7 +5,7 @@
   - [Content](#content)
     - [Schemas v3](#schemas-v3)
     - [Shacl files](#shacl-files)
-    - [V3 source](#v3-source)
+    - [V3 source zip](#v3-source-zip)
     - [Dataclasses](#dataclasses)
   - [Library build, CI, CD...](#library-build-ci-cd)
     - [CI](#ci)
@@ -16,8 +16,12 @@ Python dataclasses for CGMES 3 + rdf schema description + SHACL files
 
 ## Library usage
 
+From the internal Alliander nexus repo, 2 packages are available:
 
+- https://nexus.appx.cloud/#browse/browse:uno-pypi:pycgmes
+- https://nexus.appx.cloud/#browse/browse:uno-pypi:pycgmes-shacl
 
+They can be installed by pip once `https://nexus.appx.cloud/repository/uno-pypi/simple` is added as pip extra url or Poetry dependency.
 
 ## Content
 
@@ -38,10 +42,10 @@ is referenced, specially with older versions, but Entsoe is moving away from it.
 
 To use them, there is another package `pycmges-shacl`, built from this repo as well.
 
-### V3 source
+### V3 source zip
 
 From Entsoe, in [data](./data/). This is one small-ish zip file, containing a bit more than just the shacl and rdfs
-files (those extracted and emtioned above) but is usually not needed.
+files (those extracted and mentioned above) but is usually not needed.
 
 ### Dataclasses
 
@@ -74,5 +78,4 @@ This is managed by Team Uno, which has the nexus credentials in their own keeper
 - open source it?
 - build the library with different versions possible, to eventually use it with eg. `pip install pycgmes["3.0.0"]` for CGMES version 3 or `pip install pycgmes["2.4.5"]` for another version.
 - buid cimexport in ?
-- add shacl files as optional extra `pip install pycgmes["shacl"]`
 - Sort out proper versioning. Currently pypi will prevent reupload, but maybe we can be smarter than that, inclusive github artifacts & co.
