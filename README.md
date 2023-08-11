@@ -2,6 +2,8 @@
 
 - [cgmes-python](#cgmes-python)
   - [Library usage](#library-usage)
+  - [Custom attributes](#custom-attributes)
+    - [Apparent class](#apparent-class)
   - [Content](#content)
     - [Schemas v3](#schemas-v3)
     - [Shacl files](#shacl-files)
@@ -22,6 +24,26 @@ From the internal Alliander nexus repo, 2 packages are available:
 - https://nexus.appx.cloud/#browse/browse:uno-pypi:pycgmes-shacl
 
 They can be installed by pip once `https://nexus.appx.cloud/repository/uno-pypi/simple` is added as pip extra url or Poetry dependency.
+
+## Custom attributes
+
+### Apparent class
+
+If you need to add your own attributes (example: cable colour), you can do that by subclassing the relevant class.
+
+If this is a leaf node (for instance `ACLineSegment`), it "just works". If you want to add an extr attribute to a
+class higher in the hierarchy (for instance `Equipment`) there is a lot more work to do.
+
+By default, an attribute is fully qualified. `bch` in `ACLineSegment` will appear as `ACLineSegment.bch` in the serialisation.
+For a custom attribute, you might not want to see  `ACLineSegmentCustom.bch`. To prevent this, you can override the `apparent_name`
+of your custom class:
+
+```python
+class ACLineSegmentCustom(ACLineSegment)
+    @classmethod
+    def apparent_name(self):
+        return "ACLineSegment"
+```
 
 ## Content
 
