@@ -8,7 +8,7 @@ import importlib
 from dataclasses import Field, fields
 from enum import Enum
 from functools import cache, cached_property
-from typing import Any, TypeAlias
+from typing import Any, TypeAlias, TypedDict
 
 # Drop in dataclass replacement, allowing easier json dump and validation in the future.
 from pydantic.dataclasses import dataclass
@@ -168,9 +168,9 @@ class Base:
             if f.name != "mRID"
         }
 
-    def cgmes_attributes_in_profile(self, profile: Profile | None) -> dict[str, "CgmesAttributeTypes"]:
+    def cgmes_attributes_in_profile(self, profile: Profile | None) -> dict[str, "CgmesAttribute"]:
         """
-        Returns all attribute values as a dict: fully qualified name => value.
+        Returns all attribute values as a dict: fully qualified name => CgmesAttribute.
         Fully qualified names is in the form class_name.attribute_name, where class_name is the
         (possibly parent) class where the attribute is defined.
 
@@ -179,7 +179,7 @@ class Base:
         with thus the parent class included in the attribute name.
         """
         # What will be returned, has the qualname as key...
-        qual_attrs: dict[str, "CgmesAttributeTypes"] = {}
+        qual_attrs: dict[str, "CgmesAttribute"] = {}
         # .. but we check existence with the unqualified (short) name.
         seen_attrs = set()
 
@@ -187,12 +187,18 @@ class Base:
         for parent in reversed(self.__class__.__mro__[:-1]):
             for f in fields(parent):
                 shortname = f.name
-                qualname = f"{parent.apparent_name()}.{shortname}"
+                qualname = f"{parent.apparent_name()}.{shortname}"  # type: ignore
                 if f not in self.cgmes_attribute_names_in_profile(profile) or shortname in seen_attrs:
                     # Wrong profile or already found from a parent.
                     continue
                 else:
-                    qual_attrs[qualname] = getattr(self, shortname)
+                    qual_attrs[qualname] = CgmesAttribute(
+                        value=getattr(self, shortname),
+                        # base types (bv int) do not have extras
+                        namespace=extra.get("namespace", None)
+                        if (extra := getattr(f.default, "extra", None))
+                        else None,
+                    )
                     seen_attrs.add(shortname)
 
         return qual_attrs
@@ -203,3 +209,15 @@ class Base:
 
 
 CgmesAttributeTypes: TypeAlias = str | int | float | Base | list | None
+
+
+class CgmesAttribute(TypedDict):
+    """
+    Describes a CGMES attribute: its value and namespace.
+    """
+
+    # Actual value
+    value: CgmesAttributeTypes
+    # The default will be None. Only custom attributes might have something different, given as metadata.
+    # See readme for more information.
+    namespace: str | None

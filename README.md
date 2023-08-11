@@ -4,6 +4,7 @@
   - [Library usage](#library-usage)
   - [Custom attributes](#custom-attributes)
     - [Apparent class](#apparent-class)
+    - [Namespace](#namespace)
   - [Content](#content)
     - [Schemas v3](#schemas-v3)
     - [Shacl files](#shacl-files)
@@ -39,11 +40,45 @@ For a custom attribute, you might not want to see  `ACLineSegmentCustom.bch`. To
 of your custom class:
 
 ```python
+from pydantic.dataclasses import dataclass
+
+from pycgmes.resources.Base import Base, DataclassConfig, Profile
+
+@dataclass(config=DataclassConfig)
 class ACLineSegmentCustom(ACLineSegment)
     @classmethod
     def apparent_name(self):
         return "ACLineSegment"
 ```
+
+### Namespace
+
+In the serialisation, the namespace of all attributes is `cim` (`"http://iec.ch/TC57/2013/CIM-schema-cim16#"`) by default.
+The serialisation is not done by PyCGMES (yet), but
+you can give a hint to the serialiser, by adding some metadata to your custom attributes:
+
+```python
+from pydantic.dataclasses import dataclass
+
+from pycgmes.resources.Base import Base, DataclassConfig, Profile
+
+@dataclass(config=DataclassConfig)
+class ACLineSegmentCustom(ACLineSegment)
+
+    colour: str = Field(
+        default="Red",
+        in_profiles=[
+            Profile.EQ,
+        ],
+        namespace="custom",
+    )
+
+    @classmethod
+    def apparent_name(self):
+        return "ACLineSegment"
+```
+
+It will be given when `cgmes_attributes_in_profile()` is called.
 
 ## Content
 

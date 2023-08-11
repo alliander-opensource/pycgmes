@@ -1,3 +1,5 @@
+# Checking only one well known class.
+# As they are generated, if one is correct, the others should be as well.
 import textwrap
 
 import pytest
