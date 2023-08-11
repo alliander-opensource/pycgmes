@@ -32,6 +32,7 @@ class CustomButNotmuch(Base):
 
     # no apparent_name()
 
+
 class TestCustom:
     @pytest.mark.parametrize(
         "klass, apparent, ns",
