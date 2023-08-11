@@ -54,11 +54,12 @@ class ACLineSegmentCustom(ACLineSegment)
 ### Namespace
 
 In the serialisation, the namespace of all attributes is `cim` (`"http://iec.ch/TC57/2013/CIM-schema-cim16#"`) by default.
-The serialisation is not done by PyCGMES (yet), but
-you can give a hint to the serialiser, by adding some metadata to your custom attributes:
+The serialisation is not done by PyCGMES (yet), but if you want a custom namespace for an attribute,
+you can give a hint to the serialiser by adding some metadata to your custom attributes:
 
 ```python
 from pydantic.dataclasses import dataclass
+from pydantic import Field
 
 from pycgmes.resources.Base import Base, DataclassConfig, Profile
 
