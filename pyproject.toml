@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "pycgmes"
 # Note that trying to reupload the same version will fail.
-version = "0.9.10"
+version = "0.9.11"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["uno <uno@alliander.com>"]
 readme = "README.md"
