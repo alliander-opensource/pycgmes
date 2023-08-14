@@ -3,10 +3,26 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from pycgmes.resources.Base import Base, DataclassConfig, Profile
+from resources import ACLineSegment
 
 
 @dataclass(config=DataclassConfig)
-class FullCustom(Base):
+class CustomACLineSegment(ACLineSegment):
+    colour: str = Field(
+        default="Red",
+        in_profiles=[
+            Profile.EQ,
+        ],
+        namespace="custom",
+    )
+
+    @classmethod
+    def apparent_name(cls):
+        return "ACLineSegment"
+
+
+@dataclass(config=DataclassConfig)
+class CustomBase(Base):
     colour: str = Field(
         default="Red",
         in_profiles=[
@@ -35,17 +51,18 @@ class CustomButNotmuch(Base):
 
 class TestCustom:
     @pytest.mark.parametrize(
-        "klass, apparent, ns",
+        "klass, num_attrs, apparent, ns",
         [
-            (FullCustom, "ACLineSegment", "custom"),
-            (CustomButNotmuch, "CustomButNotmuch", None),
+            (CustomACLineSegment, 20, "ACLineSegment", "custom"),
+            (CustomBase, 1, "ACLineSegment", "custom"),
+            (CustomButNotmuch, 1, "CustomButNotmuch", None),
         ],
     )
-    def test_customisation(self, klass, apparent, ns):
+    def test_customisation(self, klass, num_attrs, apparent, ns):
         colour = "cheese"
         cust = klass(colour=colour)
         attrs = cust.cgmes_attributes_in_profile(None)
-        assert len(attrs) == 1
+        assert len(attrs) == num_attrs
         assert f"{apparent}.colour" in attrs
         assert attrs[f"{apparent}.colour"]["value"] == colour
         assert attrs[f"{apparent}.colour"]["namespace"] == ns
