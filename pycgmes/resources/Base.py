@@ -79,7 +79,7 @@ class DataclassConfig:  # pylint: disable=too-few-public-methods
     https://docs.pydantic.dev/latest/usage/model_config/#options
     """
 
-    # By default with pydantic extra arguments given to a dataclass are silently ignored.
+    # By default, with pydantic extra arguments given to a dataclass are silently ignored.
     # This matches the default behaviour by failing noisily.
     extra = "forbid"
 
@@ -139,7 +139,7 @@ class Base:
         """
         If you create your own custom attributes by subclassing a resource,
         but you do not want the name of your new subclass to appear, you can force the apparent name by
-        subclassing this method.
+        overriding this method.
         """
         return cls.__name__
 
@@ -180,10 +180,10 @@ class Base:
         """
         # What will be returned, has the qualname as key...
         qual_attrs: dict[str, "CgmesAttribute"] = {}
-        # .. but we check existence with the unqualified (short) name.
+        # ... but we check existence with the unqualified (short) name.
         seen_attrs = set()
 
-        # mro contains itself (so parent might be a misnomer) and object, removed wit the [:-1].
+        # mro contains itself (so parent might be a misnomer) and object, removed with the [:-1].
         for parent in reversed(self.__class__.__mro__[:-1]):
             for f in fields(parent):
                 shortname = f.name
@@ -194,7 +194,7 @@ class Base:
                 else:
                     qual_attrs[qualname] = CgmesAttribute(
                         value=getattr(self, shortname),
-                        # base types (bv int) do not have extras
+                        # base types (e.g. int) do not have extras
                         namespace=extra.get("namespace", None)
                         if (extra := getattr(f.default, "extra", None))
                         else None,
@@ -204,7 +204,7 @@ class Base:
         return qual_attrs
 
     def __str__(self) -> str:
-        """Returns the string represention of this resource."""
+        """Returns the string representation of this resource."""
         return "\n".join([f"{k}={v}" for k, v in self.to_dict().items()])
 
 

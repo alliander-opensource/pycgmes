@@ -16,7 +16,7 @@ class FullCustom(Base):
     )
 
     @classmethod
-    def apparent_name(self):
+    def apparent_name(cls):
         return "ACLineSegment"
 
 

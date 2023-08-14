@@ -42,12 +42,13 @@ of your custom class:
 ```python
 from pydantic.dataclasses import dataclass
 
-from pycgmes.resources.Base import Base, DataclassConfig, Profile
+from pycgmes.resources import ACLineSegment
+from pycgmes.resources.Base import DataclassConfig
 
 @dataclass(config=DataclassConfig)
-class ACLineSegmentCustom(ACLineSegment)
+class ACLineSegmentCustom(ACLineSegment):
     @classmethod
-    def apparent_name(self):
+    def apparent_name(cls):
         return "ACLineSegment"
 ```
 
@@ -61,10 +62,11 @@ you can give a hint to the serialiser by adding some metadata to your custom att
 from pydantic.dataclasses import dataclass
 from pydantic import Field
 
-from pycgmes.resources.Base import Base, DataclassConfig, Profile
+from pycgmes.resources import ACLineSegment
+from pycgmes.resources.Base import DataclassConfig, Profile
 
 @dataclass(config=DataclassConfig)
-class ACLineSegmentCustom(ACLineSegment)
+class ACLineSegmentCustom(ACLineSegment):
 
     colour: str = Field(
         default="Red",
@@ -75,7 +77,7 @@ class ACLineSegmentCustom(ACLineSegment)
     )
 
     @classmethod
-    def apparent_name(self):
+    def apparent_name(cls):
         return "ACLineSegment"
 ```
 
