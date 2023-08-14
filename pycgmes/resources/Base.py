@@ -8,7 +8,7 @@ import importlib
 from dataclasses import Field, fields
 from enum import Enum
 from functools import cache, cached_property
-from typing import Any, TypeAlias
+from typing import Any, TypeAlias, TypedDict
 
 # Drop in dataclass replacement, allowing easier json dump and validation in the future.
 from pydantic.dataclasses import dataclass
@@ -79,7 +79,7 @@ class DataclassConfig:  # pylint: disable=too-few-public-methods
     https://docs.pydantic.dev/latest/usage/model_config/#options
     """
 
-    # By default with pydantic extra arguments given to a dataclass are silently ignored.
+    # By default, with pydantic extra arguments given to a dataclass are silently ignored.
     # This matches the default behaviour by failing noisily.
     extra = "forbid"
 
@@ -134,6 +134,15 @@ class Base:
         """Returns the resource type."""
         return self.__class__.__name__
 
+    @classmethod  # From python 3.11, you cannot wrap @classmethod in @property anymore.
+    def apparent_name(cls) -> str:
+        """
+        If you create your own custom attributes by subclassing a resource,
+        but you do not want the name of your new subclass to appear, you can force the apparent name by
+        overriding this method.
+        """
+        return cls.__name__
+
     def cgmes_attribute_names_in_profile(self, profile: Profile | None) -> set[Field]:
         """
         Returns all fields accross the parent tree which are in the profile in parameter.
@@ -159,9 +168,9 @@ class Base:
             if f.name != "mRID"
         }
 
-    def cgmes_attributes_in_profile(self, profile: Profile | None) -> dict[str, "CgmesAttributeTypes"]:
+    def cgmes_attributes_in_profile(self, profile: Profile | None) -> dict[str, "CgmesAttribute"]:
         """
-        Returns all attribute values as a dict: fully qualified name => value.
+        Returns all attribute values as a dict: fully qualified name => CgmesAttribute.
         Fully qualified names is in the form class_name.attribute_name, where class_name is the
         (possibly parent) class where the attribute is defined.
 
@@ -170,26 +179,45 @@ class Base:
         with thus the parent class included in the attribute name.
         """
         # What will be returned, has the qualname as key...
-        qual_attrs: dict[str, "CgmesAttributeTypes"] = {}
-        # .. but we check existence with the unqualified (short) name.
+        qual_attrs: dict[str, "CgmesAttribute"] = {}
+        # ... but we check existence with the unqualified (short) name.
         seen_attrs = set()
 
+        # mro contains itself (so parent might be a misnomer) and object, removed with the [:-1].
         for parent in reversed(self.__class__.__mro__[:-1]):
             for f in fields(parent):
                 shortname = f.name
-                qualname = f"{parent.__name__}.{shortname}"
+                qualname = f"{parent.apparent_name()}.{shortname}"  # type: ignore
                 if f not in self.cgmes_attribute_names_in_profile(profile) or shortname in seen_attrs:
                     # Wrong profile or already found from a parent.
                     continue
                 else:
-                    qual_attrs[qualname] = getattr(self, shortname)
+                    qual_attrs[qualname] = CgmesAttribute(
+                        value=getattr(self, shortname),
+                        # base types (e.g. int) do not have extras
+                        namespace=extra.get("namespace", None)
+                        if (extra := getattr(f.default, "extra", None))
+                        else None,
+                    )
                     seen_attrs.add(shortname)
 
         return qual_attrs
 
     def __str__(self) -> str:
-        """Returns the string represention of this resource."""
+        """Returns the string representation of this resource."""
         return "\n".join([f"{k}={v}" for k, v in self.to_dict().items()])
 
 
 CgmesAttributeTypes: TypeAlias = str | int | float | Base | list | None
+
+
+class CgmesAttribute(TypedDict):
+    """
+    Describes a CGMES attribute: its value and namespace.
+    """
+
+    # Actual value
+    value: CgmesAttributeTypes
+    # The default will be None. Only custom attributes might have something different, given as metadata.
+    # See readme for more information.
+    namespace: str | None

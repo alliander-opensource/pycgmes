@@ -2,6 +2,9 @@
 
 - [cgmes-python](#cgmes-python)
   - [Library usage](#library-usage)
+  - [Custom attributes](#custom-attributes)
+    - [Apparent class](#apparent-class)
+    - [Namespace](#namespace)
   - [Content](#content)
     - [Schemas v3](#schemas-v3)
     - [Shacl files](#shacl-files)
@@ -22,6 +25,63 @@ From the internal Alliander nexus repo, 2 packages are available:
 - https://nexus.appx.cloud/#browse/browse:uno-pypi:pycgmes-shacl
 
 They can be installed by pip once `https://nexus.appx.cloud/repository/uno-pypi/simple` is added as pip extra url or Poetry dependency.
+
+## Custom attributes
+
+### Apparent class
+
+If you need to add your own attributes (example: cable colour), you can do that by subclassing the relevant class.
+
+If this is a leaf node (for instance `ACLineSegment`), it "just works". If you want to add an extr attribute to a
+class higher in the hierarchy (for instance `Equipment`) there is a lot more work to do.
+
+By default, an attribute is fully qualified. `bch` in `ACLineSegment` will appear as `ACLineSegment.bch` in the serialisation.
+For a custom attribute, you might not want to see  `ACLineSegmentCustom.bch`. To prevent this, you can override the `apparent_name`
+of your custom class:
+
+```python
+from pydantic.dataclasses import dataclass
+
+from pycgmes.resources import ACLineSegment
+from pycgmes.resources.Base import DataclassConfig
+
+@dataclass(config=DataclassConfig)
+class ACLineSegmentCustom(ACLineSegment):
+    @classmethod
+    def apparent_name(cls):
+        return "ACLineSegment"
+```
+
+### Namespace
+
+In the serialisation, the namespace of all attributes is `cim` (`"http://iec.ch/TC57/2013/CIM-schema-cim16#"`) by default.
+The serialisation is not done by PyCGMES (yet), but if you want a custom namespace for an attribute,
+you can give a hint to the serialiser by adding some metadata to your custom attributes:
+
+```python
+from pydantic.dataclasses import dataclass
+from pydantic import Field
+
+from pycgmes.resources import ACLineSegment
+from pycgmes.resources.Base import DataclassConfig, Profile
+
+@dataclass(config=DataclassConfig)
+class ACLineSegmentCustom(ACLineSegment):
+
+    colour: str = Field(
+        default="Red",
+        in_profiles=[
+            Profile.EQ,
+        ],
+        namespace="custom",
+    )
+
+    @classmethod
+    def apparent_name(cls):
+        return "ACLineSegment"
+```
+
+It will be given when `cgmes_attributes_in_profile()` is called.
 
 ## Content
 
