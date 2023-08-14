@@ -2,8 +2,8 @@ import pytest
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
+from pycgmes.resources import ACLineSegment
 from pycgmes.resources.Base import Base, DataclassConfig, Profile
-from resources import ACLineSegment
 
 
 @dataclass(config=DataclassConfig)
