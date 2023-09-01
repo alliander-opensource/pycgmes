@@ -86,7 +86,9 @@ jobs:
         run: bash ./scripts/check_indent_rdf.sh
 
       - name: check licences
-        run: poetry reuse lint
+        run: |
+          hash -r
+          reuse lint
 
       - name: poetry build pycgmes
         run: poetry build
