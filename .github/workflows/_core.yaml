@@ -33,6 +33,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+        with:
+          show-progress: false # very verbose for not much
 
       - name: Setup python
         uses: actions/setup-python@v4
@@ -90,13 +92,24 @@ jobs:
           poetry run reuse lint
 
       - name: poetry build pycgmes
-        run: poetry build
+        run: |
+          if poetry build; then
+            echo "::notice title=PyCGMES built::$(poetry version) built"
+          else
+            echo "::error title=PyCGMES failed built::$(poetry version) not built"
+            exit 1
+          fi
 
       - name: poetry build pycgmes-shacl
         run: |
           cd shacl
           poetry self add poetry-multiproject-plugin
-          poetry build-project --with-top-namespace pycgmes
+          if poetry build-project --with-top-namespace pycgmes; then
+            echo "::notice title=PyCGMES-shacl built::$(poetry version) built"
+          else
+            echo "::error title=PyCGMES-shacl failed built::$(poetry version) not built"
+            exit 1
+          fi
 
       # PUBLISH NOTE: see comments in the catch step.
       - name: poetry publish pycgmes
@@ -107,7 +120,12 @@ jobs:
           PYCGMES_PYPI_TOKEN: ${{ secrets.PYCGMES_PYPI_TOKEN }}
         run: |
           poetry config pypi-token.pypi ${PYCGMES_PYPI_TOKEN}
-          poetry publish
+          if poetry publish; then
+            echo "::notice title=PyCGMES published::$(poetry version) published"
+          else
+            echo "::error title=PyCGMES failed upload::$(poetry version) not published"
+            exit 1
+          fi
 
       - name: poetry publish pycgmes-shacl
         if: ${{ inputs.deploy }}
@@ -116,7 +134,12 @@ jobs:
         run: |
           # Config done in previous step
           cd shacl
-          poetry publish
+          if poetry publish; then
+            echo "::notice title=PyCGMES-shacl published::$(poetry version) published"
+          else
+            echo "::error title=PyCGMES-shacl failed upload::$(poetry version) not published"
+            exit 1
+          fi
 
       - name: catch publish error
         if: ${{ inputs.deploy }}
@@ -132,7 +155,7 @@ jobs:
           pycgmes="${{ steps.pycgmes-publish.outcome }}"
           shacl="${{ steps.pycgmes-shacl-publish.outcome }}"
           if [[ "$pycgmes" == 'failure' && "$shacl" == 'failure' ]]; then
-            echo "Both publish steps failed. This is not correct."
+            echo "::error title=Both publish steps failed. This is not correct.::Probably a version bump was forgotten."
             exit 1
           else
             echo "At least one publish step succeeded (pycgmes="$pycgmes", pycgmes-shacl="$shacl"). Good enough."
