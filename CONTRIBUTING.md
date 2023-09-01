@@ -17,7 +17,6 @@ SPDX-License-Identifier: Apache-2.0
   - [Style guide](#style-guide)
   - [Attribution](#attribution)
 
-
 We'd love to accept your patches and contributions to this project. There are
 just a few small guidelines you need to follow.
 
@@ -123,4 +122,4 @@ dev dependency of the project) with `scons all`. Look at the [workflow](.github/
 
 ## Attribution
 
-This Contributing.md is adapted from [Google(https://github.com/google/new-project/blob/master/docs/contributing.md)].
+This Contributing.md is adapted from [Google](https://github.com/google/new-project/blob/master/docs/contributing.md).

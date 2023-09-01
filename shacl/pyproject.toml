@@ -1,14 +1,12 @@
 [tool.poetry]
 name = "pycgmes-shacl"
-# Note that trying to reupload the same version will fail.
 version = "0.9.11"
 description = "Python dataclasses for CGMES 3.0.0"
-authors = ["uno <uno@alliander.com>"]
+authors = ["pycgmes <pycgmes@alliander.com>"]
 # readme = "README.md"
-repository = "https://github.com/Alliander/cgmes-python"
-license = "Could be open source, right? I like MIT."
+repository = "https://github.com/alliander-opensource/pycgmes"
+license = "Apache 2.0"
 classifiers = [
-    # I had fun going through https://pypi.org/classifiers/
     "Development Status :: 5 - Production/Stable",
     "Environment :: Web Environment",
     "Framework :: AWS CDK :: 2",
@@ -16,10 +14,9 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.9",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
-    # "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: Apache 2.0 License",
 ]
 
 # NOTE ABOUT BUILDING: see readme for the command.

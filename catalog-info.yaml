@@ -1,8 +1,0 @@
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: pycgmes
-spec:
-  owner: uno
-  type: library
-  lifecycle: production

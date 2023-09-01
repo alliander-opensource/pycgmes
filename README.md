@@ -13,13 +13,12 @@
   - [Library build, CI, CD...](#library-build-ci-cd)
     - [CI](#ci)
     - [CD](#cd)
-  - [TODOs](#todos)
 
-Python dataclasses for CGMES 3 + rdf schema description + SHACL files
+Python dataclasses for CGMES 3 + rdf schema description + SHACL files.
 
 ## Library usage
 
-From the internal Alliander nexus repo, 2 packages are available:
+From Pypi.org, 2 packages are available:
 
 - https://nexus.appx.cloud/#browse/browse:uno-pypi:pycgmes
 - https://nexus.appx.cloud/#browse/browse:uno-pypi:pycgmes-shacl
@@ -32,7 +31,7 @@ They can be installed by pip once `https://nexus.appx.cloud/repository/uno-pypi/
 
 If you need to add your own attributes (example: cable colour), you can do that by subclassing the relevant class.
 
-If this is a leaf node (for instance `ACLineSegment`), it "just works". If you want to add an extr attribute to a
+If this is a leaf node (for instance `ACLineSegment`), it "just works". If you want to add an extra attribute to a
 class higher in the hierarchy (for instance `Equipment`) there is a lot more work to do.
 
 By default, an attribute is fully qualified. `bch` in `ACLineSegment` will appear as `ACLineSegment.bch` in the serialisation.
@@ -109,15 +108,7 @@ files (those extracted and mentioned above) but is usually not needed.
 
 ### Dataclasses
 
-Generated from our [fork](https://github.com/Alliander/uno-cimgen/) of [cimgen](https://github.com/sogno-platform/cimgen), with as goal to push back our changes upstream.
-
-The main differences between our version and upstream are:
-
-- handle CGMES v3
-- generate dataclasses instead of classes
-- typing
-- more comments
-- independent of [cimpy](https://github.com/sogno-platform/cimpy)
+Generated from the modernpython serialisation of [cimgen](https://github.com/sogno-platform/cimgen).
 
 ## Library build, CI, CD...
 
@@ -129,13 +120,4 @@ The standard black/mypy/autoflake/isort/pylint/ruff/mypy are run there, via scon
 
 ### CD
 
-Deployment happens to the internal [Alliander Nexus](https://nexus.appx.cloud/#browse/browse:uno-pypi:pycgmes) for now, via the standard poetry commands `poetry build`, `poetry publish`.
-
-This is managed by Team Uno, which has the nexus credentials in their own keeper and as action secrets in GitHub.
-
-## TODOs
-
-- open source it?
-- build the library with different versions possible, to eventually use it with eg. `pip install pycgmes["3.0.0"]` for CGMES version 3 or `pip install pycgmes["2.4.5"]` for another version.
-- buid cimexport in ?
-- Sort out proper versioning. Currently pypi will prevent reupload, but maybe we can be smarter than that, inclusive github artifacts & co.
+Deployment happens to pypi.org, via the standard poetry commands `poetry build`, `poetry publish`.
