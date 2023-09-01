@@ -63,6 +63,11 @@ jobs:
         run: |
           poetry install --with dev
 
+      - name: check licences
+        run: |
+          hash -r
+          petry run reuse lint
+
       - name: scons black
         if: ${{ ! inputs._SKIP_QUALITY }}
         run: poetry run scons black check
@@ -84,11 +89,6 @@ jobs:
       - name: check rdf indentation
         if: ${{ ! inputs._SKIP_QUALITY }}
         run: bash ./scripts/check_indent_rdf.sh
-
-      - name: check licences
-        run: |
-          hash -r
-          reuse lint
 
       - name: poetry build pycgmes
         run: poetry build
