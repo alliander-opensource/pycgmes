@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # Checking only one well known class.
 # As they are generated, if one is correct, the others should be as well.
 import textwrap

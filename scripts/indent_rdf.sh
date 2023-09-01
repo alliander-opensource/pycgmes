@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # Indent/format all rdfs in this repo.
 
 {

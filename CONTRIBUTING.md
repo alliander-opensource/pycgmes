@@ -1,8 +1,10 @@
 <!--
-SPDX-FileCopyrightText: 'Copyright Contributors to the pygcmes  project'
+SPDX-FileCopyrightText: 'Copyright Contributors to the pygcmes project'
+SPDX-FileCopyrightText: 2023 Alliander
 
 SPDX-License-Identifier: Apache-2.0
 -->
+
 # How to Contribute
 
 - [How to Contribute](#how-to-contribute)

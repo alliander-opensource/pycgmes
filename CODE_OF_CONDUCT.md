@@ -1,6 +1,8 @@
 <!--
 SPDX-FileCopyrightText: 2014 Coraline Ada Ehmke
+SPDX-FileCopyrightText: 2023 Alliander
 
+SPDX-License-Identifier: Apache-2.0
 SPDX-License-Identifier: CC-BY-4.0
 -->
 

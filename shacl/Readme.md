@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2023 Alliander
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Why this directory
 
 It contains the SHACL build files, only meant to build a second distribution package.

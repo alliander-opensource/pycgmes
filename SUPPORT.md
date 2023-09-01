@@ -1,7 +1,7 @@
 <!--
-SPDX-FileCopyrightText: 'Copyright Contributors to the [name_open_source_project] project'
+SPDX-FileCopyrightText: 2023 Alliander
 
-SPDX-License-Identifier: MPL-2.0
+SPDX-License-Identifier: Apache-2.0
 -->
 
 # Getting Help

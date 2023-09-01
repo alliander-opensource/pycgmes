@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2023 Alliander
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Roadmap
 
 Those are the current plans to develop PyCGMES

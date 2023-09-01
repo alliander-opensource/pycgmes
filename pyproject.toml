@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
 [tool.poetry]
 name = "pycgmes"
 version = "0.9.11"

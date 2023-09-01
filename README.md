@@ -1,3 +1,10 @@
+<!--
+SPDX-FileCopyrightText: 'Copyright Contributors to the pygcmes project'
+SPDX-FileCopyrightText: 2023 Alliander
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # cgmes-python
 
 - [cgmes-python](#cgmes-python)
@@ -89,9 +96,10 @@ It will be given when `cgmes_attributes_in_profile()` is called.
 [schemas](./schemas/) are rdf definitions of CGMES. They are used once, to generate dataclasses, and
 can then happily be forgotten.
 
-They have been given by Entsoe, via the data office.
+They are available on the [ENTSO-E site](https://www.entsoe.eu/data/cim/cim-conformity-and-interoperability/).
+Look for CGMES Conformity Assessment Scheme v3 then [Application Profiles v3.0.1](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/IEC61970-600-2_CGMES_3_0_1_ApplicationProfiles.zip)
 
-Older versions could be found on the [Entsoe site](https://www.entsoe.eu/data/cim/cim-for-grid-models-exchange/).
+Older versions could be found on the [ENTSO-E site](https://www.entsoe.eu/data/cim/cim-for-grid-models-exchange/).
 
 ### Shacl files
 

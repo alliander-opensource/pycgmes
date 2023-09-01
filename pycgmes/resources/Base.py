@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # We follow the CIM naming convention, not python.
 # pylint: disable=invalid-name
 

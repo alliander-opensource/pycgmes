@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # Checks if all RDFs are properly formatted, by formatting them and
 # checking that the output is the same as the file in the repo.
 

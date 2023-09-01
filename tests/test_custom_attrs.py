@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
 import pytest
 from pydantic import Field
 from pydantic.dataclasses import dataclass
