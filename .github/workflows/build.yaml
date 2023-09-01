@@ -25,6 +25,6 @@ jobs:
   build:
     uses: ./.github/workflows/_core.yaml
     with:
-      deploy: false
+      deploy: true
     secrets:
       PYCGMES_PYPI_TOKEN: ${{ secrets.PYCGMES_PYPI_TOKEN }}
