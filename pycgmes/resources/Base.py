@@ -17,9 +17,7 @@ from pydantic.dataclasses import dataclass
 class Profile(Enum):
     """
     Enum containing all CGMES profiles and their export priority.
-    todo: enums are ordered, so we can have a short->long enum withuot explicit prio
-    todo: default mRID based on name, id, classname
-    todo: add an alliander id?
+    todo: enums are ordered, so we can have a short->long enum without explicit prio
     """
 
     EQ = 0
