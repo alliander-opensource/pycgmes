@@ -26,8 +26,4 @@ jobs:
     with:
       deploy: true
     secrets:
-      EKS_NEXUS_USER: ${{ secrets.EKS_NEXUS_USER }}
-      EKS_NEXUS_PASSWORD: ${{ secrets.EKS_NEXUS_PASSWORD }}
-      ALL_PACKAGE_TOKEN: ${{ secrets.ALL_PACKAGE_TOKEN }}
-      UNO_NEXUS_PASSWORD: ${{ secrets.UNO_NEXUS_PASSWORD }}
-      UNO_NEXUS_USER: ${{ secrets.UNO_NEXUS_USER }}
+      PYCGMES_PYPI_TOKEN: ${{ secrets.PYCGMES_PYPI_TOKEN }}

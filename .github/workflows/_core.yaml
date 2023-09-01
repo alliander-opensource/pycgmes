@@ -17,17 +17,8 @@ on:
         default: "3.10" # Weirdly enough, trailing 0 are removed if this string is not quoted.
         description: Version of python used to run tests
     secrets:
-      # Coming from the github action setup from the cloud team, nothing more to do here.
-      EKS_NEXUS_USER:
-        required: true
-      EKS_NEXUS_PASSWORD:
-        required: true
-      ALL_PACKAGE_TOKEN:
-        required: true
-      UNO_NEXUS_PASSWORD:
-        required: true
-      UNO_NEXUS_USER:
-        required: true
+      PYCGMES_PYPI_TOKEN:
+        required: false # only needed on upload
 
 jobs:
   builder:
@@ -36,21 +27,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Build & Deploy
     steps:
-      - name: printinfo
-        # This should be its own parallel job, but it would run for 2 seconds, and we would be billed 1 minute.
-        # I'm a cheap bastard, so it became a step there.
-        run: |
-          <<'____UNIQUEDCT____'
-          Role name: ${{ inputs.ROLE_NAME }}: arn:aws:iam::${{ inputs.ENVIRONMENT_ID }}:role/${{ inputs.ROLE_NAME }}
-          region : ${{ inputs._AWS_REGION }}
-          deploy: ${{ inputs.deploy }}
-          Stack module: ${{ inputs.stack_module }}
-          GitHub event:
-          ${{ toJson(github) }}
-          Environment:
-          ${{ toJson(env) }}
-          ____UNIQUEDCT____
-
       - name: checkout
         uses: actions/checkout@v3
 
@@ -81,7 +57,6 @@ jobs:
           EKS_NEXUS_USER: ${{ secrets.EKS_NEXUS_USER }}
           EKS_NEXUS_PASSWORD: ${{ secrets.EKS_NEXUS_PASSWORD }}
         run: |
-          poetry config http-basic.internal-cloud "$EKS_NEXUS_USER" "$EKS_NEXUS_PASSWORD"
           poetry install --with dev
 
       - name: scons black
@@ -121,24 +96,19 @@ jobs:
         continue-on-error: true
         id: pycgmes-publish
         env:
-          UNO_NEXUS_PASSWORD: ${{ secrets.UNO_NEXUS_PASSWORD }}
-          UNO_NEXUS_USER: ${{ secrets.UNO_NEXUS_USER }}
+          PYCGMES_PYPI_TOKEN: ${{ secrets.PYCGMES_PYPI_TOKEN }}
         run: |
-          poetry config repositories.internal-uno https://nexus.appx.cloud/repository/uno-pypi/
-          poetry config http-basic.internal-uno "$UNO_NEXUS_USER" "$UNO_NEXUS_PASSWORD"
-          poetry publish --repository internal-uno
+          poetry config pypi-token.pypi ${PYCGMES_PYPI_TOKEN}
+          poetry publish
 
       - name: poetry publish pycgmes-shacl
         if: ${{ inputs.deploy }}
         id: pycgmes-shacl-publish
         continue-on-error: true
-        env:
-          UNO_NEXUS_PASSWORD: ${{ secrets.UNO_NEXUS_PASSWORD }}
-          UNO_NEXUS_USER: ${{ secrets.UNO_NEXUS_USER }}
         run: |
           # Config done in previous step
           cd shacl
-          poetry publish --repository internal-uno
+          poetry publish
 
       - name: catch publish error
         if: ${{ inputs.deploy }}
