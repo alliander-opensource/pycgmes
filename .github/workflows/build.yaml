@@ -22,6 +22,10 @@ permissions:
   packages: read
 
 jobs:
+  code-check:
+    uses: Alliander/ospo-workflows/.github/workflows/code-check.yml@main
+    secrets: inherit
+
   build:
     uses: ./.github/workflows/_core.yaml
     with:

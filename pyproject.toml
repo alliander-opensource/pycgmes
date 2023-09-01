@@ -39,6 +39,7 @@ bandit = { extras = ["toml"], version = "*" } # Security checks
 black = "*" # Formatter
 coverage = { extras = ["toml"], version = "*" } # unit test coverage
 mypy = "*" # Type checker
+reuse = "*" # Check licence headers
 ruff = "*" # Linter/fixer. Replaces isort and autoflake, eventually probably pylint as well.
 pylint = "*" # Linter
 pytest = "*"

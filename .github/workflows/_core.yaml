@@ -85,6 +85,9 @@ jobs:
         if: ${{ ! inputs._SKIP_QUALITY }}
         run: bash ./scripts/check_indent_rdf.sh
 
+      - name: check licences
+        run: reuse lint
+
       - name: poetry build pycgmes
         run: poetry build
 
