@@ -12,9 +12,7 @@ repository = "https://github.com/alliander-opensource/pycgmes"
 license = "Apache 2.0"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
-    "Environment :: Web Environment",
-    "Framework :: AWS CDK :: 2",
-    "Framework :: FastAPI",
+    "Framework :: Pydantic",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
