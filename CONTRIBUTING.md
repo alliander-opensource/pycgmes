@@ -1,5 +1,4 @@
 <!--
-SPDX-FileCopyrightText: 'Copyright Contributors to the pygcmes project'
 SPDX-FileCopyrightText: 2023 Alliander
 
 SPDX-License-Identifier: Apache-2.0

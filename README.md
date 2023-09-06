@@ -1,5 +1,4 @@
 <!--
-SPDX-FileCopyrightText: 'Copyright Contributors to the pygcmes project'
 SPDX-FileCopyrightText: 2023 Alliander
 
 SPDX-License-Identifier: Apache-2.0
@@ -20,6 +19,7 @@ SPDX-License-Identifier: Apache-2.0
   - [Library build, CI, CD...](#library-build-ci-cd)
     - [CI](#ci)
     - [CD](#cd)
+  - [License](#license)
 
 Python dataclasses for CGMES 3 + rdf schema description + SHACL files.
 
@@ -129,3 +129,7 @@ The standard black/mypy/autoflake/isort/pylint/ruff/mypy are run there, via scon
 ### CD
 
 Deployment happens to pypi.org, via the standard poetry commands `poetry build`, `poetry publish`.
+
+## License
+
+This project is licensed under the Apache 2.0 license - see [LICENSE](./LICENSE) for details.

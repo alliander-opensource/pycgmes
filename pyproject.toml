@@ -73,7 +73,7 @@ exclude_also = [ # Regexp of lines (or first line of block) which do not count f
 ]
 
 [tool.mypy]
-ignore_missing_imports = true
+# ignore_missing_imports = true
 no_implicit_optional = true # Need an explicit None to be optional
 show_error_codes = true
 show_column_numbers = true
