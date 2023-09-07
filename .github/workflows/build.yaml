@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: Build & CI
+concurrency:
+  # means: only one run with this name (the workflow name) can run in parallel.
+  # An in progress job will carry on, but old pending jobs will be replaced by the new one.
+  group: ${{ github.workflow }}
+
+on:
+  push:
+    tags-ignore: # Only on branches, not tags
+      - "*"
+    branches:
+      - "*"
+      - "!main" # Negative pattern must be last
+
+permissions:
+  id-token: write
+  contents: read
+  packages: read
+
+jobs:
+  build:
+    uses: ./.github/workflows/_core.yaml
+    with:
+      deploy: false
+    secrets:
+      PYCGMES_PYPI_TOKEN: ${{ secrets.PYCGMES_PYPI_TOKEN }}

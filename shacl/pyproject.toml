@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
+[tool.poetry]
+name = "pycgmes-shacl"
+version = "1.0.0"
+description = "Python dataclasses for CGMES 3.0.0"
+authors = ["pycgmes <pycgmes@alliander.com>"]
+readme = "Readme.md"
+repository = "https://github.com/alliander-opensource/pycgmes"
+license = "Apache 2.0"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+    "License :: OSI Approved :: Apache Software License",
+]
+
+# NOTE ABOUT BUILDING: see readme for the command.
+packages = [{ "include" = "shacl", from = "../pycgmes" }]
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+poetry = ">=1.5.0" # key 'priority' in source
+pyshacl = "*"
+
+
+[build-system]
+# Used for building package from poetry. Present by default, not actually used.
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
