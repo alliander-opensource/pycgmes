@@ -27,8 +27,8 @@ Python dataclasses for CGMES 3 + rdf schema description + SHACL files.
 
 From Pypi.org, 2 packages are available:
 
-- https://pypi.org/project/pycgmes/
-- https://pypi.org/project/pycgmes-shacl/
+- [https://pypi.org/project/pycgmes/](https://pypi.org/project/pycgmes/)
+- [https://pypi.org/project/pycgmes-shacl/](https://pypi.org/project/pycgmes-shacl/)
 
 They can easily be installed via pip: `pip install pycgmes` or `pip install pycgmes-shacl`.
 
