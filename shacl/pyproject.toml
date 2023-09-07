@@ -4,7 +4,7 @@
 
 [tool.poetry]
 name = "pycgmes-shacl"
-version = "0.9.11"
+version = "1.0.0"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["pycgmes <pycgmes@alliander.com>"]
 readme = "Readme.md"

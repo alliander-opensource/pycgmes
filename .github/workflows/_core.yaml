@@ -32,7 +32,7 @@ jobs:
     name: Build & Deploy
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           show-progress: false # very verbose for not much
 
