@@ -1,0 +1,162 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: CI/CD
+on:
+  workflow_call:
+    inputs:
+      deploy:
+        type: boolean
+        required: true
+      # _SKIP*: sometimes you want to quickly test something, without having the whole suite kicking in.
+      # This is a lazy way to switch on and off steps. But never set it to true in main.
+      _SKIP_QUALITY:
+        type: boolean
+        default: false
+        description: for debug purposes only - if true skip all scons quality checks
+      # Python version. Nothing is 3.10 specific yet as far as I know
+      _PYTHON_VERSION:
+        type: string
+        default: "3.10" # Weirdly enough, trailing 0 are removed if this string is not quoted.
+        description: Version of python used to run tests
+    secrets:
+      PYCGMES_PYPI_TOKEN:
+        required: false # only needed on upload
+
+jobs:
+  builder:
+    environment:
+      name: ${{ inputs.deployto }}
+    runs-on: ubuntu-latest
+    name: Build & Deploy
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          show-progress: false # very verbose for not much
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "${{ inputs._PYTHON_VERSION }}"
+          architecture: "x64" # default
+          # cache: "poetry"  # This caches only the poetry downloads, not the builds.
+          # cache-dependency-path: poetry.lock
+
+      - name: Poetry caching
+        id: poetry-cache
+        uses: actions/cache@v3
+        with:
+          path: .cache/pypoetry # NOT $HOME/.cache, which only caches the downloads, before building.
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+
+      - name: Poetry setup
+        run: |
+          pip install -U poetry
+          poetry lock --check || exit 1
+          poetry env info
+
+      - name: Python package installation
+        if: steps.poetry-cache.outputs.cache-hit != 'true'
+        env:
+          EKS_NEXUS_USER: ${{ secrets.EKS_NEXUS_USER }}
+          EKS_NEXUS_PASSWORD: ${{ secrets.EKS_NEXUS_PASSWORD }}
+        run: |
+          poetry install --with dev
+
+      - name: scons black
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons black check
+      - name: scons ruff
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons ruff check
+      - name: scons pylint
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons pylint
+      - name: scons mypy
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons mypy
+      - name: scons tests
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons tests
+      - name: scons coverage
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: poetry run scons coverage
+      - name: check rdf indentation
+        if: ${{ ! inputs._SKIP_QUALITY }}
+        run: bash ./scripts/check_indent_rdf.sh
+      - name: check licences
+        run: |
+          hash -r
+          poetry run reuse lint
+
+      - name: poetry build pycgmes
+        run: |
+          if poetry build; then
+            echo "::notice title=PyCGMES built::$(poetry version) built"
+          else
+            echo "::error title=PyCGMES failed built::$(poetry version) not built"
+            exit 1
+          fi
+
+      - name: poetry build pycgmes-shacl
+        run: |
+          cd shacl
+          poetry self add poetry-multiproject-plugin
+          if poetry build-project --with-top-namespace pycgmes; then
+            echo "::notice title=PyCGMES-shacl built::$(poetry version) built"
+          else
+            echo "::error title=PyCGMES-shacl failed built::$(poetry version) not built"
+            exit 1
+          fi
+
+      # PUBLISH NOTE: see comments in the catch step.
+      - name: poetry publish pycgmes
+        if: ${{ inputs.deploy }}
+        continue-on-error: true
+        id: pycgmes-publish
+        env:
+          PYCGMES_PYPI_TOKEN: ${{ secrets.PYCGMES_PYPI_TOKEN }}
+        run: |
+          poetry config pypi-token.pypi ${PYCGMES_PYPI_TOKEN}
+          if poetry publish; then
+            echo "::notice title=PyCGMES published::$(poetry version) published"
+          else
+            echo "::error title=PyCGMES failed upload::$(poetry version) not published"
+            exit 1
+          fi
+
+      - name: poetry publish pycgmes-shacl
+        if: ${{ inputs.deploy }}
+        id: pycgmes-shacl-publish
+        continue-on-error: true
+        run: |
+          # Config done in previous step
+          cd shacl
+          if poetry publish; then
+            echo "::notice title=PyCGMES-shacl published::$(poetry version) published"
+          else
+            echo "::error title=PyCGMES-shacl failed upload::$(poetry version) not published"
+            exit 1
+          fi
+
+      - name: catch publish error
+        if: ${{ inputs.deploy }}
+        # It is valid to only have pycgmes published, only pycgmes-shacl, or both.
+        # Both publish steps could fail if they cannot upload, for instance because a version
+        # number was not bumped.
+        # It is tricky to know when one package should be uploaded, so none of those steps fails,
+        # (continue-on-error: true), but this next step looks at the outcome of the 2 publish steps
+        # and decide if something was wrong (ie, if both failed - that is probably not correct).
+        # Note: use outcome, not conclusion, because of continue-on-error
+        # see https://docs.github.com/en/actions/learn-github-actions/contexts#steps-context
+        run: |
+          pycgmes="${{ steps.pycgmes-publish.outcome }}"
+          shacl="${{ steps.pycgmes-shacl-publish.outcome }}"
+          if [[ "$pycgmes" == 'failure' && "$shacl" == 'failure' ]]; then
+            echo "::error title=Both publish steps failed. This is not correct.::Probably a version bump was forgotten."
+            exit 1
+          else
+            echo "At least one publish step succeeded (pycgmes="$pycgmes", pycgmes-shacl="$shacl"). Good enough."
+          fi

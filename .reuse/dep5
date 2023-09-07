@@ -1,0 +1,12 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: pycgmes
+Upstream-Contact: pycgmes <pycgmes@alliander.com>
+Source: https://github.com/alliander-opensource/pycgmes
+
+Files: data/* schemas/* pycgmes/shacl/datafiles/*
+Copyright: ENTSO-E <cgmes.conformity@entsoe.eu>
+License: Apache-2.0
+
+Files: poetry.lock
+Copyright: pycgmes <pycgmes@alliander.com>
+License: Apache-2.0

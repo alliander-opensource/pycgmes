@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: Build, CI & Publish
+concurrency:
+  # means: only one run with this name (the workflow name) can run in parallel.
+  # An in progress job will carry on, but old pending jobs will be replaced by the new one.
+  # Done at workflow level, otherwise a deploy to prd could happen for something
+  # which has not been deployed to acc.
+  group: ${{ github.workflow }}
+
+on:
+  # Only if a PR to main is closed by merging (see if in buildndeploy_acc)
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: write # needed write to tag
+  packages: read
+
+jobs:
+  buildndeploy:
+    if: github.event.pull_request.merged == true
+    uses: ./.github/workflows/_core.yaml
+    with:
+      deploy: true
+    secrets:
+      PYCGMES_PYPI_TOKEN: ${{ secrets.PYCGMES_PYPI_TOKEN }}
