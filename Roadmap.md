@@ -6,9 +6,17 @@ SPDX-License-Identifier: Apache-2.0
 
 # Roadmap
 
-Those are the current plans to develop PyCGMES
+Those are the current plans to develop PyCGMES:
 
-- open source
-- manage tagging/versioning (each release should have a git tag)
-- build export in
-- handle actual resources instead of just references via mRIDs
+- infrastructure:
+  - ~~open source~~
+  - manage tagging/versioning (each release should have a git tag and release)
+  - add build badges in the readme
+- Documentation:
+  - add (and publish) readthedoc.io doc
+  - Add generic readme introduction
+- Core update:
+  - build export in
+  - reference actual resources instead of just references via mRIDs
+  - manage custom profiles
+  - support pydantic v1 & v2
