@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
-from .Base import Base
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
+from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class PositionPoint(Base):
+class PositionPoint(Base, ModuleType):
     """
     Set of spatial coordinates that determine a point, defined in the coordinate system specified in
       'Location.CoordinateSystem'. Use a single position point instance to describe a point-oriented location. Use a
@@ -29,6 +30,10 @@ class PositionPoint(Base):
     yPosition: Y axis position.
     zPosition: (if applicable) Z axis position.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return PositionPoint(*args, **kwargs)
 
     Location: Optional[str] = Field(
         default=None,
@@ -66,7 +71,7 @@ class PositionPoint(Base):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -74,3 +79,13 @@ class PositionPoint(Base):
         return {
             Profile.GL,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import PositionPoint"
+# work as well as
+# "from PositionPoint import PositionPoint".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = PositionPoint

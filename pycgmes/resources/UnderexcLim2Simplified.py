@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
+class UnderexcLim2Simplified(UnderexcitationLimiterDynamics, ModuleType):
     """
     Simplified type UEL2 underexcitation limiter.  This model can be derived from UnderexcLimIEEE2.  The limit
       characteristic (look -up table) is a single straight-line, the same as UnderexcLimIEEE2 (see Figure 10.4 (p
@@ -28,6 +29,10 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
     vuimin: Minimum error signal (VUIMIN) (< UnderexcLim2Simplified.vuimax).  Typical value = 0.
     vuimax: Maximum error signal (VUIMAX) (> UnderexcLim2Simplified.vuimin).  Typical value = 1.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return UnderexcLim2Simplified(*args, **kwargs)
 
     q0: float = Field(
         default=0.0,
@@ -79,7 +84,7 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -87,3 +92,13 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import UnderexcLim2Simplified"
+# work as well as
+# "from UnderexcLim2Simplified import UnderexcLim2Simplified".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = UnderexcLim2Simplified

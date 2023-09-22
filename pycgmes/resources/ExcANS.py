@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcANS(ExcitationSystemDynamics):
+class ExcANS(ExcitationSystemDynamics, ModuleType):
     """
     Italian excitation system. It represents static field voltage or excitation current feedback excitation system.
 
@@ -35,6 +36,10 @@ class ExcANS(ExcitationSystemDynamics):
     krvecc: Feedback enabling (KRVECC).  0 = open loop control 1 = closed loop control. Typical value = 1.
     tb: Exciter time constant (TB) (>= 0).  Typical value = 0,04.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExcANS(*args, **kwargs)
 
     k3: float = Field(
         default=0.0,
@@ -135,7 +140,7 @@ class ExcANS(ExcitationSystemDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -143,3 +148,13 @@ class ExcANS(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExcANS"
+# work as well as
+# "from ExcANS import ExcANS".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExcANS

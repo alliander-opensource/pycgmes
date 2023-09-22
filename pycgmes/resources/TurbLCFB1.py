@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .TurbineLoadControllerDynamics import TurbineLoadControllerDynamics
 
 
 @dataclass(config=DataclassConfig)
-class TurbLCFB1(TurbineLoadControllerDynamics):
+class TurbLCFB1(TurbineLoadControllerDynamics, ModuleType):
     """
     Turbine load controller model developed by WECC.  This model represents a supervisory turbine load controller that
       acts to maintain turbine power at a set value by continuous adjustment of the turbine governor speed-load
@@ -36,6 +37,10 @@ class TurbLCFB1(TurbineLoadControllerDynamics):
     irmax: Maximum turbine speed/load reference bias (Irmax) (see parameter detail 3).  Typical value = 0.
     pmwset: Power controller setpoint (Pmwset) (see parameter detail 1).  Unit = MW. Typical value = 0.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return TurbLCFB1(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -122,7 +127,7 @@ class TurbLCFB1(TurbineLoadControllerDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -130,3 +135,13 @@ class TurbLCFB1(TurbineLoadControllerDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import TurbLCFB1"
+# work as well as
+# "from TurbLCFB1 import TurbLCFB1".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = TurbLCFB1

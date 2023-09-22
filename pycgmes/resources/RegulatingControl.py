@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .PowerSystemResource import PowerSystemResource
 
 
 @dataclass(config=DataclassConfig)
-class RegulatingControl(PowerSystemResource):
+class RegulatingControl(PowerSystemResource, ModuleType):
     """
     Specifies a set of equipment that works together to control a power system quantity such as voltage or flow.  Remote
       bus voltage control is possible by specifying the controlled terminal located at some place remote from the
@@ -57,6 +58,10 @@ class RegulatingControl(PowerSystemResource):
     maxAllowedTargetValue: Maximum allowed target value (RegulatingControl.targetValue).
     minAllowedTargetValue: Minimum allowed target value (RegulatingControl.targetValue).
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return RegulatingControl(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -130,7 +135,7 @@ class RegulatingControl(PowerSystemResource):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -139,3 +144,13 @@ class RegulatingControl(PowerSystemResource):
             Profile.EQ,
             Profile.SSH,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import RegulatingControl"
+# work as well as
+# "from RegulatingControl import RegulatingControl".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = RegulatingControl

@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class DiagramObject(IdentifiedObject):
+class DiagramObject(IdentifiedObject, ModuleType):
     """
     An object that defines one or more points in a given space. This object can be associated with anything that
       specializes IdentifiedObject. For single line diagrams such objects typically include such items as analog
@@ -51,6 +52,10 @@ class DiagramObject(IdentifiedObject):
     DiagramObjectStyle: A diagram object has a style associated that provides a reference for the style used in the
       originating system.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return DiagramObject(*args, **kwargs)
 
     Diagram: Optional[str] = Field(
         default=None,
@@ -117,7 +122,7 @@ class DiagramObject(IdentifiedObject):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -125,3 +130,13 @@ class DiagramObject(IdentifiedObject):
         return {
             Profile.DL,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import DiagramObject"
+# work as well as
+# "from DiagramObject import DiagramObject".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = DiagramObject

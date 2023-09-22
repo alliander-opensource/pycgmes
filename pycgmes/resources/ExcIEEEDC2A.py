@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcIEEEDC2A(ExcitationSystemDynamics):
+class ExcIEEEDC2A(ExcitationSystemDynamics, ModuleType):
     """
     IEEE 421.5-2005 type DC2A model. This model represents field-controlled DC commutator exciters with continuously
       acting voltage regulators having supplies obtained from the generator or auxiliary bus.  It differs from the
@@ -43,6 +44,10 @@ class ExcIEEEDC2A(ExcitationSystemDynamics):
     vrmax: Maximum voltage regulator output (VRMAX)(> ExcIEEEDC2A.vrmin).  Typical value = 4,95.
     vrmin: Minimum voltage regulator output (VRMIN) (< 0 and < ExcIEEEDC2A.vrmax).  Typical value = -4,9.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExcIEEEDC2A(*args, **kwargs)
 
     efd1: float = Field(
         default=0.0,
@@ -157,7 +162,7 @@ class ExcIEEEDC2A(ExcitationSystemDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -165,3 +170,13 @@ class ExcIEEEDC2A(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExcIEEEDC2A"
+# work as well as
+# "from ExcIEEEDC2A import ExcIEEEDC2A".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExcIEEEDC2A

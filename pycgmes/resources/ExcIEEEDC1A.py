@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcIEEEDC1A(ExcitationSystemDynamics):
+class ExcIEEEDC1A(ExcitationSystemDynamics, ModuleType):
     """
     IEEE 421.5-2005 type DC1A model. This model represents field-controlled DC commutator exciters with continuously
       acting voltage regulators (especially the direct-acting rheostatic, rotating amplifier, and magnetic amplifier
@@ -44,6 +45,10 @@ class ExcIEEEDC1A(ExcitationSystemDynamics):
       applied to integrator output false = a lower limit of zero is not applied to integrator output.
       Typical value = true.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExcIEEEDC1A(*args, **kwargs)
 
     ka: float = Field(
         default=0.0,
@@ -158,7 +163,7 @@ class ExcIEEEDC1A(ExcitationSystemDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -166,3 +171,13 @@ class ExcIEEEDC1A(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExcIEEEDC1A"
+# work as well as
+# "from ExcIEEEDC1A import ExcIEEEDC1A".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExcIEEEDC1A

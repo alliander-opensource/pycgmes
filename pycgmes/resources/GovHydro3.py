@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovHydro3(TurbineGovernorDynamics):
+class GovHydro3(TurbineGovernorDynamics, ModuleType):
     """
     Modified IEEE hydro governor-turbine. This model differs from that defined in the IEEE modelling guideline paper in
       that the limits on gate position and velocity do not permit "wind up" of the upstream signals.
@@ -57,6 +58,10 @@ class GovHydro3(TurbineGovernorDynamics):
     gv6: Nonlinear gain point 6, PU gv (Gv6).  Typical value = 0.
     pgv6: Nonlinear gain point 6, PU power (Pgv6).  Typical value = 0.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return GovHydro3(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -311,7 +316,7 @@ class GovHydro3(TurbineGovernorDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -319,3 +324,13 @@ class GovHydro3(TurbineGovernorDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import GovHydro3"
+# work as well as
+# "from GovHydro3 import GovHydro3".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = GovHydro3

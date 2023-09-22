@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .VoltageCompensatorDynamics import VoltageCompensatorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class VCompIEEEType1(VoltageCompensatorDynamics):
+class VCompIEEEType1(VoltageCompensatorDynamics, ModuleType):
     """
     Terminal voltage transducer and load compensator as defined in IEEE 421.5-2005, 4. This model is common to all
       excitation system models described in the IEEE Standard.  Parameter details:  If Rc and Xc are set to zero,
@@ -25,6 +26,10 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
     xc: Reactive component of compensation of a generator (Xc) (>= 0).
     tr: Time constant which is used for the combined voltage sensing and compensation signal (Tr) (>= 0).
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return VCompIEEEType1(*args, **kwargs)
 
     rc: float = Field(
         default=0.0,
@@ -48,7 +53,7 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -56,3 +61,13 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import VCompIEEEType1"
+# work as well as
+# "from VCompIEEEType1 import VCompIEEEType1".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = VCompIEEEType1

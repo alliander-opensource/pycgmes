@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class WindPlantFreqPcontrolIEC(IdentifiedObject):
+class WindPlantFreqPcontrolIEC(IdentifiedObject, ModuleType):
     """
     Frequency and active power controller model. Reference: IEC 61400-27-1:2015, Annex D.
 
@@ -46,6 +47,10 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
       parameter.
     WindPlantIEC: Wind plant model with which this wind plant frequency and active power control is associated.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return WindPlantFreqPcontrolIEC(*args, **kwargs)
 
     # *Association not used*
     # Type M:1..n in CIM  # pylint: disable-next=line-too-long
@@ -161,7 +166,7 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
     # WindPlantIEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -169,3 +174,13 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import WindPlantFreqPcontrolIEC"
+# work as well as
+# "from WindPlantFreqPcontrolIEC import WindPlantFreqPcontrolIEC".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = WindPlantFreqPcontrolIEC

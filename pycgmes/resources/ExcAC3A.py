@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcAC3A(ExcitationSystemDynamics):
+class ExcAC3A(ExcitationSystemDynamics, ModuleType):
     """
     Modified IEEE AC3A alternator-supplied rectifier excitation system with different field current limit.
 
@@ -49,6 +50,10 @@ class ExcAC3A(ExcitationSystemDynamics):
       (Se[Ve2]) (>= 0).  Typical value = 0,1.
     vlv: Field voltage used in the minimum field voltage limiter loop (Vlv).  Typical value = 0,79.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExcAC3A(*args, **kwargs)
 
     tb: int = Field(
         default=0,
@@ -233,7 +238,7 @@ class ExcAC3A(ExcitationSystemDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -241,3 +246,13 @@ class ExcAC3A(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExcAC3A"
+# work as well as
+# "from ExcAC3A import ExcAC3A".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExcAC3A

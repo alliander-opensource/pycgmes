@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class UnderexcLimIEEE2(UnderexcitationLimiterDynamics):
+class UnderexcLimIEEE2(UnderexcitationLimiterDynamics, ModuleType):
     """
     Type UEL2 underexcitation limiter which has either a straight-line or multi-segment characteristic when plotted in
       terms of machine reactive power output vs. real power output. Reference: IEEE UEL2 421.5-2005, 10.2  (limit
@@ -63,6 +64,10 @@ class UnderexcLimIEEE2(UnderexcitationLimiterDynamics):
     k2: UEL terminal voltage exponent applied to reactive power output from UEL limit look-up table (k2).  Typical value
       = 2.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return UnderexcLimIEEE2(*args, **kwargs)
 
     tuv: int = Field(
         default=0,
@@ -345,7 +350,7 @@ class UnderexcLimIEEE2(UnderexcitationLimiterDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -353,3 +358,13 @@ class UnderexcLimIEEE2(UnderexcitationLimiterDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import UnderexcLimIEEE2"
+# work as well as
+# "from UnderexcLimIEEE2 import UnderexcLimIEEE2".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = UnderexcLimIEEE2

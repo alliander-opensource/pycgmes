@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
-from .Base import Base
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
+from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class StreetDetail(Base):
+class StreetDetail(Base, ModuleType):
     """
     Street details, in the context of address.
 
@@ -36,6 +37,10 @@ class StreetDetail(Base):
     floorIdentification: The identification by name or number, expressed as text, of the floor in the building as part
       of this address.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return StreetDetail(*args, **kwargs)
 
     number: str = Field(
         default="",
@@ -129,7 +134,7 @@ class StreetDetail(Base):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -137,3 +142,13 @@ class StreetDetail(Base):
         return {
             Profile.GL,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import StreetDetail"
+# work as well as
+# "from StreetDetail import StreetDetail".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = StreetDetail

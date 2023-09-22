@@ -1,19 +1,20 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .LoadDynamics import LoadDynamics
 
 
 @dataclass(config=DataclassConfig)
-class LoadAggregate(LoadDynamics):
+class LoadAggregate(LoadDynamics, ModuleType):
     """
     Aggregate loads are used to represent all or part of the real and reactive load from one or more loads in the static
       (power flow) data. This load is usually the aggregation of many individual load devices and the load model is
@@ -27,6 +28,10 @@ class LoadAggregate(LoadDynamics):
     LoadStatic: Aggregate static load associated with this aggregate load.
     """
 
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return LoadAggregate(*args, **kwargs)
+
     # *Association not used*
     # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
     # LoadMotor : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
@@ -36,7 +41,7 @@ class LoadAggregate(LoadDynamics):
     # LoadStatic : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -44,3 +49,13 @@ class LoadAggregate(LoadDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import LoadAggregate"
+# work as well as
+# "from LoadAggregate import LoadAggregate".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = LoadAggregate

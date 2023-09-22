@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .Conductor import Conductor
 
 
 @dataclass(config=DataclassConfig)
-class ACLineSegment(Conductor):
+class ACLineSegment(Conductor, ModuleType):
     """
     A wire or combination of wires, with consistent electrical characteristics, building a single electrical system,
       used to carry alternating current between points in the power system. For symmetrical, transposed three phase
@@ -38,6 +39,10 @@ class ACLineSegment(Conductor):
       circuit currents. Used for short circuit data exchange according to IEC 60909.
     x0: Zero sequence series reactance of the entire line section.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ACLineSegment(*args, **kwargs)
 
     bch: float = Field(
         default=0.0,
@@ -111,7 +116,7 @@ class ACLineSegment(Conductor):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -120,3 +125,13 @@ class ACLineSegment(Conductor):
             Profile.EQ,
             Profile.SC,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ACLineSegment"
+# work as well as
+# "from ACLineSegment import ACLineSegment".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ACLineSegment

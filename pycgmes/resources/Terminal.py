@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ACDCTerminal import ACDCTerminal
 
 
 @dataclass(config=DataclassConfig)
-class Terminal(ACDCTerminal):
+class Terminal(ACDCTerminal, ModuleType):
     """
     An AC electrical connection point to a piece of conducting equipment. Terminals are connected at physical connection
       points called connectivity nodes.
@@ -44,6 +45,10 @@ class Terminal(ACDCTerminal):
     SvPowerFlow: The power flow state variable associated with the terminal.
     RemoteInputSignal: Input signal coming from this terminal.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return Terminal(*args, **kwargs)
 
     TopologicalNode: Optional[str] = Field(
         default=None,
@@ -113,7 +118,7 @@ class Terminal(ACDCTerminal):
     # RemoteInputSignal : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -128,3 +133,13 @@ class Terminal(ACDCTerminal):
             Profile.DY,
             Profile.OP,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import Terminal"
+# work as well as
+# "from Terminal import Terminal".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = Terminal

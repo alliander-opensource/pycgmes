@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovHydroWPID(TurbineGovernorDynamics):
+class GovHydroWPID(TurbineGovernorDynamics, ModuleType):
     """
     WoodwardTM PID hydro governor. [Footnote: Woodward PID hydro governors are an example of suitable products available
       commercially. This information is given for the convenience of users of this document and does not constitute
@@ -43,6 +44,10 @@ class GovHydroWPID(TurbineGovernorDynamics):
     pgv2: Output at Gv2 PU of MWbase (Pgv2).
     pgv3: Output at Gv3 PU of MWbase (Pgv3).
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return GovHydroWPID(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -199,7 +204,7 @@ class GovHydroWPID(TurbineGovernorDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -207,3 +212,13 @@ class GovHydroWPID(TurbineGovernorDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import GovHydroWPID"
+# work as well as
+# "from GovHydroWPID import GovHydroWPID".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = GovHydroWPID

@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .RegulatingCondEq import RegulatingCondEq
 
 
 @dataclass(config=DataclassConfig)
-class ExternalNetworkInjection(RegulatingCondEq):
+class ExternalNetworkInjection(RegulatingCondEq, ModuleType):
     """
     This class represents the external network and it is used for IEC 60909 calculations.
 
@@ -54,6 +55,10 @@ class ExternalNetworkInjection(RegulatingCondEq):
     q: Reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node. Starting
       value for steady state solutions.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExternalNetworkInjection(*args, **kwargs)
 
     governorSCD: float = Field(
         default=0.0,
@@ -182,7 +187,7 @@ class ExternalNetworkInjection(RegulatingCondEq):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -192,3 +197,13 @@ class ExternalNetworkInjection(RegulatingCondEq):
             Profile.SC,
             Profile.SSH,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExternalNetworkInjection"
+# work as well as
+# "from ExternalNetworkInjection import ExternalNetworkInjection".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExternalNetworkInjection

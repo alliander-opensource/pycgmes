@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
 @dataclass(config=DataclassConfig)
-class PssSK(PowerSystemStabilizerDynamics):
+class PssSK(PowerSystemStabilizerDynamics, ModuleType):
     """
     Slovakian PSS with three inputs.
 
@@ -30,6 +31,10 @@ class PssSK(PowerSystemStabilizerDynamics):
     vsmax: Stabilizer output maximum limit (VSMAX) (> PssSK.vsmin).  Typical value = 0,4.
     vsmin: Stabilizer output minimum limit (VSMIN) (< PssSK.vsmax).  Typical value = -0.4.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return PssSK(*args, **kwargs)
 
     k1: float = Field(
         default=0.0,
@@ -109,7 +114,7 @@ class PssSK(PowerSystemStabilizerDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -117,3 +122,13 @@ class PssSK(PowerSystemStabilizerDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import PssSK"
+# work as well as
+# "from PssSK import PssSK".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = PssSK

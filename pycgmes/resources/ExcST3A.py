@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcST3A(ExcitationSystemDynamics):
+class ExcST3A(ExcitationSystemDynamics, ModuleType):
     """
     Modified IEEE ST3A static excitation system with added speed multiplier.
 
@@ -39,6 +40,10 @@ class ExcST3A(ExcitationSystemDynamics):
     ks: Coefficient to allow different usage of the model-speed coefficient (Ks).  Typical value = 0.
     ks1: Coefficient to allow different usage of the model-speed coefficient (Ks1).  Typical value = 0.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExcST3A(*args, **kwargs)
 
     vimax: float = Field(
         default=0.0,
@@ -181,7 +186,7 @@ class ExcST3A(ExcitationSystemDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -189,3 +194,13 @@ class ExcST3A(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExcST3A"
+# work as well as
+# "from ExcST3A import ExcST3A".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExcST3A

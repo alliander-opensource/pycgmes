@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .Switch import Switch
 
 
 @dataclass(config=DataclassConfig)
-class Cut(Switch):
+class Cut(Switch, ModuleType):
     """
     A cut separates a line segment into two parts. The cut appears as a switch inserted between these two parts and
       connects them together. As the cut is normally open there is no galvanic connection between the two line
@@ -30,6 +31,10 @@ class Cut(Switch):
     lengthFromTerminal1: The length to the place where the cut is located starting from side one of the cut line
       segment, i.e. the line segment Terminal with sequenceNumber equal to 1.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return Cut(*args, **kwargs)
 
     ACLineSegment: Optional[str] = Field(
         default=None,
@@ -46,7 +51,7 @@ class Cut(Switch):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -54,3 +59,13 @@ class Cut(Switch):
         return {
             Profile.EQ,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import Cut"
+# work as well as
+# "from Cut import Cut".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = Cut

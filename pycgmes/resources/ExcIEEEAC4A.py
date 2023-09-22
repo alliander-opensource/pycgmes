@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcIEEEAC4A(ExcitationSystemDynamics):
+class ExcIEEEAC4A(ExcitationSystemDynamics, ModuleType):
     """
     IEEE 421.5-2005 type AC4A model. The model represents type AC4A alternator-supplied controlled-rectifier excitation
       system which is quite different from the other types of AC systems. This high initial response excitation
@@ -33,6 +34,10 @@ class ExcIEEEAC4A(ExcitationSystemDynamics):
     vrmin: Minimum voltage regulator output (VRMIN) (< 0).  Typical value = -4,53.
     kc: Rectifier loading factor proportional to commutating reactance (KC) (>= 0).  Typical value = 0.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExcIEEEAC4A(*args, **kwargs)
 
     vimax: float = Field(
         default=0.0,
@@ -98,7 +103,7 @@ class ExcIEEEAC4A(ExcitationSystemDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -106,3 +111,13 @@ class ExcIEEEAC4A(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExcIEEEAC4A"
+# work as well as
+# "from ExcIEEEAC4A import ExcIEEEAC4A".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExcIEEEAC4A

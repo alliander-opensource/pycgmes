@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
 @dataclass(config=DataclassConfig)
-class Pss2B(PowerSystemStabilizerDynamics):
+class Pss2B(PowerSystemStabilizerDynamics, ModuleType):
     """
     Modified IEEE PSS2B.  Extra lead/lag (or rate) block added at end (up to 4 lead/lags total).
 
@@ -48,6 +49,10 @@ class Pss2B(PowerSystemStabilizerDynamics):
     ta: Lead constant (Ta) (>= 0).  Typical value = 0.
     tb: Lag time constant (Tb) (>= 0).  Typical value = 0.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return Pss2B(*args, **kwargs)
 
     vsi1max: float = Field(
         default=0.0,
@@ -253,7 +258,7 @@ class Pss2B(PowerSystemStabilizerDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -261,3 +266,13 @@ class Pss2B(PowerSystemStabilizerDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import Pss2B"
+# work as well as
+# "from Pss2B import Pss2B".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = Pss2B

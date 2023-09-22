@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .PFVArControllerType2Dynamics import PFVArControllerType2Dynamics
 
 
 @dataclass(config=DataclassConfig)
-class PFVArType2Common1(PFVArControllerType2Dynamics):
+class PFVArType2Common1(PFVArControllerType2Dynamics, ModuleType):
     """
     Power factor / reactive power regulator. This model represents the power factor or reactive power controller such as
       the Basler SCP-250. The controller measures power factor or reactive power (PU on generator rated power) and
@@ -30,6 +31,10 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
       initialisation can override the value exchanged by this attribute to represent a plant operator`s change
       of the reference setting.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return PFVArType2Common1(*args, **kwargs)
 
     j: bool = Field(
         default=False,
@@ -67,7 +72,7 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -75,3 +80,13 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import PFVArType2Common1"
+# work as well as
+# "from PFVArType2Common1 import PFVArType2Common1".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = PFVArType2Common1

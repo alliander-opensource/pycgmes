@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcIEEEST1A(ExcitationSystemDynamics):
+class ExcIEEEST1A(ExcitationSystemDynamics, ModuleType):
     """
     IEEE 421.5-2005 type ST1A model. This model represents systems in which excitation power is supplied through a
       transformer from the generator terminals (or the unit's auxiliary bus) and is regulated by a controlled
@@ -43,6 +44,10 @@ class ExcIEEEST1A(ExcitationSystemDynamics):
     vrmax: Maximum voltage regulator outputs (VRMAX) (> 0).  Typical value = 7,8.
     vrmin: Minimum voltage regulator outputs (VRMIN) (< 0).  Typical value = -6,7.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExcIEEEST1A(*args, **kwargs)
 
     ilr: float = Field(
         default=0.0,
@@ -178,7 +183,7 @@ class ExcIEEEST1A(ExcitationSystemDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -186,3 +191,13 @@ class ExcIEEEST1A(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExcIEEEST1A"
+# work as well as
+# "from ExcIEEEST1A import ExcIEEEST1A".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExcIEEEST1A

@@ -1,19 +1,20 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .Switch import Switch
 
 
 @dataclass(config=DataclassConfig)
-class Disconnector(Switch):
+class Disconnector(Switch, ModuleType):
     """
     A manually operated or motor operated mechanical switching device used for changing the connections in a circuit, or
       for isolating a circuit or equipment from a source of power. It is required to open or close circuits when
@@ -21,10 +22,14 @@ class Disconnector(Switch):
 
     """
 
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return Disconnector(*args, **kwargs)
+
     # No attributes defined for this class.
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -33,3 +38,13 @@ class Disconnector(Switch):
             Profile.EQ,
             Profile.SSH,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import Disconnector"
+# work as well as
+# "from Disconnector import Disconnector".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = Disconnector

@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ConductingEquipment import ConductingEquipment
 
 
 @dataclass(config=DataclassConfig)
-class SeriesCompensator(ConductingEquipment):
+class SeriesCompensator(ConductingEquipment, ModuleType):
     """
     A Series Compensator is a series capacitor or reactor or an AC transmission line without charging susceptance.  It
       is a two terminal device.
@@ -31,6 +32,10 @@ class SeriesCompensator(ConductingEquipment):
     varistorVoltageThreshold: The dc voltage at which the varistor starts conducting. It is used for short circuit
       calculations and exchanged only if SeriesCompensator.varistorPresent is true.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return SeriesCompensator(*args, **kwargs)
 
     r: float = Field(
         default=0.0,
@@ -82,7 +87,7 @@ class SeriesCompensator(ConductingEquipment):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -91,3 +96,13 @@ class SeriesCompensator(ConductingEquipment):
             Profile.EQ,
             Profile.SC,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import SeriesCompensator"
+# work as well as
+# "from SeriesCompensator import SeriesCompensator".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = SeriesCompensator

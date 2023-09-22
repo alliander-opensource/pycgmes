@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcIEEEAC2A(ExcitationSystemDynamics):
+class ExcIEEEAC2A(ExcitationSystemDynamics, ModuleType):
     """
     IEEE 421.5-2005 type AC2A model. The model represents a high initial response field-controlled alternator-rectifier
       excitation system. The alternator main exciter is used with non-controlled rectifiers. The type AC2A model is
@@ -47,6 +48,10 @@ class ExcIEEEAC2A(ExcitationSystemDynamics):
     seve2: Exciter saturation function value at the corresponding exciter voltage, VE2, back of commutating reactance
       (SE[VE2]) (>= 0).  Typical value = 0,012.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExcIEEEAC2A(*args, **kwargs)
 
     tb: int = Field(
         default=0,
@@ -196,7 +201,7 @@ class ExcIEEEAC2A(ExcitationSystemDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -204,3 +209,13 @@ class ExcIEEEAC2A(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExcIEEEAC2A"
+# work as well as
+# "from ExcIEEEAC2A import ExcIEEEAC2A".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExcIEEEAC2A
