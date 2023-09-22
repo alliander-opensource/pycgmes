@@ -18,5 +18,5 @@ Those are the current plans to develop PyCGMES:
 - Core update:
   - build export in
   - reference actual resources instead of just references via mRIDs
-  - manage custom profiles
+  - ~~manage custom profiles~~
   - support pydantic v1 & v2
