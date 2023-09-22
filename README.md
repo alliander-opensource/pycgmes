@@ -9,9 +9,12 @@ SPDX-License-Identifier: Apache-2.0
 - [cgmes-python](#cgmes-python)
   - [Library usage](#library-usage)
   - [Custom attributes](#custom-attributes)
-    - [Apparent class](#apparent-class)
-    - [Namespace](#namespace)
-  - [Content](#content)
+    - [Add to an existing profile](#add-to-an-existing-profile)
+    - [Create a new profile](#create-a-new-profile)
+    - [Implementation details](#implementation-details)
+      - [Apparent class](#apparent-class)
+      - [Namespace](#namespace)
+  - [Content of this repository](#content-of-this-repository)
     - [Schemas v3](#schemas-v3)
     - [Shacl files](#shacl-files)
     - [V3 source zip](#v3-source-zip)
@@ -34,12 +37,66 @@ They can be installed by pip once `https://nexus.appx.cloud/repository/uno-pypi/
 
 ## Custom attributes
 
-### Apparent class
+You might want to add extra attributes. For instance, the color of a cable (ACLineSegment). This is possible in 2 ways.
 
-If you need to add your own attributes (example: cable colour), you can do that by subclassing the relevant class.
+You can look at the [examples](./examples/custom_attributes.py)
+
+### Add to an existing profile
+
+If you need to add your own attributes (example: cable colour), you can do that by subclassing the relevant class, and
+add a (or many) new atributes there.
 
 If this is a leaf node (for instance `ACLineSegment`), it "just works". If you want to add an extra attribute to a
 class higher in the hierarchy (for instance `Equipment`) there is a lot more work to do.
+
+```python
+@dataclass(config=DataclassConfig)
+class CustomBay(Bay):
+    colour: str = Field(
+        default="Red",
+        in_profiles=[
+            Profile.EQ,
+        ],
+    )
+```
+
+### Create a new profile
+
+This is cleaner - the official CGMES profiles stays untouched, and a new profile is delivered next to it.
+
+You can do this by extending the BaseProfile Enum in [Profile.py](./pycgmes/utils/profile.py).
+
+In Python, it is not possible to extend or compose Enums which already have fields, but you can just create your own:
+
+```python
+from pycgmes.utils.profile import BaseProfile
+
+class CustomProfile(BaseProfile):
+    CUS="Tom"
+    FRO="Mage"
+```
+
+And use it everywhere you would use a profile:
+
+```python
+from pycgmes.utils.dataclassconfig import DataclassConfig
+
+@dataclass(config=DataclassConfig)
+class CustomBayAttr(Bay):
+    colour: str = Field(
+        default="Red",
+        in_profiles=[
+            CustomProfile.CUS,
+        ],
+    )
+
+# And for instance:
+custom_attrs = CustomBayAttr(colour="purple").cgmes_attributes_in_profile(CustomProfile.CUS)
+```
+
+### Implementation details
+
+#### Apparent class
 
 By default, an attribute is fully qualified. `bch` in `ACLineSegment` will appear as `ACLineSegment.bch` in the serialisation.
 For a custom attribute, you might not want to see  `ACLineSegmentCustom.bch`. To prevent this, you can override the `apparent_name`
@@ -48,8 +105,8 @@ of your custom class:
 ```python
 from pydantic.dataclasses import dataclass
 
-from pycgmes.resources import ACLineSegment
-from pycgmes.resources.Base import DataclassConfig
+from pycgmes.resources.ACLineSegment import ACLineSegment
+from pycgmes.utils.dataclassconfig import DataclassConfig
 
 @dataclass(config=DataclassConfig)
 class ACLineSegmentCustom(ACLineSegment):
@@ -58,7 +115,7 @@ class ACLineSegmentCustom(ACLineSegment):
         return "ACLineSegment"
 ```
 
-### Namespace
+#### Namespace
 
 In the serialisation, the namespace of all attributes is `cim` (`"http://iec.ch/TC57/2013/CIM-schema-cim16#"`) by default.
 The serialisation is not done by PyCGMES (yet), but if you want a custom namespace for an attribute,
@@ -77,7 +134,7 @@ class ACLineSegmentCustom(ACLineSegment):
     colour: str = Field(
         default="Red",
         in_profiles=[
-            Profile.EQ,
+            Profile.EQ, # Do not do this, see chapter "create a new profile"
         ],
         namespace="custom",
     )
@@ -89,7 +146,7 @@ class ACLineSegmentCustom(ACLineSegment):
 
 It will be given when `cgmes_attributes_in_profile()` is called.
 
-## Content
+## Content of this repository
 
 ### Schemas v3
 

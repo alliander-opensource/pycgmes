@@ -6,12 +6,15 @@ import pytest
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from pycgmes.resources import ACLineSegment
-from pycgmes.resources.Base import Base, DataclassConfig, Profile
+from pycgmes.resources import Bay as BayShortcut
+from pycgmes.resources.Bay import Bay
+from pycgmes.utils.base import Base
+from pycgmes.utils.dataclassconfig import DataclassConfig
+from pycgmes.utils.profile import Profile
 
 
 @dataclass(config=DataclassConfig)
-class CustomACLineSegment(ACLineSegment):
+class CustomBay(Bay):
     colour: str = Field(
         default="Red",
         in_profiles=[
@@ -22,7 +25,22 @@ class CustomACLineSegment(ACLineSegment):
 
     @classmethod
     def apparent_name(cls):
-        return "ACLineSegment"
+        return "Bay"
+
+
+@dataclass(config=DataclassConfig)
+class CustomBayShortcut(BayShortcut().__class__):
+    colour: str = Field(
+        default="Red",
+        in_profiles=[
+            Profile.EQ,
+        ],
+        namespace="customShortcut",
+    )
+
+    @classmethod
+    def apparent_name(cls):
+        return "Bay"
 
 
 @dataclass(config=DataclassConfig)
@@ -37,7 +55,7 @@ class CustomBase(Base):
 
     @classmethod
     def apparent_name(cls):
-        return "ACLineSegment"
+        return "Bay"
 
 
 @dataclass(config=DataclassConfig)
@@ -57,8 +75,9 @@ class TestCustom:
     @pytest.mark.parametrize(
         "klass, num_attrs, apparent, ns",
         [
-            (CustomACLineSegment, 20, "ACLineSegment", "custom"),
-            (CustomBase, 1, "ACLineSegment", "custom"),
+            (CustomBay, 6, "Bay", "custom"),
+            (CustomBayShortcut, 6, "Bay", "customShortcut"),
+            (CustomBase, 1, "Bay", "custom"),
             (CustomButNotmuch, 1, "CustomButNotmuch", None),
         ],
     )
