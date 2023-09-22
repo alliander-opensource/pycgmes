@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .PFVArControllerType2Dynamics import PFVArControllerType2Dynamics
 
 
 @dataclass(config=DataclassConfig)
-class PFVArType2IEEEPFController(PFVArControllerType2Dynamics):
+class PFVArType2IEEEPFController(PFVArControllerType2Dynamics, ModuleType):
     """
     IEEE PF controller type 2 which is a summing point type controller making up the outside loop of a two-loop system.
       This controller is implemented as a slow PI type controller. The voltage regulator forms the inner loop and is
@@ -30,6 +31,10 @@ class PFVArType2IEEEPFController(PFVArControllerType2Dynamics):
       integral action is active) false = 0 (in the overexcitation or underexcitation state, so integral
       action is disabled to allow the limiter to play its role).
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return PFVArType2IEEEPFController(*args, **kwargs)
 
     pfref: float = Field(
         default=0.0,
@@ -81,7 +86,7 @@ class PFVArType2IEEEPFController(PFVArControllerType2Dynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -89,3 +94,13 @@ class PFVArType2IEEEPFController(PFVArControllerType2Dynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import PFVArType2IEEEPFController"
+# work as well as
+# "from PFVArType2IEEEPFController import PFVArType2IEEEPFController".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = PFVArType2IEEEPFController

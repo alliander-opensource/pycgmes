@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
-from .Base import Base
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
+from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class StreetAddress(Base):
+class StreetAddress(Base, ModuleType):
     """
     General purpose street and postal address information.
 
@@ -25,6 +26,10 @@ class StreetAddress(Base):
     poBox: Post office box.
     language: The language in which the address is specified, using ISO 639-1 two digit language code.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return StreetAddress(*args, **kwargs)
 
     streetDetail: float = Field(
         default=0.0,
@@ -69,7 +74,7 @@ class StreetAddress(Base):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -77,3 +82,13 @@ class StreetAddress(Base):
         return {
             Profile.GL,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import StreetAddress"
+# work as well as
+# "from StreetAddress import StreetAddress".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = StreetAddress

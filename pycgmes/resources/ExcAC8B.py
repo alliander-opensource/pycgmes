@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcAC8B(ExcitationSystemDynamics):
+class ExcAC8B(ExcitationSystemDynamics, ModuleType):
     """
     Modified IEEE AC8B alternator-supplied rectifier excitation system with speed input and input limiter.
 
@@ -55,6 +56,10 @@ class ExcAC8B(ExcitationSystemDynamics):
       generator`s terminal voltage to represent a thyristor power stage fed from the generator terminals
       false = limits are not multiplied by generator`s terminal voltage.  Typical value = false.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExcAC8B(*args, **kwargs)
 
     inlim: bool = Field(
         default=False,
@@ -246,7 +251,7 @@ class ExcAC8B(ExcitationSystemDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -254,3 +259,13 @@ class ExcAC8B(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExcAC8B"
+# work as well as
+# "from ExcAC8B import ExcAC8B".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExcAC8B

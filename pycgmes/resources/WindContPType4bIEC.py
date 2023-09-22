@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class WindContPType4bIEC(IdentifiedObject):
+class WindContPType4bIEC(IdentifiedObject, ModuleType):
     """
     P control model type 4B. Reference: IEC 61400-27-1:2015, 5.6.5.6.
 
@@ -24,6 +25,10 @@ class WindContPType4bIEC(IdentifiedObject):
     tufiltp4b: Voltage measurement filter time constant (Tufiltp4B) (>= 0). It is a type-dependent parameter.
     WindTurbineType4bIEC: Wind turbine type 4B model with which this wind control P type 4B model is associated.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return WindContPType4bIEC(*args, **kwargs)
 
     dpmaxp4b: float = Field(
         default=0.0,
@@ -58,7 +63,7 @@ class WindContPType4bIEC(IdentifiedObject):
     # WindTurbineType4bIEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -66,3 +71,13 @@ class WindContPType4bIEC(IdentifiedObject):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import WindContPType4bIEC"
+# work as well as
+# "from WindContPType4bIEC import WindContPType4bIEC".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = WindContPType4bIEC

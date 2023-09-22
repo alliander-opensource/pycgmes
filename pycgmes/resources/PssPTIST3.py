@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
 @dataclass(config=DataclassConfig)
-class PssPTIST3(PowerSystemStabilizerDynamics):
+class PssPTIST3(PowerSystemStabilizerDynamics, ModuleType):
     """
     PTI microprocessor-based stabilizer type 3.
 
@@ -54,6 +55,10 @@ class PssPTIST3(PowerSystemStabilizerDynamics):
     ncl: Number of counts at limit to active limit function (NCL) (> 0).
     ncr: Number of counts until reset after limit function is triggered (NCR).
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return PssPTIST3(*args, **kwargs)
 
     m: float = Field(
         default=0.0,
@@ -294,7 +299,7 @@ class PssPTIST3(PowerSystemStabilizerDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -302,3 +307,13 @@ class PssPTIST3(PowerSystemStabilizerDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import PssPTIST3"
+# work as well as
+# "from PssPTIST3 import PssPTIST3".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = PssPTIST3

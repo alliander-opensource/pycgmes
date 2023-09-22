@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .EnergyConnection import EnergyConnection
 
 
 @dataclass(config=DataclassConfig)
-class EnergyConsumer(EnergyConnection):
+class EnergyConsumer(EnergyConnection, ModuleType):
     """
     Generic user of energy - a  point of consumption on the power system model. EnergyConsumer.pfixed, .qfixed,
       .pfixedPct and .qfixedPct have meaning only if there is no LoadResponseCharacteristic associated with
@@ -36,6 +37,10 @@ class EnergyConsumer(EnergyConnection):
       voltage dependent loads the value is at rated voltage. Starting value for a steady state solution.
     LoadDynamics: Load dynamics model used to describe dynamic behaviour of this energy consumer.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return EnergyConsumer(*args, **kwargs)
 
     pfixed: float = Field(
         default=0.0,
@@ -94,7 +99,7 @@ class EnergyConsumer(EnergyConnection):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -104,3 +109,13 @@ class EnergyConsumer(EnergyConnection):
             Profile.SSH,
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import EnergyConsumer"
+# work as well as
+# "from EnergyConsumer import EnergyConsumer".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = EnergyConsumer

@@ -1,19 +1,20 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .Curve import Curve
 
 
 @dataclass(config=DataclassConfig)
-class ReactiveCapabilityCurve(Curve):
+class ReactiveCapabilityCurve(Curve, ModuleType):
     """
     Reactive power rating envelope versus the synchronous machine's active power, in both the generating and motoring
       modes. For each active power value there is a corresponding high and low reactive power limit  value.
@@ -24,6 +25,10 @@ class ReactiveCapabilityCurve(Curve):
     InitiallyUsedBySynchronousMachines: Synchronous machines using this curve as default.
     """
 
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ReactiveCapabilityCurve(*args, **kwargs)
+
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
     # EquivalentInjection : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
@@ -33,7 +38,7 @@ class ReactiveCapabilityCurve(Curve):
     # InitiallyUsedBySynchronousMachines : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -41,3 +46,13 @@ class ReactiveCapabilityCurve(Curve):
         return {
             Profile.EQ,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ReactiveCapabilityCurve"
+# work as well as
+# "from ReactiveCapabilityCurve import ReactiveCapabilityCurve".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ReactiveCapabilityCurve

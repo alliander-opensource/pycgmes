@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcDC2A(ExcitationSystemDynamics):
+class ExcDC2A(ExcitationSystemDynamics, ModuleType):
     """
     Modified IEEE DC2A direct current commutator exciter with speed input, one more leg block in feedback loop and
       without underexcitation limiters (UEL) inputs.  DC type 2 excitation system model with added speed multiplier,
@@ -46,6 +47,10 @@ class ExcDC2A(ExcitationSystemDynamics):
     vtlim: (Vtlim). true = limiter at the block (Ka / [1 + sTa]) is dependent on Vt  false = limiter at the block is not
       dependent on Vt. Typical value = true.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ExcDC2A(*args, **kwargs)
 
     ka: float = Field(
         default=0.0,
@@ -174,7 +179,7 @@ class ExcDC2A(ExcitationSystemDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -182,3 +187,13 @@ class ExcDC2A(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ExcDC2A"
+# work as well as
+# "from ExcDC2A import ExcDC2A".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ExcDC2A

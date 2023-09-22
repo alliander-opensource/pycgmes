@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovCT1(TurbineGovernorDynamics):
+class GovCT1(TurbineGovernorDynamics, ModuleType):
     """
     General model for any prime mover with a PID governor, used primarily for combustion turbine and combined cycle
       units. This model can be used to represent a variety of prime movers controlled by PID governors.  It is
@@ -76,6 +77,10 @@ class GovCT1(TurbineGovernorDynamics):
     rup: Maximum rate of load limit increase (Rup).  Typical value = 99.
     rdown: Maximum rate of load limit decrease (Rdown).  Typical value = -99.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return GovCT1(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -323,7 +328,7 @@ class GovCT1(TurbineGovernorDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -331,3 +336,13 @@ class GovCT1(TurbineGovernorDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import GovCT1"
+# work as well as
+# "from GovCT1 import GovCT1".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = GovCT1

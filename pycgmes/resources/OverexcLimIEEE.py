@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .OverexcitationLimiterDynamics import OverexcitationLimiterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class OverexcLimIEEE(OverexcitationLimiterDynamics):
+class OverexcLimIEEE(OverexcitationLimiterDynamics, ModuleType):
     """
     The over excitation limiter model is intended to represent the significant features of OELs necessary for some
       large-scale system studies. It is the result of a pragmatic approach to obtain a model that can be widely
@@ -29,6 +30,10 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics):
     kcd: OEL cooldown gain (KCD).  Typical value = 1.
     kramp: OEL ramped limit rate (KRAMP).  Unit = PU / s.  Typical value = 10.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return OverexcLimIEEE(*args, **kwargs)
 
     itfpu: float = Field(
         default=0.0,
@@ -73,7 +78,7 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -81,3 +86,13 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import OverexcLimIEEE"
+# work as well as
+# "from OverexcLimIEEE import OverexcLimIEEE".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = OverexcLimIEEE

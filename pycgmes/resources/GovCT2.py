@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovCT2(TurbineGovernorDynamics):
+class GovCT2(TurbineGovernorDynamics, ModuleType):
     """
     General governor with frequency-dependent fuel flow limit.  This model is a modification of the GovCT1 model in
       order to represent the frequency-dependent fuel flow limit of a specific gas turbine manufacturer.
@@ -91,6 +92,10 @@ class GovCT2(TurbineGovernorDynamics):
     flim10: Frequency threshold 10 (Flim10).  Unit = Hz.  Typical value = 0.
     plim10: Power limit 10 (Plim10).  Typical value = 0.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return GovCT2(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -485,7 +490,7 @@ class GovCT2(TurbineGovernorDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -493,3 +498,13 @@ class GovCT2(TurbineGovernorDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import GovCT2"
+# work as well as
+# "from GovCT2 import GovCT2".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = GovCT2

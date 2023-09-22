@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
-from .Base import Base
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
+from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class SvStatus(Base):
+class SvStatus(Base, ModuleType):
     """
     State variable for status.
 
@@ -24,6 +25,10 @@ class SvStatus(Base):
       energized by the power flow. It reflects if the equipment is connected within a solvable island.
       It does not necessarily reflect whether or not the island was solved by the power flow.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return SvStatus(*args, **kwargs)
 
     ConductingEquipment: Optional[str] = Field(
         default=None,
@@ -40,7 +45,7 @@ class SvStatus(Base):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -48,3 +53,13 @@ class SvStatus(Base):
         return {
             Profile.SV,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import SvStatus"
+# work as well as
+# "from SvStatus import SvStatus".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = SvStatus

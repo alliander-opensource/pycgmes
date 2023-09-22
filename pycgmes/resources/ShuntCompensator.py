@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .RegulatingCondEq import RegulatingCondEq
 
 
 @dataclass(config=DataclassConfig)
-class ShuntCompensator(RegulatingCondEq):
+class ShuntCompensator(RegulatingCondEq, ModuleType):
     """
     A shunt capacitor or reactor or switchable bank of shunt capacitors or reactors. A section of a shunt compensator is
       an individual capacitor or reactor. A negative value for bPerSection indicates that the compensator is a
@@ -42,6 +43,10 @@ class ShuntCompensator(RegulatingCondEq):
       to one of the NonlinearShuntCompenstorPoint.sectionNumber. There is no interpolation between
       NonlinearShuntCompenstorPoint-s.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return ShuntCompensator(*args, **kwargs)
 
     aVRDelay: int = Field(
         default=0,
@@ -97,7 +102,7 @@ class ShuntCompensator(RegulatingCondEq):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -108,3 +113,13 @@ class ShuntCompensator(RegulatingCondEq):
             Profile.SV,
             Profile.SSH,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import ShuntCompensator"
+# work as well as
+# "from ShuntCompensator import ShuntCompensator".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = ShuntCompensator

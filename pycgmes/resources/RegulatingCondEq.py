@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .EnergyConnection import EnergyConnection
 
 
 @dataclass(config=DataclassConfig)
-class RegulatingCondEq(EnergyConnection):
+class RegulatingCondEq(EnergyConnection, ModuleType):
     """
     A type of conducting equipment that can regulate a quantity (i.e. voltage or flow) at a specific point in the
       network.
@@ -23,6 +24,10 @@ class RegulatingCondEq(EnergyConnection):
     RegulatingControl: The regulating control scheme in which this equipment participates.
     controlEnabled: Specifies the regulation status of the equipment.  True is regulating, false is not regulating.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return RegulatingCondEq(*args, **kwargs)
 
     RegulatingControl: Optional[str] = Field(
         default=None,
@@ -39,7 +44,7 @@ class RegulatingCondEq(EnergyConnection):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -50,3 +55,13 @@ class RegulatingCondEq(EnergyConnection):
             Profile.SSH,
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import RegulatingCondEq"
+# work as well as
+# "from RegulatingCondEq import RegulatingCondEq".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = RegulatingCondEq

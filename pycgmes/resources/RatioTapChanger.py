@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .TapChanger import TapChanger
 
 
 @dataclass(config=DataclassConfig)
-class RatioTapChanger(TapChanger):
+class RatioTapChanger(TapChanger, ModuleType):
     """
     A tap changer that changes the voltage ratio impacting the voltage magnitude but not the phase angle across the
       transformer.  Angle sign convention (general): Positive value indicates a positive phase shift from the
@@ -27,6 +28,10 @@ class RatioTapChanger(TapChanger):
     RatioTapChangerTable: The tap ratio table for this ratio  tap changer.
     TransformerEnd: Transformer end to which this ratio tap changer belongs.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return RatioTapChanger(*args, **kwargs)
 
     stepVoltageIncrement: float = Field(
         default=0.0,
@@ -50,7 +55,7 @@ class RatioTapChanger(TapChanger):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -59,3 +64,13 @@ class RatioTapChanger(TapChanger):
             Profile.EQ,
             Profile.SSH,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import RatioTapChanger"
+# work as well as
+# "from RatioTapChanger import RatioTapChanger".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = RatioTapChanger

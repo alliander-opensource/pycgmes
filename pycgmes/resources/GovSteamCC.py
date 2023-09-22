@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .CrossCompoundTurbineGovernorDynamics import CrossCompoundTurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovSteamCC(CrossCompoundTurbineGovernorDynamics):
+class GovSteamCC(CrossCompoundTurbineGovernorDynamics, ModuleType):
     """
     Cross compound turbine governor.  Unlike tandem compound units, cross compound units are not on the same shaft.
 
@@ -36,6 +37,10 @@ class GovSteamCC(CrossCompoundTurbineGovernorDynamics):
     flp: Fraction of LP power ahead of reheater (Flp).  Typical value = 0,7.
     dlp: LP damping factor (Dlp).  Typical value = 0.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return GovSteamCC(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -157,7 +162,7 @@ class GovSteamCC(CrossCompoundTurbineGovernorDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -165,3 +170,13 @@ class GovSteamCC(CrossCompoundTurbineGovernorDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import GovSteamCC"
+# work as well as
+# "from GovSteamCC import GovSteamCC".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = GovSteamCC

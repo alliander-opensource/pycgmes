@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovHydroWEH(TurbineGovernorDynamics):
+class GovHydroWEH(TurbineGovernorDynamics, ModuleType):
     """
     WoodwardTM electric hydro governor.  [Footnote: Woodward electric hydro governors are an example of suitable
       products available commercially. This information is given for the convenience of users of this document and
@@ -105,6 +106,10 @@ class GovHydroWEH(TurbineGovernorDynamics):
     pmss10: Pmss flow P10 (Pmss10).  Mechanical power output for turbine flow point 10 for lookup table representing PU
       mechanical power on machine MVA rating as a function of turbine flow.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return GovHydroWEH(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -464,7 +469,7 @@ class GovHydroWEH(TurbineGovernorDynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -472,3 +477,13 @@ class GovHydroWEH(TurbineGovernorDynamics):
         return {
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import GovHydroWEH"
+# work as well as
+# "from GovHydroWEH import GovHydroWEH".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = GovHydroWEH

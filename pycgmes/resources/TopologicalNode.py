@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class TopologicalNode(IdentifiedObject):
+class TopologicalNode(IdentifiedObject, ModuleType):
     """
     For a detailed substation model a topological node is a set of connectivity nodes that, in the current network
       state, are connected together through any type of closed switches, including  jumpers. Topological nodes
@@ -38,6 +39,10 @@ class TopologicalNode(IdentifiedObject):
       reference node for each island.
     TopologicalIsland: A topological node belongs to a topological island.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return TopologicalNode(*args, **kwargs)
 
     BaseVoltage: Optional[str] = Field(
         default=None,
@@ -85,7 +90,7 @@ class TopologicalNode(IdentifiedObject):
     # TopologicalIsland : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -94,3 +99,13 @@ class TopologicalNode(IdentifiedObject):
             Profile.TP,
             Profile.SV,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import TopologicalNode"
+# work as well as
+# "from TopologicalNode import TopologicalNode".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = TopologicalNode

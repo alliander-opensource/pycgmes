@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
+import sys
+from types import ModuleType
+
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
-from .Base import Base
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
+from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class Status(Base):
+class Status(Base, ModuleType):
     """
     Current status information relevant to an entity.
 
@@ -24,6 +25,10 @@ class Status(Base):
     remark: Pertinent information regarding the current `value`, as free form text.
     reason: Reason code or explanation for why an object went to the current status `value`.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return Status(*args, **kwargs)
 
     value: str = Field(
         default="",
@@ -54,7 +59,7 @@ class Status(Base):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -62,3 +67,13 @@ class Status(Base):
         return {
             Profile.GL,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import Status"
+# work as well as
+# "from Status import Status".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = Status

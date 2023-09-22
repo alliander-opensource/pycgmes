@@ -1,21 +1,22 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
+
+import sys
+from types import ModuleType
 
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .ACDCConverter import ACDCConverter
 
 
 @dataclass(config=DataclassConfig)
-class CsConverter(ACDCConverter):
+class CsConverter(ACDCConverter, ModuleType):
     """
     DC side of the current source converter (CSC). The firing angle controls the dc voltage at the converter, both for
       rectifier and inverter. The difference between the dc voltages of the rectifier and inverter determines the dc
@@ -66,6 +67,10 @@ class CsConverter(ACDCConverter):
       positive value.
     CSCDynamics: Current source converter dynamics model used to describe dynamic behaviour of this converter.
     """
+
+    def __call__(self, *args, **kwargs):
+        # Dark magic - see last lines of the file.
+        return CsConverter(*args, **kwargs)
 
     maxAlpha: float = Field(
         default=0.0,
@@ -170,7 +175,7 @@ class CsConverter(ACDCConverter):
     # CSCDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.
@@ -181,3 +186,13 @@ class CsConverter(ACDCConverter):
             Profile.SSH,
             Profile.DY,
         }
+
+
+# This + inheriting from ModuleType + __call__:
+# makes:
+# "import CsConverter"
+# work as well as
+# "from CsConverter import CsConverter".
+# You would get a typechecker "not callable" error, but this might be useful for
+# backward compatibility.
+sys.modules[__name__].__class__ = CsConverter
