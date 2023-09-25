@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcST1A(ExcitationSystemDynamics, ModuleType):
+class ExcST1A(ExcitationSystemDynamics):
     """
     Modification of an old IEEE ST1A static excitation system without overexcitation limiter (OEL) and underexcitation
       limiter (UEL).
@@ -39,10 +36,6 @@ class ExcST1A(ExcitationSystemDynamics, ModuleType):
     klr: Exciter output current limiter gain (Klr).  Typical value = 0.
     xe: Excitation xfmr effective reactance (Xe).  Typical value = 0,04.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcST1A(*args, **kwargs)
 
     vimax: float = Field(
         default=0.0,
@@ -179,13 +172,3 @@ class ExcST1A(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcST1A"
-# work as well as
-# "from ExcST1A import ExcST1A".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcST1A

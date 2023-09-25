@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class UnderexcLimIEEE1(UnderexcitationLimiterDynamics, ModuleType):
+class UnderexcLimIEEE1(UnderexcitationLimiterDynamics):
     """
     Type UEL1 model which has a circular limit boundary when plotted in terms of machine reactive power vs. real power
       output. Reference: IEEE UEL1 421.5-2005, 10.1.
@@ -36,10 +33,6 @@ class UnderexcLimIEEE1(UnderexcitationLimiterDynamics, ModuleType):
     vulmax: UEL output maximum limit (VULMAX) (> UnderexcLimIEEE1.vulmin).  Typical value = 18.
     vulmin: UEL output minimum limit (VULMIN) (< UnderexcLimIEEE1.vulmax).  Typical value = -18.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return UnderexcLimIEEE1(*args, **kwargs)
 
     kur: float = Field(
         default=0.0,
@@ -155,13 +148,3 @@ class UnderexcLimIEEE1(UnderexcitationLimiterDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import UnderexcLimIEEE1"
-# work as well as
-# "from UnderexcLimIEEE1 import UnderexcLimIEEE1".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = UnderexcLimIEEE1

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class LoadDynamics(IdentifiedObject, ModuleType):
+class LoadDynamics(IdentifiedObject):
     """
     Load whose behaviour is described by reference to a standard model or by definition of a user-defined model. A
       standard feature of dynamic load behaviour modelling is the ability to associate the same behaviour to
@@ -23,10 +20,6 @@ class LoadDynamics(IdentifiedObject, ModuleType):
 
     EnergyConsumer: Energy consumer to which this dynamics load model applies.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return LoadDynamics(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -41,13 +34,3 @@ class LoadDynamics(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import LoadDynamics"
-# work as well as
-# "from LoadDynamics import LoadDynamics".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = LoadDynamics

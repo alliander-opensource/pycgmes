@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class WindAeroTwoDimIEC(IdentifiedObject, ModuleType):
+class WindAeroTwoDimIEC(IdentifiedObject):
     """
     Two-dimensional aerodynamic model.   Reference: IEC 61400-27-1:2015, 5.6.1.3.
 
@@ -30,10 +27,6 @@ class WindAeroTwoDimIEC(IdentifiedObject, ModuleType):
     thetav2: Blade angle at twice rated wind speed (thetav2). It is a type-dependent parameter.
     WindTurbineType3IEC: Wind turbine type 3 model with which this wind aerodynamic model is associated.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindAeroTwoDimIEC(*args, **kwargs)
 
     dpomega: float = Field(
         default=0.0,
@@ -97,13 +90,3 @@ class WindAeroTwoDimIEC(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindAeroTwoDimIEC"
-# work as well as
-# "from WindAeroTwoDimIEC import WindAeroTwoDimIEC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindAeroTwoDimIEC

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
 @dataclass(config=DataclassConfig)
-class PssRQB(PowerSystemStabilizerDynamics, ModuleType):
+class PssRQB(PowerSystemStabilizerDynamics):
     """
     Power system stabilizer type RQB. This power system stabilizer is intended to be used together with excitation
       system type ExcRQB, which is primarily used in nuclear or thermal generating units.
@@ -31,10 +28,6 @@ class PssRQB(PowerSystemStabilizerDynamics, ModuleType):
     kdpm: Lead lag gain (KDPM). Typical value = 0,185.
     t4f: Lead lag time constant (T4F) (>= 0). Typical value = 0,045.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PssRQB(*args, **kwargs)
 
     ki2: float = Field(
         default=0.0,
@@ -115,13 +108,3 @@ class PssRQB(PowerSystemStabilizerDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PssRQB"
-# work as well as
-# "from PssRQB import PssRQB".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PssRQB

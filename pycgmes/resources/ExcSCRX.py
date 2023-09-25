@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcSCRX(ExcitationSystemDynamics, ModuleType):
+class ExcSCRX(ExcitationSystemDynamics):
     """
     Simple excitation system with generic characteristics typical of many excitation systems; intended for use where
       negative field current could be a problem.
@@ -30,10 +27,6 @@ class ExcSCRX(ExcitationSystemDynamics, ModuleType):
     cswitch: Power source switch (Cswitch). true = fixed voltage of 1.0 PU false = generator terminal voltage.
     rcrfd: Ratio of field discharge resistance to field winding resistance ([rc / rfd]).  Typical value = 0.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcSCRX(*args, **kwargs)
 
     tatb: float = Field(
         default=0.0,
@@ -100,13 +93,3 @@ class ExcSCRX(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcSCRX"
-# work as well as
-# "from ExcSCRX import ExcSCRX".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcSCRX

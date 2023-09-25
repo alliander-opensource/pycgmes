@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,17 +13,13 @@ from .PhaseTapChanger import PhaseTapChanger
 
 
 @dataclass(config=DataclassConfig)
-class PhaseTapChangerTabular(PhaseTapChanger, ModuleType):
+class PhaseTapChangerTabular(PhaseTapChanger):
     """
     Describes a tap changer with a table defining the relation between the tap step and the phase angle difference
       across the transformer.
 
     PhaseTapChangerTable: The phase tap changer table for this phase tap changer.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PhaseTapChangerTabular(*args, **kwargs)
 
     PhaseTapChangerTable: Optional[str] = Field(
         default=None,
@@ -45,13 +38,3 @@ class PhaseTapChangerTabular(PhaseTapChanger, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PhaseTapChangerTabular"
-# work as well as
-# "from PhaseTapChangerTabular import PhaseTapChangerTabular".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PhaseTapChangerTabular

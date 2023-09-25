@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class DCTopologicalNode(IdentifiedObject, ModuleType):
+class DCTopologicalNode(IdentifiedObject):
     """
     DC bus.
 
@@ -26,10 +23,6 @@ class DCTopologicalNode(IdentifiedObject, ModuleType):
       state of switches in the network.
     DCTopologicalIsland: A DC topological node belongs to a DC topological island.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return DCTopologicalNode(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -60,13 +53,3 @@ class DCTopologicalNode(IdentifiedObject, ModuleType):
             Profile.TP,
             Profile.SV,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import DCTopologicalNode"
-# work as well as
-# "from DCTopologicalNode import DCTopologicalNode".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = DCTopologicalNode

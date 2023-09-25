@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovGAST(TurbineGovernorDynamics, ModuleType):
+class GovGAST(TurbineGovernorDynamics):
     """
     Single shaft gas turbine.
 
@@ -34,10 +31,6 @@ class GovGAST(TurbineGovernorDynamics, ModuleType):
     vmin: Minimum turbine power, PU of MWbase (Vmin) (< GovGAST.vmax).  Typical value = 0.
     dturb: Turbine damping factor (Dturb).  Typical value = 0,18.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return GovGAST(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -118,13 +111,3 @@ class GovGAST(TurbineGovernorDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import GovGAST"
-# work as well as
-# "from GovGAST import GovGAST".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = GovGAST

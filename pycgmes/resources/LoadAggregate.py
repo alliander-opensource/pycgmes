@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from .LoadDynamics import LoadDynamics
 
 
 @dataclass(config=DataclassConfig)
-class LoadAggregate(LoadDynamics, ModuleType):
+class LoadAggregate(LoadDynamics):
     """
     Aggregate loads are used to represent all or part of the real and reactive load from one or more loads in the static
       (power flow) data. This load is usually the aggregation of many individual load devices and the load model is
@@ -27,10 +24,6 @@ class LoadAggregate(LoadDynamics, ModuleType):
     LoadMotor: Aggregate motor (dynamic) load associated with this aggregate load.
     LoadStatic: Aggregate static load associated with this aggregate load.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return LoadAggregate(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
@@ -49,13 +42,3 @@ class LoadAggregate(LoadDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import LoadAggregate"
-# work as well as
-# "from LoadAggregate import LoadAggregate".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = LoadAggregate

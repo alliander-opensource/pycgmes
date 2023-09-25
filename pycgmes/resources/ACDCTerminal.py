@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class ACDCTerminal(IdentifiedObject, ModuleType):
+class ACDCTerminal(IdentifiedObject):
     """
     An electrical connection point (AC or DC) to a piece of conducting equipment. Terminals are connected at physical
       connection points called connectivity nodes.
@@ -38,10 +35,6 @@ class ACDCTerminal(IdentifiedObject, ModuleType):
       transformer (PT) at a busbar or a current transformer (CT) at the bar between a breaker and an
       isolator.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ACDCTerminal(*args, **kwargs)
 
     sequenceNumber: int = Field(
         default=0,
@@ -88,13 +81,3 @@ class ACDCTerminal(IdentifiedObject, ModuleType):
             Profile.DY,
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ACDCTerminal"
-# work as well as
-# "from ACDCTerminal import ACDCTerminal".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ACDCTerminal

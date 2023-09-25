@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class ActivePowerPerFrequency(Base, ModuleType):
+class ActivePowerPerFrequency(Base):
     """
     Active power variation with frequency.
 
@@ -24,10 +21,6 @@ class ActivePowerPerFrequency(Base, ModuleType):
     unit:
     value:
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ActivePowerPerFrequency(*args, **kwargs)
 
     multiplier: Optional[str] = Field(
         default=None,
@@ -59,13 +52,3 @@ class ActivePowerPerFrequency(Base, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ActivePowerPerFrequency"
-# work as well as
-# "from ActivePowerPerFrequency import ActivePowerPerFrequency".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ActivePowerPerFrequency

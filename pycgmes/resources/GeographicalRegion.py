@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,16 +11,12 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class GeographicalRegion(IdentifiedObject, ModuleType):
+class GeographicalRegion(IdentifiedObject):
     """
     A geographical region of a power system network model.
 
     Regions: All sub-geographical regions within this geographical region.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return GeographicalRegion(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -39,13 +32,3 @@ class GeographicalRegion(IdentifiedObject, ModuleType):
             Profile.EQBD,
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import GeographicalRegion"
-# work as well as
-# "from GeographicalRegion import GeographicalRegion".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = GeographicalRegion

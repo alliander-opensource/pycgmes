@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class IdentifiedObject(Base, ModuleType):
+class IdentifiedObject(Base):
     """
     This is a root class to provide common identification for all classes needing identification and naming attributes.
 
@@ -33,10 +30,6 @@ class IdentifiedObject(Base, ModuleType):
       characters maximum.
     DiagramObjects: The diagram objects that are associated with the domain object.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return IdentifiedObject(*args, **kwargs)
 
     description: str = Field(
         default="",
@@ -120,13 +113,3 @@ class IdentifiedObject(Base, ModuleType):
             Profile.DY,
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import IdentifiedObject"
-# work as well as
-# "from IdentifiedObject import IdentifiedObject".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = IdentifiedObject

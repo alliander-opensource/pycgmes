@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class LimitSet(IdentifiedObject, ModuleType):
+class LimitSet(IdentifiedObject):
     """
     Specifies a set of Limits that are associated with a Measurement. A Measurement may have several LimitSets
       corresponding to seasonal or other changing conditions. The condition is captured in the name and description
@@ -25,10 +22,6 @@ class LimitSet(IdentifiedObject, ModuleType):
     isPercentageLimits: Tells if the limit values are in percentage of normalValue or the specified Unit for
       Measurements and Controls.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return LimitSet(*args, **kwargs)
 
     isPercentageLimits: bool = Field(
         default=False,
@@ -46,13 +39,3 @@ class LimitSet(IdentifiedObject, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import LimitSet"
-# work as well as
-# "from LimitSet import LimitSet".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = LimitSet

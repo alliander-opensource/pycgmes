@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .Conductor import Conductor
 
 
 @dataclass(config=DataclassConfig)
-class ACLineSegment(Conductor, ModuleType):
+class ACLineSegment(Conductor):
     """
     A wire or combination of wires, with consistent electrical characteristics, building a single electrical system,
       used to carry alternating current between points in the power system. For symmetrical, transposed three phase
@@ -39,10 +36,6 @@ class ACLineSegment(Conductor, ModuleType):
       circuit currents. Used for short circuit data exchange according to IEC 60909.
     x0: Zero sequence series reactance of the entire line section.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ACLineSegment(*args, **kwargs)
 
     bch: float = Field(
         default=0.0,
@@ -125,13 +118,3 @@ class ACLineSegment(Conductor, ModuleType):
             Profile.EQ,
             Profile.SC,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ACLineSegment"
-# work as well as
-# "from ACLineSegment import ACLineSegment".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ACLineSegment

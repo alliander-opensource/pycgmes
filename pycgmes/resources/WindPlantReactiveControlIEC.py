@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class WindPlantReactiveControlIEC(IdentifiedObject, ModuleType):
+class WindPlantReactiveControlIEC(IdentifiedObject):
     """
     Simplified plant voltage and reactive power control model for use with type 3 and type 4 wind turbine models.
       Reference: IEC 61400-27-1:2015, Annex D.
@@ -52,10 +49,6 @@ class WindPlantReactiveControlIEC(IdentifiedObject, ModuleType):
     xrefmin: Minimum xWTref (qWTref or delta uWTref) request from the plant controller (xrefmin) (<
       WindPlantReactiveControlIEC.xrefmax). It is a project-dependent parameter.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindPlantReactiveControlIEC(*args, **kwargs)
 
     # *Association not used*
     # Type M:1..n in CIM  # pylint: disable-next=line-too-long
@@ -200,13 +193,3 @@ class WindPlantReactiveControlIEC(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindPlantReactiveControlIEC"
-# work as well as
-# "from WindPlantReactiveControlIEC import WindPlantReactiveControlIEC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindPlantReactiveControlIEC

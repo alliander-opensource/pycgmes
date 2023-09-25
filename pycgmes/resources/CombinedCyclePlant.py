@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,17 +11,13 @@ from .PowerSystemResource import PowerSystemResource
 
 
 @dataclass(config=DataclassConfig)
-class CombinedCyclePlant(PowerSystemResource, ModuleType):
+class CombinedCyclePlant(PowerSystemResource):
     """
     A set of combustion turbines and steam turbines where the exhaust heat from the combustion turbines is recovered to
       make steam for the steam turbines, resulting in greater overall plant efficiency.
 
     ThermalGeneratingUnits: A thermal generating unit may be a member of a combined cycle plant.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return CombinedCyclePlant(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -39,13 +32,3 @@ class CombinedCyclePlant(PowerSystemResource, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import CombinedCyclePlant"
-# work as well as
-# "from CombinedCyclePlant import CombinedCyclePlant".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = CombinedCyclePlant

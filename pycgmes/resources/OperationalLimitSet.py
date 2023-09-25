@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class OperationalLimitSet(IdentifiedObject, ModuleType):
+class OperationalLimitSet(IdentifiedObject):
     """
     A set of limits associated with equipment.  Sets of limits might apply to a specific temperature, or season for
       example. A set of limits may contain different severities of limit levels that would apply to the same
@@ -27,10 +24,6 @@ class OperationalLimitSet(IdentifiedObject, ModuleType):
     Equipment: The equipment to which the limit set applies.
     OperationalLimitValue: Values of equipment limits.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return OperationalLimitSet(*args, **kwargs)
 
     Terminal: Optional[str] = Field(
         default=None,
@@ -59,13 +52,3 @@ class OperationalLimitSet(IdentifiedObject, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import OperationalLimitSet"
-# work as well as
-# "from OperationalLimitSet import OperationalLimitSet".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = OperationalLimitSet

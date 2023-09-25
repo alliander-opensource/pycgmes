@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .RotatingMachineDynamics import RotatingMachineDynamics
 
 
 @dataclass(config=DataclassConfig)
-class AsynchronousMachineDynamics(RotatingMachineDynamics, ModuleType):
+class AsynchronousMachineDynamics(RotatingMachineDynamics):
     """
     Asynchronous machine whose behaviour is described by reference to a standard model expressed in either time constant
       reactance form or equivalent circuit form or by definition of a user-defined model. Parameter details:
@@ -29,10 +26,6 @@ class AsynchronousMachineDynamics(RotatingMachineDynamics, ModuleType):
     MechanicalLoadDynamics: Mechanical load model associated with this asynchronous machine model.
     WindTurbineType1or2Dynamics: Wind generator type 1 or type 2 model associated with this asynchronous machine model.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return AsynchronousMachineDynamics(*args, **kwargs)
 
     AsynchronousMachine: Optional[str] = Field(
         default=None,
@@ -62,13 +55,3 @@ class AsynchronousMachineDynamics(RotatingMachineDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import AsynchronousMachineDynamics"
-# work as well as
-# "from AsynchronousMachineDynamics import AsynchronousMachineDynamics".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = AsynchronousMachineDynamics

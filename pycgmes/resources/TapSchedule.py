@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,16 +13,12 @@ from .SeasonDayTypeSchedule import SeasonDayTypeSchedule
 
 
 @dataclass(config=DataclassConfig)
-class TapSchedule(SeasonDayTypeSchedule, ModuleType):
+class TapSchedule(SeasonDayTypeSchedule):
     """
     A pre-established pattern over time for a tap step.
 
     TapChanger: A TapSchedule is associated with a TapChanger.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return TapSchedule(*args, **kwargs)
 
     TapChanger: Optional[str] = Field(
         default=None,
@@ -43,13 +36,3 @@ class TapSchedule(SeasonDayTypeSchedule, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import TapSchedule"
-# work as well as
-# "from TapSchedule import TapSchedule".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = TapSchedule

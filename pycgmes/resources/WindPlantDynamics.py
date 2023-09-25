@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
 @dataclass(config=DataclassConfig)
-class WindPlantDynamics(DynamicsFunctionBlock, ModuleType):
+class WindPlantDynamics(DynamicsFunctionBlock):
     """
     Parent class supporting relationships to wind turbines type 3 and type 4 and wind plant IEC and user-defined wind
       plants including their control models.
@@ -24,10 +21,6 @@ class WindPlantDynamics(DynamicsFunctionBlock, ModuleType):
     RemoteInputSignal: The remote signal with which this power plant is associated.
     WindTurbineType3or4Dynamics: The wind turbine type 3 or type 4 associated with this wind plant.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindPlantDynamics(*args, **kwargs)
 
     RemoteInputSignal: Optional[str] = Field(
         default=None,
@@ -49,13 +42,3 @@ class WindPlantDynamics(DynamicsFunctionBlock, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindPlantDynamics"
-# work as well as
-# "from WindPlantDynamics import WindPlantDynamics".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindPlantDynamics

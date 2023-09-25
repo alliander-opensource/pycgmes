@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcIEEEST5B(ExcitationSystemDynamics, ModuleType):
+class ExcIEEEST5B(ExcitationSystemDynamics):
     """
     IEEE 421.5-2005 type ST5B model. The type ST5B excitation system is a variation of the type ST1A model, with
       alternative overexcitation and underexcitation inputs and additional limits. The block diagram in the IEEE
@@ -40,10 +37,6 @@ class ExcIEEEST5B(ExcitationSystemDynamics, ModuleType):
     tuc2: UEL lead time constant (TUC2) (>= 0).  Typical value = 0,1.
     tub2: UEL lag time constant (TUB2) (>= 0).  Typical value = 0,05.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcIEEEST5B(*args, **kwargs)
 
     kr: float = Field(
         default=0.0,
@@ -173,13 +166,3 @@ class ExcIEEEST5B(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcIEEEST5B"
-# work as well as
-# "from ExcIEEEST5B import ExcIEEEST5B".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcIEEEST5B

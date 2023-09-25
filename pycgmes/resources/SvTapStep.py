@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class SvTapStep(Base, ModuleType):
+class SvTapStep(Base):
     """
     State variable for transformer tap step.
 
@@ -25,10 +22,6 @@ class SvTapStep(Base, ModuleType):
       maximum tap positions.
     TapChanger: The tap changer associated with the tap step state.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SvTapStep(*args, **kwargs)
 
     position: float = Field(
         default=0.0,
@@ -53,13 +46,3 @@ class SvTapStep(Base, ModuleType):
         return {
             Profile.SV,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SvTapStep"
-# work as well as
-# "from SvTapStep import SvTapStep".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SvTapStep

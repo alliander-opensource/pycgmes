@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class WindContRotorRIEC(IdentifiedObject, ModuleType):
+class WindContRotorRIEC(IdentifiedObject):
     """
     Rotor resistance control model. Reference: IEC 61400-27-1:2015, 5.6.5.3.
 
@@ -32,10 +29,6 @@ class WindContRotorRIEC(IdentifiedObject, ModuleType):
     WindGenTurbineType2IEC: Wind turbine type 2 model with whitch this wind control rotor resistance model is
       associated.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindContRotorRIEC(*args, **kwargs)
 
     kirr: float = Field(
         default=0.0,
@@ -110,13 +103,3 @@ class WindContRotorRIEC(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindContRotorRIEC"
-# work as well as
-# "from WindContRotorRIEC import WindContRotorRIEC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindContRotorRIEC

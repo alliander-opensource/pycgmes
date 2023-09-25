@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .RegulatingCondEq import RegulatingCondEq
 
 
 @dataclass(config=DataclassConfig)
-class StaticVarCompensator(RegulatingCondEq, ModuleType):
+class StaticVarCompensator(RegulatingCondEq):
     """
     A facility for providing variable and controllable shunt reactive power. The SVC typically consists of a stepdown
       transformer, filter, thyristor-controlled reactor, and thyristor-switched capacitor arms.  The SVC may operate
@@ -39,10 +36,6 @@ class StaticVarCompensator(RegulatingCondEq, ModuleType):
     StaticVarCompensatorDynamics: Static Var Compensator dynamics model used to describe dynamic behaviour of this
       Static Var Compensator.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return StaticVarCompensator(*args, **kwargs)
 
     capacitiveRating: float = Field(
         default=0.0,
@@ -101,13 +94,3 @@ class StaticVarCompensator(RegulatingCondEq, ModuleType):
             Profile.SSH,
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import StaticVarCompensator"
-# work as well as
-# "from StaticVarCompensator import StaticVarCompensator".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = StaticVarCompensator

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class UnderexcitationLimiterUserDefined(UnderexcitationLimiterDynamics, ModuleType):
+class UnderexcitationLimiterUserDefined(UnderexcitationLimiterDynamics):
     """
     Underexcitation limiter function block whose dynamic behaviour is described by a user-defined model.
 
@@ -25,10 +22,6 @@ class UnderexcitationLimiterUserDefined(UnderexcitationLimiterDynamics, ModuleTy
       of control blocks and their input and output signals.
     ProprietaryParameterDynamics: Parameter of this proprietary user-defined model.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return UnderexcitationLimiterUserDefined(*args, **kwargs)
 
     proprietary: bool = Field(
         default=False,
@@ -50,13 +43,3 @@ class UnderexcitationLimiterUserDefined(UnderexcitationLimiterDynamics, ModuleTy
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import UnderexcitationLimiterUserDefined"
-# work as well as
-# "from UnderexcitationLimiterUserDefined import UnderexcitationLimiterUserDefined".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = UnderexcitationLimiterUserDefined

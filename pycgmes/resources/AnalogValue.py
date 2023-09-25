@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,17 +13,13 @@ from .MeasurementValue import MeasurementValue
 
 
 @dataclass(config=DataclassConfig)
-class AnalogValue(MeasurementValue, ModuleType):
+class AnalogValue(MeasurementValue):
     """
     AnalogValue represents an analog MeasurementValue.
 
     Analog: Measurement to which this value is connected.
     AnalogControl: The Control variable associated with the MeasurementValue.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return AnalogValue(*args, **kwargs)
 
     Analog: Optional[str] = Field(
         default=None,
@@ -48,13 +41,3 @@ class AnalogValue(MeasurementValue, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import AnalogValue"
-# work as well as
-# "from AnalogValue import AnalogValue".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = AnalogValue

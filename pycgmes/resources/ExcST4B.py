@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcST4B(ExcitationSystemDynamics, ModuleType):
+class ExcST4B(ExcitationSystemDynamics):
     """
     Modified IEEE ST4B static excitation system with maximum inner loop feedback gain Vgmax.
 
@@ -41,10 +38,6 @@ class ExcST4B(ExcitationSystemDynamics, ModuleType):
     lvgate: Selector (LVGate). true = LVGate is part of the block diagram false = LVGate is not part of the block
       diagram.  Typical value = false.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcST4B(*args, **kwargs)
 
     kpr: float = Field(
         default=0.0,
@@ -188,13 +181,3 @@ class ExcST4B(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcST4B"
-# work as well as
-# "from ExcST4B import ExcST4B".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcST4B

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class ReactivePower(Base, ModuleType):
+class ReactivePower(Base):
     """
     Product of RMS value of the voltage and the RMS value of the quadrature component of the current.
 
@@ -24,10 +21,6 @@ class ReactivePower(Base, ModuleType):
     unit:
     multiplier:
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ReactivePower(*args, **kwargs)
 
     value: float = Field(
         default=0.0,
@@ -67,13 +60,3 @@ class ReactivePower(Base, ModuleType):
             Profile.SV,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ReactivePower"
-# work as well as
-# "from ReactivePower import ReactivePower".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ReactivePower

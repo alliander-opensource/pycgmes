@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,16 +11,12 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class IOPoint(IdentifiedObject, ModuleType):
+class IOPoint(IdentifiedObject):
     """
     The class describe a measurement or control value. The purpose is to enable having attributes and associations
       common for measurement and control.
 
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return IOPoint(*args, **kwargs)
 
     # No attributes defined for this class.
 
@@ -36,13 +29,3 @@ class IOPoint(IdentifiedObject, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import IOPoint"
-# work as well as
-# "from IOPoint import IOPoint".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = IOPoint

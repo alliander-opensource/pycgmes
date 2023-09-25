@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcAC8B(ExcitationSystemDynamics, ModuleType):
+class ExcAC8B(ExcitationSystemDynamics):
     """
     Modified IEEE AC8B alternator-supplied rectifier excitation system with speed input and input limiter.
 
@@ -56,10 +53,6 @@ class ExcAC8B(ExcitationSystemDynamics, ModuleType):
       generator`s terminal voltage to represent a thyristor power stage fed from the generator terminals
       false = limits are not multiplied by generator`s terminal voltage.  Typical value = false.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcAC8B(*args, **kwargs)
 
     inlim: bool = Field(
         default=False,
@@ -259,13 +252,3 @@ class ExcAC8B(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcAC8B"
-# work as well as
-# "from ExcAC8B import ExcAC8B".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcAC8B

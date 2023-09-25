@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from .SynchronousMachineDynamics import SynchronousMachineDynamics
 
 
 @dataclass(config=DataclassConfig)
-class SynchronousMachineSimplified(SynchronousMachineDynamics, ModuleType):
+class SynchronousMachineSimplified(SynchronousMachineDynamics):
     """
     The simplified model represents a synchronous generator as a constant internal voltage behind an impedance (Rs +
       jXp) as shown in the Simplified diagram. Since internal voltage is held constant, there is no Efd input and
@@ -25,10 +22,6 @@ class SynchronousMachineSimplified(SynchronousMachineDynamics, ModuleType):
       for SynchronousMachineSimplified); - RotatingMachineDynamics.statorResistance (Rs).
 
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SynchronousMachineSimplified(*args, **kwargs)
 
     # No attributes defined for this class.
 
@@ -41,13 +34,3 @@ class SynchronousMachineSimplified(SynchronousMachineDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SynchronousMachineSimplified"
-# work as well as
-# "from SynchronousMachineSimplified import SynchronousMachineSimplified".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SynchronousMachineSimplified

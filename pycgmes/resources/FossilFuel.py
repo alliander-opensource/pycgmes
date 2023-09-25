@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class FossilFuel(IdentifiedObject, ModuleType):
+class FossilFuel(IdentifiedObject):
     """
     The fossil fuel consumed by the non-nuclear thermal generating unit.   For example, coal, oil, gas, etc.   These are
       the specific fuels that the generating unit can consume.
@@ -24,10 +21,6 @@ class FossilFuel(IdentifiedObject, ModuleType):
     fossilFuelType: The type of fossil fuel, such as coal, oil, or gas.
     ThermalGeneratingUnit: A thermal generating unit may have one or more fossil fuels.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return FossilFuel(*args, **kwargs)
 
     fossilFuelType: Optional[str] = Field(
         default=None,
@@ -52,13 +45,3 @@ class FossilFuel(IdentifiedObject, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import FossilFuel"
-# work as well as
-# "from FossilFuel import FossilFuel".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = FossilFuel

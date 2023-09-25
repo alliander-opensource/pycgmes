@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class TapChangerTablePoint(Base, ModuleType):
+class TapChangerTablePoint(Base):
     """
     Describes each tap step in the tabular curve.
 
@@ -40,10 +37,6 @@ class TapChangerTablePoint(Base, ModuleType):
       series reactance on the associated power transformer end or ends.  This model assumes the star impedance
       (pi model) form.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return TapChangerTablePoint(*args, **kwargs)
 
     b: float = Field(
         default=0.0,
@@ -96,13 +89,3 @@ class TapChangerTablePoint(Base, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import TapChangerTablePoint"
-# work as well as
-# "from TapChangerTablePoint import TapChangerTablePoint".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = TapChangerTablePoint

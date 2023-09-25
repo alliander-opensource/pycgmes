@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class WindContPitchAngleIEC(IdentifiedObject, ModuleType):
+class WindContPitchAngleIEC(IdentifiedObject):
     """
     Pitch angle control model. Reference: IEC 61400-27-1:2015, 5.6.5.2.
 
@@ -33,10 +30,6 @@ class WindContPitchAngleIEC(IdentifiedObject, ModuleType):
     ttheta: Pitch time constant (ttheta) (>= 0). It is a type-dependent parameter.
     WindTurbineType3IEC: Wind turbine type 3 model with which this pitch control model is associated.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindContPitchAngleIEC(*args, **kwargs)
 
     dthetamax: float = Field(
         default=0.0,
@@ -121,13 +114,3 @@ class WindContPitchAngleIEC(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindContPitchAngleIEC"
-# work as well as
-# "from WindContPitchAngleIEC import WindContPitchAngleIEC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindContPitchAngleIEC

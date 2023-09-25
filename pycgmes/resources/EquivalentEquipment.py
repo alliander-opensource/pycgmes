@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,17 +13,13 @@ from .ConductingEquipment import ConductingEquipment
 
 
 @dataclass(config=DataclassConfig)
-class EquivalentEquipment(ConductingEquipment, ModuleType):
+class EquivalentEquipment(ConductingEquipment):
     """
     The class represents equivalent objects that are the result of a network reduction. The class is the base for
       equivalent objects of different types.
 
     EquivalentNetwork: The equivalent where the reduced model belongs.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return EquivalentEquipment(*args, **kwargs)
 
     EquivalentNetwork: Optional[str] = Field(
         default=None,
@@ -46,13 +39,3 @@ class EquivalentEquipment(ConductingEquipment, ModuleType):
             Profile.SC,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import EquivalentEquipment"
-# work as well as
-# "from EquivalentEquipment import EquivalentEquipment".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = EquivalentEquipment

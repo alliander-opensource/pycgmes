@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,15 +11,11 @@ from .GeneratingUnit import GeneratingUnit
 
 
 @dataclass(config=DataclassConfig)
-class NuclearGeneratingUnit(GeneratingUnit, ModuleType):
+class NuclearGeneratingUnit(GeneratingUnit):
     """
     A nuclear generating unit.
 
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return NuclearGeneratingUnit(*args, **kwargs)
 
     # No attributes defined for this class.
 
@@ -36,13 +29,3 @@ class NuclearGeneratingUnit(GeneratingUnit, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import NuclearGeneratingUnit"
-# work as well as
-# "from NuclearGeneratingUnit import NuclearGeneratingUnit".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = NuclearGeneratingUnit

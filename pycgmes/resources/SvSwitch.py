@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,17 +13,13 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class SvSwitch(Base, ModuleType):
+class SvSwitch(Base):
     """
     State variable for switch.
 
     open: The attribute tells if the computed state of the switch is considered open.
     Switch: The switch associated with the switch state.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SvSwitch(*args, **kwargs)
 
     open: bool = Field(
         default=False,
@@ -51,13 +44,3 @@ class SvSwitch(Base, ModuleType):
         return {
             Profile.SV,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SvSwitch"
-# work as well as
-# "from SvSwitch import SvSwitch".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SvSwitch

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,16 +13,12 @@ from .EquipmentContainer import EquipmentContainer
 
 
 @dataclass(config=DataclassConfig)
-class Line(EquipmentContainer, ModuleType):
+class Line(EquipmentContainer):
     """
     Contains equipment beyond a substation belonging to a power transmission line.
 
     Region: The sub-geographical region of the line.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Line(*args, **kwargs)
 
     Region: Optional[str] = Field(
         default=None,
@@ -45,13 +38,3 @@ class Line(EquipmentContainer, ModuleType):
             Profile.EQBD,
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Line"
-# work as well as
-# "from Line import Line".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Line

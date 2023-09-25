@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .EquivalentEquipment import EquivalentEquipment
 
 
 @dataclass(config=DataclassConfig)
-class EquivalentBranch(EquivalentEquipment, ModuleType):
+class EquivalentBranch(EquivalentEquipment):
     """
     The class represents equivalent branches. In cases where a transformer phase shift is modelled and the
       EquivalentBranch is spanning the same nodes, the impedance quantities for the EquivalentBranch shall consider
@@ -68,10 +65,6 @@ class EquivalentBranch(EquivalentEquipment, ModuleType):
       exchange according to IEC 60909. Usage : EquivalentBranch is a result of network reduction prior to
       the data exchange.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return EquivalentBranch(*args, **kwargs)
 
     r: float = Field(
         default=0.0,
@@ -195,13 +188,3 @@ class EquivalentBranch(EquivalentEquipment, ModuleType):
             Profile.EQ,
             Profile.SC,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import EquivalentBranch"
-# work as well as
-# "from EquivalentBranch import EquivalentBranch".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = EquivalentBranch

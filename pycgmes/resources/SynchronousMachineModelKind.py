@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,15 +11,11 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class SynchronousMachineModelKind(Base, ModuleType):
+class SynchronousMachineModelKind(Base):
     """
     Type of synchronous machine model used in dynamic simulation applications.
 
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SynchronousMachineModelKind(*args, **kwargs)
 
     # No attributes defined for this class.
 
@@ -35,13 +28,3 @@ class SynchronousMachineModelKind(Base, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SynchronousMachineModelKind"
-# work as well as
-# "from SynchronousMachineModelKind import SynchronousMachineModelKind".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SynchronousMachineModelKind

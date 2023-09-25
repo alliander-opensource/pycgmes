@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .RotatingMachine import RotatingMachine
 
 
 @dataclass(config=DataclassConfig)
-class SynchronousMachine(RotatingMachine, ModuleType):
+class SynchronousMachine(RotatingMachine):
     """
     An electromechanical device that operates with shaft rotating synchronously with the network. It is a single machine
       operating either as a generator or synchronous condenser or pump.
@@ -64,10 +61,6 @@ class SynchronousMachine(RotatingMachine, ModuleType):
     SynchronousMachineDynamics: Synchronous machine dynamics model used to describe dynamic behaviour of this
       synchronous machine.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SynchronousMachine(*args, **kwargs)
 
     InitialReactiveCapabilityCurve: Optional[str] = Field(
         default=None,
@@ -239,13 +232,3 @@ class SynchronousMachine(RotatingMachine, ModuleType):
             Profile.SSH,
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SynchronousMachine"
-# work as well as
-# "from SynchronousMachine import SynchronousMachine".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SynchronousMachine

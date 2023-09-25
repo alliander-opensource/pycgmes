@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,15 +11,11 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class BatteryStateKind(Base, ModuleType):
+class BatteryStateKind(Base):
     """
     The state of the battery unit.
 
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return BatteryStateKind(*args, **kwargs)
 
     # No attributes defined for this class.
 
@@ -35,13 +28,3 @@ class BatteryStateKind(Base, ModuleType):
         return {
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import BatteryStateKind"
-# work as well as
-# "from BatteryStateKind import BatteryStateKind".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = BatteryStateKind

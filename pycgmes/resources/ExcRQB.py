@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcRQB(ExcitationSystemDynamics, ModuleType):
+class ExcRQB(ExcitationSystemDynamics):
     """
     Excitation system type RQB (four-loop regulator, r?gulateur quatre boucles, developed in France) primarily used in
       nuclear or thermal generating units. This excitation system shall be always used together with power system
@@ -35,10 +32,6 @@ class ExcRQB(ExcitationSystemDynamics, ModuleType):
     lsat: Integrator limiter (LSAT).  Typical value = 5,73.
     tf: Exciter time constant (TF) (>= 0).  Typical value = 0,01.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcRQB(*args, **kwargs)
 
     ki0: float = Field(
         default=0.0,
@@ -140,13 +133,3 @@ class ExcRQB(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcRQB"
-# work as well as
-# "from ExcRQB import ExcRQB".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcRQB

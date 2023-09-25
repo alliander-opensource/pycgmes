@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class SubGeographicalRegion(IdentifiedObject, ModuleType):
+class SubGeographicalRegion(IdentifiedObject):
     """
     A subset of a geographical region of a power system network model.
 
@@ -25,10 +22,6 @@ class SubGeographicalRegion(IdentifiedObject, ModuleType):
     Substations: The substations in this sub-geographical region.
     DCLines: The DC lines in this sub-geographical region.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SubGeographicalRegion(*args, **kwargs)
 
     Region: Optional[str] = Field(
         default=None,
@@ -60,13 +53,3 @@ class SubGeographicalRegion(IdentifiedObject, ModuleType):
             Profile.EQBD,
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SubGeographicalRegion"
-# work as well as
-# "from SubGeographicalRegion import SubGeographicalRegion".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SubGeographicalRegion

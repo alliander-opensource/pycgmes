@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcST6B(ExcitationSystemDynamics, ModuleType):
+class ExcST6B(ExcitationSystemDynamics):
     """
     Modified IEEE ST6B static excitation system with PID controller and optional inner feedback loop.
 
@@ -46,10 +43,6 @@ class ExcST6B(ExcitationSystemDynamics, ModuleType):
     vrmin: Minimum voltage regulator output (Vrmin) (< 0).  Typical value = -3,85.
     xc: Excitation source reactance (Xc).  Typical value = 0,05.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcST6B(*args, **kwargs)
 
     ilr: float = Field(
         default=0.0,
@@ -221,13 +214,3 @@ class ExcST6B(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcST6B"
-# work as well as
-# "from ExcST6B import ExcST6B".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcST6B

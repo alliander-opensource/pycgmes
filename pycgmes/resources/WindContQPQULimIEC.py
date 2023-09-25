@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class WindContQPQULimIEC(IdentifiedObject, ModuleType):
+class WindContQPQULimIEC(IdentifiedObject):
     """
     QP and QU limitation model. Reference: IEC 61400-27-1:2015, 5.6.5.10.
 
@@ -26,10 +23,6 @@ class WindContQPQULimIEC(IdentifiedObject, ModuleType):
       associated.
     WindDynamicsLookupTable: The wind dynamics lookup table associated with this QP and QU limitation model.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindContQPQULimIEC(*args, **kwargs)
 
     tpfiltql: int = Field(
         default=0,
@@ -62,13 +55,3 @@ class WindContQPQULimIEC(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindContQPQULimIEC"
-# work as well as
-# "from WindContQPQULimIEC import WindContQPQULimIEC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindContQPQULimIEC

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class LoadMotor(IdentifiedObject, ModuleType):
+class LoadMotor(IdentifiedObject):
     """
     Aggregate induction motor load. This model is used to represent a fraction of an ordinary load as "induction motor
       load".  It allows a load that is treated as an ordinary constant power in power flow analysis to be
@@ -50,10 +47,6 @@ class LoadMotor(IdentifiedObject, ModuleType):
     tv: Voltage trip pickup time (Tv) (>= 0).  Typical value = 0,1.
     tbkr: Circuit breaker operating time (Tbkr) (>= 0).  Typical value = 0,08.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return LoadMotor(*args, **kwargs)
 
     LoadAggregate: Optional[str] = Field(
         default=None,
@@ -162,13 +155,3 @@ class LoadMotor(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import LoadMotor"
-# work as well as
-# "from LoadMotor import LoadMotor".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = LoadMotor

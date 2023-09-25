@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
 @dataclass(config=DataclassConfig)
-class Pss1A(PowerSystemStabilizerDynamics, ModuleType):
+class Pss1A(PowerSystemStabilizerDynamics):
     """
     Single input power system stabilizer. It is a modified version in order to allow representation of various vendors'
       implementations on PSS type 1A.
@@ -45,10 +42,6 @@ class Pss1A(PowerSystemStabilizerDynamics, ModuleType):
     kd: Selector (Kd).  true = e-sTdelay used false = e-sTdelay not used.
     tdelay: Time constant (Tdelay) (>= 0).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Pss1A(*args, **kwargs)
 
     inputSignalType: Optional[str] = Field(
         default=None,
@@ -213,13 +206,3 @@ class Pss1A(PowerSystemStabilizerDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Pss1A"
-# work as well as
-# "from Pss1A import Pss1A".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Pss1A

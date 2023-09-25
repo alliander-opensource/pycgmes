@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class ProprietaryParameterDynamics(Base, ModuleType):
+class ProprietaryParameterDynamics(Base):
     """
     Supports definition of one or more parameters of several different datatypes for use by proprietary user-defined
       models.   This class does not inherit from IdentifiedObject since it is not intended that a single instance of
@@ -52,10 +49,6 @@ class ProprietaryParameterDynamics(Base, ModuleType):
     floatParameterValue: Floating point parameter value.  If this attribute is populated, booleanParameterValue and
       integerParameterValue will not be.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ProprietaryParameterDynamics(*args, **kwargs)
 
     CSCUserDefined: Optional[str] = Field(
         default=None,
@@ -241,13 +234,3 @@ class ProprietaryParameterDynamics(Base, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ProprietaryParameterDynamics"
-# work as well as
-# "from ProprietaryParameterDynamics import ProprietaryParameterDynamics".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ProprietaryParameterDynamics

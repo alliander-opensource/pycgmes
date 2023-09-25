@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .RegulatingCondEq import RegulatingCondEq
 
 
 @dataclass(config=DataclassConfig)
-class RotatingMachine(RegulatingCondEq, ModuleType):
+class RotatingMachine(RegulatingCondEq):
     """
     A rotating machine which may be used as a generator or motor.
 
@@ -34,10 +31,6 @@ class RotatingMachine(RegulatingCondEq, ModuleType):
     q: Reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node. Starting
       value for a steady state solution.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return RotatingMachine(*args, **kwargs)
 
     GeneratingUnit: Optional[str] = Field(
         default=None,
@@ -97,13 +90,3 @@ class RotatingMachine(RegulatingCondEq, ModuleType):
             Profile.SSH,
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import RotatingMachine"
-# work as well as
-# "from RotatingMachine import RotatingMachine".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = RotatingMachine

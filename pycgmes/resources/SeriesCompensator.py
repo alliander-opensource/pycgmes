@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ConductingEquipment import ConductingEquipment
 
 
 @dataclass(config=DataclassConfig)
-class SeriesCompensator(ConductingEquipment, ModuleType):
+class SeriesCompensator(ConductingEquipment):
     """
     A Series Compensator is a series capacitor or reactor or an AC transmission line without charging susceptance.  It
       is a two terminal device.
@@ -32,10 +29,6 @@ class SeriesCompensator(ConductingEquipment, ModuleType):
     varistorVoltageThreshold: The dc voltage at which the varistor starts conducting. It is used for short circuit
       calculations and exchanged only if SeriesCompensator.varistorPresent is true.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SeriesCompensator(*args, **kwargs)
 
     r: float = Field(
         default=0.0,
@@ -96,13 +89,3 @@ class SeriesCompensator(ConductingEquipment, ModuleType):
             Profile.EQ,
             Profile.SC,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SeriesCompensator"
-# work as well as
-# "from SeriesCompensator import SeriesCompensator".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SeriesCompensator

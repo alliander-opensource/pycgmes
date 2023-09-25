@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IOPoint import IOPoint
 
 
 @dataclass(config=DataclassConfig)
-class MeasurementValue(IOPoint, ModuleType):
+class MeasurementValue(IOPoint):
     """
     The current state for a measurement. A state value is an instance of a measurement from a specific source.
       Measurements can be associated with many state values, each representing a different source for the
@@ -30,10 +27,6 @@ class MeasurementValue(IOPoint, ModuleType):
       manual, etc. User conventions for the names of sources are contained in the
       introduction to IEC 61970-301.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return MeasurementValue(*args, **kwargs)
 
     timeStamp: str = Field(
         default="",
@@ -69,13 +62,3 @@ class MeasurementValue(IOPoint, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import MeasurementValue"
-# work as well as
-# "from MeasurementValue import MeasurementValue".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = MeasurementValue

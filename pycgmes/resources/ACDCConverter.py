@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .ConductingEquipment import ConductingEquipment
 
 
 @dataclass(config=DataclassConfig)
-class ACDCConverter(ConductingEquipment, ModuleType):
+class ACDCConverter(ConductingEquipment):
     """
     A unit with valves for three phases, together with unit control equipment, essential protective and switching
       devices, DC storage capacitors, phase reactors and auxiliaries, if any, used for conversion.
@@ -60,10 +57,6 @@ class ACDCConverter(ConductingEquipment, ModuleType):
       positive sign means flow out from a node.
     targetUdc: Target value for DC voltage magnitude. The attribute shall be a positive value.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ACDCConverter(*args, **kwargs)
 
     baseS: float = Field(
         default=0.0,
@@ -221,13 +214,3 @@ class ACDCConverter(ConductingEquipment, ModuleType):
             Profile.SSH,
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ACDCConverter"
-# work as well as
-# "from ACDCConverter import ACDCConverter".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ACDCConverter

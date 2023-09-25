@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .PowerSystemResource import PowerSystemResource
 
 
 @dataclass(config=DataclassConfig)
-class Equipment(PowerSystemResource, ModuleType):
+class Equipment(PowerSystemResource):
     """
     The parts of a power system that are physical devices, electronic or mechanical.
 
@@ -38,10 +35,6 @@ class Equipment(PowerSystemResource, ModuleType):
       processing, which determines if the equipment is energized or not. False means that the equipment
       is treated by network applications as if it is not in the model.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Equipment(*args, **kwargs)
 
     EquipmentContainer: Optional[str] = Field(
         default=None,
@@ -89,13 +82,3 @@ class Equipment(PowerSystemResource, ModuleType):
             Profile.SSH,
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Equipment"
-# work as well as
-# "from Equipment import Equipment".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Equipment

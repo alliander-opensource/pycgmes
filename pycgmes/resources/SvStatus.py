@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class SvStatus(Base, ModuleType):
+class SvStatus(Base):
     """
     State variable for status.
 
@@ -25,10 +22,6 @@ class SvStatus(Base, ModuleType):
       energized by the power flow. It reflects if the equipment is connected within a solvable island.
       It does not necessarily reflect whether or not the island was solved by the power flow.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SvStatus(*args, **kwargs)
 
     ConductingEquipment: Optional[str] = Field(
         default=None,
@@ -53,13 +46,3 @@ class SvStatus(Base, ModuleType):
         return {
             Profile.SV,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SvStatus"
-# work as well as
-# "from SvStatus import SvStatus".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SvStatus

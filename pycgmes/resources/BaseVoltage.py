@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class BaseVoltage(IdentifiedObject, ModuleType):
+class BaseVoltage(IdentifiedObject):
     """
     Defines a system base voltage which is referenced.
 
@@ -27,10 +24,6 @@ class BaseVoltage(IdentifiedObject, ModuleType):
       transformers.
     TransformerEnds: Transformer ends at the base voltage.  This is essential for PU calculation.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return BaseVoltage(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -67,13 +60,3 @@ class BaseVoltage(IdentifiedObject, ModuleType):
             Profile.EQBD,
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import BaseVoltage"
-# work as well as
-# "from BaseVoltage import BaseVoltage".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = BaseVoltage

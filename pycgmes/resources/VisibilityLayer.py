@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class VisibilityLayer(IdentifiedObject, ModuleType):
+class VisibilityLayer(IdentifiedObject):
     """
     Layers are typically used for grouping diagram objects according to themes and scales. Themes are used to display or
       hide certain information (e.g., lakes, borders), while scales are used for hiding or displaying information
@@ -28,10 +25,6 @@ class VisibilityLayer(IdentifiedObject, ModuleType):
     drawingOrder: The drawing order for this layer.  The higher the number, the later the layer and the objects within
       it are rendered.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return VisibilityLayer(*args, **kwargs)
 
     VisibleObjects: list = Field(
         default_factory=list,
@@ -56,13 +49,3 @@ class VisibilityLayer(IdentifiedObject, ModuleType):
         return {
             Profile.DL,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import VisibilityLayer"
-# work as well as
-# "from VisibilityLayer import VisibilityLayer".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = VisibilityLayer

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
 @dataclass(config=DataclassConfig)
-class DiscontinuousExcitationControlDynamics(DynamicsFunctionBlock, ModuleType):
+class DiscontinuousExcitationControlDynamics(DynamicsFunctionBlock):
     """
     Discontinuous excitation control function block whose behaviour is described by reference to a standard model or by
       definition of a user-defined model.
@@ -25,10 +22,6 @@ class DiscontinuousExcitationControlDynamics(DynamicsFunctionBlock, ModuleType):
     ExcitationSystemDynamics: Excitation system model with which this discontinuous excitation control model is
       associated.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return DiscontinuousExcitationControlDynamics(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
@@ -50,13 +43,3 @@ class DiscontinuousExcitationControlDynamics(DynamicsFunctionBlock, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import DiscontinuousExcitationControlDynamics"
-# work as well as
-# "from DiscontinuousExcitationControlDynamics import DiscontinuousExcitationControlDynamics".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = DiscontinuousExcitationControlDynamics

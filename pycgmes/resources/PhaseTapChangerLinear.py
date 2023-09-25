@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .PhaseTapChanger import PhaseTapChanger
 
 
 @dataclass(config=DataclassConfig)
-class PhaseTapChangerLinear(PhaseTapChanger, ModuleType):
+class PhaseTapChangerLinear(PhaseTapChanger):
     """
     Describes a tap changer with a linear relation between the tap step and the phase angle difference across the
       transformer. This is a mathematical model that is an approximation of a real phase tap changer. The phase
@@ -35,10 +32,6 @@ class PhaseTapChangerLinear(PhaseTapChanger, ModuleType):
       PhaseTapChangerLinear.xMin and PhaseTapChangerNonLinear.xMin. In case of inconsistency,
       PowerTransformerEnd.x shall be used.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PhaseTapChangerLinear(*args, **kwargs)
 
     stepPhaseShiftIncrement: float = Field(
         default=0.0,
@@ -71,13 +64,3 @@ class PhaseTapChangerLinear(PhaseTapChanger, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PhaseTapChangerLinear"
-# work as well as
-# "from PhaseTapChangerLinear import PhaseTapChangerLinear".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PhaseTapChangerLinear

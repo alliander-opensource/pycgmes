@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .WindTurbineType1or2Dynamics import WindTurbineType1or2Dynamics
 
 
 @dataclass(config=DataclassConfig)
-class WindType1or2UserDefined(WindTurbineType1or2Dynamics, ModuleType):
+class WindType1or2UserDefined(WindTurbineType1or2Dynamics):
     """
     Wind type 1 or type 2 function block whose dynamic behaviour is described by a user-defined model.
 
@@ -25,10 +22,6 @@ class WindType1or2UserDefined(WindTurbineType1or2Dynamics, ModuleType):
       of control blocks and their input and output signals.
     ProprietaryParameterDynamics: Parameter of this proprietary user-defined model.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindType1or2UserDefined(*args, **kwargs)
 
     proprietary: bool = Field(
         default=False,
@@ -50,13 +43,3 @@ class WindType1or2UserDefined(WindTurbineType1or2Dynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindType1or2UserDefined"
-# work as well as
-# "from WindType1or2UserDefined import WindType1or2UserDefined".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindType1or2UserDefined

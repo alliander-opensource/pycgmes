@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class CoordinateSystem(IdentifiedObject, ModuleType):
+class CoordinateSystem(IdentifiedObject):
     """
     Coordinate reference system.
 
@@ -28,10 +25,6 @@ class CoordinateSystem(IdentifiedObject, ModuleType):
       should limit this code to a set of allowed URNs agreed to by all sending and receiving parties.
     Locations: All locations described with position points in this coordinate system.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return CoordinateSystem(*args, **kwargs)
 
     crsUrn: str = Field(
         default="",
@@ -53,13 +46,3 @@ class CoordinateSystem(IdentifiedObject, ModuleType):
         return {
             Profile.GL,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import CoordinateSystem"
-# work as well as
-# "from CoordinateSystem import CoordinateSystem".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = CoordinateSystem

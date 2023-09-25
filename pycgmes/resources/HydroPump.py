@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .Equipment import Equipment
 
 
 @dataclass(config=DataclassConfig)
-class HydroPump(Equipment, ModuleType):
+class HydroPump(Equipment):
     """
     A synchronous motor-driven pump, typically associated with a pumped storage plant.
 
@@ -25,10 +22,6 @@ class HydroPump(Equipment, ModuleType):
       elevation. The direction of machine rotation for pumping may or may not be the same as for
       generating.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return HydroPump(*args, **kwargs)
 
     HydroPowerPlant: Optional[str] = Field(
         default=None,
@@ -53,13 +46,3 @@ class HydroPump(Equipment, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import HydroPump"
-# work as well as
-# "from HydroPump import HydroPump".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = HydroPump

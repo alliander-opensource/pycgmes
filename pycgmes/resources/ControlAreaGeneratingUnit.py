@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class ControlAreaGeneratingUnit(IdentifiedObject, ModuleType):
+class ControlAreaGeneratingUnit(IdentifiedObject):
     """
     A control area generating unit. This class is needed so that alternate control area definitions may include the same
       generating unit.   It should be noted that only one instance within a control area should reference a specific
@@ -26,10 +23,6 @@ class ControlAreaGeneratingUnit(IdentifiedObject, ModuleType):
     GeneratingUnit: The generating unit specified for this control area.  Note that a control area should include a
       GeneratingUnit only once.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ControlAreaGeneratingUnit(*args, **kwargs)
 
     ControlArea: Optional[str] = Field(
         default=None,
@@ -54,13 +47,3 @@ class ControlAreaGeneratingUnit(IdentifiedObject, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ControlAreaGeneratingUnit"
-# work as well as
-# "from ControlAreaGeneratingUnit import ControlAreaGeneratingUnit".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ControlAreaGeneratingUnit

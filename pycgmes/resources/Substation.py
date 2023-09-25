@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .EquipmentContainer import EquipmentContainer
 
 
 @dataclass(config=DataclassConfig)
-class Substation(EquipmentContainer, ModuleType):
+class Substation(EquipmentContainer):
     """
     A collection of equipment for purposes other than generation or utilization, through which electric energy in bulk
       is passed for the purposes of switching or modifying its characteristics.
@@ -25,10 +22,6 @@ class Substation(EquipmentContainer, ModuleType):
     VoltageLevels: The voltage levels within this substation.
     DCConverterUnit: The DC converter unit belonging of the substation.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Substation(*args, **kwargs)
 
     Region: Optional[str] = Field(
         default=None,
@@ -56,13 +49,3 @@ class Substation(EquipmentContainer, ModuleType):
             Profile.EQBD,
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Substation"
-# work as well as
-# "from Substation import Substation".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Substation

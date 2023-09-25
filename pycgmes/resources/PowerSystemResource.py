@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class PowerSystemResource(IdentifiedObject, ModuleType):
+class PowerSystemResource(IdentifiedObject):
     """
     A power system resource (PSR) can be an item of equipment such as a switch, an equipment container containing many
       individual items of equipment such as a substation, or an organisational entity such as sub-control area.
@@ -25,10 +22,6 @@ class PowerSystemResource(IdentifiedObject, ModuleType):
       synchronous machine or capacitor bank breaker actuator.
     Measurements: The measurements associated with this power system resource.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PowerSystemResource(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
@@ -57,13 +50,3 @@ class PowerSystemResource(IdentifiedObject, ModuleType):
             Profile.DY,
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PowerSystemResource"
-# work as well as
-# "from PowerSystemResource import PowerSystemResource".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PowerSystemResource

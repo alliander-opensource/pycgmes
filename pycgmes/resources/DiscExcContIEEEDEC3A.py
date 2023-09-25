@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .DiscontinuousExcitationControlDynamics import DiscontinuousExcitationContr
 
 
 @dataclass(config=DataclassConfig)
-class DiscExcContIEEEDEC3A(DiscontinuousExcitationControlDynamics, ModuleType):
+class DiscExcContIEEEDEC3A(DiscontinuousExcitationControlDynamics):
     """
     IEEE type DEC3A model. In some systems, the stabilizer output is disconnected from the regulator immediately
       following a severe fault to prevent the stabilizer from competing with action of voltage regulator during the
@@ -24,10 +21,6 @@ class DiscExcContIEEEDEC3A(DiscontinuousExcitationControlDynamics, ModuleType):
     vtmin: Terminal undervoltage comparison level (VTMIN).
     tdr: Reset time delay (TDR) (>= 0).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return DiscExcContIEEEDEC3A(*args, **kwargs)
 
     vtmin: float = Field(
         default=0.0,
@@ -52,13 +45,3 @@ class DiscExcContIEEEDEC3A(DiscontinuousExcitationControlDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import DiscExcContIEEEDEC3A"
-# work as well as
-# "from DiscExcContIEEEDEC3A import DiscExcContIEEEDEC3A".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = DiscExcContIEEEDEC3A

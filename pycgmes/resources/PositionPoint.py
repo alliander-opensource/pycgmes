@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class PositionPoint(Base, ModuleType):
+class PositionPoint(Base):
     """
     Set of spatial coordinates that determine a point, defined in the coordinate system specified in
       'Location.CoordinateSystem'. Use a single position point instance to describe a point-oriented location. Use a
@@ -30,10 +27,6 @@ class PositionPoint(Base, ModuleType):
     yPosition: Y axis position.
     zPosition: (if applicable) Z axis position.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PositionPoint(*args, **kwargs)
 
     Location: Optional[str] = Field(
         default=None,
@@ -79,13 +72,3 @@ class PositionPoint(Base, ModuleType):
         return {
             Profile.GL,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PositionPoint"
-# work as well as
-# "from PositionPoint import PositionPoint".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PositionPoint

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .EarthFaultCompensator import EarthFaultCompensator
 
 
 @dataclass(config=DataclassConfig)
-class PetersenCoil(EarthFaultCompensator, ModuleType):
+class PetersenCoil(EarthFaultCompensator):
     """
     A variable impedance device normally used to offset line charging during single line faults in an ungrounded section
       of network.
@@ -34,10 +31,6 @@ class PetersenCoil(EarthFaultCompensator, ModuleType):
       based on the resonance point in the healthy network condition.  The impedance is calculated
       based on nominal voltage divided by position current.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PetersenCoil(*args, **kwargs)
 
     mode: Optional[str] = Field(
         default=None,
@@ -98,13 +91,3 @@ class PetersenCoil(EarthFaultCompensator, ModuleType):
             Profile.EQ,
             Profile.SC,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PetersenCoil"
-# work as well as
-# "from PetersenCoil import PetersenCoil".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PetersenCoil

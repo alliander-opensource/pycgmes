@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class TieFlow(IdentifiedObject, ModuleType):
+class TieFlow(IdentifiedObject):
     """
     Defines the structure (in terms of location and direction) of the net interchange constraint for a control area.
       This constraint may be used by either AGC or power flow.
@@ -27,10 +24,6 @@ class TieFlow(IdentifiedObject, ModuleType):
       terminal (load convention) is also positive flow into the control area.  See the description
       of ControlArea for further explanation of how TieFlow.positiveFlowIn is used.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return TieFlow(*args, **kwargs)
 
     ControlArea: Optional[str] = Field(
         default=None,
@@ -62,13 +55,3 @@ class TieFlow(IdentifiedObject, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import TieFlow"
-# work as well as
-# "from TieFlow import TieFlow".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = TieFlow

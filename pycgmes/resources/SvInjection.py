@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class SvInjection(Base, ModuleType):
+class SvInjection(Base):
     """
     The SvInjection reports the calculated bus injection minus the sum of the terminal flows. The terminal flow is
       positive out from the bus (load sign convention) and bus injection has positive flow into the bus. SvInjection
@@ -28,10 +25,6 @@ class SvInjection(Base, ModuleType):
       injection into the TopologicalNode (bus).
     TopologicalNode: The topological node associated with the flow injection state variable.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SvInjection(*args, **kwargs)
 
     pInjection: float = Field(
         default=0.0,
@@ -63,13 +56,3 @@ class SvInjection(Base, ModuleType):
         return {
             Profile.SV,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SvInjection"
-# work as well as
-# "from SvInjection import SvInjection".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SvInjection

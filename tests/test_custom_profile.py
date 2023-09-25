@@ -6,7 +6,6 @@ import pytest
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from pycgmes.resources import Bay as BayShortcut
 from pycgmes.resources.Bay import Bay
 from pycgmes.utils.base import Base
 from pycgmes.utils.dataclassconfig import DataclassConfig

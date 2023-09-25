@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class Money(Base, ModuleType):
+class Money(Base):
     """
     Amount of money.
 
@@ -24,10 +21,6 @@ class Money(Base, ModuleType):
     multiplier:
     value:
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Money(*args, **kwargs)
 
     unit: Optional[str] = Field(
         default=None,
@@ -59,13 +52,3 @@ class Money(Base, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Money"
-# work as well as
-# "from Money import Money".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Money

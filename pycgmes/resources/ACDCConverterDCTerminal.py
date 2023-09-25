@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .DCBaseTerminal import DCBaseTerminal
 
 
 @dataclass(config=DataclassConfig)
-class ACDCConverterDCTerminal(DCBaseTerminal, ModuleType):
+class ACDCConverterDCTerminal(DCBaseTerminal):
     """
     A DC electrical connection point at the AC/DC converter. The AC/DC converter is electrically connected also to the
       AC side. The AC connection is inherited from the AC conducting equipment in the same way as any other AC
@@ -30,10 +27,6 @@ class ACDCConverterDCTerminal(DCBaseTerminal, ModuleType):
       `negative`. - For a bi-pole or symmetric monopole with three converter terminals use DCPolarityKind
       `positive`, `middle` and `negative`.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ACDCConverterDCTerminal(*args, **kwargs)
 
     DCConductingEquipment: Optional[str] = Field(
         default=None,
@@ -60,13 +53,3 @@ class ACDCConverterDCTerminal(DCBaseTerminal, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ACDCConverterDCTerminal"
-# work as well as
-# "from ACDCConverterDCTerminal import ACDCConverterDCTerminal".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ACDCConverterDCTerminal

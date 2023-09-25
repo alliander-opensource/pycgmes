@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
 @dataclass(config=DataclassConfig)
-class PssIEEE4B(PowerSystemStabilizerDynamics, ModuleType):
+class PssIEEE4B(PowerSystemStabilizerDynamics):
     """
     IEEE 421.5-2005 type PSS4B power system stabilizer. The PSS4B model represents a structure based on multiple working
       frequency bands. Three separate bands, respectively dedicated to the low-, intermediate- and high-frequency
@@ -93,10 +90,6 @@ class PssIEEE4B(PowerSystemStabilizerDynamics, ModuleType):
     vstmax: PSS output maximum limit (VSTmax) (> PssIEEE4B.vstmin).  Typical value = 0,15.
     vstmin: PSS output minimum limit (VSTmin) (< PssIEEE4B.vstmax).  Typical value = -0,15.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PssIEEE4B(*args, **kwargs)
 
     bwh1: float = Field(
         default=0.0,
@@ -576,13 +569,3 @@ class PssIEEE4B(PowerSystemStabilizerDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PssIEEE4B"
-# work as well as
-# "from PssIEEE4B import PssIEEE4B".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PssIEEE4B

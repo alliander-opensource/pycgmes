@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class RemoteInputSignal(IdentifiedObject, ModuleType):
+class RemoteInputSignal(IdentifiedObject):
     """
     Supports connection to a terminal associated with a remote bus from which an input signal of a specific type is
       coming.
@@ -32,10 +29,6 @@ class RemoteInputSignal(IdentifiedObject, ModuleType):
     WindPlantDynamics: The wind plant using the remote signal.
     WindTurbineType3or4Dynamics: Wind turbine type 3 or type 4 models using this remote input signal.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return RemoteInputSignal(*args, **kwargs)
 
     Terminal: Optional[str] = Field(
         default=None,
@@ -107,13 +100,3 @@ class RemoteInputSignal(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import RemoteInputSignal"
-# work as well as
-# "from RemoteInputSignal import RemoteInputSignal".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = RemoteInputSignal

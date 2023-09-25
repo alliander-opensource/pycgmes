@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovHydroIEEE0(TurbineGovernorDynamics, ModuleType):
+class GovHydroIEEE0(TurbineGovernorDynamics):
     """
     IEEE simplified hydro governor-turbine model.  Used for mechanical-hydraulic and electro-hydraulic turbine
       governors, with or without steam feedback. Typical values given are for mechanical-hydraulic turbine-governor.
@@ -31,10 +28,6 @@ class GovHydroIEEE0(TurbineGovernorDynamics, ModuleType):
     pmax: Gate maximum (Pmax) (> GovHydroIEEE0.pmin).
     pmin: Gate minimum (Pmin) (< GovHydroIEEE.pmax).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return GovHydroIEEE0(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -101,13 +94,3 @@ class GovHydroIEEE0(TurbineGovernorDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import GovHydroIEEE0"
-# work as well as
-# "from GovHydroIEEE0 import GovHydroIEEE0".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = GovHydroIEEE0

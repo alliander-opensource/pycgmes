@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,17 +13,13 @@ from .MeasurementValue import MeasurementValue
 
 
 @dataclass(config=DataclassConfig)
-class AccumulatorValue(MeasurementValue, ModuleType):
+class AccumulatorValue(MeasurementValue):
     """
     AccumulatorValue represents an accumulated (counted) MeasurementValue.
 
     Accumulator: Measurement to which this value is connected.
     AccumulatorReset: The command that resets the accumulator value.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return AccumulatorValue(*args, **kwargs)
 
     Accumulator: Optional[str] = Field(
         default=None,
@@ -48,13 +41,3 @@ class AccumulatorValue(MeasurementValue, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import AccumulatorValue"
-# work as well as
-# "from AccumulatorValue import AccumulatorValue".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = AccumulatorValue

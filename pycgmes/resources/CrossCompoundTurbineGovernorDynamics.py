@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
 @dataclass(config=DataclassConfig)
-class CrossCompoundTurbineGovernorDynamics(DynamicsFunctionBlock, ModuleType):
+class CrossCompoundTurbineGovernorDynamics(DynamicsFunctionBlock):
     """
     Turbine-governor cross-compound function block whose behaviour is described by reference to a standard model or by
       definition of a user-defined model.
@@ -26,10 +23,6 @@ class CrossCompoundTurbineGovernorDynamics(DynamicsFunctionBlock, ModuleType):
     LowPressureSynchronousMachineDynamics: Low-pressure synchronous machine with which this cross-compound turbine
       governor is associated.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return CrossCompoundTurbineGovernorDynamics(*args, **kwargs)
 
     HighPressureSynchronousMachineDynamics: Optional[str] = Field(
         default=None,
@@ -54,13 +47,3 @@ class CrossCompoundTurbineGovernorDynamics(DynamicsFunctionBlock, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import CrossCompoundTurbineGovernorDynamics"
-# work as well as
-# "from CrossCompoundTurbineGovernorDynamics import CrossCompoundTurbineGovernorDynamics".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = CrossCompoundTurbineGovernorDynamics

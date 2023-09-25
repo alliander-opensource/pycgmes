@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovSteamIEEE1(TurbineGovernorDynamics, ModuleType):
+class GovSteamIEEE1(TurbineGovernorDynamics):
     """
     IEEE steam turbine governor model. Reference: IEEE Transactions on Power Apparatus and Systems, November/December
       1973, Volume PAS-92, Number 6, Dynamic Models for Steam and Hydro Turbines in Power System Studies, page 1904.
@@ -42,10 +39,6 @@ class GovSteamIEEE1(TurbineGovernorDynamics, ModuleType):
     k7: Fraction of HP shaft power after fourth boiler pass (K7).  Typical value = 0.
     k8: Fraction of LP shaft power after fourth boiler pass (K8).  Typical value = 0.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return GovSteamIEEE1(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -203,13 +196,3 @@ class GovSteamIEEE1(TurbineGovernorDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import GovSteamIEEE1"
-# work as well as
-# "from GovSteamIEEE1 import GovSteamIEEE1".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = GovSteamIEEE1

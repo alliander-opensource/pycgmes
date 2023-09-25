@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
 @dataclass(config=DataclassConfig)
-class Pss2B(PowerSystemStabilizerDynamics, ModuleType):
+class Pss2B(PowerSystemStabilizerDynamics):
     """
     Modified IEEE PSS2B.  Extra lead/lag (or rate) block added at end (up to 4 lead/lags total).
 
@@ -49,10 +46,6 @@ class Pss2B(PowerSystemStabilizerDynamics, ModuleType):
     ta: Lead constant (Ta) (>= 0).  Typical value = 0.
     tb: Lag time constant (Tb) (>= 0).  Typical value = 0.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Pss2B(*args, **kwargs)
 
     vsi1max: float = Field(
         default=0.0,
@@ -266,13 +259,3 @@ class Pss2B(PowerSystemStabilizerDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Pss2B"
-# work as well as
-# "from Pss2B import Pss2B".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Pss2B

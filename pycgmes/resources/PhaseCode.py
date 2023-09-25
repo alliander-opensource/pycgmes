@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class PhaseCode(Base, ModuleType):
+class PhaseCode(Base):
     """
     An unordered enumeration of phase identifiers.  Allows designation of phases for both transmission and distribution
       equipment, circuits and loads.   The enumeration, by itself, does not describe how the phases are connected
@@ -26,10 +23,6 @@ class PhaseCode(Base, ModuleType):
       values are from IEC 61968-9 to support revenue metering applications.
 
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PhaseCode(*args, **kwargs)
 
     # No attributes defined for this class.
 
@@ -43,13 +36,3 @@ class PhaseCode(Base, ModuleType):
             Profile.EQ,
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PhaseCode"
-# work as well as
-# "from PhaseCode import PhaseCode".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PhaseCode

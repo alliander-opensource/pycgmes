@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from .ShuntCompensator import ShuntCompensator
 
 
 @dataclass(config=DataclassConfig)
-class NonlinearShuntCompensator(ShuntCompensator, ModuleType):
+class NonlinearShuntCompensator(ShuntCompensator):
     """
     A non linear shunt compensator has bank or section admittance values that differ. The attributes g, b, g0 and b0 of
       the associated NonlinearShuntCompensatorPoint describe the total conductance and admittance of a
@@ -22,10 +19,6 @@ class NonlinearShuntCompensator(ShuntCompensator, ModuleType):
 
     NonlinearShuntCompensatorPoints: All points of the non-linear shunt compensator.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return NonlinearShuntCompensator(*args, **kwargs)
 
     # *Association not used*
     # Type M:1..n in CIM  # pylint: disable-next=line-too-long
@@ -41,13 +34,3 @@ class NonlinearShuntCompensator(ShuntCompensator, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import NonlinearShuntCompensator"
-# work as well as
-# "from NonlinearShuntCompensator import NonlinearShuntCompensator".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = NonlinearShuntCompensator

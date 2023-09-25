@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .EquivalentEquipment import EquivalentEquipment
 
 
 @dataclass(config=DataclassConfig)
-class EquivalentInjection(EquivalentEquipment, ModuleType):
+class EquivalentInjection(EquivalentEquipment):
     """
     This class represents equivalent injections (generation or load).  Voltage regulation is allowed only at the point
       of connection.
@@ -52,10 +49,6 @@ class EquivalentInjection(EquivalentEquipment, ModuleType):
     q: Equivalent reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node.
       Starting value for steady state solutions.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return EquivalentInjection(*args, **kwargs)
 
     maxP: float = Field(
         default=0.0,
@@ -180,13 +173,3 @@ class EquivalentInjection(EquivalentEquipment, ModuleType):
             Profile.SC,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import EquivalentInjection"
-# work as well as
-# "from EquivalentInjection import EquivalentInjection".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = EquivalentInjection

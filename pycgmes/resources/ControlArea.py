@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .PowerSystemResource import PowerSystemResource
 
 
 @dataclass(config=DataclassConfig)
-class ControlArea(PowerSystemResource, ModuleType):
+class ControlArea(PowerSystemResource):
     """
     A control area is a grouping of generating units and/or loads and a cutset of tie lines (as terminals) which may be
       used for a variety of purposes including automatic generation control, power flow solution area interchange
@@ -46,10 +43,6 @@ class ControlArea(PowerSystemResource, ModuleType):
       area.
     pTolerance: Active power net interchange tolerance. The attribute shall be a positive value or zero.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ControlArea(*args, **kwargs)
 
     type: Optional[str] = Field(
         default=None,
@@ -97,13 +90,3 @@ class ControlArea(PowerSystemResource, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ControlArea"
-# work as well as
-# "from ControlArea import ControlArea".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ControlArea

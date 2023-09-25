@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
 @dataclass(config=DataclassConfig)
-class MechanicalLoadDynamics(DynamicsFunctionBlock, ModuleType):
+class MechanicalLoadDynamics(DynamicsFunctionBlock):
     """
     Mechanical load function block whose behaviour is described by reference to a standard model or by definition of a
       user-defined model.
@@ -28,10 +25,6 @@ class MechanicalLoadDynamics(DynamicsFunctionBlock, ModuleType):
       MechanicalLoadDynamics shall have either an association to
       SynchronousMachineDynamics or to AsynchronousMachineDynamics.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return MechanicalLoadDynamics(*args, **kwargs)
 
     SynchronousMachineDynamics: Optional[str] = Field(
         default=None,
@@ -56,13 +49,3 @@ class MechanicalLoadDynamics(DynamicsFunctionBlock, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import MechanicalLoadDynamics"
-# work as well as
-# "from MechanicalLoadDynamics import MechanicalLoadDynamics".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = MechanicalLoadDynamics

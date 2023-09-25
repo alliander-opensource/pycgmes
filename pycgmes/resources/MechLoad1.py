@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .MechanicalLoadDynamics import MechanicalLoadDynamics
 
 
 @dataclass(config=DataclassConfig)
-class MechLoad1(MechanicalLoadDynamics, ModuleType):
+class MechLoad1(MechanicalLoadDynamics):
     """
     Mechanical load model type 1.
 
@@ -24,10 +21,6 @@ class MechLoad1(MechanicalLoadDynamics, ModuleType):
     d: Speed to the exponent coefficient (d).
     e: Exponent (e).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return MechLoad1(*args, **kwargs)
 
     a: float = Field(
         default=0.0,
@@ -66,13 +59,3 @@ class MechLoad1(MechanicalLoadDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import MechLoad1"
-# work as well as
-# "from MechLoad1 import MechLoad1".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = MechLoad1

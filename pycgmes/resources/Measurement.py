@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class Measurement(IdentifiedObject, ModuleType):
+class Measurement(IdentifiedObject):
     """
     A Measurement represents any measured, calculated or non-measured non-calculated quantity. Any piece of equipment
       may contain Measurements, e.g. a substation may have temperature measurements and door open indications, a
@@ -48,10 +45,6 @@ class Measurement(IdentifiedObject, ModuleType):
     unitSymbol: The unit of measure of the measured quantity.
     PowerSystemResource: The power system resource that contains the measurement.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Measurement(*args, **kwargs)
 
     Terminal: Optional[str] = Field(
         default=None,
@@ -104,13 +97,3 @@ class Measurement(IdentifiedObject, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Measurement"
-# work as well as
-# "from Measurement import Measurement".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Measurement

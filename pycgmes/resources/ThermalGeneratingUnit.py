@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .GeneratingUnit import GeneratingUnit
 
 
 @dataclass(config=DataclassConfig)
-class ThermalGeneratingUnit(GeneratingUnit, ModuleType):
+class ThermalGeneratingUnit(GeneratingUnit):
     """
     A generating unit whose prime mover could be a steam turbine, combustion turbine, or diesel engine.
 
@@ -25,10 +22,6 @@ class ThermalGeneratingUnit(GeneratingUnit, ModuleType):
     CombinedCyclePlant: A thermal generating unit may be a member of a combined cycle plant.
     FossilFuels: A thermal generating unit may have one or more fossil fuels.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ThermalGeneratingUnit(*args, **kwargs)
 
     CAESPlant: Optional[str] = Field(
         default=None,
@@ -65,13 +58,3 @@ class ThermalGeneratingUnit(GeneratingUnit, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ThermalGeneratingUnit"
-# work as well as
-# "from ThermalGeneratingUnit import ThermalGeneratingUnit".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ThermalGeneratingUnit
