@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,17 +13,13 @@ from .MeasurementValue import MeasurementValue
 
 
 @dataclass(config=DataclassConfig)
-class DiscreteValue(MeasurementValue, ModuleType):
+class DiscreteValue(MeasurementValue):
     """
     DiscreteValue represents a discrete MeasurementValue.
 
     Command: The Control variable associated with the MeasurementValue.
     Discrete: Measurement to which this value is connected.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return DiscreteValue(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
@@ -48,13 +41,3 @@ class DiscreteValue(MeasurementValue, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import DiscreteValue"
-# work as well as
-# "from DiscreteValue import DiscreteValue".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = DiscreteValue

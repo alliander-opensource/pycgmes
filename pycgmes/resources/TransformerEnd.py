@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class TransformerEnd(IdentifiedObject, ModuleType):
+class TransformerEnd(IdentifiedObject):
     """
     A conducting connection point of a power transformer. It corresponds to a physical transformer winding terminal.  In
       earlier CIM versions, the TransformerWinding class served a similar purpose, but this class is more flexible
@@ -34,10 +31,6 @@ class TransformerEnd(IdentifiedObject, ModuleType):
     grounded: (for Yn and Zn connections) True if the neutral is solidly grounded.
     xground: (for Yn and Zn connections) Reactive part of neutral impedance where `grounded` is true.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return TransformerEnd(*args, **kwargs)
 
     BaseVoltage: Optional[str] = Field(
         default=None,
@@ -99,13 +92,3 @@ class TransformerEnd(IdentifiedObject, ModuleType):
             Profile.EQ,
             Profile.SC,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import TransformerEnd"
-# work as well as
-# "from TransformerEnd import TransformerEnd".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = TransformerEnd

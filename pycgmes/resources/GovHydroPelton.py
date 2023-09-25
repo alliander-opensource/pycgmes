@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovHydroPelton(TurbineGovernorDynamics, ModuleType):
+class GovHydroPelton(TurbineGovernorDynamics):
     """
     Detailed hydro unit - Pelton model.  This model can be used to represent the dynamic related to water tunnel and
       surge chamber. The DetailedHydroModelHydraulicSystem diagram, located under the GovHydroFrancis class,
@@ -56,10 +53,6 @@ class GovHydroPelton(TurbineGovernorDynamics, ModuleType):
       chamber simulation. Typical value = false.
     zsfc: Head of upper water level with respect to the level of penstock (Zsfc).  Unit = km.  Typical value = 0,025.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return GovHydroPelton(*args, **kwargs)
 
     av0: float = Field(
         default=0.0,
@@ -266,13 +259,3 @@ class GovHydroPelton(TurbineGovernorDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import GovHydroPelton"
-# work as well as
-# "from GovHydroPelton import GovHydroPelton".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = GovHydroPelton

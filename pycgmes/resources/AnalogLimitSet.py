@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,17 +12,13 @@ from .LimitSet import LimitSet
 
 
 @dataclass(config=DataclassConfig)
-class AnalogLimitSet(LimitSet, ModuleType):
+class AnalogLimitSet(LimitSet):
     """
     An AnalogLimitSet specifies a set of Limits that are associated with an Analog measurement.
 
     Measurements: The Measurements using the LimitSet.
     Limits: The limit values used for supervision of Measurements.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return AnalogLimitSet(*args, **kwargs)
 
     Measurements: list = Field(
         default_factory=list,
@@ -47,13 +40,3 @@ class AnalogLimitSet(LimitSet, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import AnalogLimitSet"
-# work as well as
-# "from AnalogLimitSet import AnalogLimitSet".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = AnalogLimitSet

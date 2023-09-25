@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class DateTime(Base, ModuleType):
+class DateTime(Base):
     """
     Date and time as "yyyy-mm-ddThh:mm:ss.sss", which conforms with ISO 8601. UTC time zone is specified as "yyyy-mm-
       ddThh:mm:ss.sssZ". A local timezone relative UTC is specified as "yyyy-mm-ddThh:mm:ss.sss-hh:mm". The second
@@ -22,10 +19,6 @@ class DateTime(Base, ModuleType):
       precision beyond seconds.
 
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return DateTime(*args, **kwargs)
 
     # No attributes defined for this class.
 
@@ -40,13 +33,3 @@ class DateTime(Base, ModuleType):
             Profile.EQ,
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import DateTime"
-# work as well as
-# "from DateTime import DateTime".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = DateTime

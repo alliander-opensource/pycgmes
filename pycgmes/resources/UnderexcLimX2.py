@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class UnderexcLimX2(UnderexcitationLimiterDynamics, ModuleType):
+class UnderexcLimX2(UnderexcitationLimiterDynamics):
     """
     Westinghouse minimum excitation limiter.
 
@@ -27,10 +24,6 @@ class UnderexcLimX2(UnderexcitationLimiterDynamics, ModuleType):
     qo: Excitation centre setting (QO).
     r: Excitation radius (R).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return UnderexcLimX2(*args, **kwargs)
 
     kf2: float = Field(
         default=0.0,
@@ -90,13 +83,3 @@ class UnderexcLimX2(UnderexcitationLimiterDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import UnderexcLimX2"
-# work as well as
-# "from UnderexcLimX2 import UnderexcLimX2".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = UnderexcLimX2

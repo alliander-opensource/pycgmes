@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class BasicIntervalSchedule(IdentifiedObject, ModuleType):
+class BasicIntervalSchedule(IdentifiedObject):
     """
     Schedule of values at points in time.
 
@@ -24,10 +21,6 @@ class BasicIntervalSchedule(IdentifiedObject, ModuleType):
     value1Unit: Value1 units of measure.
     value2Unit: Value2 units of measure.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return BasicIntervalSchedule(*args, **kwargs)
 
     startTime: str = Field(
         default="",
@@ -59,13 +52,3 @@ class BasicIntervalSchedule(IdentifiedObject, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import BasicIntervalSchedule"
-# work as well as
-# "from BasicIntervalSchedule import BasicIntervalSchedule".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = BasicIntervalSchedule

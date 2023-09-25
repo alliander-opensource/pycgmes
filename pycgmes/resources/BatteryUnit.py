@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .PowerElectronicsUnit import PowerElectronicsUnit
 
 
 @dataclass(config=DataclassConfig)
-class BatteryUnit(PowerElectronicsUnit, ModuleType):
+class BatteryUnit(PowerElectronicsUnit):
     """
     An electrochemical energy storage device.
 
@@ -25,10 +22,6 @@ class BatteryUnit(PowerElectronicsUnit, ModuleType):
     storedE: Amount of energy currently stored. The attribute shall be a positive value or zero and lower than
       BatteryUnit.ratedE.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return BatteryUnit(*args, **kwargs)
 
     ratedE: float = Field(
         default=0.0,
@@ -61,13 +54,3 @@ class BatteryUnit(PowerElectronicsUnit, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import BatteryUnit"
-# work as well as
-# "from BatteryUnit import BatteryUnit".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = BatteryUnit

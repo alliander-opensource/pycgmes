@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class Diagram(IdentifiedObject, ModuleType):
+class Diagram(IdentifiedObject):
     """
     The diagram being exchanged. The coordinate system is a standard Cartesian coordinate system and the orientation
       attribute defines the orientation. The initial view related attributes can be used to specify an initial view
@@ -35,10 +32,6 @@ class Diagram(IdentifiedObject, ModuleType):
     DiagramElements: A diagram is made up of multiple diagram objects.
     DiagramStyle: A Diagram may have a DiagramStyle.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Diagram(*args, **kwargs)
 
     orientation: Optional[str] = Field(
         default=None,
@@ -95,13 +88,3 @@ class Diagram(IdentifiedObject, ModuleType):
         return {
             Profile.DL,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Diagram"
-# work as well as
-# "from Diagram import Diagram".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Diagram

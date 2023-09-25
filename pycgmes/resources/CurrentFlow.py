@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class CurrentFlow(Base, ModuleType):
+class CurrentFlow(Base):
     """
     Electrical current with sign convention: positive flow is out of the conducting equipment into the connectivity
       node. Can be both AC and DC.
@@ -25,10 +22,6 @@ class CurrentFlow(Base, ModuleType):
     multiplier:
     unit:
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return CurrentFlow(*args, **kwargs)
 
     value: float = Field(
         default=0.0,
@@ -72,13 +65,3 @@ class CurrentFlow(Base, ModuleType):
             Profile.SV,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import CurrentFlow"
-# work as well as
-# "from CurrentFlow import CurrentFlow".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = CurrentFlow

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcNI(ExcitationSystemDynamics, ModuleType):
+class ExcNI(ExcitationSystemDynamics):
     """
     Bus or solid fed SCR (silicon-controlled rectifier) bridge excitation system model type NI (NVE).
 
@@ -32,10 +29,6 @@ class ExcNI(ExcitationSystemDynamics, ModuleType):
     r: rc / rfd (R) (>= 0).  0 means exciter has negative current capability > 0 means exciter does not have negative
       current capability.   Typical value = 5.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcNI(*args, **kwargs)
 
     busFedSelector: bool = Field(
         default=False,
@@ -116,13 +109,3 @@ class ExcNI(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcNI"
-# work as well as
-# "from ExcNI import ExcNI".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcNI

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .SynchronousMachineDetailed import SynchronousMachineDetailed
 
 
 @dataclass(config=DataclassConfig)
-class SynchronousMachineEquivalentCircuit(SynchronousMachineDetailed, ModuleType):
+class SynchronousMachineEquivalentCircuit(SynchronousMachineDetailed):
     """
     The electrical equations for all variations of the synchronous models are based on the SynchronousEquivalentCircuit
       diagram for the direct- and quadrature- axes. Equations for conversion between equivalent circuit and time
@@ -48,10 +45,6 @@ class SynchronousMachineEquivalentCircuit(SynchronousMachineDetailed, ModuleType
     r2q: Quadrature-axis damper 2 winding resistance.
     x2q: Quadrature-axis damper 2 winding leakage reactance.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SynchronousMachineEquivalentCircuit(*args, **kwargs)
 
     xad: float = Field(
         default=0.0,
@@ -139,13 +132,3 @@ class SynchronousMachineEquivalentCircuit(SynchronousMachineDetailed, ModuleType
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SynchronousMachineEquivalentCircuit"
-# work as well as
-# "from SynchronousMachineEquivalentCircuit import SynchronousMachineEquivalentCircuit".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SynchronousMachineEquivalentCircuit

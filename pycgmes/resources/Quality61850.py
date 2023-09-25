@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class Quality61850(Base, ModuleType):
+class Quality61850(Base):
     """
     Quality flags in this class are as defined in IEC 61850, except for estimatorReplaced, which has been included in
       this class for convenience.
@@ -50,10 +47,6 @@ class Quality61850(Base, ModuleType):
     test: Measurement value is transmitted for test purposes.
     validity: Validity of the measurement value.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Quality61850(*args, **kwargs)
 
     badReference: bool = Field(
         default=False,
@@ -148,13 +141,3 @@ class Quality61850(Base, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Quality61850"
-# work as well as
-# "from Quality61850 import Quality61850".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Quality61850

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,17 +13,13 @@ from .HVDCDynamics import HVDCDynamics
 
 
 @dataclass(config=DataclassConfig)
-class VSCDynamics(HVDCDynamics, ModuleType):
+class VSCDynamics(HVDCDynamics):
     """
     VSC function block whose behaviour is described by reference to a standard model or by definition of a user-defined
       model.
 
     VsConverter: Voltage source converter to which voltage source converter dynamics model applies.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return VSCDynamics(*args, **kwargs)
 
     VsConverter: Optional[str] = Field(
         default=None,
@@ -44,13 +37,3 @@ class VSCDynamics(HVDCDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import VSCDynamics"
-# work as well as
-# "from VSCDynamics import VSCDynamics".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = VSCDynamics

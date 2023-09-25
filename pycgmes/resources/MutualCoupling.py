@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class MutualCoupling(IdentifiedObject, ModuleType):
+class MutualCoupling(IdentifiedObject):
     """
     This class represents the zero sequence line mutual coupling.
 
@@ -36,10 +33,6 @@ class MutualCoupling(IdentifiedObject, ModuleType):
       coupling.  Normally MutualCoupling would only be used for terminals of AC line segments.  The
       first and second terminals of a mutual coupling should point to different AC line segments.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return MutualCoupling(*args, **kwargs)
 
     b0ch: float = Field(
         default=0.0,
@@ -120,13 +113,3 @@ class MutualCoupling(IdentifiedObject, ModuleType):
         return {
             Profile.SC,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import MutualCoupling"
-# work as well as
-# "from MutualCoupling import MutualCoupling".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = MutualCoupling

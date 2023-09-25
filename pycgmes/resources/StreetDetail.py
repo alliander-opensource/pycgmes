@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class StreetDetail(Base, ModuleType):
+class StreetDetail(Base):
     """
     Street details, in the context of address.
 
@@ -37,10 +34,6 @@ class StreetDetail(Base, ModuleType):
     floorIdentification: The identification by name or number, expressed as text, of the floor in the building as part
       of this address.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return StreetDetail(*args, **kwargs)
 
     number: str = Field(
         default="",
@@ -142,13 +135,3 @@ class StreetDetail(Base, ModuleType):
         return {
             Profile.GL,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import StreetDetail"
-# work as well as
-# "from StreetDetail import StreetDetail".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = StreetDetail

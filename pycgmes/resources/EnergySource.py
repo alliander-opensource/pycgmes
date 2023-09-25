@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .EnergyConnection import EnergyConnection
 
 
 @dataclass(config=DataclassConfig)
-class EnergySource(EnergyConnection, ModuleType):
+class EnergySource(EnergyConnection):
     """
     A generic equivalent for an energy supplier on a transmission or distribution voltage level.
 
@@ -45,10 +42,6 @@ class EnergySource(EnergyConnection, ModuleType):
       angles from the transmission level are used as input to the distribution network. The
       attribute shall be a positive value or zero.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return EnergySource(*args, **kwargs)
 
     EnergySchedulingType: Optional[str] = Field(
         default=None,
@@ -159,13 +152,3 @@ class EnergySource(EnergyConnection, ModuleType):
             Profile.SC,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import EnergySource"
-# work as well as
-# "from EnergySource import EnergySource".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = EnergySource

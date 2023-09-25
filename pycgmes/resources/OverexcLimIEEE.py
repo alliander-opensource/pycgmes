@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .OverexcitationLimiterDynamics import OverexcitationLimiterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class OverexcLimIEEE(OverexcitationLimiterDynamics, ModuleType):
+class OverexcLimIEEE(OverexcitationLimiterDynamics):
     """
     The over excitation limiter model is intended to represent the significant features of OELs necessary for some
       large-scale system studies. It is the result of a pragmatic approach to obtain a model that can be widely
@@ -30,10 +27,6 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics, ModuleType):
     kcd: OEL cooldown gain (KCD).  Typical value = 1.
     kramp: OEL ramped limit rate (KRAMP).  Unit = PU / s.  Typical value = 10.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return OverexcLimIEEE(*args, **kwargs)
 
     itfpu: float = Field(
         default=0.0,
@@ -86,13 +79,3 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import OverexcLimIEEE"
-# work as well as
-# "from OverexcLimIEEE import OverexcLimIEEE".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = OverexcLimIEEE

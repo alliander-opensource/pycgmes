@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
 @dataclass(config=DataclassConfig)
-class PssSH(PowerSystemStabilizerDynamics, ModuleType):
+class PssSH(PowerSystemStabilizerDynamics):
     """
     SiemensTM "H infinity" power system stabilizer with generator electrical power input. [Footnote: Siemens "H
       infinity" power system stabilizers are an example of suitable products available commercially. This
@@ -36,10 +33,6 @@ class PssSH(PowerSystemStabilizerDynamics, ModuleType):
     vsmax: Output maximum limit (Vsmax) (> PssSH.vsmin).  Typical value = 0,1.
     vsmin: Output minimum limit (Vsmin) (< PssSH.vsmax).  Typical value = -0,1.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PssSH(*args, **kwargs)
 
     k: float = Field(
         default=0.0,
@@ -141,13 +134,3 @@ class PssSH(PowerSystemStabilizerDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PssSH"
-# work as well as
-# "from PssSH import PssSH".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PssSH

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ConductingEquipment import ConductingEquipment
 
 
 @dataclass(config=DataclassConfig)
-class EarthFaultCompensator(ConductingEquipment, ModuleType):
+class EarthFaultCompensator(ConductingEquipment):
     """
     A conducting equipment used to represent a connection to ground which is typically used to compensate earth faults.
       An earth fault compensator device modelled with a single terminal implies a second terminal solidly connected
@@ -23,10 +20,6 @@ class EarthFaultCompensator(ConductingEquipment, ModuleType):
 
     r: Nominal resistance of device.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return EarthFaultCompensator(*args, **kwargs)
 
     r: float = Field(
         default=0.0,
@@ -45,13 +38,3 @@ class EarthFaultCompensator(ConductingEquipment, ModuleType):
             Profile.EQ,
             Profile.SC,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import EarthFaultCompensator"
-# work as well as
-# "from EarthFaultCompensator import EarthFaultCompensator".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = EarthFaultCompensator

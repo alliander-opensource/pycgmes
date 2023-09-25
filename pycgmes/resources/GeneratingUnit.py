@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .Equipment import Equipment
 
 
 @dataclass(config=DataclassConfig)
-class GeneratingUnit(Equipment, ModuleType):
+class GeneratingUnit(Equipment):
     """
     A single or set of synchronous machines for converting mechanical power into alternating-current power. For example,
       individual machines within a set may be defined for scheduling purposes while a single control signal is
@@ -55,10 +52,6 @@ class GeneratingUnit(Equipment, ModuleType):
       units does not have to sum to one.  It is used for representing distributed slack participation
       factor. The attribute shall be a positive value or zero.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return GeneratingUnit(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -194,13 +187,3 @@ class GeneratingUnit(Equipment, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import GeneratingUnit"
-# work as well as
-# "from GeneratingUnit import GeneratingUnit".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = GeneratingUnit

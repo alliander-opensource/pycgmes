@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,17 +13,13 @@ from .AnalogControl import AnalogControl
 
 
 @dataclass(config=DataclassConfig)
-class RaiseLowerCommand(AnalogControl, ModuleType):
+class RaiseLowerCommand(AnalogControl):
     """
     An analog control that increases or decreases a set point value with pulses. Unless otherwise specified, one pulse
       moves the set point by one.
 
     ValueAliasSet: The ValueAliasSet used for translation of a Control value to a name.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return RaiseLowerCommand(*args, **kwargs)
 
     ValueAliasSet: Optional[str] = Field(
         default=None,
@@ -44,13 +37,3 @@ class RaiseLowerCommand(AnalogControl, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import RaiseLowerCommand"
-# work as well as
-# "from RaiseLowerCommand import RaiseLowerCommand".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = RaiseLowerCommand

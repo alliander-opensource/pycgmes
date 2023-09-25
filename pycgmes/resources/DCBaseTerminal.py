@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .ACDCTerminal import ACDCTerminal
 
 
 @dataclass(config=DataclassConfig)
-class DCBaseTerminal(ACDCTerminal, ModuleType):
+class DCBaseTerminal(ACDCTerminal):
     """
     An electrical connection point at a piece of DC conducting equipment. DC terminals are connected at one physical DC
       node that may have multiple DC terminals connected. A DC node is similar to an AC connectivity node. The model
@@ -25,10 +22,6 @@ class DCBaseTerminal(ACDCTerminal, ModuleType):
     DCTopologicalNode: See association end Terminal.TopologicalNode.
     DCNode: The DC connectivity node to which this DC base terminal connects with zero impedance.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return DCBaseTerminal(*args, **kwargs)
 
     DCTopologicalNode: Optional[str] = Field(
         default=None,
@@ -55,13 +48,3 @@ class DCBaseTerminal(ACDCTerminal, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import DCBaseTerminal"
-# work as well as
-# "from DCBaseTerminal import DCBaseTerminal".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = DCBaseTerminal

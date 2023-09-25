@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class Inductance(Base, ModuleType):
+class Inductance(Base):
     """
     Inductive part of reactance (imaginary part of impedance), at rated frequency.
 
@@ -24,10 +21,6 @@ class Inductance(Base, ModuleType):
     unit:
     multiplier:
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Inductance(*args, **kwargs)
 
     value: float = Field(
         default=0.0,
@@ -59,13 +52,3 @@ class Inductance(Base, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Inductance"
-# work as well as
-# "from Inductance import Inductance".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Inductance

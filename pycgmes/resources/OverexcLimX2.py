@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .OverexcitationLimiterDynamics import OverexcitationLimiterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class OverexcLimX2(OverexcitationLimiterDynamics, ModuleType):
+class OverexcLimX2(OverexcitationLimiterDynamics):
     """
     Field voltage or current overexcitation limiter designed to protect the generator field of an AC machine with
       automatic excitation control from overheating due to prolonged overexcitation.
@@ -35,10 +32,6 @@ class OverexcLimX2(OverexcitationLimiterDynamics, ModuleType):
     kmx: Gain (KMX).  Typical value = 0,002.
     vlow: Low voltage limit (VLOW) (> 0).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return OverexcLimX2(*args, **kwargs)
 
     m: bool = Field(
         default=False,
@@ -126,13 +119,3 @@ class OverexcLimX2(OverexcitationLimiterDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import OverexcLimX2"
-# work as well as
-# "from OverexcLimX2 import OverexcLimX2".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = OverexcLimX2

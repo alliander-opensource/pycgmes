@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class BusNameMarker(IdentifiedObject, ModuleType):
+class BusNameMarker(IdentifiedObject):
     """
     Used to apply user standard names to TopologicalNodes. Associated with one or more terminals that are normally
       connected with the bus name.    The associated terminals are normally connected by non-retained switches. For
@@ -30,10 +27,6 @@ class BusNameMarker(IdentifiedObject, ModuleType):
       priority.  Use 2 as priority is less than 1 and so on.
     ReportingGroup: The reporting group to which this bus name marker belongs.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return BusNameMarker(*args, **kwargs)
 
     # *Association not used*
     # Type M:1..n in CIM  # pylint: disable-next=line-too-long
@@ -62,13 +55,3 @@ class BusNameMarker(IdentifiedObject, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import BusNameMarker"
-# work as well as
-# "from BusNameMarker import BusNameMarker".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = BusNameMarker

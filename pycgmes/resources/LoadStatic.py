@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class LoadStatic(IdentifiedObject, ModuleType):
+class LoadStatic(IdentifiedObject):
     """
     General static load. This model represents the sensitivity of the real and reactive power consumed by the load to
       the amplitude and frequency of the bus voltage.
@@ -42,10 +39,6 @@ class LoadStatic(IdentifiedObject, ModuleType):
     eq3: Third term voltage exponent for reactive power (Eq3).  Used only when .staticLoadModelType = exponential.
     kqf: Frequency deviation coefficient for reactive power (Kqf).  Not used when .staticLoadModelType = constantZ.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return LoadStatic(*args, **kwargs)
 
     LoadAggregate: Optional[str] = Field(
         default=None,
@@ -182,13 +175,3 @@ class LoadStatic(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import LoadStatic"
-# work as well as
-# "from LoadStatic import LoadStatic".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = LoadStatic

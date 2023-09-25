@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .EnergyArea import EnergyArea
 
 
 @dataclass(config=DataclassConfig)
-class SubLoadArea(EnergyArea, ModuleType):
+class SubLoadArea(EnergyArea):
     """
     The class is the second level in a hierarchical structure for grouping of loads for the purpose of load flow load
       scaling.
@@ -24,10 +21,6 @@ class SubLoadArea(EnergyArea, ModuleType):
     LoadArea: The LoadArea where the SubLoadArea belongs.
     LoadGroups: The Loadgroups in the SubLoadArea.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return SubLoadArea(*args, **kwargs)
 
     LoadArea: Optional[str] = Field(
         default=None,
@@ -49,13 +42,3 @@ class SubLoadArea(EnergyArea, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import SubLoadArea"
-# work as well as
-# "from SubLoadArea import SubLoadArea".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = SubLoadArea

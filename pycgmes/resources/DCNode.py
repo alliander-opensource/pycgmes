@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class DCNode(IdentifiedObject, ModuleType):
+class DCNode(IdentifiedObject):
     """
     DC nodes are points where terminals of DC conducting equipment are connected together with zero impedance.
 
@@ -25,10 +22,6 @@ class DCNode(IdentifiedObject, ModuleType):
     DCTerminals: DC base terminals interconnected with zero impedance at a this DC connectivity node.
     DCEquipmentContainer: The DC container for the DC nodes.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return DCNode(*args, **kwargs)
 
     DCTopologicalNode: Optional[str] = Field(
         default=None,
@@ -58,13 +51,3 @@ class DCNode(IdentifiedObject, ModuleType):
             Profile.TP,
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import DCNode"
-# work as well as
-# "from DCNode import DCNode".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = DCNode

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .TransformerEnd import TransformerEnd
 
 
 @dataclass(config=DataclassConfig)
-class PowerTransformerEnd(TransformerEnd, ModuleType):
+class PowerTransformerEnd(TransformerEnd):
     """
     A PowerTransformerEnd is associated with each Terminal of a PowerTransformer. The impedance values r, r0, x, and x0
       of a PowerTransformerEnd represents a star equivalent as follows. 1) for a two Terminal PowerTransformer the
@@ -58,10 +55,6 @@ class PowerTransformerEnd(TransformerEnd, ModuleType):
     r0: Zero sequence series resistance (star-model) of the transformer end.
     x0: Zero sequence series reactance of the transformer end.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PowerTransformerEnd(*args, **kwargs)
 
     PowerTransformer: Optional[str] = Field(
         default=None,
@@ -164,13 +157,3 @@ class PowerTransformerEnd(TransformerEnd, ModuleType):
             Profile.EQ,
             Profile.SC,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PowerTransformerEnd"
-# work as well as
-# "from PowerTransformerEnd import PowerTransformerEnd".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PowerTransformerEnd

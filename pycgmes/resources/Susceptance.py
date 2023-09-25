@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class Susceptance(Base, ModuleType):
+class Susceptance(Base):
     """
     Imaginary part of admittance.
 
@@ -24,10 +21,6 @@ class Susceptance(Base, ModuleType):
     unit:
     multiplier:
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Susceptance(*args, **kwargs)
 
     value: float = Field(
         default=0.0,
@@ -63,13 +56,3 @@ class Susceptance(Base, ModuleType):
             Profile.EQ,
             Profile.SC,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Susceptance"
-# work as well as
-# "from Susceptance import Susceptance".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Susceptance

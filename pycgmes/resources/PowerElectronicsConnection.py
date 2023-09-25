@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .RegulatingCondEq import RegulatingCondEq
 
 
 @dataclass(config=DataclassConfig)
-class PowerElectronicsConnection(RegulatingCondEq, ModuleType):
+class PowerElectronicsConnection(RegulatingCondEq):
     """
     A connection to the AC network for energy production or consumption that uses power electronics rather than rotating
       machines.
@@ -34,10 +31,6 @@ class PowerElectronicsConnection(RegulatingCondEq, ModuleType):
     WindTurbineType3or4Dynamics: The wind turbine type 3 or type 4 dynamics model associated with this power electronics
       connection.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PowerElectronicsConnection(*args, **kwargs)
 
     maxQ: float = Field(
         default=0.0,
@@ -103,13 +96,3 @@ class PowerElectronicsConnection(RegulatingCondEq, ModuleType):
             Profile.SSH,
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PowerElectronicsConnection"
-# work as well as
-# "from PowerElectronicsConnection import PowerElectronicsConnection".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PowerElectronicsConnection

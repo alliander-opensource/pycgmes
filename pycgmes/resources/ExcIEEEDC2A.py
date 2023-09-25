@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcIEEEDC2A(ExcitationSystemDynamics, ModuleType):
+class ExcIEEEDC2A(ExcitationSystemDynamics):
     """
     IEEE 421.5-2005 type DC2A model. This model represents field-controlled DC commutator exciters with continuously
       acting voltage regulators having supplies obtained from the generator or auxiliary bus.  It differs from the
@@ -44,10 +41,6 @@ class ExcIEEEDC2A(ExcitationSystemDynamics, ModuleType):
     vrmax: Maximum voltage regulator output (VRMAX)(> ExcIEEEDC2A.vrmin).  Typical value = 4,95.
     vrmin: Minimum voltage regulator output (VRMIN) (< 0 and < ExcIEEEDC2A.vrmax).  Typical value = -4,9.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcIEEEDC2A(*args, **kwargs)
 
     efd1: float = Field(
         default=0.0,
@@ -170,13 +163,3 @@ class ExcIEEEDC2A(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcIEEEDC2A"
-# work as well as
-# "from ExcIEEEDC2A import ExcIEEEDC2A".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcIEEEDC2A

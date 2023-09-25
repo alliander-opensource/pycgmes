@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class Length(Base, ModuleType):
+class Length(Base):
     """
     Unit of length. It shall be a positive value or zero.
 
@@ -24,10 +21,6 @@ class Length(Base, ModuleType):
     unit:
     multiplier:
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Length(*args, **kwargs)
 
     value: float = Field(
         default=0.0,
@@ -67,13 +60,3 @@ class Length(Base, ModuleType):
             Profile.SC,
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Length"
-# work as well as
-# "from Length import Length".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Length

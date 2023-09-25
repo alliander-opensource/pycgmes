@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
 
 
 @dataclass(config=DataclassConfig)
-class PssWECC(PowerSystemStabilizerDynamics, ModuleType):
+class PssWECC(PowerSystemStabilizerDynamics):
     """
     Dual input power system stabilizer, based on IEEE type 2, with modified output limiter defined by WECC (Western
       Electricity Coordinating Council, USA).
@@ -45,10 +42,6 @@ class PssWECC(PowerSystemStabilizerDynamics, ModuleType):
     vcu: Maximum value for voltage compensator output (VCU). Typical value = 0.
     vcl: Minimum value for voltage compensator output (VCL). Typical value = 0.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PssWECC(*args, **kwargs)
 
     inputSignal1Type: Optional[str] = Field(
         default=None,
@@ -185,13 +178,3 @@ class PssWECC(PowerSystemStabilizerDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PssWECC"
-# work as well as
-# "from PssWECC import PssWECC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PssWECC

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class ConnectivityNode(IdentifiedObject, ModuleType):
+class ConnectivityNode(IdentifiedObject):
     """
     Connectivity nodes are points where terminals of AC conducting equipment are connected together with zero impedance.
 
@@ -26,10 +23,6 @@ class ConnectivityNode(IdentifiedObject, ModuleType):
     Terminals: Terminals interconnected with zero impedance at a this connectivity node.
     ConnectivityNodeContainer: Container of this connectivity node.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ConnectivityNode(*args, **kwargs)
 
     TopologicalNode: Optional[str] = Field(
         default=None,
@@ -65,13 +58,3 @@ class ConnectivityNode(IdentifiedObject, ModuleType):
             Profile.EQBD,
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ConnectivityNode"
-# work as well as
-# "from ConnectivityNode import ConnectivityNode".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ConnectivityNode

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class PerCent(Base, ModuleType):
+class PerCent(Base):
     """
     Percentage on a defined base.   For example, specify as 100 to indicate at the defined base.
 
@@ -24,10 +21,6 @@ class PerCent(Base, ModuleType):
     unit:
     multiplier:
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PerCent(*args, **kwargs)
 
     value: float = Field(
         default=0.0,
@@ -71,13 +64,3 @@ class PerCent(Base, ModuleType):
             Profile.SSH,
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PerCent"
-# work as well as
-# "from PerCent import PerCent".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PerCent

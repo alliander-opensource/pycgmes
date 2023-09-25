@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class DiagramObjectPoint(Base, ModuleType):
+class DiagramObjectPoint(Base):
     """
     A point in a given space defined by 3 coordinates and associated to a diagram object.  The coordinates may be
       positive or negative as the origin does not have to be in the corner of a diagram.
@@ -29,10 +26,6 @@ class DiagramObjectPoint(Base, ModuleType):
     yPosition: The Y coordinate of this point.
     zPosition: The Z coordinate of this point.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return DiagramObjectPoint(*args, **kwargs)
 
     DiagramObject: Optional[str] = Field(
         default=None,
@@ -85,13 +78,3 @@ class DiagramObjectPoint(Base, ModuleType):
         return {
             Profile.DL,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import DiagramObjectPoint"
-# work as well as
-# "from DiagramObjectPoint import DiagramObjectPoint".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = DiagramObjectPoint

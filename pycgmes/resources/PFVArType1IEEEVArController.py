@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .PFVArControllerType1Dynamics import PFVArControllerType1Dynamics
 
 
 @dataclass(config=DataclassConfig)
-class PFVArType1IEEEVArController(PFVArControllerType1Dynamics, ModuleType):
+class PFVArType1IEEEVArController(PFVArControllerType1Dynamics):
     """
     IEEE VAR controller type 1 which operates by moving the voltage reference directly. Reference: IEEE 421.5-2005,
       11.3.
@@ -29,10 +26,6 @@ class PFVArType1IEEEVArController(PFVArControllerType1Dynamics, ModuleType):
     vvtmin: Minimum machine terminal voltage needed to enable pf/var controller (VVTMIN) (<
       PVFArType1IEEEVArController.vvtmax).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PFVArType1IEEEVArController(*args, **kwargs)
 
     tvarc: int = Field(
         default=0,
@@ -85,13 +78,3 @@ class PFVArType1IEEEVArController(PFVArControllerType1Dynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PFVArType1IEEEVArController"
-# work as well as
-# "from PFVArType1IEEEVArController import PFVArType1IEEEVArController".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PFVArType1IEEEVArController

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .OperationalLimit import OperationalLimit
 
 
 @dataclass(config=DataclassConfig)
-class VoltageLimit(OperationalLimit, ModuleType):
+class VoltageLimit(OperationalLimit):
     """
     Operational limit applied to voltage. The use of operational VoltageLimit is preferred instead of limits defined at
       VoltageLevel. The operational VoltageLimits are used, if present.
@@ -25,10 +22,6 @@ class VoltageLimit(OperationalLimit, ModuleType):
     value: Limit on voltage. High or low limit nature of the limit depends upon the properties of the operational limit
       type. The attribute shall be a positive value or zero.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return VoltageLimit(*args, **kwargs)
 
     normalValue: float = Field(
         default=0.0,
@@ -54,13 +47,3 @@ class VoltageLimit(OperationalLimit, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import VoltageLimit"
-# work as well as
-# "from VoltageLimit import VoltageLimit".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = VoltageLimit

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .Connector import Connector
 
 
 @dataclass(config=DataclassConfig)
-class BusbarSection(Connector, ModuleType):
+class BusbarSection(Connector):
     """
     A conductor, or group of conductors, with negligible impedance, that serve to connect other conducting equipment
       within a single substation.  Voltage measurements are typically obtained from voltage transformers that are
@@ -25,10 +22,6 @@ class BusbarSection(Connector, ModuleType):
     ipMax: Maximum allowable peak short-circuit current of busbar (Ipmax in IEC 60909-0).  Mechanical limit of the
       busbar in the substation itself. Used for short circuit data exchange according to IEC 60909.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return BusbarSection(*args, **kwargs)
 
     ipMax: float = Field(
         default=0.0,
@@ -47,13 +40,3 @@ class BusbarSection(Connector, ModuleType):
             Profile.EQ,
             Profile.SC,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import BusbarSection"
-# work as well as
-# "from BusbarSection import BusbarSection".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = BusbarSection

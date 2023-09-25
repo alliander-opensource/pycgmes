@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class EnergyArea(IdentifiedObject, ModuleType):
+class EnergyArea(IdentifiedObject):
     """
     Describes an area having energy production or consumption.  Specializations are intended to support the load
       allocation function as typically required in energy management systems or planning studies to allocate
@@ -23,10 +20,6 @@ class EnergyArea(IdentifiedObject, ModuleType):
 
     ControlArea: The control area specification that is used for the load forecast.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return EnergyArea(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
@@ -41,13 +34,3 @@ class EnergyArea(IdentifiedObject, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import EnergyArea"
-# work as well as
-# "from EnergyArea import EnergyArea".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = EnergyArea

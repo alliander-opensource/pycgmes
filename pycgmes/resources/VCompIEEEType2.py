@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .VoltageCompensatorDynamics import VoltageCompensatorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class VCompIEEEType2(VoltageCompensatorDynamics, ModuleType):
+class VCompIEEEType2(VoltageCompensatorDynamics):
     """
     Terminal voltage transducer and load compensator as defined in IEEE 421.5-2005, 4. This model is designed to cover
       the following types of compensation:   reactive droop; transformer-drop or line-drop compensation; reactive
@@ -25,10 +22,6 @@ class VCompIEEEType2(VoltageCompensatorDynamics, ModuleType):
     GenICompensationForGenJ: Compensation of this voltage compensator`s generator for current flow out of another
       generator.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return VCompIEEEType2(*args, **kwargs)
 
     tr: int = Field(
         default=0,
@@ -50,13 +43,3 @@ class VCompIEEEType2(VoltageCompensatorDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import VCompIEEEType2"
-# work as well as
-# "from VCompIEEEType2 import VCompIEEEType2".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = VCompIEEEType2

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ShuntCompensator import ShuntCompensator
 
 
 @dataclass(config=DataclassConfig)
-class LinearShuntCompensator(ShuntCompensator, ModuleType):
+class LinearShuntCompensator(ShuntCompensator):
     """
     A linear shunt compensator has banks or sections with equal admittance values.
 
@@ -24,10 +21,6 @@ class LinearShuntCompensator(ShuntCompensator, ModuleType):
     b0PerSection: Zero sequence shunt (charging) susceptance per section.
     g0PerSection: Zero sequence shunt (charging) conductance per section.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return LinearShuntCompensator(*args, **kwargs)
 
     bPerSection: float = Field(
         default=0.0,
@@ -68,13 +61,3 @@ class LinearShuntCompensator(ShuntCompensator, ModuleType):
             Profile.SC,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import LinearShuntCompensator"
-# work as well as
-# "from LinearShuntCompensator import LinearShuntCompensator".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = LinearShuntCompensator

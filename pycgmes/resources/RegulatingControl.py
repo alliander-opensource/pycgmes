@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .PowerSystemResource import PowerSystemResource
 
 
 @dataclass(config=DataclassConfig)
-class RegulatingControl(PowerSystemResource, ModuleType):
+class RegulatingControl(PowerSystemResource):
     """
     Specifies a set of equipment that works together to control a power system quantity such as voltage or flow.  Remote
       bus voltage control is possible by specifying the controlled terminal located at some place remote from the
@@ -58,10 +55,6 @@ class RegulatingControl(PowerSystemResource, ModuleType):
     maxAllowedTargetValue: Maximum allowed target value (RegulatingControl.targetValue).
     minAllowedTargetValue: Minimum allowed target value (RegulatingControl.targetValue).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return RegulatingControl(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -144,13 +137,3 @@ class RegulatingControl(PowerSystemResource, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import RegulatingControl"
-# work as well as
-# "from RegulatingControl import RegulatingControl".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = RegulatingControl

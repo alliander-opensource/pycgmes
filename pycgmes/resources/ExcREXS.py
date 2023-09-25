@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcREXS(ExcitationSystemDynamics, ModuleType):
+class ExcREXS(ExcitationSystemDynamics):
     """
     General purpose rotating excitation system.  This model can be used to represent a wide range of excitation systems
       whose DC power source is an AC or DC generator. It encompasses IEEE type AC1, AC2, DC1, and DC2 excitation
@@ -59,10 +56,6 @@ class ExcREXS(ExcitationSystemDynamics, ModuleType):
     vrmin: Minimum controller output (Vrmin) (< ExcREXS.vrmax).  Typical value = -20.
     xc: Exciter compounding reactance (Xc).  Typical value = 0.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcREXS(*args, **kwargs)
 
     e1: float = Field(
         default=0.0,
@@ -325,13 +318,3 @@ class ExcREXS(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcREXS"
-# work as well as
-# "from ExcREXS import ExcREXS".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcREXS

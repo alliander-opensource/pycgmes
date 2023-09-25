@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class StreetAddress(Base, ModuleType):
+class StreetAddress(Base):
     """
     General purpose street and postal address information.
 
@@ -26,10 +23,6 @@ class StreetAddress(Base, ModuleType):
     poBox: Post office box.
     language: The language in which the address is specified, using ISO 639-1 two digit language code.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return StreetAddress(*args, **kwargs)
 
     streetDetail: float = Field(
         default=0.0,
@@ -82,13 +75,3 @@ class StreetAddress(Base, ModuleType):
         return {
             Profile.GL,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import StreetAddress"
-# work as well as
-# "from StreetAddress import StreetAddress".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = StreetAddress

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from .ConnectivityNodeContainer import ConnectivityNodeContainer
 
 
 @dataclass(config=DataclassConfig)
-class EquivalentNetwork(ConnectivityNodeContainer, ModuleType):
+class EquivalentNetwork(ConnectivityNodeContainer):
     """
     A class that groups electrical equivalents, including internal nodes, of a network that has been reduced. The
       ConnectivityNodes contained in the equivalent are intended to reflect internal nodes of the equivalent. The
@@ -22,10 +19,6 @@ class EquivalentNetwork(ConnectivityNodeContainer, ModuleType):
 
     EquivalentEquipments: The associated reduced equivalents.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return EquivalentNetwork(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -40,13 +33,3 @@ class EquivalentNetwork(ConnectivityNodeContainer, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import EquivalentNetwork"
-# work as well as
-# "from EquivalentNetwork import EquivalentNetwork".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = EquivalentNetwork

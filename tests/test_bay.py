@@ -9,8 +9,7 @@ import textwrap
 import pytest
 from pydantic import ValidationError
 
-from pycgmes.resources import Bay as ShortcutBay
-from pycgmes.resources.Bay import Bay as RealBay
+from pycgmes.resources.Bay import Bay
 from pycgmes.resources.ConnectivityNodeContainer import ConnectivityNodeContainer
 from pycgmes.resources.EquipmentContainer import EquipmentContainer
 from pycgmes.resources.IdentifiedObject import IdentifiedObject
@@ -19,19 +18,18 @@ from pycgmes.utils.base import Base
 from pycgmes.utils.profile import Profile
 
 
-@pytest.mark.parametrize("bay_class", [ShortcutBay, RealBay])
-class TestBayCallableModule:
-    def test_load_bay(self, bay_class):
-        b = bay_class()
+class TestBay:
+    def test_load_bay(self):
+        b = Bay()
 
-    def test_bay_has_mrid(self, bay_class):
-        b = bay_class()
+    def test_bay_has_mrid(self):
+        b = Bay()
         assert getattr(b, "mRID") is not None
 
-    def test_bay_has_expected_parents(self, bay_class):
-        parents = bay_class().__class__.__mro__[0:6]
+    def test_bay_has_expected_parents(self):
+        parents = Bay.__mro__[0:6]
         expected = (  # mro returns a tuple
-            RealBay,
+            Bay,
             EquipmentContainer,
             ConnectivityNodeContainer,
             PowerSystemResource,
@@ -40,7 +38,7 @@ class TestBayCallableModule:
         )
         assert expected == parents
 
-    def test_bay_has_expected_str(self, bay_class):
+    def test_bay_has_expected_str(self):
         expected = textwrap.dedent(
             """
         VoltageLevel=None
@@ -54,12 +52,12 @@ class TestBayCallableModule:
         )[
             1:-1  # The first and last characters are newlines, which are not in str()
         ]
-        assert str(bay_class()) == expected
+        assert str(Bay()) == expected
 
-    def test_bay_has_expected_profiles(self, bay_class):
+    def test_bay_has_expected_profiles(self):
         expected = {Profile.EQBD, Profile.EQ}
 
-        assert expected == bay_class().possible_profiles
+        assert expected == Bay().possible_profiles
 
     @pytest.mark.parametrize(
         "profile, attribute_names",
@@ -69,14 +67,14 @@ class TestBayCallableModule:
             ("SV", {"name"}),
         ],
     )
-    def test_bay_has_expected_attributes(self, bay_class, profile, attribute_names):
-        assert attribute_names == {a.name for a in bay_class().cgmes_attribute_names_in_profile(Profile[profile])}
+    def test_bay_has_expected_attributes(self, profile, attribute_names):
+        assert attribute_names == {a.name for a in Bay().cgmes_attribute_names_in_profile(Profile[profile])}
 
-    def test_param_casting(self, bay_class):
+    def test_param_casting(self):
         # An int is castable to string, and it happens.
-        assert bay_class(VoltageLevel=42).VoltageLevel == "42"
+        assert Bay(VoltageLevel=42).VoltageLevel == "42"
 
-    def test_param_validation(self, bay_class):
+    def test_param_validation(self):
         # mRID is not allowed to be None
         with pytest.raises(ValidationError):
-            bay_class(mRID=None)
+            Bay(mRID=None)

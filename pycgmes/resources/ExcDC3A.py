@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcDC3A(ExcitationSystemDynamics, ModuleType):
+class ExcDC3A(ExcitationSystemDynamics):
     """
     Modified IEEE DC3A direct current commutator exciter with speed input, and deadband.  DC old type 4.
 
@@ -41,10 +38,6 @@ class ExcDC3A(ExcitationSystemDynamics, ModuleType):
     efdlim: (Efdlim). true = exciter output limiter is active false = exciter output limiter not active. Typical value =
       true.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcDC3A(*args, **kwargs)
 
     trh: int = Field(
         default=0,
@@ -167,13 +160,3 @@ class ExcDC3A(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcDC3A"
-# work as well as
-# "from ExcDC3A import ExcDC3A".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcDC3A

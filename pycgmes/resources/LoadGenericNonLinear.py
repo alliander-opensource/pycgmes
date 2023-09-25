@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .LoadDynamics import LoadDynamics
 
 
 @dataclass(config=DataclassConfig)
-class LoadGenericNonLinear(LoadDynamics, ModuleType):
+class LoadGenericNonLinear(LoadDynamics):
     """
     Generic non-linear dynamic (GNLD) load. This model can be used in mid-term and long-term voltage stability
       simulations (i.e., to study voltage collapse), as it can replace a more detailed representation of aggregate
@@ -30,10 +27,6 @@ class LoadGenericNonLinear(LoadDynamics, ModuleType):
     bs: Steady state voltage index for reactive power (BS).
     bt: Transient voltage index for reactive power (BT).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return LoadGenericNonLinear(*args, **kwargs)
 
     genericNonLinearLoadModelType: Optional[str] = Field(
         default=None,
@@ -93,13 +86,3 @@ class LoadGenericNonLinear(LoadDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import LoadGenericNonLinear"
-# work as well as
-# "from LoadGenericNonLinear import LoadGenericNonLinear".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = LoadGenericNonLinear

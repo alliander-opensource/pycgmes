@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .Control import Control
 
 
 @dataclass(config=DataclassConfig)
-class AnalogControl(Control, ModuleType):
+class AnalogControl(Control):
     """
     An analog control used for supervisory control.
 
@@ -24,10 +21,6 @@ class AnalogControl(Control, ModuleType):
     minValue: Normal value range minimum for any of the Control.value. Used for scaling, e.g. in bar graphs.
     AnalogValue: The MeasurementValue that is controlled.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return AnalogControl(*args, **kwargs)
 
     maxValue: float = Field(
         default=0.0,
@@ -59,13 +52,3 @@ class AnalogControl(Control, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import AnalogControl"
-# work as well as
-# "from AnalogControl import AnalogControl".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = AnalogControl

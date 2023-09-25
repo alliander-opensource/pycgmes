@@ -12,15 +12,10 @@ def get_all_resources() -> Iterator[str]:
 
 
 class TestLoadAll:
-    # Importing all resources to make sure there is no syntax error
-    @pytest.mark.parametrize("direct", [True, False])
+    # Importing all resources to make sure there is no syntax error.
+
     @pytest.mark.parametrize("resource", get_all_resources())
-    def test_importing(self, direct, resource):
+    def test_importing(self, resource):
         mod = importlib.import_module(f".{resource}", package="pycgmes.resources")
         # Calling possible profiles to have full coverage.
-        if direct:
-            # callable module
-            mod().possible_profiles
-        else:
-            # normal usage
-            getattr(mod, resource)().possible_profiles
+        getattr(mod, resource)().possible_profiles

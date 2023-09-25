@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ConductingEquipment import ConductingEquipment
 
 
 @dataclass(config=DataclassConfig)
-class Switch(ConductingEquipment, ModuleType):
+class Switch(ConductingEquipment):
     """
     A generic device designed to close, or open, or both, one or more electric circuits.  All switches are two terminal
       devices including grounding switches. The ACDCTerminal.connected at the two sides of the switch shall not be
@@ -35,10 +32,6 @@ class Switch(ConductingEquipment, ModuleType):
       locked=false and Switch.open=true. The resulting state is open; locked=false and Switch.open=false.
       The resulting state is closed.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Switch(*args, **kwargs)
 
     normalOpen: bool = Field(
         default=False,
@@ -94,13 +87,3 @@ class Switch(ConductingEquipment, ModuleType):
             Profile.SV,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Switch"
-# work as well as
-# "from Switch import Switch".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Switch

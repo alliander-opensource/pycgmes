@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcCZ(ExcitationSystemDynamics, ModuleType):
+class ExcCZ(ExcitationSystemDynamics):
     """
     Czech proportion/integral exciter.
 
@@ -30,10 +27,6 @@ class ExcCZ(ExcitationSystemDynamics, ModuleType):
     efdmax: Exciter output maximum limit (Efdmax) (> ExcCZ.efdmin).
     efdmin: Exciter output minimum limit (Efdmin) (< ExcCZ.efdmax).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcCZ(*args, **kwargs)
 
     kp: float = Field(
         default=0.0,
@@ -114,13 +107,3 @@ class ExcCZ(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcCZ"
-# work as well as
-# "from ExcCZ import ExcCZ".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcCZ

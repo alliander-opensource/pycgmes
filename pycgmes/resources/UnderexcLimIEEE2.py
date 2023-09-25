@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class UnderexcLimIEEE2(UnderexcitationLimiterDynamics, ModuleType):
+class UnderexcLimIEEE2(UnderexcitationLimiterDynamics):
     """
     Type UEL2 underexcitation limiter which has either a straight-line or multi-segment characteristic when plotted in
       terms of machine reactive power output vs. real power output. Reference: IEEE UEL2 421.5-2005, 10.2  (limit
@@ -64,10 +61,6 @@ class UnderexcLimIEEE2(UnderexcitationLimiterDynamics, ModuleType):
     k2: UEL terminal voltage exponent applied to reactive power output from UEL limit look-up table (k2).  Typical value
       = 2.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return UnderexcLimIEEE2(*args, **kwargs)
 
     tuv: int = Field(
         default=0,
@@ -358,13 +351,3 @@ class UnderexcLimIEEE2(UnderexcitationLimiterDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import UnderexcLimIEEE2"
-# work as well as
-# "from UnderexcLimIEEE2 import UnderexcLimIEEE2".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = UnderexcLimIEEE2

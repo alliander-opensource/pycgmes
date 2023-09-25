@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class Status(Base, ModuleType):
+class Status(Base):
     """
     Current status information relevant to an entity.
 
@@ -25,10 +22,6 @@ class Status(Base, ModuleType):
     remark: Pertinent information regarding the current `value`, as free form text.
     reason: Reason code or explanation for why an object went to the current status `value`.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Status(*args, **kwargs)
 
     value: str = Field(
         default="",
@@ -67,13 +60,3 @@ class Status(Base, ModuleType):
         return {
             Profile.GL,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Status"
-# work as well as
-# "from Status import Status".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Status

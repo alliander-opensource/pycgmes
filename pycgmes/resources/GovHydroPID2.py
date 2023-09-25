@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .TurbineGovernorDynamics import TurbineGovernorDynamics
 
 
 @dataclass(config=DataclassConfig)
-class GovHydroPID2(TurbineGovernorDynamics, ModuleType):
+class GovHydroPID2(TurbineGovernorDynamics):
     """
     Hydro turbine and governor. Represents plants with straightforward penstock configurations and "three term" electro-
       hydraulic governors (i.e. WoodwardTM electronic). [Footnote: Woodward electronic governors are an example of
@@ -45,10 +42,6 @@ class GovHydroPID2(TurbineGovernorDynamics, ModuleType):
     atw: Factor multiplying Tw (Atw).  Typical value = 0.
     feedbackSignal: Feedback signal type flag (Flag). true = use gate position feedback signal false = use Pe.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return GovHydroPID2(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -213,13 +206,3 @@ class GovHydroPID2(TurbineGovernorDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import GovHydroPID2"
-# work as well as
-# "from GovHydroPID2 import GovHydroPID2".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = GovHydroPID2

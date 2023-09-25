@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .WindGenType3IEC import WindGenType3IEC
 
 
 @dataclass(config=DataclassConfig)
-class WindGenType3bIEC(WindGenType3IEC, ModuleType):
+class WindGenType3bIEC(WindGenType3IEC):
     """
     IEC type 3B generator set model. Reference: IEC 61400-27-1:2015, 5.6.3.3.
 
@@ -25,10 +22,6 @@ class WindGenType3bIEC(WindGenType3IEC, ModuleType):
     tg: Current generation time constant (Tg) (>= 0). It is a type-dependent parameter.
     two: Time constant for crowbar washout filter (Two) (>= 0). It is a case-dependent parameter.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindGenType3bIEC(*args, **kwargs)
 
     # *Association not used*
     # Type M:1..n in CIM  # pylint: disable-next=line-too-long
@@ -64,13 +57,3 @@ class WindGenType3bIEC(WindGenType3IEC, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindGenType3bIEC"
-# work as well as
-# "from WindGenType3bIEC import WindGenType3bIEC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindGenType3bIEC

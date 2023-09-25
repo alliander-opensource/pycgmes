@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from .Curve import Curve
 
 
 @dataclass(config=DataclassConfig)
-class ReactiveCapabilityCurve(Curve, ModuleType):
+class ReactiveCapabilityCurve(Curve):
     """
     Reactive power rating envelope versus the synchronous machine's active power, in both the generating and motoring
       modes. For each active power value there is a corresponding high and low reactive power limit  value.
@@ -24,10 +21,6 @@ class ReactiveCapabilityCurve(Curve, ModuleType):
     EquivalentInjection: The equivalent injection using this reactive capability curve.
     InitiallyUsedBySynchronousMachines: Synchronous machines using this curve as default.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ReactiveCapabilityCurve(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -46,13 +39,3 @@ class ReactiveCapabilityCurve(Curve, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ReactiveCapabilityCurve"
-# work as well as
-# "from ReactiveCapabilityCurve import ReactiveCapabilityCurve".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ReactiveCapabilityCurve

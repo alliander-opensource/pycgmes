@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .LoadDynamics import LoadDynamics
 
 
 @dataclass(config=DataclassConfig)
-class LoadComposite(LoadDynamics, ModuleType):
+class LoadComposite(LoadDynamics):
     """
     Combined static load and induction motor load effects. The dynamics of the motor are simplified by linearizing the
       induction machine equations.
@@ -33,10 +30,6 @@ class LoadComposite(LoadDynamics, ModuleType):
     pfrac: Fraction of constant-power load to be represented by this motor model (PFRAC) (>= 0,0 and <= 1,0).  Typical
       value = 0,5.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return LoadComposite(*args, **kwargs)
 
     epvs: float = Field(
         default=0.0,
@@ -124,13 +117,3 @@ class LoadComposite(LoadDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import LoadComposite"
-# work as well as
-# "from LoadComposite import LoadComposite".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = LoadComposite

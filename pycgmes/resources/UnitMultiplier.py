@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,7 +11,7 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class UnitMultiplier(Base, ModuleType):
+class UnitMultiplier(Base):
     """
     The unit multipliers defined for the CIM.  When applied to unit symbols, the unit symbol is treated as a derived
       unit. Regardless of the contents of the unit symbol text, the unit symbol shall be treated as if it were a
@@ -34,10 +31,6 @@ class UnitMultiplier(Base, ModuleType):
 
     """
 
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return UnitMultiplier(*args, **kwargs)
-
     # No attributes defined for this class.
 
     @cached_property
@@ -56,13 +49,3 @@ class UnitMultiplier(Base, ModuleType):
             Profile.DY,
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import UnitMultiplier"
-# work as well as
-# "from UnitMultiplier import UnitMultiplier".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = UnitMultiplier

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class WindDynamicsLookupTable(IdentifiedObject, ModuleType):
+class WindDynamicsLookupTable(IdentifiedObject):
     """
     Look up table for the purpose of wind standard models.
 
@@ -36,10 +33,6 @@ class WindDynamicsLookupTable(IdentifiedObject, ModuleType):
     WindGenType3bIEC: The generator type 3B model with which this wind dynamics lookup table is associated.
     WindPitchContPowerIEC: The pitch control power model with which this wind dynamics lookup table is associated.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindDynamicsLookupTable(*args, **kwargs)
 
     WindContCurrLimIEC: Optional[str] = Field(
         default=None,
@@ -141,13 +134,3 @@ class WindDynamicsLookupTable(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindDynamicsLookupTable"
-# work as well as
-# "from WindDynamicsLookupTable import WindDynamicsLookupTable".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindDynamicsLookupTable

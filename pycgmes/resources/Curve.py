@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class Curve(IdentifiedObject, ModuleType):
+class Curve(IdentifiedObject):
     """
     A multi-purpose curve or functional relationship between an independent variable (X-axis) and dependent (Y-axis)
       variables.
@@ -27,10 +24,6 @@ class Curve(IdentifiedObject, ModuleType):
     y2Unit: The Y2-axis units of measure.
     CurveDatas: The point data values that define this curve.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Curve(*args, **kwargs)
 
     curveStyle: Optional[str] = Field(
         default=None,
@@ -73,13 +66,3 @@ class Curve(IdentifiedObject, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Curve"
-# work as well as
-# "from Curve import Curve".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Curve

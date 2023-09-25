@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcPIC(ExcitationSystemDynamics, ModuleType):
+class ExcPIC(ExcitationSystemDynamics):
     """
     Proportional/integral regulator excitation system.  This model can be used to represent excitation systems with a
       proportional-integral (PI) voltage regulator controller.
@@ -44,10 +41,6 @@ class ExcPIC(ExcitationSystemDynamics, ModuleType):
     ki: Current source gain (Ki).  Typical value = 0.
     kc: Exciter regulation factor (Kc).  Typical value = 0,08.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcPIC(*args, **kwargs)
 
     ka: float = Field(
         default=0.0,
@@ -219,13 +212,3 @@ class ExcPIC(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcPIC"
-# work as well as
-# "from ExcPIC import ExcPIC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcPIC

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcELIN1(ExcitationSystemDynamics, ModuleType):
+class ExcELIN1(ExcitationSystemDynamics):
     """
     Static PI transformer fed excitation system ELIN (VATECH) - simplified model.  This model represents an all-static
       excitation system. A PI voltage controller establishes a desired field current set point for a proportional
@@ -39,10 +36,6 @@ class ExcELIN1(ExcitationSystemDynamics, ModuleType):
     ts2: Stabilizer filter time constant (Ts2) (>= 0).  Typical value = 1.
     smax: Stabilizer limit output (smax).  Typical value = 0,1.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcELIN1(*args, **kwargs)
 
     tfi: int = Field(
         default=0,
@@ -158,13 +151,3 @@ class ExcELIN1(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcELIN1"
-# work as well as
-# "from ExcELIN1 import ExcELIN1".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcELIN1

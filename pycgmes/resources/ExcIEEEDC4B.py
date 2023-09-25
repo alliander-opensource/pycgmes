@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcIEEEDC4B(ExcitationSystemDynamics, ModuleType):
+class ExcIEEEDC4B(ExcitationSystemDynamics):
     """
     IEEE 421.5-2005 type DC4B model. These excitation systems utilize a field-controlled DC commutator exciter with a
       continuously acting voltage regulator having supplies obtained from the generator or auxiliary bus. Reference:
@@ -43,10 +40,6 @@ class ExcIEEEDC4B(ExcitationSystemDynamics, ModuleType):
     oelin: OEL input (OELin). true = LV gate false = subtract from error signal. Typical value = true.
     uelin: UEL input (UELin). true = HV gate false = add to error signal. Typical value = true.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcIEEEDC4B(*args, **kwargs)
 
     ka: float = Field(
         default=0.0,
@@ -190,13 +183,3 @@ class ExcIEEEDC4B(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcIEEEDC4B"
-# work as well as
-# "from ExcIEEEDC4B import ExcIEEEDC4B".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcIEEEDC4B

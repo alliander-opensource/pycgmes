@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .PhaseTapChangerNonLinear import PhaseTapChangerNonLinear
 
 
 @dataclass(config=DataclassConfig)
-class PhaseTapChangerAsymmetrical(PhaseTapChangerNonLinear, ModuleType):
+class PhaseTapChangerAsymmetrical(PhaseTapChangerNonLinear):
     """
     Describes the tap model for an asymmetrical phase shifting transformer in which the difference voltage vector adds
       to the in-phase winding. The out-of-phase winding is the transformer end where the tap changer is located.
@@ -28,10 +25,6 @@ class PhaseTapChangerAsymmetrical(PhaseTapChangerNonLinear, ModuleType):
       transformer. The attribute can only be multiples of 30 degrees.  The allowed range is
       -150 degrees to 150 degrees excluding 0.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PhaseTapChangerAsymmetrical(*args, **kwargs)
 
     windingConnectionAngle: float = Field(
         default=0.0,
@@ -50,13 +43,3 @@ class PhaseTapChangerAsymmetrical(PhaseTapChangerNonLinear, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PhaseTapChangerAsymmetrical"
-# work as well as
-# "from PhaseTapChangerAsymmetrical import PhaseTapChangerAsymmetrical".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PhaseTapChangerAsymmetrical

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .PFVArControllerType1Dynamics import PFVArControllerType1Dynamics
 
 
 @dataclass(config=DataclassConfig)
-class PFVArControllerType1UserDefined(PFVArControllerType1Dynamics, ModuleType):
+class PFVArControllerType1UserDefined(PFVArControllerType1Dynamics):
     """
     Power factor or VAr controller type 1 function block whose dynamic behaviour is described by a user-defined model.
 
@@ -25,10 +22,6 @@ class PFVArControllerType1UserDefined(PFVArControllerType1Dynamics, ModuleType):
       of control blocks and their input and output signals.
     ProprietaryParameterDynamics: Parameter of this proprietary user-defined model.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PFVArControllerType1UserDefined(*args, **kwargs)
 
     proprietary: bool = Field(
         default=False,
@@ -50,13 +43,3 @@ class PFVArControllerType1UserDefined(PFVArControllerType1Dynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PFVArControllerType1UserDefined"
-# work as well as
-# "from PFVArControllerType1UserDefined import PFVArControllerType1UserDefined".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PFVArControllerType1UserDefined

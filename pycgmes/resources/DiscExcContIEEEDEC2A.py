@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .DiscontinuousExcitationControlDynamics import DiscontinuousExcitationContr
 
 
 @dataclass(config=DataclassConfig)
-class DiscExcContIEEEDEC2A(DiscontinuousExcitationControlDynamics, ModuleType):
+class DiscExcContIEEEDEC2A(DiscontinuousExcitationControlDynamics):
     """
     IEEE type DEC2A model for discontinuous excitation control. This system provides transient excitation boosting via
       an open-loop control as initiated by a trigger signal generated remotely. Reference: IEEE 421.5-2005 12.3.
@@ -26,10 +23,6 @@ class DiscExcContIEEEDEC2A(DiscontinuousExcitationControlDynamics, ModuleType):
     vdmin: Limiter (VDMIN) (< DiscExcContIEEEDEC2A.vdmax).
     vdmax: Limiter (VDMAX) (> DiscExcContIEEEDEC2A.vdmin).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return DiscExcContIEEEDEC2A(*args, **kwargs)
 
     vk: float = Field(
         default=0.0,
@@ -75,13 +68,3 @@ class DiscExcContIEEEDEC2A(DiscontinuousExcitationControlDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import DiscExcContIEEEDEC2A"
-# work as well as
-# "from DiscExcContIEEEDEC2A import DiscExcContIEEEDEC2A".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = DiscExcContIEEEDEC2A

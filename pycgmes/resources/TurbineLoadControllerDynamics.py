@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,17 +13,13 @@ from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
 @dataclass(config=DataclassConfig)
-class TurbineLoadControllerDynamics(DynamicsFunctionBlock, ModuleType):
+class TurbineLoadControllerDynamics(DynamicsFunctionBlock):
     """
     Turbine load controller function block whose behaviour is described by reference to a standard model or by
       definition of a user-defined model.
 
     TurbineGovernorDynamics: Turbine-governor controlled by this turbine load controller.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return TurbineLoadControllerDynamics(*args, **kwargs)
 
     TurbineGovernorDynamics: Optional[str] = Field(
         default=None,
@@ -44,13 +37,3 @@ class TurbineLoadControllerDynamics(DynamicsFunctionBlock, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import TurbineLoadControllerDynamics"
-# work as well as
-# "from TurbineLoadControllerDynamics import TurbineLoadControllerDynamics".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = TurbineLoadControllerDynamics

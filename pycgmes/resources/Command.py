@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .Control import Control
 
 
 @dataclass(config=DataclassConfig)
-class Command(Control, ModuleType):
+class Command(Control):
     """
     A Command is a discrete control used for supervisory control.
 
@@ -25,10 +22,6 @@ class Command(Control, ModuleType):
     ValueAliasSet: The ValueAliasSet used for translation of a Control value to a name.
     DiscreteValue: The MeasurementValue that is controlled.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Command(*args, **kwargs)
 
     normalValue: int = Field(
         default=0,
@@ -67,13 +60,3 @@ class Command(Control, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Command"
-# work as well as
-# "from Command import Command".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Command

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .ConductingEquipment import ConductingEquipment
 
 
 @dataclass(config=DataclassConfig)
-class Clamp(ConductingEquipment, ModuleType):
+class Clamp(ConductingEquipment):
     """
     A Clamp is a galvanic connection at a line segment where other equipment is connected. A Clamp does not cut the line
       segment.  A Clamp is ConductingEquipment and has one Terminal with an associated ConnectivityNode. Any other
@@ -26,10 +23,6 @@ class Clamp(ConductingEquipment, ModuleType):
     lengthFromTerminal1: The length to the place where the clamp is located starting from side one of the line segment,
       i.e. the line segment terminal with sequence number equal to 1.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Clamp(*args, **kwargs)
 
     ACLineSegment: Optional[str] = Field(
         default=None,
@@ -54,13 +47,3 @@ class Clamp(ConductingEquipment, ModuleType):
         return {
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Clamp"
-# work as well as
-# "from Clamp import Clamp".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Clamp

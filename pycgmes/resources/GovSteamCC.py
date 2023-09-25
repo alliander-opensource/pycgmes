@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .CrossCompoundTurbineGovernorDynamics import CrossCompoundTurbineGovernorDy
 
 
 @dataclass(config=DataclassConfig)
-class GovSteamCC(CrossCompoundTurbineGovernorDynamics, ModuleType):
+class GovSteamCC(CrossCompoundTurbineGovernorDynamics):
     """
     Cross compound turbine governor.  Unlike tandem compound units, cross compound units are not on the same shaft.
 
@@ -37,10 +34,6 @@ class GovSteamCC(CrossCompoundTurbineGovernorDynamics, ModuleType):
     flp: Fraction of LP power ahead of reheater (Flp).  Typical value = 0,7.
     dlp: LP damping factor (Dlp).  Typical value = 0.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return GovSteamCC(*args, **kwargs)
 
     mwbase: float = Field(
         default=0.0,
@@ -170,13 +163,3 @@ class GovSteamCC(CrossCompoundTurbineGovernorDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import GovSteamCC"
-# work as well as
-# "from GovSteamCC import GovSteamCC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = GovSteamCC

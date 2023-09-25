@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .AsynchronousMachineDynamics import AsynchronousMachineDynamics
 
 
 @dataclass(config=DataclassConfig)
-class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics, ModuleType):
+class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics):
     """
     The electrical equations of all variations of the asynchronous model are based on the AsynchronousEquivalentCircuit
       diagram for the direct- and quadrature- axes, with two equivalent rotor windings in each axis.   Equations for
@@ -35,10 +32,6 @@ class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics, ModuleTy
     rr2: Damper 2 winding resistance.
     xlr2: Damper 2 winding leakage reactance.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return AsynchronousMachineEquivalentCircuit(*args, **kwargs)
 
     xm: float = Field(
         default=0.0,
@@ -84,13 +77,3 @@ class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics, ModuleTy
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import AsynchronousMachineEquivalentCircuit"
-# work as well as
-# "from AsynchronousMachineEquivalentCircuit import AsynchronousMachineEquivalentCircuit".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = AsynchronousMachineEquivalentCircuit

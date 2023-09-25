@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .RegulatingCondEq import RegulatingCondEq
 
 
 @dataclass(config=DataclassConfig)
-class ShuntCompensator(RegulatingCondEq, ModuleType):
+class ShuntCompensator(RegulatingCondEq):
     """
     A shunt capacitor or reactor or switchable bank of shunt capacitors or reactors. A section of a shunt compensator is
       an individual capacitor or reactor. A negative value for bPerSection indicates that the compensator is a
@@ -43,10 +40,6 @@ class ShuntCompensator(RegulatingCondEq, ModuleType):
       to one of the NonlinearShuntCompenstorPoint.sectionNumber. There is no interpolation between
       NonlinearShuntCompenstorPoint-s.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ShuntCompensator(*args, **kwargs)
 
     aVRDelay: int = Field(
         default=0,
@@ -113,13 +106,3 @@ class ShuntCompensator(RegulatingCondEq, ModuleType):
             Profile.SV,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ShuntCompensator"
-# work as well as
-# "from ShuntCompensator import ShuntCompensator".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ShuntCompensator

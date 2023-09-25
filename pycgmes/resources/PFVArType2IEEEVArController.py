@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .PFVArControllerType2Dynamics import PFVArControllerType2Dynamics
 
 
 @dataclass(config=DataclassConfig)
-class PFVArType2IEEEVArController(PFVArControllerType2Dynamics, ModuleType):
+class PFVArType2IEEEVArController(PFVArControllerType2Dynamics):
     """
     IEEE VAR controller type 2 which is a summing point type controller. It makes up the outside loop of a two-loop
       system. This controller is implemented as a slow PI type controller, and the voltage regulator forms the inner
@@ -31,10 +28,6 @@ class PFVArType2IEEEVArController(PFVArControllerType2Dynamics, ModuleType):
       integral action is active) false = 0 (in the overexcitation or underexcitation state, so integral
       action is disabled to allow the limiter to play its role).
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return PFVArType2IEEEVArController(*args, **kwargs)
 
     qref: float = Field(
         default=0.0,
@@ -94,13 +87,3 @@ class PFVArType2IEEEVArController(PFVArControllerType2Dynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import PFVArType2IEEEVArController"
-# work as well as
-# "from PFVArType2IEEEVArController import PFVArType2IEEEVArController".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = PFVArType2IEEEVArController

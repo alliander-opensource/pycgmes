@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .ACDCConverter import ACDCConverter
 
 
 @dataclass(config=DataclassConfig)
-class CsConverter(ACDCConverter, ModuleType):
+class CsConverter(ACDCConverter):
     """
     DC side of the current source converter (CSC). The firing angle controls the dc voltage at the converter, both for
       rectifier and inverter. The difference between the dc voltages of the rectifier and inverter determines the dc
@@ -67,10 +64,6 @@ class CsConverter(ACDCConverter, ModuleType):
       positive value.
     CSCDynamics: Current source converter dynamics model used to describe dynamic behaviour of this converter.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return CsConverter(*args, **kwargs)
 
     maxAlpha: float = Field(
         default=0.0,
@@ -186,13 +179,3 @@ class CsConverter(ACDCConverter, ModuleType):
             Profile.SSH,
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import CsConverter"
-# work as well as
-# "from CsConverter import CsConverter".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = CsConverter

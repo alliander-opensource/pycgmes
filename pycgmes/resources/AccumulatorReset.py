@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,16 +13,12 @@ from .Control import Control
 
 
 @dataclass(config=DataclassConfig)
-class AccumulatorReset(Control, ModuleType):
+class AccumulatorReset(Control):
     """
     This command resets the counter value to zero.
 
     AccumulatorValue: The accumulator value that is reset by the command.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return AccumulatorReset(*args, **kwargs)
 
     AccumulatorValue: Optional[str] = Field(
         default=None,
@@ -43,13 +36,3 @@ class AccumulatorReset(Control, ModuleType):
         return {
             Profile.OP,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import AccumulatorReset"
-# work as well as
-# "from AccumulatorReset import AccumulatorReset".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = AccumulatorReset

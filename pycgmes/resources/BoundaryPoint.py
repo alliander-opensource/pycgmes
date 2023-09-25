@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .PowerSystemResource import PowerSystemResource
 
 
 @dataclass(config=DataclassConfig)
-class BoundaryPoint(PowerSystemResource, ModuleType):
+class BoundaryPoint(PowerSystemResource):
     """
     Designates a connection point at which one or more model authority sets shall connect to. The location of the
       connection point as well as other properties are agreed between organisations responsible for the
@@ -55,10 +52,6 @@ class BoundaryPoint(PowerSystemResource, ModuleType):
       TieFlow is required at all sides of the boundary point (default).
     ConnectivityNode: The connectivity node that is designated as a boundary point.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return BoundaryPoint(*args, **kwargs)
 
     fromEndIsoCode: str = Field(
         default="",
@@ -142,13 +135,3 @@ class BoundaryPoint(PowerSystemResource, ModuleType):
             Profile.EQBD,
             Profile.EQ,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import BoundaryPoint"
-# work as well as
-# "from BoundaryPoint import BoundaryPoint".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = BoundaryPoint

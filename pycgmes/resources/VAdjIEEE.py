@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .VoltageAdjusterDynamics import VoltageAdjusterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class VAdjIEEE(VoltageAdjusterDynamics, ModuleType):
+class VAdjIEEE(VoltageAdjusterDynamics):
     """
     IEEE voltage adjuster which is used to represent the voltage adjuster in either a power factor or VAr control
       system. Reference: IEEE 421.5-2005, 11.1.
@@ -27,10 +24,6 @@ class VAdjIEEE(VoltageAdjusterDynamics, ModuleType):
     taon: Time that adjuster pulses are on (TAON) (>= 0).  Typical value = 0,1.
     taoff: Time that adjuster pulses are off (TAOFF) (>= 0).  Typical value = 0,5.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return VAdjIEEE(*args, **kwargs)
 
     vadjf: float = Field(
         default=0.0,
@@ -83,13 +76,3 @@ class VAdjIEEE(VoltageAdjusterDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import VAdjIEEE"
-# work as well as
-# "from VAdjIEEE import VAdjIEEE".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = VAdjIEEE

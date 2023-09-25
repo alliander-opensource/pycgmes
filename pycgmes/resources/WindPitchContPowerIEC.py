@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class WindPitchContPowerIEC(IdentifiedObject, ModuleType):
+class WindPitchContPowerIEC(IdentifiedObject):
     """
     Pitch control power model. Reference: IEC 61400-27-1:2015, 5.6.5.1.
 
@@ -31,10 +28,6 @@ class WindPitchContPowerIEC(IdentifiedObject, ModuleType):
     tr: Voltage measurement time constant (Tr) (>= 0). It is a type-dependent parameter.
     uuvrt: Dip detection threshold (uUVRT). It is a type-dependent parameter.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindPitchContPowerIEC(*args, **kwargs)
 
     # *Association not used*
     # Type M:1..n in CIM  # pylint: disable-next=line-too-long
@@ -106,13 +99,3 @@ class WindPitchContPowerIEC(IdentifiedObject, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindPitchContPowerIEC"
-# work as well as
-# "from WindPitchContPowerIEC import WindPitchContPowerIEC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindPitchContPowerIEC

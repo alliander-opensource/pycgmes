@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcSK(ExcitationSystemDynamics, ModuleType):
+class ExcSK(ExcitationSystemDynamics):
     """
     Slovakian excitation system.  UEL and secondary voltage control are included in this model. When this model is used,
       there cannot be a separate underexcitation limiter or VAr controller model.
@@ -58,10 +55,6 @@ class ExcSK(ExcitationSystemDynamics, ModuleType):
       value = 0,95.
     yp: Maximum output (Yp).  Typical value = 1.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcSK(*args, **kwargs)
 
     efdmax: float = Field(
         default=0.0,
@@ -296,13 +289,3 @@ class ExcSK(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcSK"
-# work as well as
-# "from ExcSK import ExcSK".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcSK

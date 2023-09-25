@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .Equipment import Equipment
 
 
 @dataclass(config=DataclassConfig)
-class ConductingEquipment(Equipment, ModuleType):
+class ConductingEquipment(Equipment):
     """
     The parts of the AC power system that are designed to carry current or that are conductively connected through
       terminals.
@@ -27,10 +24,6 @@ class ConductingEquipment(Equipment, ModuleType):
       only one base voltage applies.  For example, not used for transformers.
     SvStatus: The status state variable associated with this conducting equipment.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ConductingEquipment(*args, **kwargs)
 
     # *Association not used*
     # Type M:0..n in CIM  # pylint: disable-next=line-too-long
@@ -61,13 +54,3 @@ class ConductingEquipment(Equipment, ModuleType):
             Profile.SSH,
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ConductingEquipment"
-# work as well as
-# "from ConductingEquipment import ConductingEquipment".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ConductingEquipment

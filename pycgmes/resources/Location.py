@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .IdentifiedObject import IdentifiedObject
 
 
 @dataclass(config=DataclassConfig)
-class Location(IdentifiedObject, ModuleType):
+class Location(IdentifiedObject):
     """
     The place, scene, or point of something where someone or something has been, is, and/or will be at a given moment in
       time. It can be defined with one or more position points (coordinates) in a given coordinate system.
@@ -27,10 +24,6 @@ class Location(IdentifiedObject, ModuleType):
     PositionPoints: Sequence of position points describing this location, expressed in coordinate system
       `Location.CoordinateSystem`.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return Location(*args, **kwargs)
 
     CoordinateSystem: Optional[str] = Field(
         default=None,
@@ -66,13 +59,3 @@ class Location(IdentifiedObject, ModuleType):
         return {
             Profile.GL,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import Location"
-# work as well as
-# "from Location import Location".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = Location

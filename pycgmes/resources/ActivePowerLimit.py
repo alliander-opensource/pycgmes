@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,17 +12,13 @@ from .OperationalLimit import OperationalLimit
 
 
 @dataclass(config=DataclassConfig)
-class ActivePowerLimit(OperationalLimit, ModuleType):
+class ActivePowerLimit(OperationalLimit):
     """
     Limit on active power flow.
 
     normalValue: The normal value of active power limit. The attribute shall be a positive value or zero.
     value: Value of active power limit. The attribute shall be a positive value or zero.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ActivePowerLimit(*args, **kwargs)
 
     normalValue: float = Field(
         default=0.0,
@@ -51,13 +44,3 @@ class ActivePowerLimit(OperationalLimit, ModuleType):
             Profile.EQ,
             Profile.SSH,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ActivePowerLimit"
-# work as well as
-# "from ActivePowerLimit import ActivePowerLimit".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ActivePowerLimit

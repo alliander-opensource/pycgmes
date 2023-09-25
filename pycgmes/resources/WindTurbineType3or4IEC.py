@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .WindTurbineType3or4Dynamics import WindTurbineType3or4Dynamics
 
 
 @dataclass(config=DataclassConfig)
-class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics, ModuleType):
+class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
     """
     Parent class supporting relationships to IEC wind turbines type 3 and type 4 including their control models.
 
@@ -27,10 +24,6 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics, ModuleType):
     WindProtectionIEC: Wind turbune protection model associated with this wind generator type 3 or type 4 model.
     WindRefFrameRotIEC: Reference frame rotation model associated with this wind turbine type 3 or type 4 model.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindTurbineType3or4IEC(*args, **kwargs)
 
     WindContCurrLimIEC: Optional[str] = Field(
         default=None,
@@ -83,13 +76,3 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindTurbineType3or4IEC"
-# work as well as
-# "from WindTurbineType3or4IEC import WindTurbineType3or4IEC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindTurbineType3or4IEC

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic.dataclasses import dataclass
 from ..utils.dataclassconfig import DataclassConfig
@@ -14,15 +11,11 @@ from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
-class RemoteSignalKind(Base, ModuleType):
+class RemoteSignalKind(Base):
     """
     Type of input signal coming from remote bus.
 
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return RemoteSignalKind(*args, **kwargs)
 
     # No attributes defined for this class.
 
@@ -35,13 +28,3 @@ class RemoteSignalKind(Base, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import RemoteSignalKind"
-# work as well as
-# "from RemoteSignalKind import RemoteSignalKind".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = RemoteSignalKind

@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .OverexcitationLimiterDynamics import OverexcitationLimiterDynamics
 
 
 @dataclass(config=DataclassConfig)
-class OverexcLim2(OverexcitationLimiterDynamics, ModuleType):
+class OverexcLim2(OverexcitationLimiterDynamics):
     """
     Different from LimIEEEOEL, LimOEL2 has a fixed pickup threshold and reduces the excitation set-point by means of a
       non-windup integral regulator. Irated is the rated machine excitation current (calculated from nameplate
@@ -26,10 +23,6 @@ class OverexcLim2(OverexcitationLimiterDynamics, ModuleType):
     voimin: Minimum error signal (VOIMIN) (< OverexcLim2.voimax).  Typical value = -9999.
     ifdlim: Limit value of rated field current (IFDLIM).  Typical value = 1,05.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return OverexcLim2(*args, **kwargs)
 
     koi: float = Field(
         default=0.0,
@@ -68,13 +61,3 @@ class OverexcLim2(OverexcitationLimiterDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import OverexcLim2"
-# work as well as
-# "from OverexcLim2 import OverexcLim2".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = OverexcLim2

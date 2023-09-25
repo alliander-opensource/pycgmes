@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -15,7 +12,7 @@ from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
 @dataclass(config=DataclassConfig)
-class ExcBBC(ExcitationSystemDynamics, ModuleType):
+class ExcBBC(ExcitationSystemDynamics):
     """
     Transformer fed static excitation system (static with ABB regulator). This model represents a static excitation
       system in which a gated thyristor bridge fed by a transformer at the main generator terminals feeds the main
@@ -35,10 +32,6 @@ class ExcBBC(ExcitationSystemDynamics, ModuleType):
     switch: Supplementary signal routing selector (switch). true = Vs connected to 3rd summing point false =  Vs
       connected to 1st summing point (see diagram). Typical value = false.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return ExcBBC(*args, **kwargs)
 
     t1: int = Field(
         default=0,
@@ -126,13 +119,3 @@ class ExcBBC(ExcitationSystemDynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import ExcBBC"
-# work as well as
-# "from ExcBBC import ExcBBC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = ExcBBC

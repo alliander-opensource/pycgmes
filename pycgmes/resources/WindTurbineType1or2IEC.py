@@ -2,9 +2,6 @@
 Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-import sys
-from types import ModuleType
-
 from functools import cached_property
 from typing import Optional
 from pydantic import Field
@@ -16,7 +13,7 @@ from .WindTurbineType1or2Dynamics import WindTurbineType1or2Dynamics
 
 
 @dataclass(config=DataclassConfig)
-class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics, ModuleType):
+class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics):
     """
     Parent class supporting relationships to IEC wind turbines type 1 and type 2 including their control models.
       Generator model for wind turbine of IEC type 1 or type 2 is a standard asynchronous generator model.
@@ -25,10 +22,6 @@ class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics, ModuleType):
     WindMechIEC: Wind mechanical model associated with this wind generator type 1 or type 2 model.
     WindProtectionIEC: Wind turbune protection model associated with this wind generator type 1 or type 2 model.
     """
-
-    def __call__(self, *args, **kwargs):
-        # Dark magic - see last lines of the file.
-        return WindTurbineType1or2IEC(*args, **kwargs)
 
     WindMechIEC: Optional[str] = Field(
         default=None,
@@ -53,13 +46,3 @@ class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics, ModuleType):
         return {
             Profile.DY,
         }
-
-
-# This + inheriting from ModuleType + __call__:
-# makes:
-# "import WindTurbineType1or2IEC"
-# work as well as
-# "from WindTurbineType1or2IEC import WindTurbineType1or2IEC".
-# You would get a typechecker "not callable" error, but this might be useful for
-# backward compatibility.
-sys.modules[__name__].__class__ = WindTurbineType1or2IEC

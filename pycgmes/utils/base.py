@@ -100,11 +100,8 @@ class Base:
         # ... but we check existence with the unqualified (short) name.
         seen_attrs = set()
 
-        # mro contains itself (so parent might be a misnomer) and object, possibly module as well.
-        print(self.__class__.__mro__)
-        for parent in reversed(self.__class__.__mro__):
-            if parent.__name__ in ["object", "module"]:
-                continue
+        # mro contains itself (so parent might be a misnomer) and object, removed with the [:-1].
+        for parent in reversed(self.__class__.__mro__[:-1]):
             for f in fields(parent):
                 shortname = f.name
                 qualname = f"{parent.apparent_name()}.{shortname}"  # type: ignore
