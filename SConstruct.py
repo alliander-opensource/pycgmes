@@ -39,7 +39,7 @@ if "format" in COMMAND_LINE_TARGETS:
     COMMAND_LINE_TARGETS += ["black", "ruff"]
 
 if "quality" in COMMAND_LINE_TARGETS:
-    COMMAND_LINE_TARGETS += ["ruff", "lock", "pylint", "mypy", "test", "coverage"]
+    COMMAND_LINE_TARGETS += ["ruff", "lock", "pylint", "mypy", "test", "coverage", "license"]
 
 # Formatting targets, which might change files. Let's run them *before* the linters and friends.
 # This is why ruff is the first of the quality target, as it fixes things as well.
@@ -92,6 +92,9 @@ if "coverage" in COMMAND_LINE_TARGETS:
         _exec(f"coverage run --module pytest {_TEST_SUBJECT}")
 
     _exec("coverage report --show-missing")
+
+if "license" in COMMAND_LINE_TARGETS or "licence" in COMMAND_LINE_TARGETS:
+    _exec("reuse lint")
 
 if not _target_found:
     print(f"No valid target in {COMMAND_LINE_TARGETS}. Look at SConstruct.py for what is allowed.")

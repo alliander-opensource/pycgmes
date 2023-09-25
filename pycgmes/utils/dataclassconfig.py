@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
+
 class DataclassConfig:  # pylint: disable=too-few-public-methods
     """
     Used to configure pydantic dataclasses.

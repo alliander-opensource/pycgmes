@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # Default namespaces used by CGMES.
 NAMESPACES = {
     "cim": "http://iec.ch/TC57/2013/CIM-schema-cim16#",
