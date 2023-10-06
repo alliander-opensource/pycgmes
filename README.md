@@ -37,14 +37,17 @@ They can easily be installed via pip: `pip install pycgmes` or `pip install pycg
 
 ## Custom attributes
 
-You might want to add extra attributes. For instance, the color of a cable (ACLineSegment). This is possible in 2 ways.
+You might want to add extra attributes. For instance, the color of a cable (ACLineSegment). This is possible in 2 ways:
+
+- Adding the attribute to a custom class in an existing profile.
+- Define a new profile including a custom class where the attribute is defined.
 
 You can look at the [examples](./examples/custom_attributes.py)
 
 ### Add to an existing profile
 
 If you need to add your own attributes (example: cable colour), you can do that by subclassing the relevant class, and
-add a (or many) new atributes there.
+add one or more new atributes there.
 
 If this is a leaf node (for instance `ACLineSegment`), it "just works". If you want to add an extra attribute to a
 class higher in the hierarchy (for instance `Equipment`) there is a lot more work to do.
@@ -62,11 +65,11 @@ class CustomBay(Bay):
 
 ### Create a new profile
 
-This is cleaner - the official CGMES profiles stays untouched, and a new profile is delivered next to it.
+This approach is cleaner and more standard compliant: the official CGMES profiles stay untouched, while a new additional profile contains your customisations.
 
-You can do this by extending the BaseProfile Enum in [Profile.py](./pycgmes/utils/profile.py).
+You can do this by extending the `BaseProfile`` Enum in [profile.py](./pycgmes/utils/profile.py).
 
-In Python, it is not possible to extend or compose Enums which already have fields, but you can just create your own:
+While in Python it is not possible to extend or compose Enums which already have fields, you can create your own:
 
 ```python
 from pycgmes.utils.profile import BaseProfile
@@ -98,9 +101,8 @@ custom_attrs = CustomBayAttr(colour="purple").cgmes_attributes_in_profile(Custom
 
 #### Apparent class
 
-By default, an attribute is fully qualified. `bch` in `ACLineSegment` will appear as `ACLineSegment.bch` in the serialisation.
-For a custom attribute, you might not want to see  `ACLineSegmentCustom.bch`. To prevent this, you can override the `apparent_name`
-of your custom class:
+By default, an attribute is fully qualified. A standard `attribute` in `ACLineSegment` will appear as `ACLineSegment.attribute` in the serialisation.
+In the case of a custom attribute defined via a sub class, the result would be: `ACLineSegmentCustom.customAttribute`. To preserve the original class name (i.e. serialise your attribute as `ACLineSegment.customAttribute`), you need to override the `apparent_name` of your custom class:
 
 ```python
 from pydantic.dataclasses import dataclass
