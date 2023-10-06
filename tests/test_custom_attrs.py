@@ -14,6 +14,7 @@ from pycgmes.utils.profile import Profile
 
 @dataclass(config=DataclassConfig)
 class CustomBay(Bay):
+    # Extends Bay. Has a lot of inherited fields.
     colour: str = Field(
         default="Red",
         in_profiles=[
@@ -29,6 +30,7 @@ class CustomBay(Bay):
 
 @dataclass(config=DataclassConfig)
 class CustomBase(Base):
+    # Extends Base. Has no inherited fields. Says its Bay.
     colour: str = Field(
         default="Red",
         in_profiles=[
@@ -44,6 +46,7 @@ class CustomBase(Base):
 
 @dataclass(config=DataclassConfig)
 class CustomButNotmuch(Base):
+    # Extends Base. No inherited fields. Not namespace defined anywhere.
     colour: str = Field(
         default="Red",
         in_profiles=[
@@ -55,16 +58,37 @@ class CustomButNotmuch(Base):
     # no apparent_name()
 
 
+@dataclass(config=DataclassConfig)
+class CustomNS(Base):
+    # Extends Base. No inherited fields. NS only defined at class level, but will be
+    # used by the attribute.
+    colour: str = Field(
+        default="Red",
+        in_profiles=[
+            Profile.EQ,
+        ],
+        # no namespace
+    )
+
+    @property
+    def namespace(self):
+        return "cheesy namespace"
+
+    # no apparent_name()
+
+
 class TestCustom:
     @pytest.mark.parametrize(
-        "klass, num_attrs, apparent, ns",
+        ("klass", "num_attrs", "apparent", "ns"),
         [
             (CustomBay, 6, "Bay", "custom"),
             (CustomBase, 1, "Bay", "custom"),
-            (CustomButNotmuch, 1, "CustomButNotmuch", None),
+            (CustomButNotmuch, 1, "CustomButNotmuch", "cim"),
+            (CustomNS, 1, "CustomNS", "cheesy namespace"),
         ],
     )
     def test_customisation(self, klass, num_attrs, apparent, ns):
+        # Test different variations of class with a 'colour' attribute.
         colour = "cheese"
         cust = klass(colour=colour)
         attrs = cust.cgmes_attributes_in_profile(None)

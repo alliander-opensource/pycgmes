@@ -14,6 +14,8 @@ SPDX-License-Identifier: Apache-2.0
     - [Implementation details](#implementation-details)
       - [Apparent class](#apparent-class)
       - [Namespace](#namespace)
+        - [Class/Resource Namespace](#classresource-namespace)
+        - [Attribute namespace](#attribute-namespace)
   - [Content of this repository](#content-of-this-repository)
     - [Schemas v3](#schemas-v3)
     - [Shacl files](#shacl-files)
@@ -119,9 +121,22 @@ class ACLineSegmentCustom(ACLineSegment):
 
 #### Namespace
 
+##### Class/Resource Namespace
+
+The default class (or resource) namespace is `cim` (`"http://iec.ch/TC57/2013/CIM-schema-cim16#"`)
+
+You can override it when you create a custom resource by just redefining the property `namespace`:
+
+##### Attribute namespace
+
 In the serialisation, the namespace of all attributes is `cim` (`"http://iec.ch/TC57/2013/CIM-schema-cim16#"`) by default.
-The serialisation is not done by PyCGMES (yet), but if you want a custom namespace for an attribute,
-you can give a hint to the serialiser by adding some metadata to your custom attributes:
+
+The namespace of an attribute is the first value found:
+
+- namespace defined in the Field (see `colour` below - it would be `custom`)
+- namespace of the class (see `size` below - it would be `custom ns class`)
+- namespace of the first parent defining one. The top parent (`Base`) defined  `cim`.
+
 
 ```python
 from pydantic.dataclasses import dataclass
@@ -140,6 +155,17 @@ class ACLineSegmentCustom(ACLineSegment):
         ],
         namespace="custom",
     )
+
+    size: str = Field(
+        default="Big",
+        in_profiles=[
+            Profile.EQ, # Do not do this, see chapter "create a new profile"
+        ],
+    )
+
+    @property
+    def namesapce(self) -> str:
+        return "custom ns class"
 
     @classmethod
     def apparent_name(cls):

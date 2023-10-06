@@ -2,6 +2,9 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+import json
+from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
@@ -20,24 +23,33 @@ class CustomAttribute(ACLineSegment):
         in_profiles=[
             CustomProfile.MYOWN,
         ],
-        namespace="custom",
+        namespace="custom for colour",
     )
 
     structure: str = Field(
         default="chewy",
         in_profiles=[
-            Profile.EQ,
+            CustomProfile.MYOWN,
         ],
-        namespace="custom",
+        # No namespace defined, it will use the class namespace.
     )
 
     @classmethod
     def apparent_name(cls):
         return cls.__base__.__name__
 
+    @cached_property
+    def namespace(self) -> str:
+        return "custom from class"
+
 
 if __name__ == "__main__":
     my_resource = CustomAttribute(colour="red")
 
-    print(my_resource.cgmes_attribute_names_in_profile(CustomProfile.MYOWN))
-    print(my_resource.cgmes_attribute_names_in_profile(Profile.EQ))
+    print("Attributes in profile MYOWN:")
+    print(
+        json.dumps(
+            {qualname: attr for qualname, attr in my_resource.cgmes_attributes_in_profile(CustomProfile.MYOWN).items()},
+            indent=2,
+        )
+    )
