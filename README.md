@@ -4,9 +4,11 @@ SPDX-FileCopyrightText: 2023 Alliander
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# cgmes-python
+# PyCGMES
 
-- [cgmes-python](#cgmes-python)
+<<<<<<< HEAD
+- [PyCGMES](#pycgmes)
+  - [About CGMES](#about-cgmes)
   - [Library usage](#library-usage)
   - [Custom attributes](#custom-attributes)
     - [Add to an existing profile](#add-to-an-existing-profile)
@@ -18,19 +20,33 @@ SPDX-License-Identifier: Apache-2.0
         - [Attribute namespace](#attribute-namespace)
   - [Content of this repository](#content-of-this-repository)
     - [Schemas v3](#schemas-v3)
-    - [Shacl files](#shacl-files)
+    - [SHACL files](#shacl-files)
     - [V3 source zip](#v3-source-zip)
     - [Dataclasses](#dataclasses)
   - [Library build, CI, CD...](#library-build-ci-cd)
     - [CI](#ci)
     - [CD](#cd)
   - [License](#license)
+>>>>>>> 4384d02 (update docs with CGMES info)
 
-Python dataclasses for CGMES 3 + rdf schema description + SHACL files.
+Python dataclasses for CGMES 3 + RDF schema description + SHACL (validation) files.
+
+## About CGMES
+
+The Common Grid Model Exchange Specification, or CGMES, is provided by ENTSO-E (the European Network of TSOs for
+Electricity) to facilitate the exchange of grid data between parties. It is based on CIM, the Common Information Model
+for electric utilities, provided by the
+IEC (see also [CIM on Wikipedia](https://en.wikipedia.org/wiki/Common_Information_Model_(electricity))).
+
+CIM defines the vocabulary for electricity grids, meaning the names we use for different components and the way they
+relate to each other. CGMES takes a subset of this vocabulary and provides RDF schema and SHACL validation files.
+
+Further reading and all relevant CGMES (source) files are found
+on [the CGMES page of the ENTSO-E website](https://www.entsoe.eu/data/cim/cim-for-grid-models-exchange/).
 
 ## Library usage
 
-From Pypi.org, 2 packages are available:
+From Pypi.org, 2 packages are available (both from this repository):
 
 - [https://pypi.org/project/pycgmes/](https://pypi.org/project/pycgmes/)
 - [https://pypi.org/project/pycgmes-shacl/](https://pypi.org/project/pycgmes-shacl/)
@@ -112,6 +128,7 @@ from pydantic.dataclasses import dataclass
 from pycgmes.resources.ACLineSegment import ACLineSegment
 from pycgmes.utils.dataclassconfig import DataclassConfig
 
+
 @dataclass(config=DataclassConfig)
 class ACLineSegmentCustom(ACLineSegment):
     @classmethod
@@ -123,13 +140,13 @@ class ACLineSegmentCustom(ACLineSegment):
 
 ##### Class/Resource Namespace
 
-The default class (or resource) namespace is `cim` (`"http://iec.ch/TC57/2013/CIM-schema-cim16#"`)
+The default class (or resource) namespace is `http://iec.ch/TC57/CIM100#`.
 
 You can override it when you create a custom resource by just redefining the property `namespace`:
 
 ##### Attribute namespace
 
-In the serialisation, the namespace of all attributes is `cim` (`"http://iec.ch/TC57/2013/CIM-schema-cim16#"`) by default.
+In the serialisation, the namespace of all attributes is `http://iec.ch/TC57/CIM100#` by default.
 
 The namespace of an attribute is the first value found:
 
@@ -145,9 +162,9 @@ from pydantic import Field
 from pycgmes.resources import ACLineSegment
 from pycgmes.resources.Base import DataclassConfig, Profile
 
+
 @dataclass(config=DataclassConfig)
 class ACLineSegmentCustom(ACLineSegment):
-
     colour: str = Field(
         default="Red",
         in_profiles=[
@@ -178,25 +195,27 @@ It will be given when `cgmes_attributes_in_profile()` is called.
 
 ### Schemas v3
 
-[schemas](./schemas/) are rdf definitions of CGMES. They are used once, to generate dataclasses, and
+[schemas](./schemas) are rdf definitions of CGMES. They are used once, to generate dataclasses, and
 can then happily be forgotten.
 
 They are available on the [ENTSO-E site](https://www.entsoe.eu/data/cim/cim-conformity-and-interoperability/).
-Look for CGMES Conformity Assessment Scheme v3 then [Application Profiles v3.0.1](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/IEC61970-600-2_CGMES_3_0_1_ApplicationProfiles.zip)
+Look for CGMES Conformity Assessment Scheme v3
+then [Application Profiles v3.0.1](https://www.entsoe.eu/Documents/CIM_documents/Grid_Model_CIM/IEC61970-600-2_CGMES_3_0_1_ApplicationProfiles.zip)
 
 Older versions could be found on the [ENTSO-E site](https://www.entsoe.eu/data/cim/cim-for-grid-models-exchange/).
 
-### Shacl files
+### SHACL files
 
-[Shapes constraint Language](https://en.wikipedia.org/wiki/SHACL) is used for validation of the actual content of the
-CGMES files, not just XML validation. They can be found in [shacl](./pycgmes/shacl). This is the new validation standard. OCL
-is referenced, specially with older versions, but Entsoe is moving away from it.
+[Shapes Constraint Language](https://en.wikipedia.org/wiki/SHACL) is used for validation of the actual content of the
+CGMES files, not just XML validation. They can be found in [shacl](./pycgmes/shacl). This is the new validation
+standard. OCL
+is referenced, specially with older versions, but ENTSO-E is moving away from it.
 
 To use them, there is another package `pycmges-shacl`, built from this repo as well.
 
 ### V3 source zip
 
-From Entsoe, in [data](./data/). This is one small-ish zip file, containing a bit more than just the shacl and rdfs
+From ENTSO-E, in [data](./data). This is one small-ish zip file, containing a bit more than just the SHACL and RDFS
 files (those extracted and mentioned above) but is usually not needed.
 
 ### Dataclasses
