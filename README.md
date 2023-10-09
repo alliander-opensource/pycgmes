@@ -35,14 +35,14 @@ Python dataclasses for CGMES 3 + RDF schema description + SHACL (validation) fil
 
 The Common Grid Model Exchange Specification, or CGMES, is provided by ENTSO-E (the European Network of TSOs for
 Electricity) to facilitate the exchange of grid data between parties. It is based on CIM, the Common Information Model
-for electric utilities, provided by the
-IEC (see also [CIM on Wikipedia](https://en.wikipedia.org/wiki/Common_Information_Model_(electricity))).
+for electric utilities, provided by the IEC (see also
+[CIM on Wikipedia](https://en.wikipedia.org/wiki/Common_Information_Model_(electricity))).
 
 CIM defines the vocabulary for electricity grids, meaning the names we use for different components and the way they
 relate to each other. CGMES takes a subset of this vocabulary and provides RDF schema and SHACL validation files.
 
-Further reading and all relevant CGMES (source) files are found
-on [the CGMES page of the ENTSO-E website](https://www.entsoe.eu/data/cim/cim-for-grid-models-exchange/).
+Further reading and all relevant CGMES (source) files are found on
+[the CGMES page of the ENTSO-E website](https://www.entsoe.eu/data/cim/cim-for-grid-models-exchange/).
 
 ## Library usage
 
@@ -153,7 +153,6 @@ The namespace of an attribute is the first value found:
 - namespace defined in the Field (see `colour` below - it would be `custom`)
 - namespace of the class (see `size` below - it would be `custom ns class`)
 - namespace of the first parent defining one. The top parent (`Base`) defined  `cim`.
-
 
 ```python
 from pydantic.dataclasses import dataclass
