@@ -14,7 +14,7 @@ Those are the current plans to develop PyCGMES:
   - add build badges in the readme
 - Documentation:
   - add (and publish) readthedoc.io doc
-  - Add generic readme introduction
+  - ~~Add generic readme introduction~~
 - Core update:
   - Look into handling profiles as strings instead of ENUM
   - build export in
