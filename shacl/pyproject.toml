@@ -5,7 +5,7 @@
 [tool.poetry]
 name = "pycgmes-shacl"
 version = "1.0.1"
-description = "Python dataclasses for CGMES 3.0.0"
+description = "SHACL validation files for PyCGMES"
 authors = ["pycgmes <pycgmes@alliander.com>"]
 readme = "Readme.md"
 repository = "https://github.com/alliander-opensource/pycgmes"

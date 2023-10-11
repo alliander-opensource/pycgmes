@@ -10,8 +10,10 @@ from functools import cached_property
 from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
-from .Base import Base
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
+from ..utils.base import Base
 
 
 @dataclass(config=DataclassConfig)
@@ -46,7 +48,7 @@ class ActivePowerPerCurrentFlow(Base):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.

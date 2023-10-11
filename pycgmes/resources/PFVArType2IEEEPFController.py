@@ -9,7 +9,9 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from .Base import DataclassConfig, Profile
+from ..utils.dataclassconfig import DataclassConfig
+from ..utils.profile import BaseProfile, Profile
+
 from .PFVArControllerType2Dynamics import PFVArControllerType2Dynamics
 
 
@@ -81,7 +83,7 @@ class PFVArType2IEEEPFController(PFVArControllerType2Dynamics):
     )
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         """
         A resource can be used by multiple profiles. This is the set of profiles
         where this element can be found.

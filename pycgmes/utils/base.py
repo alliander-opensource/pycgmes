@@ -2,108 +2,28 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-# We follow the CIM naming convention, not python.
-# pylint: disable=invalid-name
-
-"""
-Parent element of all CGMES elements
-"""
+# Drop in dataclass replacement, allowing easier json dump and validation in the future.
 import importlib
 from dataclasses import Field, fields
-from enum import Enum
-from functools import cache, cached_property
+from functools import cached_property
 from typing import Any, TypeAlias, TypedDict
 
-# Drop in dataclass replacement, allowing easier json dump and validation in the future.
 from pydantic.dataclasses import dataclass
 
+from pycgmes.utils.constants import NAMESPACES
 
-class Profile(Enum):
-    """
-    Enum containing all CGMES profiles and their export priority.
-    todo: enums are ordered, so we can have a short->long enum without explicit prio
-    """
-
-    EQ = 0
-    SSH = 1
-    TP = 2
-    SV = 3
-    DY = 4
-    OP = 5
-    SC = 6
-    GL = 7
-    # DI = 8 # Initially mentioned but does not seem used?
-    DL = 9
-    TPBD = 10
-    EQBD = 11
-
-    @cached_property
-    def long_name(self):
-        """From the short name, return the long name of the profile."""
-        return self._short_to_long()[self.name]
-
-    @classmethod
-    def from_long_name(cls, long_name):
-        """From the long name, return the short name of the profile."""
-        return cls[cls._long_to_short()[long_name]]
-
-    @classmethod
-    @cache
-    def _short_to_long(cls) -> dict[str, str]:
-        """Returns the long name from a short name"""
-        return {
-            "DL": "DiagramLayout",
-            # "DI": "DiagramLayout",
-            "DY": "Dynamics",
-            "EQ": "Equipment",
-            "EQBD": "EquipmentBoundary",  # Not too sure about that one
-            "GL": "GeographicalLocation",
-            "OP": "Operation",
-            "SC": "ShortCircuit",
-            "SV": "StateVariables",
-            "SSH": "SteadyStateHypothesis",
-            "TP": "Topology",
-            "TPBD": "TopologyBoundary",  # Not too sure about that one
-        }
-
-    @classmethod
-    @cache
-    def _long_to_short(cls) -> dict[str, str]:
-        """Returns the short name from a long name"""
-        return {_long: _short for _short, _long in cls._short_to_long().items()}
-
-
-class DataclassConfig:  # pylint: disable=too-few-public-methods
-    """
-    Used to configure pydantic dataclasses.
-
-    See doc at
-    https://docs.pydantic.dev/latest/usage/model_config/#options
-    """
-
-    # By default, with pydantic extra arguments given to a dataclass are silently ignored.
-    # This matches the default behaviour by failing noisily.
-    extra = "forbid"
-
-
-# Default namespaces used by CGMES.
-NAMESPACES = {
-    "cim": "http://iec.ch/TC57/2013/CIM-schema-cim16#",
-    "entsoe": "http://entsoe.eu/CIM/SchemaExtension/3/1#",
-    "md": "http://iec.ch/TC57/61970-552/ModelDescription/1#",
-    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
-}
+from .dataclassconfig import DataclassConfig
+from .profile import BaseProfile
 
 
 @dataclass(config=DataclassConfig)
 class Base:
     """
-    Base Class for CIM.
+    Base Class for pylint .
     """
 
     @cached_property
-    def possible_profiles(self) -> set[Profile]:
+    def possible_profiles(self) -> set[BaseProfile]:
         raise NotImplementedError("Method not implemented because not relevant in Base.")
 
     @staticmethod
@@ -129,13 +49,20 @@ class Base:
 
         """
         attrs = {f.name: getattr(self, f.name) for f in fields(self)}
-        attrs["__class__"] = self.resource_name
+        attrs["__class__"] = self.apparent_name()
         return attrs
 
     @cached_property
     def resource_name(self) -> str:
         """Returns the resource type."""
         return self.__class__.__name__
+
+    @cached_property
+    def namespace(self) -> str:
+        """Returns the namespace. By default, the namespace is the cim namespace for all resources.
+        Custom resources can override this.
+        """
+        return NAMESPACES["cim"]
 
     @classmethod  # From python 3.11, you cannot wrap @classmethod in @property anymore.
     def apparent_name(cls) -> str:
@@ -146,7 +73,7 @@ class Base:
         """
         return cls.__name__
 
-    def cgmes_attribute_names_in_profile(self, profile: Profile | None) -> set[Field]:
+    def cgmes_attribute_names_in_profile(self, profile: BaseProfile | None) -> set[Field]:
         """
         Returns all fields accross the parent tree which are in the profile in parameter.
 
@@ -171,7 +98,7 @@ class Base:
             if f.name != "mRID"
         }
 
-    def cgmes_attributes_in_profile(self, profile: Profile | None) -> dict[str, "CgmesAttribute"]:
+    def cgmes_attributes_in_profile(self, profile: BaseProfile | None) -> dict[str, "CgmesAttribute"]:
         """
         Returns all attribute values as a dict: fully qualified name => CgmesAttribute.
         Fully qualified names is in the form class_name.attribute_name, where class_name is the
@@ -195,12 +122,25 @@ class Base:
                     # Wrong profile or already found from a parent.
                     continue
                 else:
+                    # Namespace finding
+                    # "class namespace" means the first namespace defined in the inheritance tree.
+                    # This can go up to Base, which will give the default cim NS.
+                    if (extra := getattr(f.default, "extra", None)) is None:
+                        # The attribute does not have extra metadata. It might be a custom atttribute
+                        # without it, or a base type (int...).
+                        # Use the class namespace.
+                        namespace = self.namespace
+                    elif (attr_ns := extra.get("namespace", None)) is None:
+                        # The attribute has some extras, but not namespace.
+                        # Use the class namespace.
+                        namespace = self.namespace
+                    else:
+                        # The attribute has an explicit namesapce
+                        namespace = attr_ns
+
                     qual_attrs[qualname] = CgmesAttribute(
                         value=getattr(self, shortname),
-                        # base types (e.g. int) do not have extras
-                        namespace=extra.get("namespace", None)
-                        if (extra := getattr(f.default, "extra", None))
-                        else None,
+                        namespace=namespace,
                     )
                     seen_attrs.add(shortname)
 
@@ -208,7 +148,7 @@ class Base:
 
     def __str__(self) -> str:
         """Returns the string representation of this resource."""
-        return "\n".join([f"{k}={v}" for k, v in self.to_dict().items()])
+        return "\n".join([f"{k}={v}" for k, v in sorted(self.to_dict().items())])
 
 
 CgmesAttributeTypes: TypeAlias = str | int | float | Base | list | None

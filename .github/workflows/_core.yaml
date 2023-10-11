@@ -88,8 +88,8 @@ jobs:
         run: bash ./scripts/check_indent_rdf.sh
       - name: check licences
         run: |
-          hash -r
-          poetry run reuse lint
+          hash -r # this this mandatory for reuse...
+          poetry run scons license
 
       - name: poetry build pycgmes
         run: |

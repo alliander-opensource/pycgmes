@@ -2,32 +2,27 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import os
 import subprocess  # nosec
 import sys
+from typing import Mapping
 
 from SCons.Script import COMMAND_LINE_TARGETS
 
 _CHECK_ONLY = "check" in COMMAND_LINE_TARGETS
 _SUBJECT = "pycgmes"
 _TEST_SUBJECT = "tests"
-# Full path to an environment bin directory.
-# Not needed if an environment is activated or not used (eg. Jenkins).
-_BIN = os.environ.get("PY_VENV", "")
 
 # Remember if a target has been found, to warn if not.
 _target_found: bool = False
 
 
-def _exec(command: str, absolute: bool = False) -> int:
+def _exec(command: str, env: Mapping | None = None) -> int:
     global _target_found
     _target_found = True
-    if not absolute:
-        command = f"{_BIN}{command}"
 
     print(f">>> {command}")
 
-    exit_code = subprocess.call(command, shell=True)
+    exit_code = subprocess.call(command, shell=True, env=env)
     if exit_code != 0:
         print(f"Exiting with {exit_code}")
         sys.exit(exit_code)
@@ -44,12 +39,12 @@ if "format" in COMMAND_LINE_TARGETS:
     COMMAND_LINE_TARGETS += ["black", "ruff"]
 
 if "quality" in COMMAND_LINE_TARGETS:
-    COMMAND_LINE_TARGETS += ["ruff", "lock", "pylint", "mypy", "bandit", "coverage"]
+    COMMAND_LINE_TARGETS += ["ruff", "lock", "pylint", "mypy", "test", "coverage", "license"]
 
 # Formatting targets, which might change files. Let's run them *before* the linters and friends.
 # This is why ruff is the first of the quality target, as it fixes things as well.
 if "black" in COMMAND_LINE_TARGETS:
-    cmd = f"black  SConstruct.py {_SUBJECT} {_TEST_SUBJECT} "
+    cmd = f"black  SConstruct.py {_SUBJECT} {_TEST_SUBJECT} examples"
     if _CHECK_ONLY:
         cmd += " --check"
     _exec(cmd)
@@ -70,7 +65,7 @@ if "ruff" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
 
 
 if "lock" in COMMAND_LINE_TARGETS:
-    _exec("poetry lock --check")
+    _exec("poetry check --lock")
 
 if "pylint" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
     _exec(f"pylint --rcfile=pyproject.toml {_SUBJECT}")
@@ -86,11 +81,20 @@ if "bandit" in COMMAND_LINE_TARGETS:
     _exec(f"bandit --recursive --configfile pyproject.toml .")
 
 if "test" in COMMAND_LINE_TARGETS or "tests" in COMMAND_LINE_TARGETS:
-    _exec(f"python -m pytest  {_TEST_SUBJECT}")
+    # Running tests via coverage to only report when asking for coverage
+    _exec(f"coverage run --module pytest {_TEST_SUBJECT}")
 
 if "coverage" in COMMAND_LINE_TARGETS:
-    _exec(f"coverage run -m pytest {_TEST_SUBJECT}")
-    _exec("coverage report -m")
+    if "test" in COMMAND_LINE_TARGETS or "tests" in COMMAND_LINE_TARGETS:
+        print("Reusing test output from the tests just run.")
+    else:
+        print("Need to run the tests first.")
+        _exec(f"coverage run --module pytest {_TEST_SUBJECT}")
+
+    _exec("coverage report --show-missing")
+
+if "license" in COMMAND_LINE_TARGETS or "licence" in COMMAND_LINE_TARGETS:
+    _exec("reuse lint")
 
 if not _target_found:
     print(f"No valid target in {COMMAND_LINE_TARGETS}. Look at SConstruct.py for what is allowed.")

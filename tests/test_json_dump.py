@@ -4,22 +4,29 @@
 
 import json
 
-from pycgmes.resources import Base, VoltageLevel
+from pycgmes.resources.Bay import Bay
+from pycgmes.utils.base import Base
+
+descr = "A bay, but not at sea."
 
 
 class TestJsonification:
     def test_round_robin_json_class_json(self):
-        start = json.loads('{"__class__":"VoltageLevel", "lowVoltageLimit":32.0}')
-        complete = Base.parse_json_as(start).to_dict()
+        # initial_string=
+        initial_json = json.loads(f'{{"__class__":"Bay", "description":"{descr}"}}')
+        as_class = Base.parse_json_as(initial_json)
+        final_json = as_class.to_dict()
 
-        # Validates that the given parameters (start) is in the dict of final class,
+        # Validates that the given parameters (initial_json) is in the dict of final class,
         # ignoring the other defaults params.
         # items() is actuallly a set view, and sets can be compared with <=. This line
-        # thus means: make sure that start is a subset of complete.
-        assert start.items() <= complete.items()
+        # thus means: make sure that initial_json is a subset of final_json.
+        assert initial_json.items() <= final_json.items()
 
     def test_round_robin_class_json_class(self):
-        vl = VoltageLevel(lowVoltageLimit=32.0)
-        after_rr = Base.parse_json_as(vl.to_dict())
+        initial_class = Bay(description=descr)
+        as_json = initial_class.to_dict()
+        final_class = Base.parse_json_as(as_json)
 
-        assert vl == after_rr
+        # Pydantic rewrites the == to check dataclasses element.
+        assert initial_class == final_class

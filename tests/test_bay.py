@@ -2,22 +2,20 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-# Checking only one well known class.
+# Checking only one well known class, for its callable module shortcut.
 # As they are generated, if one is correct, the others should be as well.
 import textwrap
 
 import pytest
 from pydantic import ValidationError
 
-from pycgmes.resources import (
-    Base,
-    Bay,
-    ConnectivityNodeContainer,
-    EquipmentContainer,
-    IdentifiedObject,
-    PowerSystemResource,
-)
-from pycgmes.resources.Base import Profile
+from pycgmes.resources.Bay import Bay
+from pycgmes.resources.ConnectivityNodeContainer import ConnectivityNodeContainer
+from pycgmes.resources.EquipmentContainer import EquipmentContainer
+from pycgmes.resources.IdentifiedObject import IdentifiedObject
+from pycgmes.resources.PowerSystemResource import PowerSystemResource
+from pycgmes.utils.base import Base
+from pycgmes.utils.profile import Profile
 
 
 class TestBay:
@@ -29,7 +27,7 @@ class TestBay:
         assert getattr(b, "mRID") is not None
 
     def test_bay_has_expected_parents(self):
-        parents = Bay.__mro__[0:6]  # after that there's object.
+        parents = Bay.__mro__[0:6]
         expected = (  # mro returns a tuple
             Bay,
             EquipmentContainer,
@@ -43,13 +41,13 @@ class TestBay:
     def test_bay_has_expected_str(self):
         expected = textwrap.dedent(
             """
+        VoltageLevel=None
+        __class__=Bay
         description=
         energyIdentCodeEic=
         mRID=
         name=
         shortName=
-        VoltageLevel=None
-        __class__=Bay
         """
         )[
             1:-1  # The first and last characters are newlines, which are not in str()

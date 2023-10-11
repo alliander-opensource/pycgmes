@@ -6,12 +6,16 @@ import pytest
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from pycgmes.resources import ACLineSegment
-from pycgmes.resources.Base import Base, DataclassConfig, Profile
+from pycgmes.resources.Bay import Bay
+from pycgmes.utils.base import Base
+from pycgmes.utils.constants import NAMESPACES
+from pycgmes.utils.dataclassconfig import DataclassConfig
+from pycgmes.utils.profile import Profile
 
 
 @dataclass(config=DataclassConfig)
-class CustomACLineSegment(ACLineSegment):
+class CustomBay(Bay):
+    # Extends Bay. Has a lot of inherited fields.
     colour: str = Field(
         default="Red",
         in_profiles=[
@@ -22,11 +26,12 @@ class CustomACLineSegment(ACLineSegment):
 
     @classmethod
     def apparent_name(cls):
-        return "ACLineSegment"
+        return "Bay"
 
 
 @dataclass(config=DataclassConfig)
 class CustomBase(Base):
+    # Extends Base. Has no inherited fields. Says its Bay.
     colour: str = Field(
         default="Red",
         in_profiles=[
@@ -37,11 +42,12 @@ class CustomBase(Base):
 
     @classmethod
     def apparent_name(cls):
-        return "ACLineSegment"
+        return "Bay"
 
 
 @dataclass(config=DataclassConfig)
 class CustomButNotmuch(Base):
+    # Extends Base. No inherited fields. Not namespace defined anywhere.
     colour: str = Field(
         default="Red",
         in_profiles=[
@@ -53,16 +59,37 @@ class CustomButNotmuch(Base):
     # no apparent_name()
 
 
+@dataclass(config=DataclassConfig)
+class CustomNS(Base):
+    # Extends Base. No inherited fields. NS only defined at class level, but will be
+    # used by the attribute.
+    colour: str = Field(
+        default="Red",
+        in_profiles=[
+            Profile.EQ,
+        ],
+        # no namespace
+    )
+
+    @property
+    def namespace(self):
+        return "cheesy namespace"
+
+    # no apparent_name()
+
+
 class TestCustom:
     @pytest.mark.parametrize(
-        "klass, num_attrs, apparent, ns",
+        ("klass", "num_attrs", "apparent", "ns"),
         [
-            (CustomACLineSegment, 20, "ACLineSegment", "custom"),
-            (CustomBase, 1, "ACLineSegment", "custom"),
-            (CustomButNotmuch, 1, "CustomButNotmuch", None),
+            (CustomBay, 6, "Bay", "custom"),
+            (CustomBase, 1, "Bay", "custom"),
+            (CustomButNotmuch, 1, "CustomButNotmuch", NAMESPACES["cim"]),
+            (CustomNS, 1, "CustomNS", "cheesy namespace"),
         ],
     )
     def test_customisation(self, klass, num_attrs, apparent, ns):
+        # Test different variations of class with a 'colour' attribute.
         colour = "cheese"
         cust = klass(colour=colour)
         attrs = cust.cgmes_attributes_in_profile(None)
