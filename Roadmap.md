@@ -16,6 +16,7 @@ Those are the current plans to develop PyCGMES:
   - add (and publish) readthedoc.io doc
   - Add generic readme introduction
 - Core update:
+  - Look into handling profiles as strings instead of ENUM
   - build export in
   - reference actual resources instead of just references via mRIDs
   - ~~manage custom profiles~~
