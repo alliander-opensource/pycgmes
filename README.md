@@ -6,7 +6,6 @@ SPDX-License-Identifier: Apache-2.0
 
 # PyCGMES
 
-<<<<<<< HEAD
 - [PyCGMES](#pycgmes)
   - [About CGMES](#about-cgmes)
   - [Library usage](#library-usage)
@@ -27,7 +26,6 @@ SPDX-License-Identifier: Apache-2.0
     - [CI](#ci)
     - [CD](#cd)
   - [License](#license)
->>>>>>> 4384d02 (update docs with CGMES info)
 
 Python dataclasses for CGMES 3 + RDF schema description + SHACL (validation) files.
 
