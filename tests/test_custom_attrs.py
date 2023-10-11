@@ -8,6 +8,7 @@ from pydantic.dataclasses import dataclass
 
 from pycgmes.resources.Bay import Bay
 from pycgmes.utils.base import Base
+from pycgmes.utils.constants import NAMESPACES
 from pycgmes.utils.dataclassconfig import DataclassConfig
 from pycgmes.utils.profile import Profile
 
@@ -83,7 +84,7 @@ class TestCustom:
         [
             (CustomBay, 6, "Bay", "custom"),
             (CustomBase, 1, "Bay", "custom"),
-            (CustomButNotmuch, 1, "CustomButNotmuch", "cim"),
+            (CustomButNotmuch, 1, "CustomButNotmuch", NAMESPACES["cim"]),
             (CustomNS, 1, "CustomNS", "cheesy namespace"),
         ],
     )

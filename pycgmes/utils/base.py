@@ -10,6 +10,8 @@ from typing import Any, TypeAlias, TypedDict
 
 from pydantic.dataclasses import dataclass
 
+from pycgmes.utils.constants import NAMESPACES
+
 from .dataclassconfig import DataclassConfig
 from .profile import BaseProfile
 
@@ -57,10 +59,10 @@ class Base:
 
     @cached_property
     def namespace(self) -> str:
-        """Returns the namespace. By default, the namesapce is 'cim' for all resources.
+        """Returns the namespace. By default, the namespace is the cim namespace for all resources.
         Custom resources can override this.
         """
-        return "cim"
+        return NAMESPACES["cim"]
 
     @classmethod  # From python 3.11, you cannot wrap @classmethod in @property anymore.
     def apparent_name(cls) -> str:
@@ -122,7 +124,7 @@ class Base:
                 else:
                     # Namespace finding
                     # "class namespace" means the first namespace defined in the inheritance tree.
-                    # This can go up to Base, which will give 'cim', the default.
+                    # This can go up to Base, which will give the default cim NS.
                     if (extra := getattr(f.default, "extra", None)) is None:
                         # The attribute does not have extra metadata. It might be a custom atttribute
                         # without it, or a base type (int...).
