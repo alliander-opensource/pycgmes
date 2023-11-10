@@ -237,11 +237,11 @@ This project is licensed under the Apache 2.0 license - see [LICENSE](./LICENSE)
 
 ## Contributing
 
-Please read CODE_OF_CONDUCT.md, CONTRIBUTING.md, and PROJECT GOVERNANCE.md for details on the process for submitting pull requests to us.
+Please read [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md), [CONTRIBUTING.md](./CONTRIBUTING.md), and [PROJECT GOVERNANCE.md](./PROJECT_GOVERNANCE.md) for details on the process for submitting pull requests to us.
 
 ## Contact
 
-Please read SUPPORT.md for how to connect and get into contact with the project.
+Please read [SUPPORT.md](./SUPPORT.md)for how to connect and get into contact with the project.
 
 ## Attribution
 
