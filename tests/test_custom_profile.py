@@ -2,12 +2,10 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import pytest
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from pycgmes.resources.Bay import Bay
-from pycgmes.utils.base import Base
 from pycgmes.utils.dataclassconfig import DataclassConfig
 from pycgmes.utils.profile import BaseProfile
 

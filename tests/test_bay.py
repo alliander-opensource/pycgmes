@@ -24,7 +24,7 @@ class TestBay:
 
     def test_bay_has_mrid(self):
         b = Bay()
-        assert getattr(b, "mRID") is not None
+        assert b.mRID is not None
 
     def test_bay_has_expected_parents(self):
         parents = Bay.__mro__[0:6]

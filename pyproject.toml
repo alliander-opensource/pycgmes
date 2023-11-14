@@ -32,13 +32,11 @@ poetry = ">=1.5.0" # key 'priority' in source
 pydantic = "<2" # Used for dataclasses, v2 is quite new and needs more stability before migration
 
 [tool.poetry.group.dev.dependencies]
-bandit = { extras = ["toml"], version = "*" } # Security checks
 black = "*" # Formatter
 coverage = { extras = ["toml"], version = "*" } # unit test coverage
-mypy = "*" # Type checker
+pyright = "*" # replaces mypy
 reuse = "*" # Check licence headers
 ruff = "*" # Linter/fixer. Replaces isort and autoflake, eventually probably pylint as well.
-pylint = "*" # Linter
 pytest = "*"
 SCons = "*" # Command runner
 
@@ -72,63 +70,62 @@ exclude_also = [ # Regexp of lines (or first line of block) which do not count f
     "if __name__ == .__main__.:",
 ]
 
-[tool.mypy]
-# ignore_missing_imports = true
-no_implicit_optional = true # Need an explicit None to be optional
-show_error_codes = true
-show_column_numbers = true
-pretty = true
-non_interactive = true # Do not ask for confirmations to install stubs
-install_types = true # Install stubs if required
-check_untyped_defs = true # Checks what it can even in files without annotation
-plugins = ["pydantic.mypy"]
+[tool.pyright]
+include = ["src"]
+exclude = ["tests"]
+# Simulate mypy - these vars will always have the value defined here during type checks
+defineConstant = { TYPE_CHECKING = true }
+# This is the default, but FYI.
+# Pyright in strict mode need to check everything, ie. all code branches. In Basic mode, it will be happy
+# enough with partially know types.
+# Specially for boto3, which has a massively overloaded boto3.client() method, all stubs are required to
+# have a happy strict mode, and they take about 5mintes to install (there are a lot of them!)
+# Long story short: basic is fine.
+typeCheckingMode = "basic"
 
-[tool.bandit]
-targets = ["pycgmes"]
-exclude_dirs = ["tests", "SConstruct.py"]
-skips = [
-    "B101" # assert_used
-]
-
-[tool.pylint.messages_control]
-max-line-length = 120
-disable = [
-    "duplicate-code", # pylint is too sensitive and got it wrong more often than not
-    "logging-fstring-interpolation", # Let's keep fstrings for consistency
-    "method-cache-max-size-none", # I want to be able to use @cache
-    "missing-function-docstring",
-    "missing-module-docstring",
-    "no-else-continue", # if ... continue else something should be accepted
-    "no-else-raise", # if ... raise else something should be accepted
-    "no-else-return", # if ... return else return should be accepted.
-    "too-many-instance-attributes",  # Not relevant for dataclasses.
-    "unsubscriptable-object", # https://github.com/PyCQA/pylint/issues/3637,
-    # Above are generic stuff.
-    # Below are cimgen specific stuff.
-    "invalid-name", # We follow the CIM naming convention, not python.
-    "similarities", # Most dataclasses are the same, ignore similarities.
-    "too-many-ancestors", # The tree of parent can be big but we have no control over it.
-    "too-many-instance-attributes", # Dataclasses can have a lot of attributes.
-]
-
-
-[tool.pylint.similarities]
-# Ignore imports when computing similarities. They create a lot of false positives because of
-# typing, were the imports look a lot like each other across many files.
-ignore-imports = "yes"
-
-[tool.pylint.miscellaneous]
-# Notes which will generate a warning from pylint. TODO for instance will not.
-notes = "FIXME"
-
-[tool.pylint.master]
-# Tell pylint to add the directory where this file is as pythonpath. Not ideal, but it seems to work nicely, on cli and vscode.
-init-hook = "from pylint.config import find_default_config_files; import os, sys; sys.path.append(os.path.dirname(list(find_default_config_files())[-1])); sys.path.append('./pycgmes/lambdas')"
 
 [tool.ruff]
 line-length = 120
 # Group violations by containing file.
-format = "grouped"
+output-format = "grouped"
+select = [
+    # See https://docs.astral.sh/ruff/rules/
+    "E", # Default, pyflake
+    "F", # Default, pyflake
+    "I", # isort
+    "W", # warning
+    "C90", # McCabe
+    "PL", # Pylint (a subset thereof)
+    "RUF", # RUF rules
+    "UP", # upgrade python rules
+    "B", # catch common bugs
+    "A", # catch builtin shadowing
+    "C4", # unnecessary things in/with comprehensions
+    "DTZ", # datetime good practice
+    "PIE", # unnecessary args/code for some well known code
+    "PT", # pytest linting
+    "SIM", # simplify code
+    "ARG", # unused arguments
+    "PTH", # use pathlib instead of os & co
+    "PD", # pandas things
+    "PERF", # performance things
+    "N", # pep8
+    "BLE", # catch too broad exception
+]
+ignore = [
+    "A003", # when an attributes shadows a builtin. Id in a dataclass is OK, ruff.
+            # revisit when https://github.com/astral-sh/ruff/issues/7806 is done
+    "N999", "N815", # Formatting due to CamelCase coming from CGMES.
+]
+[tool.ruff.pep8-naming]
+# extend= use the default ignored names and add those
+extend-ignore-names = [
+    "G", # makes sense in the context of graph
+    "mRID", "lineColor", # cim notation
+    "create_*", # some functions are named after CIM nomenclatures, not python
+    "N", # shortcut in stack
+    ]
+
 
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib",] # modern way to import tests
