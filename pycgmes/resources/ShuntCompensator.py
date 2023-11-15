@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .RegulatingCondEq import RegulatingCondEq
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ShuntCompensator(RegulatingCondEq):
     """
     A shunt capacitor or reactor or switchable bank of shunt capacitors or reactors. A section of a shunt compensator is
@@ -48,55 +47,69 @@ class ShuntCompensator(RegulatingCondEq):
 
     aVRDelay: int = Field(
         default=0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     grounded: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     maximumSections: int = Field(
         default=0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     nomU: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     normalSections: int = Field(
         default=0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     voltageSensitivity: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # SvShuntCompensatorSections : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+    # Type M:0..1 in CIM
+    # SvShuntCompensatorSections : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]}) # noqa: E501
 
     sections: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     @cached_property

@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class UnderexcLimIEEE1(UnderexcitationLimiterDynamics):
     """
     Type UEL1 model which has a circular limit boundary when plotted in terms of machine reactive power vs. real power
@@ -41,107 +40,137 @@ class UnderexcLimIEEE1(UnderexcitationLimiterDynamics):
 
     kur: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kuc: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kuf: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vurmax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vucmax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kui: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kul: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vuimax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vuimin: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tu1: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tu2: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tu3: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tu4: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vulmax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vulmin: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

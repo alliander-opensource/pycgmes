@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .PhaseTapChanger import PhaseTapChanger
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PhaseTapChangerNonLinear(PhaseTapChanger):
     """
     The non-linear phase tap changer describes the non-linear behaviour of a phase tap changer. This is a base class for
@@ -38,23 +37,29 @@ class PhaseTapChangerNonLinear(PhaseTapChanger):
 
     voltageStepIncrement: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     xMax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     xMin: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

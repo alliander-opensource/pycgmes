@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .PFVArControllerType2Dynamics import PFVArControllerType2Dynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PFVArType2Common1(PFVArControllerType2Dynamics):
     """
     Power factor / reactive power regulator. This model represents the power factor or reactive power controller such as
@@ -36,37 +35,47 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
 
     j: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kp: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     ki: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     max: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     ref: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

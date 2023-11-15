@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Measurement import Measurement
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Accumulator(Measurement):
     """
     Accumulator represents an accumulated (counted) Measurement, e.g. an energy value.
@@ -25,12 +24,12 @@ class Accumulator(Measurement):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # AccumulatorValues : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+    # Type M:0..n in CIM
+    # AccumulatorValues : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # LimitSets : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+    # Type M:0..n in CIM
+    # LimitSets : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

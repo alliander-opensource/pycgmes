@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ExcST6B(ExcitationSystemDynamics):
     """
     Modified IEEE ST6B static excitation system with PID controller and optional inner feedback loop.
@@ -51,163 +50,209 @@ class ExcST6B(ExcitationSystemDynamics):
 
     ilr: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     k1: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kcl: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kff: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kg: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kia: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     klr: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     km: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kpa: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kvd: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     oelin: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tg: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     ts: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tvd: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vamax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vamin: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vilim: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vimax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vimin: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vmult: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vrmax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vrmin: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     xc: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

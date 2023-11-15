@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .PhaseTapChangerNonLinear import PhaseTapChangerNonLinear
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PhaseTapChangerAsymmetrical(PhaseTapChangerNonLinear):
     """
     Describes the tap model for an asymmetrical phase shifting transformer in which the difference voltage vector adds
@@ -33,9 +32,11 @@ class PhaseTapChangerAsymmetrical(PhaseTapChangerNonLinear):
 
     windingConnectionAngle: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

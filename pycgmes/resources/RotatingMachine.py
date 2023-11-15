@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .RegulatingCondEq import RegulatingCondEq
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class RotatingMachine(RegulatingCondEq):
     """
     A rotating machine which may be used as a generator or motor.
@@ -39,48 +38,60 @@ class RotatingMachine(RegulatingCondEq):
 
     GeneratingUnit: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # HydroPump : Optional[str] = Field(default=None, in_profiles = [Profile.EQ, ])
+    # Type M:0..1 in CIM
+    # HydroPump : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     ratedPowerFactor: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     ratedS: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     ratedU: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     p: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     q: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     @cached_property

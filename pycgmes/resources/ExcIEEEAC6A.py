@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ExcIEEEAC6A(ExcitationSystemDynamics):
     """
     IEEE 421.5-2005 type AC6A model. The model represents field-controlled alternator-rectifier excitation systems with
@@ -54,156 +53,200 @@ class ExcIEEEAC6A(ExcitationSystemDynamics):
 
     ka: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     ta: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tk: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tb: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tc: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vamax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vamin: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vrmax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vrmin: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     te: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kh: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tj: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     th: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vfelim: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     vhmax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kc: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     kd: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     ke: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     ve1: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     seve1: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     ve2: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     seve2: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

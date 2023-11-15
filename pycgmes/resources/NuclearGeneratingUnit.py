@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .GeneratingUnit import GeneratingUnit
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class NuclearGeneratingUnit(GeneratingUnit):
     """
     A nuclear generating unit.

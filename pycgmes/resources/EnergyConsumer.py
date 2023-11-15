@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .EnergyConnection import EnergyConnection
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class EnergyConsumer(EnergyConnection):
     """
     Generic user of energy - a  point of consumption on the power system model. EnergyConsumer.pfixed, .qfixed,
@@ -42,58 +41,74 @@ class EnergyConsumer(EnergyConnection):
 
     pfixed: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     pfixedPct: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     qfixed: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     qfixedPct: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     LoadResponse: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     p: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     q: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     LoadDynamics: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

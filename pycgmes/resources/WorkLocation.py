@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Location import Location
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class WorkLocation(Location):
     """
     Information about a particular location for various forms of work.

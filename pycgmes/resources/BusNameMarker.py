@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class BusNameMarker(IdentifiedObject):
     """
     Used to apply user standard names to TopologicalNodes. Associated with one or more terminals that are normally
@@ -34,21 +33,25 @@ class BusNameMarker(IdentifiedObject):
     """
 
     # *Association not used*
-    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
-    # Terminal : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:1..n in CIM
+    # Terminal : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     priority: int = Field(
         default=0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     ReportingGroup: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Limit import Limit
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class AnalogLimit(Limit):
     """
     Limit values for Analog measurements.
@@ -28,16 +27,20 @@ class AnalogLimit(Limit):
 
     value: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     LimitSet: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     @cached_property

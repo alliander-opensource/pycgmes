@@ -13,11 +13,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PerCent(Base):
     """
     Percentage on a defined base.   For example, specify as 100 to indicate at the defined base.
@@ -29,32 +28,38 @@ class PerCent(Base):
 
     value: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-            Profile.SSH,
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+                Profile.SSH,
+                Profile.OP,
+            ]
+        },
     )
 
     unit: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-            Profile.SSH,
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+                Profile.SSH,
+                Profile.OP,
+            ]
+        },
     )
 
     multiplier: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-            Profile.SSH,
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+                Profile.SSH,
+                Profile.OP,
+            ]
+        },
     )
 
     @cached_property

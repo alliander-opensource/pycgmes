@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .DCConductingEquipment import DCConductingEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DCChopper(DCConductingEquipment):
     """
     Low resistance equipment used in the internal DC circuit to balance voltages. It has typically positive and negative

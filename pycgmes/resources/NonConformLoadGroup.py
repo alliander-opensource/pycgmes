@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .LoadGroup import LoadGroup
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class NonConformLoadGroup(LoadGroup):
     """
     Loads that do not follow a daily and seasonal load variation pattern.
@@ -25,12 +24,12 @@ class NonConformLoadGroup(LoadGroup):
     """
 
     # *Association not used*
-    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
-    # EnergyConsumers : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:1..n in CIM
+    # EnergyConsumers : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # NonConformLoadSchedules : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # NonConformLoadSchedules : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

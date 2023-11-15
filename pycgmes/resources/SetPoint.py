@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .AnalogControl import AnalogControl
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SetPoint(AnalogControl):
     """
     An analog control that issues a set point value.
@@ -27,16 +26,20 @@ class SetPoint(AnalogControl):
 
     normalValue: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     value: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     @cached_property

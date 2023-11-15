@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Equipment import Equipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class HydroPump(Equipment):
     """
     A synchronous motor-driven pump, typically associated with a pumped storage plant.
@@ -30,16 +29,20 @@ class HydroPump(Equipment):
 
     HydroPowerPlant: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     RotatingMachine: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

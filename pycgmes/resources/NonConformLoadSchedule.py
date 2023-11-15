@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .SeasonDayTypeSchedule import SeasonDayTypeSchedule
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class NonConformLoadSchedule(SeasonDayTypeSchedule):
     """
     An active power (Y1-axis) and reactive power (Y2-axis) schedule (curves) versus time (X-axis) for non-conforming
@@ -28,9 +27,11 @@ class NonConformLoadSchedule(SeasonDayTypeSchedule):
 
     NonConformLoadGroup: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

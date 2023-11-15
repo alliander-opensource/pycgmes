@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .EnergyConsumer import EnergyConsumer
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class NonConformLoad(EnergyConsumer):
     """
     NonConformLoad represents loads that do not follow a daily load change pattern and whose changes are not correlated
@@ -28,9 +27,11 @@ class NonConformLoad(EnergyConsumer):
 
     LoadGroup: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

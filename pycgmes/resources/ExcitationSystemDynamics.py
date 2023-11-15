@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ExcitationSystemDynamics(DynamicsFunctionBlock):
     """
     Excitation system function block whose behaviour is described by reference to a standard model or by definition of a
@@ -38,38 +37,40 @@ class ExcitationSystemDynamics(DynamicsFunctionBlock):
 
     SynchronousMachineDynamics: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:1 in CIM  # pylint: disable-next=line-too-long
-    # VoltageCompensatorDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:1 in CIM
+    # VoltageCompensatorDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # OverexcitationLimiterDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # OverexcitationLimiterDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # PFVArControllerType2Dynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # PFVArControllerType2Dynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # DiscontinuousExcitationControlDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ]) # noqa: E501
+    # Type M:0..1 in CIM
+    # DiscontinuousExcitationControlDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # PowerSystemStabilizerDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # PowerSystemStabilizerDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # UnderexcitationLimiterDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # UnderexcitationLimiterDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # PFVArControllerType1Dynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # PFVArControllerType1Dynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

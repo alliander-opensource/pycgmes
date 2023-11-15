@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .TapChangerTablePoint import TapChangerTablePoint
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class RatioTapChangerTablePoint(TapChangerTablePoint):
     """
     Describes each tap step in the ratio tap changer tabular curve.
@@ -27,9 +26,11 @@ class RatioTapChangerTablePoint(TapChangerTablePoint):
 
     RatioTapChangerTable: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

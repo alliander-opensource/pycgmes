@@ -12,11 +12,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class TownDetail(Base):
     """
     Town details, in the context of address.
@@ -30,37 +29,47 @@ class TownDetail(Base):
 
     code: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     section: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     name: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     stateOrProvince: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     country: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     @cached_property

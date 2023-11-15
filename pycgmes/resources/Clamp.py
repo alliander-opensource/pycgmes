@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .ConductingEquipment import ConductingEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Clamp(ConductingEquipment):
     """
     A Clamp is a galvanic connection at a line segment where other equipment is connected. A Clamp does not cut the line
@@ -31,16 +30,20 @@ class Clamp(ConductingEquipment):
 
     ACLineSegment: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     lengthFromTerminal1: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

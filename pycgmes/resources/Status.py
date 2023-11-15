@@ -12,11 +12,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Status(Base):
     """
     Current status information relevant to an entity.
@@ -30,30 +29,38 @@ class Status(Base):
 
     value: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     dateTime: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     remark: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     reason: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     @cached_property

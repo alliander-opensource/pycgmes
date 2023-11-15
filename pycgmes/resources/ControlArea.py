@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .PowerSystemResource import PowerSystemResource
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ControlArea(PowerSystemResource):
     """
     A control area is a grouping of generating units and/or loads and a cutset of tie lines (as terminals) which may be
@@ -51,38 +50,46 @@ class ControlArea(PowerSystemResource):
 
     type: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # TieFlow : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # TieFlow : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # ControlAreaGeneratingUnit : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # ControlAreaGeneratingUnit : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     EnergyArea: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     netInterchange: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     pTolerance: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     @cached_property

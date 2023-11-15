@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .GeneratingUnit import GeneratingUnit
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SolarGeneratingUnit(GeneratingUnit):
     """
     A solar thermal generating unit, connected to the grid by means of a rotating machine.  This class does not
@@ -28,9 +27,11 @@ class SolarGeneratingUnit(GeneratingUnit):
 
     SolarPowerPlant: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

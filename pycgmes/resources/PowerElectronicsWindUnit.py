@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .PowerElectronicsUnit import PowerElectronicsUnit
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PowerElectronicsWindUnit(PowerElectronicsUnit):
     """
     A wind generating unit that connects to the AC network with power electronics rather than rotating machines or an

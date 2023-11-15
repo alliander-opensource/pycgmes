@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .ACDCConverter import ACDCConverter
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class VsConverter(ACDCConverter):
     """
     DC side of the voltage source converter (VSC).
@@ -48,105 +47,133 @@ class VsConverter(ACDCConverter):
 
     CapabilityCurve: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     maxModulationIndex: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     delta: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SV,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ]
+        },
     )
 
     uv: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SV,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ]
+        },
     )
 
     droop: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     droopCompensation: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     pPccControl: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     qPccControl: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     qShare: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     targetQpcc: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     targetUpcc: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     targetPowerFactorPcc: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     targetPhasePcc: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     targetPWMfactor: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # VSCDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # VSCDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

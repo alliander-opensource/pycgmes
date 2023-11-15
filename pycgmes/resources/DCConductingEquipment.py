@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Equipment import Equipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DCConductingEquipment(Equipment):
     """
     The parts of the DC power system that are designed to carry current or that are conductively connected through DC
@@ -29,14 +28,16 @@ class DCConductingEquipment(Equipment):
 
     ratedUdc: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # DCTerminals : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # DCTerminals : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

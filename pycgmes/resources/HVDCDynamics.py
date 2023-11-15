@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class HVDCDynamics(DynamicsFunctionBlock):
     """
     HVDC whose behaviour is described by reference to a standard model or by definition of a user-defined model.

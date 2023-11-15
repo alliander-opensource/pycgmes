@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .DCConductingEquipment import DCConductingEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DCBusbar(DCConductingEquipment):
     """
     A busbar within a DC system.

@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .WindTurbineType1or2Dynamics import WindTurbineType1or2Dynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics):
     """
     Parent class supporting relationships to IEC wind turbines type 1 and type 2 including their control models.
@@ -30,16 +29,20 @@ class WindTurbineType1or2IEC(WindTurbineType1or2Dynamics):
 
     WindMechIEC: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     WindProtectionIEC: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

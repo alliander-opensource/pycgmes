@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .ProtectedSwitch import ProtectedSwitch
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Breaker(ProtectedSwitch):
     """
     A mechanical switching device capable of making, carrying, and breaking currents under normal circuit conditions and

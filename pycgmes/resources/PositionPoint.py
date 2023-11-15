@@ -13,11 +13,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PositionPoint(Base):
     """
     Set of spatial coordinates that determine a point, defined in the coordinate system specified in
@@ -35,37 +34,47 @@ class PositionPoint(Base):
 
     Location: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     sequenceNumber: int = Field(
         default=0,
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     xPosition: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     yPosition: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     zPosition: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     @cached_property

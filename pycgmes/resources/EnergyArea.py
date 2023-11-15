@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class EnergyArea(IdentifiedObject):
     """
     Describes an area having energy production or consumption.  Specializations are intended to support the load
@@ -27,8 +26,8 @@ class EnergyArea(IdentifiedObject):
     """
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # ControlArea : Optional[str] = Field(default=None, in_profiles = [Profile.EQ, ])
+    # Type M:0..1 in CIM
+    # ControlArea : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

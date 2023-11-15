@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .ConductingEquipment import ConductingEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SeriesCompensator(ConductingEquipment):
     """
     A Series Compensator is a series capacitor or reactor or an AC transmission line without charging susceptance.  It
@@ -37,51 +36,65 @@ class SeriesCompensator(ConductingEquipment):
 
     r: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     x: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     r0: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     x0: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     varistorPresent: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     varistorRatedCurrent: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     varistorVoltageThreshold: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     @cached_property

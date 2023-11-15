@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .ConnectivityNodeContainer import ConnectivityNodeContainer
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class EquivalentNetwork(ConnectivityNodeContainer):
     """
     A class that groups electrical equivalents, including internal nodes, of a network that has been reduced. The
@@ -26,8 +25,8 @@ class EquivalentNetwork(ConnectivityNodeContainer):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # EquivalentEquipments : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # EquivalentEquipments : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

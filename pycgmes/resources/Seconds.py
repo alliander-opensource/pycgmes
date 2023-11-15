@@ -13,11 +13,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Seconds(Base):
     """
     Time, in seconds.
@@ -29,26 +28,32 @@ class Seconds(Base):
 
     value: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.DY,
+            ]
+        },
     )
 
     unit: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.DY,
+            ]
+        },
     )
 
     multiplier: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

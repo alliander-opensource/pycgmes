@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .OperationalLimit import OperationalLimit
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class VoltageLimit(OperationalLimit):
     """
     Operational limit applied to voltage. The use of operational VoltageLimit is preferred instead of limits defined at
@@ -30,16 +29,20 @@ class VoltageLimit(OperationalLimit):
 
     normalValue: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     value: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     @cached_property

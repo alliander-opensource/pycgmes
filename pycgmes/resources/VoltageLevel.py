@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .EquipmentContainer import EquipmentContainer
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class VoltageLevel(EquipmentContainer):
     """
     A collection of equipment at one common system voltage forming a switchgear. The equipment typically consists of
@@ -37,38 +36,46 @@ class VoltageLevel(EquipmentContainer):
 
     BaseVoltage: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # Bays : list = Field(default_factory=list, in_profiles = [Profile.EQBD, Profile.EQ, ])
+    # Type M:0..n in CIM
+    # Bays : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQBD, Profile.EQ, ]}) # noqa: E501
 
     Substation: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     highVoltageLimit: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     lowVoltageLimit: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

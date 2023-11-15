@@ -13,11 +13,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Conductance(Base):
     """
     Factor by which voltage must be multiplied to give corresponding power lost from a circuit. Real part of admittance.
@@ -29,26 +28,32 @@ class Conductance(Base):
 
     value: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+            ]
+        },
     )
 
     unit: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+            ]
+        },
     )
 
     multiplier: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+            ]
+        },
     )
 
     @cached_property

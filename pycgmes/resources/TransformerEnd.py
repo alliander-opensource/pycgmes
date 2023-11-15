@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class TransformerEnd(IdentifiedObject):
     """
     A conducting connection point of a power transformer. It corresponds to a physical transformer winding terminal.  In
@@ -39,52 +38,64 @@ class TransformerEnd(IdentifiedObject):
 
     BaseVoltage: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # PhaseTapChanger : Optional[str] = Field(default=None, in_profiles = [Profile.EQ, ])
+    # Type M:0..1 in CIM
+    # PhaseTapChanger : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # RatioTapChanger : Optional[str] = Field(default=None, in_profiles = [Profile.EQ, ])
+    # Type M:0..1 in CIM
+    # RatioTapChanger : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     Terminal: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     endNumber: int = Field(
         default=0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     rground: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     grounded: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     xground: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     @cached_property

@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .EnergyConnection import EnergyConnection
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class RegulatingCondEq(EnergyConnection):
     """
     A type of conducting equipment that can regulate a quantity (i.e. voltage or flow) at a specific point in the
@@ -29,16 +28,20 @@ class RegulatingCondEq(EnergyConnection):
 
     RegulatingControl: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     controlEnabled: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     @cached_property

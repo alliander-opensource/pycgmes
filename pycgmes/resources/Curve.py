@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Curve(IdentifiedObject):
     """
     A multi-purpose curve or functional relationship between an independent variable (X-axis) and dependent (Y-axis)
@@ -32,35 +31,43 @@ class Curve(IdentifiedObject):
 
     curveStyle: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     xUnit: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     y1Unit: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     y2Unit: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
-    # CurveDatas : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:1..n in CIM
+    # CurveDatas : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

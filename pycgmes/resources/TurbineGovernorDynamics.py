@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class TurbineGovernorDynamics(DynamicsFunctionBlock):
     """
     Turbine-governor function block whose behaviour is described by reference to a standard model or by definition of a
@@ -34,21 +33,25 @@ class TurbineGovernorDynamics(DynamicsFunctionBlock):
 
     SynchronousMachineDynamics: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     AsynchronousMachineDynamics: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # TurbineLoadControllerDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # TurbineLoadControllerDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

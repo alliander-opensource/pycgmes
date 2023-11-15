@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .RotatingMachine import RotatingMachine
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class AsynchronousMachine(RotatingMachine):
     """
     A rotating machine whose shaft rotates asynchronously with the electrical field.  Also known as an induction machine
@@ -44,77 +43,97 @@ class AsynchronousMachine(RotatingMachine):
 
     nominalFrequency: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     nominalSpeed: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     converterFedDrive: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     efficiency: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     iaIrRatio: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     polePairNumber: int = Field(
         default=0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     ratedMechanicalPower: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     reversible: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     rxLockedRotorRatio: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     asynchronousMachineType: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # AsynchronousMachineDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # AsynchronousMachineDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

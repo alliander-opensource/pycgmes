@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PowerSystemStabilizerDynamics(DynamicsFunctionBlock):
     """
     Power system stabilizer function block whose behaviour is described by reference to a standard model or by
@@ -28,14 +27,16 @@ class PowerSystemStabilizerDynamics(DynamicsFunctionBlock):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # RemoteInputSignal : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+    # Type M:0..n in CIM
+    # RemoteInputSignal : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     ExcitationSystemDynamics: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

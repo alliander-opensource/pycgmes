@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ConnectivityNode(IdentifiedObject):
     """
     Connectivity nodes are points where terminals of AC conducting equipment are connected together with zero impedance.
@@ -31,25 +30,29 @@ class ConnectivityNode(IdentifiedObject):
 
     TopologicalNode: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.TP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # BoundaryPoint : Optional[str] = Field(default=None, in_profiles = [Profile.EQBD, Profile.EQ, ])
+    # Type M:0..1 in CIM
+    # BoundaryPoint : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.EQBD, Profile.EQ, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # Terminals : list = Field(default_factory=list, in_profiles = [Profile.EQBD, Profile.EQ, ])
+    # Type M:0..n in CIM
+    # Terminals : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQBD, Profile.EQ, ]}) # noqa: E501
 
     ConnectivityNodeContainer: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

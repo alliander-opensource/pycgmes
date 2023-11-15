@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class WindAeroOneDimIEC(IdentifiedObject):
     """
     One-dimensional aerodynamic model.   Reference: IEC 61400-27-1:2015, 5.6.1.2.
@@ -28,21 +27,25 @@ class WindAeroOneDimIEC(IdentifiedObject):
 
     ka: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     thetaomega: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:1 in CIM  # pylint: disable-next=line-too-long
-    # WindTurbineType3IEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:1 in CIM
+    # WindTurbineType3IEC : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

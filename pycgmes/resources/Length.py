@@ -13,11 +13,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Length(Base):
     """
     Unit of length. It shall be a positive value or zero.
@@ -29,29 +28,35 @@ class Length(Base):
 
     value: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+                Profile.DY,
+            ]
+        },
     )
 
     unit: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+                Profile.DY,
+            ]
+        },
     )
 
     multiplier: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

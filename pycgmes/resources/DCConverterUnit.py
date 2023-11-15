@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .DCEquipmentContainer import DCEquipmentContainer
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DCConverterUnit(DCEquipmentContainer):
     """
     Indivisible operative unit comprising all equipment between the point of common coupling on the AC side and the
@@ -31,16 +30,20 @@ class DCConverterUnit(DCEquipmentContainer):
 
     operationMode: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     Substation: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

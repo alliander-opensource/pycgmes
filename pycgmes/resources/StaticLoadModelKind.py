@@ -11,11 +11,10 @@ from functools import cached_property
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class StaticLoadModelKind(Base):
     """
     Type of static load model.

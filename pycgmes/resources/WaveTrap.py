@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .AuxiliaryEquipment import AuxiliaryEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class WaveTrap(AuxiliaryEquipment):
     """
     Line traps are devices that impede high frequency power line carrier signals yet present a negligible impedance at

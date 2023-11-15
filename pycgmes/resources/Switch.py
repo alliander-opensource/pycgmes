@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .ConductingEquipment import ConductingEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Switch(ConductingEquipment):
     """
     A generic device designed to close, or open, or both, one or more electric circuits.  All switches are two terminal
@@ -40,45 +39,55 @@ class Switch(ConductingEquipment):
 
     normalOpen: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     ratedCurrent: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     retained: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # SwitchSchedules : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # SwitchSchedules : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # SvSwitch : list = Field(default_factory=list, in_profiles = [Profile.SV, ])
+    # Type M:0..n in CIM
+    # SvSwitch : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.SV, ]})
 
     open: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     locked: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     @cached_property

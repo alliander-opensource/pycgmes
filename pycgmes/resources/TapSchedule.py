@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .SeasonDayTypeSchedule import SeasonDayTypeSchedule
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class TapSchedule(SeasonDayTypeSchedule):
     """
     A pre-established pattern over time for a tap step.
@@ -27,9 +26,11 @@ class TapSchedule(SeasonDayTypeSchedule):
 
     TapChanger: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .ConnectivityNodeContainer import ConnectivityNodeContainer
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class EquipmentContainer(ConnectivityNodeContainer):
     """
     A modelling construct to provide a root class for containing equipment.
@@ -24,8 +23,8 @@ class EquipmentContainer(ConnectivityNodeContainer):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # Equipments : list = Field(default_factory=list, in_profiles = [Profile.EQBD, Profile.EQ, ])
+    # Type M:0..n in CIM
+    # Equipments : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQBD, Profile.EQ, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .PhaseTapChanger import PhaseTapChanger
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PhaseTapChangerLinear(PhaseTapChanger):
     """
     Describes a tap changer with a linear relation between the tap step and the phase angle difference across the
@@ -40,23 +39,29 @@ class PhaseTapChangerLinear(PhaseTapChanger):
 
     stepPhaseShiftIncrement: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     xMax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     xMin: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

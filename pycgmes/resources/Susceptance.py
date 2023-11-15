@@ -13,11 +13,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Susceptance(Base):
     """
     Imaginary part of admittance.
@@ -29,26 +28,32 @@ class Susceptance(Base):
 
     value: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+            ]
+        },
     )
 
     unit: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+            ]
+        },
     )
 
     multiplier: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.SC,
+            ]
+        },
     )
 
     @cached_property

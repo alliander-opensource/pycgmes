@@ -12,11 +12,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class IdentifiedObject(Base):
     """
     This is a root class to provide common identification for all classes needing identification and naming attributes.
@@ -38,67 +37,77 @@ class IdentifiedObject(Base):
 
     description: str = Field(
         default="",
-        in_profiles=[
-            Profile.TP,
-            Profile.DL,
-            Profile.EQBD,
-            Profile.EQ,
-            Profile.DY,
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+                Profile.DL,
+                Profile.EQBD,
+                Profile.EQ,
+                Profile.DY,
+                Profile.OP,
+            ]
+        },
     )
 
     energyIdentCodeEic: str = Field(
         default="",
-        in_profiles=[
-            Profile.TP,
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     mRID: str = Field(
         default="",
-        in_profiles=[
-            Profile.TP,
-            Profile.GL,
-            Profile.DL,
-            Profile.EQBD,
-            Profile.EQ,
-            Profile.SC,
-            Profile.SV,
-            Profile.SSH,
-            Profile.DY,
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+                Profile.GL,
+                Profile.DL,
+                Profile.EQBD,
+                Profile.EQ,
+                Profile.SC,
+                Profile.SV,
+                Profile.SSH,
+                Profile.DY,
+                Profile.OP,
+            ]
+        },
     )
 
     name: str = Field(
         default="",
-        in_profiles=[
-            Profile.TP,
-            Profile.GL,
-            Profile.DL,
-            Profile.EQBD,
-            Profile.EQ,
-            Profile.SV,
-            Profile.DY,
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+                Profile.GL,
+                Profile.DL,
+                Profile.EQBD,
+                Profile.EQ,
+                Profile.SV,
+                Profile.DY,
+                Profile.OP,
+            ]
+        },
     )
 
     shortName: str = Field(
         default="",
-        in_profiles=[
-            Profile.TP,
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # DiagramObjects : list = Field(default_factory=list, in_profiles = [Profile.DL, ])
+    # Type M:0..n in CIM
+    # DiagramObjects : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DL, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

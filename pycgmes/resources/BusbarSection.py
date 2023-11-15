@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Connector import Connector
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class BusbarSection(Connector):
     """
     A conductor, or group of conductors, with negligible impedance, that serve to connect other conducting equipment
@@ -30,9 +29,11 @@ class BusbarSection(Connector):
 
     ipMax: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     @cached_property

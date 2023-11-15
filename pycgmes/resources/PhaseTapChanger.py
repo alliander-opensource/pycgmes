@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .TapChanger import TapChanger
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PhaseTapChanger(TapChanger):
     """
     A transformer phase shifting tap model that controls the phase angle difference across the power transformer and
@@ -29,9 +28,11 @@ class PhaseTapChanger(TapChanger):
 
     TransformerEnd: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Switch import Switch
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ProtectedSwitch(Switch):
     """
     A ProtectedSwitch is a switching device that can be operated by ProtectionEquipment.

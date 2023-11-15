@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Measurement(IdentifiedObject):
     """
     A Measurement represents any measured, calculated or non-measured non-calculated quantity. Any piece of equipment
@@ -53,44 +52,56 @@ class Measurement(IdentifiedObject):
 
     Terminal: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     measurementType: str = Field(
         default="",
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     phases: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     unitMultiplier: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     unitSymbol: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     PowerSystemResource: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     @cached_property

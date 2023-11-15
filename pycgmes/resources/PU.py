@@ -13,11 +13,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PU(Base):
     """
     Per Unit - a positive or negative value referred to a defined base. Values typically range from -10 to +10.
@@ -29,29 +28,35 @@ class PU(Base):
 
     value: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-            Profile.SSH,
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+                Profile.SSH,
+                Profile.DY,
+            ]
+        },
     )
 
     unit: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.SC,
-            Profile.SSH,
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+                Profile.SSH,
+                Profile.DY,
+            ]
+        },
     )
 
     multiplier: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.SC,
-            Profile.SSH,
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+                Profile.SSH,
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property
