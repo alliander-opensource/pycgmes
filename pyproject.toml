@@ -29,7 +29,7 @@ exclude = ["./pycgmes/shacl"]
 [tool.poetry.dependencies]
 python = "^3.10"
 poetry = ">=1.5.0" # key 'priority' in source
-pydantic = "<2" # Used for dataclasses, v2 is quite new and needs more stability before migration
+pydantic = ">=2" # Used for dataclasses
 
 [tool.poetry.group.dev.dependencies]
 black = "*" # Formatter
