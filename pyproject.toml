@@ -4,7 +4,7 @@
 
 [tool.poetry]
 name = "pycgmes"
-version = "1.1.0"
+version = "2.0.0"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["pycgmes <pycgmes@alliander.com>"]
 readme = "README.md"
@@ -36,7 +36,7 @@ black = "*" # Formatter
 coverage = { extras = ["toml"], version = "*" } # unit test coverage
 pyright = "*" # replaces mypy
 reuse = "*" # Check licence headers
-ruff = "*" # Linter/fixer. Replaces isort and autoflake, eventually probably pylint as well.
+ruff = "*" # Linter/fixer. Replaces isort autoflake and pylint
 pytest = "*"
 SCons = "*" # Command runner
 
@@ -71,7 +71,7 @@ exclude_also = [ # Regexp of lines (or first line of block) which do not count f
 ]
 
 [tool.pyright]
-include = ["src"]
+include = ["pycgmes"]
 exclude = ["tests"]
 # Simulate mypy - these vars will always have the value defined here during type checks
 defineConstant = { TYPE_CHECKING = true }

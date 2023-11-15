@@ -8,20 +8,23 @@ from pydantic.dataclasses import dataclass
 
 from pycgmes.resources.Bay import Bay
 from pycgmes.utils.base import Base
+from pycgmes.utils.config import cgmes_resource_config
 from pycgmes.utils.constants import NAMESPACES
-from pycgmes.utils.dataclassconfig import DataclassConfig
 from pycgmes.utils.profile import Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class CustomBay(Bay):
+    model_config = cgmes_resource_config
     # Extends Bay. Has a lot of inherited fields.
     colour: str = Field(
         default="Red",
-        in_profiles=[
-            Profile.EQ,
-        ],
-        namespace="custom",
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "namespace": "custom",
+        },
     )
 
     @classmethod
@@ -29,15 +32,18 @@ class CustomBay(Bay):
         return "Bay"
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class CustomBase(Base):
+    model_config = cgmes_resource_config
     # Extends Base. Has no inherited fields. Says its Bay.
     colour: str = Field(
         default="Red",
-        in_profiles=[
-            Profile.EQ,
-        ],
-        namespace="custom",
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "namespace": "custom",
+        },
     )
 
     @classmethod
@@ -45,29 +51,35 @@ class CustomBase(Base):
         return "Bay"
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class CustomButNotmuch(Base):
+    model_config = cgmes_resource_config
     # Extends Base. No inherited fields. Not namespace defined anywhere.
     colour: str = Field(
         default="Red",
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
         # no namespace
     )
 
     # no apparent_name()
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class CustomNS(Base):
+    model_config = cgmes_resource_config
     # Extends Base. No inherited fields. NS only defined at class level, but will be
     # used by the attribute.
     colour: str = Field(
         default="Red",
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
         # no namespace
     )
 
@@ -93,6 +105,8 @@ class TestCustom:
         colour = "cheese"
         cust = klass(colour=colour)
         attrs = cust.cgmes_attributes_in_profile(None)
+        print("PLOP")
+        print(attrs)
         assert len(attrs) == num_attrs
         assert f"{apparent}.colour" in attrs
         assert attrs[f"{apparent}.colour"]["value"] == colour

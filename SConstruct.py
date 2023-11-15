@@ -72,12 +72,8 @@ if "ruff" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
 if "lock" in COMMAND_LINE_TARGETS:
     _exec("poetry check --lock")
 
-if "lint" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
-    _exec(f"pylint --rcfile=pyproject.toml {_SUBJECT}")
-
 
 if "type" in COMMAND_LINE_TARGETS or "pyright" in COMMAND_LINE_TARGETS:
-    # https://mypy.readthedocs.io/en/stable/running_mypy.html#library-stubs-not-installed
     _exec("pyright", env=os.environ)
     _target_found = True
 
@@ -96,6 +92,8 @@ if "coverage" in COMMAND_LINE_TARGETS:
     _exec("coverage report --show-missing")
 
 if "license" in COMMAND_LINE_TARGETS or "licence" in COMMAND_LINE_TARGETS:
+    # To fix:
+    # reuse annotate --copyright="Alliander" --license=Apache-2.0 --recursive pycgmes/{resources,utils}
     _exec("reuse lint")
 
 if not _target_found:
