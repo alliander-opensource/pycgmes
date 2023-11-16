@@ -105,8 +105,6 @@ class TestCustom:
         colour = "cheese"
         cust = klass(colour=colour)
         attrs = cust.cgmes_attributes_in_profile(None)
-        print("PLOP")
-        print(attrs)
         assert len(attrs) == num_attrs
         assert f"{apparent}.colour" in attrs
         assert attrs[f"{apparent}.colour"]["value"] == colour
