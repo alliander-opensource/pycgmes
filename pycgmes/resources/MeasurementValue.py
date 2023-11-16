@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .IOPoint import IOPoint
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class MeasurementValue(IOPoint):
     """
     The current state for a measurement. A state value is an instance of a measurement from a specific source.
@@ -35,27 +34,33 @@ class MeasurementValue(IOPoint):
 
     timeStamp: str = Field(
         default="",
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     sensorAccuracy: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # MeasurementValueQuality : Optional[str] = Field(default=None, in_profiles = [Profile.OP, ])
+    # Type M:0..1 in CIM
+    # MeasurementValueQuality : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.OP, ]}) # noqa: E501
 
     MeasurementValueSource: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     @cached_property

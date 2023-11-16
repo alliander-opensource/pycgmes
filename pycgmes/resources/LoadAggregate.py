@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .LoadDynamics import LoadDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class LoadAggregate(LoadDynamics):
     """
     Aggregate loads are used to represent all or part of the real and reactive load from one or more loads in the static
@@ -31,12 +30,12 @@ class LoadAggregate(LoadDynamics):
     """
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # LoadMotor : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # LoadMotor : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]})
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # LoadStatic : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # LoadStatic : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

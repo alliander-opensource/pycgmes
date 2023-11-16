@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .VoltageCompensatorDynamics import VoltageCompensatorDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class VCompIEEEType1(VoltageCompensatorDynamics):
     """
     Terminal voltage transducer and load compensator as defined in IEEE 421.5-2005, 4. This model is common to all
@@ -31,23 +30,29 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
 
     rc: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     xc: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tr: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

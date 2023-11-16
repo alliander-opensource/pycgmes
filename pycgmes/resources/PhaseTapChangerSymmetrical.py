@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .PhaseTapChangerNonLinear import PhaseTapChangerNonLinear
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PhaseTapChangerSymmetrical(PhaseTapChangerNonLinear):
     """
     Describes a symmetrical phase shifting transformer tap model in which the voltage magnitude of both sides is the

@@ -12,11 +12,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class StreetAddress(Base):
     """
     General purpose street and postal address information.
@@ -31,44 +30,56 @@ class StreetAddress(Base):
 
     streetDetail: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     townDetail: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     status: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     postalCode: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     poBox: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     language: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     @cached_property

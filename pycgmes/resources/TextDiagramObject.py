@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .DiagramObject import DiagramObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class TextDiagramObject(DiagramObject):
     """
     A diagram object for placing free-text or text derived from an associated domain object.
@@ -26,9 +25,11 @@ class TextDiagramObject(DiagramObject):
 
     text: str = Field(
         default="",
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     @cached_property

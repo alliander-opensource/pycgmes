@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Connector import Connector
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Junction(Connector):
     """
     A point where one or more conducting equipments are connected with zero resistance.

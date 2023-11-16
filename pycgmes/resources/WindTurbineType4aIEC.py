@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .WindTurbineType4IEC import WindTurbineType4IEC
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class WindTurbineType4aIEC(WindTurbineType4IEC):
     """
     Wind turbine IEC type 4A. Reference: IEC 61400-27-1:2015, 5.5.5.2.
@@ -28,16 +27,20 @@ class WindTurbineType4aIEC(WindTurbineType4IEC):
 
     WindContPType4aIEC: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     WindGenType4IEC: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

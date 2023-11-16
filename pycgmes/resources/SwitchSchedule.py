@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .SeasonDayTypeSchedule import SeasonDayTypeSchedule
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SwitchSchedule(SeasonDayTypeSchedule):
     """
     A schedule of switch positions.  If RegularTimePoint.value1 is 0, the switch is open.  If 1, the switch is closed.
@@ -27,9 +26,11 @@ class SwitchSchedule(SeasonDayTypeSchedule):
 
     Switch: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

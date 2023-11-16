@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .StaticVarCompensatorDynamics import StaticVarCompensatorDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SVCUserDefined(StaticVarCompensatorDynamics):
     """
     Static var compensator (SVC) function block whose dynamic behaviour is described by a user-defined model.
@@ -30,14 +29,16 @@ class SVCUserDefined(StaticVarCompensatorDynamics):
 
     proprietary: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # ProprietaryParameterDynamics : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+    # Type M:0..n in CIM
+    # ProprietaryParameterDynamics : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

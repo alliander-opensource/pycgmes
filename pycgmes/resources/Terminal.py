@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .ACDCTerminal import ACDCTerminal
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Terminal(ACDCTerminal):
     """
     An AC electrical connection point to a piece of conducting equipment. Terminals are connected at physical connection
@@ -50,70 +49,78 @@ class Terminal(ACDCTerminal):
 
     TopologicalNode: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.TP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+            ]
+        },
     )
 
     ConductingEquipment: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+                Profile.DY,
+            ]
+        },
     )
 
     ConnectivityNode: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # ConverterDCSides : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # ConverterDCSides : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # AuxiliaryEquipment : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # AuxiliaryEquipment : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # RegulatingControl : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # RegulatingControl : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     phases: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # TransformerEnd : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # TransformerEnd : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     # *Association not used*
-    # Type M:0..2 in CIM  # pylint: disable-next=line-too-long
-    # TieFlow : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..2 in CIM
+    # TieFlow : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # HasSecondMutualCoupling : list = Field(default_factory=list, in_profiles = [Profile.SC, ])
+    # Type M:0..n in CIM
+    # HasSecondMutualCoupling : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.SC, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # HasFirstMutualCoupling : list = Field(default_factory=list, in_profiles = [Profile.SC, ])
+    # Type M:0..n in CIM
+    # HasFirstMutualCoupling : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.SC, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # SvPowerFlow : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+    # Type M:0..1 in CIM
+    # SvPowerFlow : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]})
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # RemoteInputSignal : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+    # Type M:0..n in CIM
+    # RemoteInputSignal : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

@@ -11,11 +11,10 @@ from functools import cached_property
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class VsQpccControlKind(Base):
     """
     Kind of reactive power control at point of common coupling for a voltage source converter.

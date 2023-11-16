@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .RegularIntervalSchedule import RegularIntervalSchedule
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SeasonDayTypeSchedule(RegularIntervalSchedule):
     """
     A time schedule covering a 24 hour period, with curve data for a specific type of season and day.
@@ -28,16 +27,20 @@ class SeasonDayTypeSchedule(RegularIntervalSchedule):
 
     DayType: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     Season: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

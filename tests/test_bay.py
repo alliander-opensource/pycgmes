@@ -20,7 +20,7 @@ from pycgmes.utils.profile import Profile
 
 class TestBay:
     def test_load_bay(self):
-        b = Bay()
+        Bay()
 
     def test_bay_has_mrid(self):
         b = Bay()
@@ -69,10 +69,6 @@ class TestBay:
     )
     def test_bay_has_expected_attributes(self, profile, attribute_names):
         assert attribute_names == {a.name for a in Bay().cgmes_attribute_names_in_profile(Profile[profile])}
-
-    def test_param_casting(self):
-        # An int is castable to string, and it happens.
-        assert Bay(VoltageLevel=42).VoltageLevel == "42"
 
     def test_param_validation(self):
         # mRID is not allowed to be None

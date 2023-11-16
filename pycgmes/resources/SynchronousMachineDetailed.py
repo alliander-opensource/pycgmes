@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .SynchronousMachineDynamics import SynchronousMachineDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SynchronousMachineDetailed(SynchronousMachineDynamics):
     """
     All synchronous machine detailed types use a subset of the same data parameters and input/output variables.   The
@@ -41,30 +40,38 @@ class SynchronousMachineDetailed(SynchronousMachineDynamics):
 
     saturationFactorQAxis: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     saturationFactor120QAxis: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     efdBaseRatio: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     ifdBaseType: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

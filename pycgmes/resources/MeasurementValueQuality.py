@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Quality61850 import Quality61850
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class MeasurementValueQuality(Quality61850):
     """
     Measurement quality flags. Bits 0-10 are defined for substation automation in IEC 61850-7-3. Bits 11-15 are reserved
@@ -28,9 +27,11 @@ class MeasurementValueQuality(Quality61850):
 
     MeasurementValue: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     @cached_property

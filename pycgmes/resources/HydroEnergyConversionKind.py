@@ -11,11 +11,10 @@ from functools import cached_property
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class HydroEnergyConversionKind(Base):
     """
     Specifies the capability of the hydro generating unit to convert energy as a generator or pump.

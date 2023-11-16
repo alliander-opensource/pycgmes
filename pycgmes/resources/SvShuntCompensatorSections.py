@@ -13,11 +13,10 @@ from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from ..utils.base import Base
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SvShuntCompensatorSections(Base):
     """
     State variable for the number of sections in service for a shunt compensator.
@@ -29,16 +28,20 @@ class SvShuntCompensatorSections(Base):
 
     ShuntCompensator: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.SV,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ]
+        },
     )
 
     sections: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SV,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ]
+        },
     )
 
     @cached_property

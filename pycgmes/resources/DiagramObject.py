@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DiagramObject(IdentifiedObject):
     """
     An object that defines one or more points in a given space. This object can be associated with anything that
@@ -57,66 +56,82 @@ class DiagramObject(IdentifiedObject):
 
     Diagram: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     drawingOrder: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     isPolygon: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     offsetX: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     offsetY: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     rotation: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     IdentifiedObject: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # DiagramObjectPoints : list = Field(default_factory=list, in_profiles = [Profile.DL, ])
+    # Type M:0..n in CIM
+    # DiagramObjectPoints : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DL, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # VisibilityLayers : list = Field(default_factory=list, in_profiles = [Profile.DL, ])
+    # Type M:0..n in CIM
+    # VisibilityLayers : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DL, ]}) # noqa: E501
 
     DiagramObjectStyle: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     @cached_property

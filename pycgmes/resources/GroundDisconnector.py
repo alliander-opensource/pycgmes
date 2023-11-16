@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Switch import Switch
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class GroundDisconnector(Switch):
     """
     A manually operated or motor operated mechanical switching device used for isolating a circuit or equipment from

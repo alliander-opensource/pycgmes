@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .WorkLocation import WorkLocation
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ServiceLocation(WorkLocation):
     """
     A real estate location, commonly referred to as premises.

@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .AnalogControl import AnalogControl
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class RaiseLowerCommand(AnalogControl):
     """
     An analog control that increases or decreases a set point value with pulses. Unless otherwise specified, one pulse
@@ -28,9 +27,11 @@ class RaiseLowerCommand(AnalogControl):
 
     ValueAliasSet: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     @cached_property

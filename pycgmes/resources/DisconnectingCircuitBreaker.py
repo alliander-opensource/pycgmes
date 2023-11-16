@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Breaker import Breaker
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DisconnectingCircuitBreaker(Breaker):
     """
     A circuit breaking device including disconnecting function, eliminating the need for separate disconnectors.

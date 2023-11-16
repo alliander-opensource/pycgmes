@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Switch import Switch
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Fuse(Switch):
     """
     An overcurrent protective device with a circuit opening fusible part that is heated and severed by the passage of

@@ -69,7 +69,7 @@ If this is a leaf node (for instance `ACLineSegment`), it "just works". If you w
 class higher in the hierarchy (for instance `Equipment`) there is a lot more work to do.
 
 ```python
-@dataclass(config=DataclassConfig)
+@dataclass
 class CustomBay(Bay):
     colour: str = Field(
         default="Red",
@@ -98,15 +98,15 @@ class CustomProfile(BaseProfile):
 And use it everywhere you would use a profile:
 
 ```python
-from pycgmes.utils.dataclassconfig import DataclassConfig
-
-@dataclass(config=DataclassConfig)
+@dataclass
 class CustomBayAttr(Bay):
     colour: str = Field(
         default="Red",
-        in_profiles=[
-            CustomProfile.CUS,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                CustomProfile.CUS,
+            ],
+        }
     )
 
 # And for instance:
@@ -124,10 +124,9 @@ In the case of a custom attribute defined via a sub class, the result would be: 
 from pydantic.dataclasses import dataclass
 
 from pycgmes.resources.ACLineSegment import ACLineSegment
-from pycgmes.utils.dataclassconfig import DataclassConfig
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ACLineSegmentCustom(ACLineSegment):
     @classmethod
     def apparent_name(cls):
@@ -157,28 +156,31 @@ from pydantic.dataclasses import dataclass
 from pydantic import Field
 
 from pycgmes.resources import ACLineSegment
-from pycgmes.resources.Base import DataclassConfig, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ACLineSegmentCustom(ACLineSegment):
     colour: str = Field(
         default="Red",
-        in_profiles=[
-            Profile.EQ, # Do not do this, see chapter "create a new profile"
-        ],
-        namespace="custom",
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ, # Do not do this, see chapter "create a new profile"
+            ],
+            "namespace": "custom",
+        },
     )
 
     size: str = Field(
         default="Big",
-        in_profiles=[
-            Profile.EQ, # Do not do this, see chapter "create a new profile"
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ, # Do not do this, see chapter "create a new profile"
+            ],
+        }
     )
 
     @property
-    def namesapce(self) -> str:
+    def namespace(self) -> str:
         return "custom ns class"
 
     @classmethod
@@ -225,7 +227,7 @@ Generated from the modernpython serialisation of [cimgen](https://github.com/sog
 
 The CI happens in GitHub actions.
 
-The standard black/mypy/autoflake/isort/pylint/ruff/mypy are run there, via scons.
+The standard black/pyright/ruff are run there, via scons.
 
 ### CD
 

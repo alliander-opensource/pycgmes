@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class WindPlantDynamics(DynamicsFunctionBlock):
     """
     Parent class supporting relationships to wind turbines type 3 and type 4 and wind plant IEC and user-defined wind
@@ -29,14 +28,16 @@ class WindPlantDynamics(DynamicsFunctionBlock):
 
     RemoteInputSignal: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
-    # WindTurbineType3or4Dynamics : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+    # Type M:1..n in CIM
+    # WindTurbineType3or4Dynamics : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

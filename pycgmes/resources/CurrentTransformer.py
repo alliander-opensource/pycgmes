@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Sensor import Sensor
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class CurrentTransformer(Sensor):
     """
     Instrument transformer used to measure electrical qualities of the circuit that is being protected and/or monitored.

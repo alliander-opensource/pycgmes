@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .Control import Control
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class AccumulatorReset(Control):
     """
     This command resets the counter value to zero.
@@ -27,9 +26,11 @@ class AccumulatorReset(Control):
 
     AccumulatorValue: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     @cached_property

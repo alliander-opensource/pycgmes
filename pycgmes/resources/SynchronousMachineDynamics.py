@@ -12,12 +12,11 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .RotatingMachineDynamics import RotatingMachineDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SynchronousMachineDynamics(RotatingMachineDynamics):
     """
     Synchronous machine whose behaviour is described by reference to a standard model expressed in one of the following
@@ -45,34 +44,36 @@ class SynchronousMachineDynamics(RotatingMachineDynamics):
 
     SynchronousMachine: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # CrossCompoundTurbineGovernorDyanmics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ]) # noqa: E501
+    # Type M:0..1 in CIM
+    # CrossCompoundTurbineGovernorDyanmics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # CrossCompoundTurbineGovernorDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ]) # noqa: E501
+    # Type M:0..1 in CIM
+    # CrossCompoundTurbineGovernorDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # MechanicalLoadDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # MechanicalLoadDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # ExcitationSystemDynamics : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # ExcitationSystemDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # TurbineGovernorDynamics : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+    # Type M:0..n in CIM
+    # TurbineGovernorDynamics : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # GenICompensationForGenJ : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+    # Type M:0..n in CIM
+    # GenICompensationForGenJ : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

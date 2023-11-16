@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .AuxiliaryEquipment import AuxiliaryEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class FaultIndicator(AuxiliaryEquipment):
     """
     A FaultIndicator is typically only an indicator (which may or may not be remotely monitored), and not a piece of

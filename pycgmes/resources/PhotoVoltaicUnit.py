@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .PowerElectronicsUnit import PowerElectronicsUnit
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PhotoVoltaicUnit(PowerElectronicsUnit):
     """
     A photovoltaic device or an aggregation of such devices.

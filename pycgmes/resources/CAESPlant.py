@@ -10,12 +10,11 @@ from functools import cached_property
 
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .PowerSystemResource import PowerSystemResource
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class CAESPlant(PowerSystemResource):
     """
     Compressed air energy storage plant.
@@ -24,8 +23,8 @@ class CAESPlant(PowerSystemResource):
     """
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # ThermalGeneratingUnit : Optional[str] = Field(default=None, in_profiles = [Profile.EQ, ])
+    # Type M:0..1 in CIM
+    # ThermalGeneratingUnit : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

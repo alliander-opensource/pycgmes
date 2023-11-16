@@ -11,12 +11,11 @@ from functools import cached_property
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.dataclassconfig import DataclassConfig
 from ..utils.profile import BaseProfile, Profile
 from .EarthFaultCompensator import EarthFaultCompensator
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class GroundingImpedance(EarthFaultCompensator):
     """
     A fixed impedance device used for grounding.
@@ -26,9 +25,11 @@ class GroundingImpedance(EarthFaultCompensator):
 
     x: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     @cached_property
