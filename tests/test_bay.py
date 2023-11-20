@@ -74,3 +74,8 @@ class TestBay:
         # mRID is not allowed to be None
         with pytest.raises(ValidationError):
             Bay(mRID=None)
+
+    def test_extra_filed_forbidden(self):
+        # Extra fields are not allowed
+        with pytest.raises(ValidationError):
+            Bay(somefield="should not exist")
