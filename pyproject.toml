@@ -4,7 +4,7 @@
 
 [tool.poetry]
 name = "pycgmes"
-version = "2.0.0"
+version = "2.0.1"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["pycgmes <pycgmes@alliander.com>"]
 readme = "README.md"
