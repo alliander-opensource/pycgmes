@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
 from ..utils.base import Base
+from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DateTime(Base):
     """
     Date and time as "yyyy-mm-ddThh:mm:ss.sss", which conforms with ISO 8601. UTC time zone is specified as "yyyy-mm-

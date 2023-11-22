@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PowerSystemResource(IdentifiedObject):
     """
     A power system resource (PSR) can be an item of equipment such as a switch, an equipment container containing many
@@ -28,16 +28,16 @@ class PowerSystemResource(IdentifiedObject):
     """
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # Location : Optional[str] = Field(default=None, in_profiles = [Profile.GL, ])
+    # Type M:0..1 in CIM
+    # Location : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.GL, ]})
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # Controls : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+    # Type M:0..n in CIM
+    # Controls : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]})
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # Measurements : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+    # Type M:0..n in CIM
+    # Measurements : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

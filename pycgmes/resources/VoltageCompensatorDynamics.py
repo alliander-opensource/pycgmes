@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .DynamicsFunctionBlock import DynamicsFunctionBlock
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class VoltageCompensatorDynamics(DynamicsFunctionBlock):
     """
     Voltage compensator function block whose behaviour is described by reference to a standard model or by definition of
@@ -27,14 +27,16 @@ class VoltageCompensatorDynamics(DynamicsFunctionBlock):
     """
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # RemoteInputSignal : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:0..1 in CIM
+    # RemoteInputSignal : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     ExcitationSystemDynamics: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

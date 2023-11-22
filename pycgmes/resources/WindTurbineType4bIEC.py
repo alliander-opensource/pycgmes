@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .WindTurbineType4IEC import WindTurbineType4IEC
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class WindTurbineType4bIEC(WindTurbineType4IEC):
     """
     Wind turbine IEC type 4B. Reference: IEC 61400-27-1:2015, 5.5.5.3.
@@ -28,23 +28,29 @@ class WindTurbineType4bIEC(WindTurbineType4IEC):
 
     WindContPType4bIEC: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     WindGenType4IEC: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     WindMechIEC: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

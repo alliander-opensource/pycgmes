@@ -7,15 +7,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .EquivalentEquipment import EquivalentEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class EquivalentBranch(EquivalentEquipment):
     """
     The class represents equivalent branches. In cases where a transformer phase shift is modelled and the
@@ -72,114 +72,146 @@ class EquivalentBranch(EquivalentEquipment):
 
     r: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     r21: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     x: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     x21: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     negativeR12: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     negativeR21: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     negativeX12: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     negativeX21: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     positiveR12: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     positiveR21: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     positiveX12: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     positiveX21: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     zeroR12: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     zeroR21: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     zeroX12: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     zeroX21: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.SC,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ]
+        },
     )
 
     @cached_property

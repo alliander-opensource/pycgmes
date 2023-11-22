@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .WindTurbineType1or2IEC import WindTurbineType1or2IEC
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class WindGenTurbineType2IEC(WindTurbineType1or2IEC):
     """
     Wind turbine IEC type 2.  Reference: IEC 61400-27-1:2015, 5.5.3.
@@ -27,16 +27,20 @@ class WindGenTurbineType2IEC(WindTurbineType1or2IEC):
 
     WindContRotorRIEC: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     WindPitchContPowerIEC: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

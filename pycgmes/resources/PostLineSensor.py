@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .Sensor import Sensor
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PostLineSensor(Sensor):
     """
     A sensor used mainly in overhead distribution networks as the source of both current and voltage measurements.

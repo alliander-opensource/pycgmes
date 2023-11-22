@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
 from ..utils.base import Base
+from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Quality61850(Base):
     """
     Quality flags in this class are as defined in IEC 61850, except for estimatorReplaced, which has been included in
@@ -54,86 +54,110 @@ class Quality61850(Base):
 
     badReference: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     estimatorReplaced: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     failure: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     oldData: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     operatorBlocked: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     oscillatory: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     outOfRange: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     overFlow: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     source: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     suspect: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     test: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     validity: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     @cached_property

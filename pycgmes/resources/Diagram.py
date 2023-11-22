@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Diagram(IdentifiedObject):
     """
     The diagram being exchanged. The coordinate system is a standard Cartesian coordinate system and the orientation
@@ -39,48 +39,60 @@ class Diagram(IdentifiedObject):
 
     orientation: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     x1InitialView: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     x2InitialView: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     y1InitialView: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     y2InitialView: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # DiagramElements : list = Field(default_factory=list, in_profiles = [Profile.DL, ])
+    # Type M:0..n in CIM
+    # DiagramElements : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DL, ]}) # noqa: E501
 
     DiagramStyle: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     @cached_property

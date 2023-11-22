@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
 from ..utils.base import Base
+from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class UnitSymbol(Base):
     """
     The derived units defined for usage in the CIM. In some cases, the derived unit is equal to an SI unit. Whenever

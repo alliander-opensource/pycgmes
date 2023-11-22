@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .EquipmentContainer import EquipmentContainer
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class Line(EquipmentContainer):
     """
     Contains equipment beyond a substation belonging to a power transmission line.
@@ -26,10 +26,12 @@ class Line(EquipmentContainer):
 
     Region: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .PowerSystemResource import PowerSystemResource
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class HydroPowerPlant(PowerSystemResource):
     """
     A hydro power station which can generate or pump. When generating, the generator turbines receive water from an
@@ -28,19 +28,21 @@ class HydroPowerPlant(PowerSystemResource):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # HydroGeneratingUnits : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # HydroGeneratingUnits : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     hydroPlantStorageType: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # HydroPumps : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # HydroPumps : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

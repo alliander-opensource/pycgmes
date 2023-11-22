@@ -2,29 +2,31 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-import pytest
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from pycgmes.resources.Bay import Bay
-from pycgmes.utils.base import Base
-from pycgmes.utils.dataclassconfig import DataclassConfig
+from pycgmes.utils.config import cgmes_resource_config
 from pycgmes.utils.profile import BaseProfile
 
 
 class CustomProfile(BaseProfile):
     CUS = "Tom"
     FRO = "Mage"
+    model_config = cgmes_resource_config
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class CustomBayAttr(Bay):
+    model_config = cgmes_resource_config
     colour: str = Field(
         default="Red",
-        in_profiles=[
-            CustomProfile.CUS,
-        ],
-        namespace="custom",
+        json_schema_extra={
+            "in_profiles": [
+                CustomProfile.CUS,
+            ],
+            "namespace": "custom",
+        },
     )
 
     @classmethod
@@ -32,8 +34,10 @@ class CustomBayAttr(Bay):
         return "Bay"
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class CustomBayClass(Bay):
+    model_config = cgmes_resource_config
+
     @classmethod
     def apparent_name(cls):
         return "Cheese"

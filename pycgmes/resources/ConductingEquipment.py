@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .Equipment import Equipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ConductingEquipment(Equipment):
     """
     The parts of the AC power system that are designed to carry current or that are conductively connected through
@@ -30,19 +30,21 @@ class ConductingEquipment(Equipment):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # Terminals : list = Field(default_factory=list, in_profiles = [Profile.EQBD, Profile.EQ, Profile.DY, ]) # noqa: E501
+    # Type M:0..n in CIM
+    # Terminals : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQBD, Profile.EQ, Profile.DY, ]}) # noqa: E501
 
     BaseVoltage: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # SvStatus : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+    # Type M:0..1 in CIM
+    # SvStatus : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

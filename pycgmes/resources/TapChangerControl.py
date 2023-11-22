@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .RegulatingControl import RegulatingControl
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class TapChangerControl(RegulatingControl):
     """
     Describes behaviour specific to tap changers, e.g. how the voltage at the end of a line varies with the load level
@@ -24,8 +24,8 @@ class TapChangerControl(RegulatingControl):
     """
 
     # *Association not used*
-    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
-    # TapChanger : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:1..n in CIM
+    # TapChanger : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

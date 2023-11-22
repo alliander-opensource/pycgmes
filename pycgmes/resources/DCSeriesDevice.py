@@ -7,15 +7,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .DCConductingEquipment import DCConductingEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DCSeriesDevice(DCConductingEquipment):
     """
     A series device within the DC system, typically a reactor used for filtering or smoothing.  Needed for transient and
@@ -27,16 +27,20 @@ class DCSeriesDevice(DCConductingEquipment):
 
     inductance: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     resistance: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

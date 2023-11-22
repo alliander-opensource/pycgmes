@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ValueAliasSet(IdentifiedObject):
     """
     Describes the translation of a set of values into a name and is intendend to facilitate custom translations. Each
@@ -30,20 +30,20 @@ class ValueAliasSet(IdentifiedObject):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # Commands : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+    # Type M:0..n in CIM
+    # Commands : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]})
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # Discretes : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+    # Type M:0..n in CIM
+    # Discretes : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]})
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # RaiseLowerCommands : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+    # Type M:0..n in CIM
+    # RaiseLowerCommands : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
-    # Values : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+    # Type M:1..n in CIM
+    # Values : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

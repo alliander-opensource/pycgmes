@@ -71,12 +71,9 @@ jobs:
       - name: scons ruff
         if: ${{ ! inputs._SKIP_QUALITY }}
         run: poetry run scons ruff check
-      - name: scons pylint
+      - name: scons type
         if: ${{ ! inputs._SKIP_QUALITY }}
-        run: poetry run scons pylint
-      - name: scons mypy
-        if: ${{ ! inputs._SKIP_QUALITY }}
-        run: poetry run scons mypy
+        run: poetry run scons type
       - name: scons tests
         if: ${{ ! inputs._SKIP_QUALITY }}
         run: poetry run scons tests

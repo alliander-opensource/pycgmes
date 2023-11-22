@@ -7,15 +7,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class LimitSet(IdentifiedObject):
     """
     Specifies a set of Limits that are associated with a Measurement. A Measurement may have several LimitSets
@@ -29,9 +29,11 @@ class LimitSet(IdentifiedObject):
 
     isPercentageLimits: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     @cached_property

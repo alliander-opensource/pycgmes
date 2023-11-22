@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class TopologicalNode(IdentifiedObject):
     """
     For a detailed substation model a topological node is a set of connectivity nodes that, in the current network
@@ -43,48 +43,54 @@ class TopologicalNode(IdentifiedObject):
 
     BaseVoltage: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.TP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # ConnectivityNodes : list = Field(default_factory=list, in_profiles = [Profile.TP, ])
+    # Type M:0..n in CIM
+    # ConnectivityNodes : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.TP, ]}) # noqa: E501
 
     ConnectivityNodeContainer: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.TP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
-    # Terminal : list = Field(default_factory=list, in_profiles = [Profile.TP, ])
+    # Type M:1..n in CIM
+    # Terminal : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.TP, ]})
 
     ReportingGroup: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.TP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # SvInjection : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+    # Type M:0..1 in CIM
+    # SvInjection : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]})
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # SvVoltage : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+    # Type M:0..1 in CIM
+    # SvVoltage : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]})
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # AngleRefTopologicalIsland : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+    # Type M:0..1 in CIM
+    # AngleRefTopologicalIsland : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # TopologicalIsland : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+    # Type M:0..1 in CIM
+    # TopologicalIsland : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

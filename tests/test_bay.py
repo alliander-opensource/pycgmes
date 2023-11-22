@@ -20,11 +20,11 @@ from pycgmes.utils.profile import Profile
 
 class TestBay:
     def test_load_bay(self):
-        b = Bay()
+        Bay()
 
     def test_bay_has_mrid(self):
         b = Bay()
-        assert getattr(b, "mRID") is not None
+        assert b.mRID is not None
 
     def test_bay_has_expected_parents(self):
         parents = Bay.__mro__[0:6]
@@ -70,11 +70,12 @@ class TestBay:
     def test_bay_has_expected_attributes(self, profile, attribute_names):
         assert attribute_names == {a.name for a in Bay().cgmes_attribute_names_in_profile(Profile[profile])}
 
-    def test_param_casting(self):
-        # An int is castable to string, and it happens.
-        assert Bay(VoltageLevel=42).VoltageLevel == "42"
-
     def test_param_validation(self):
         # mRID is not allowed to be None
         with pytest.raises(ValidationError):
             Bay(mRID=None)
+
+    def test_extra_filed_forbidden(self):
+        # Extra fields are not allowed
+        with pytest.raises(ValidationError):
+            Bay(somefield="should not exist")

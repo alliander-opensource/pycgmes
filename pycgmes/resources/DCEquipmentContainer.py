@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .EquipmentContainer import EquipmentContainer
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DCEquipmentContainer(EquipmentContainer):
     """
     A modelling construct to provide a root class for containment of DC as well as AC equipment. The class differ from
@@ -26,12 +26,12 @@ class DCEquipmentContainer(EquipmentContainer):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # DCTopologicalNode : list = Field(default_factory=list, in_profiles = [Profile.TP, ])
+    # Type M:0..n in CIM
+    # DCTopologicalNode : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.TP, ]}) # noqa: E501
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # DCNodes : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # DCNodes : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

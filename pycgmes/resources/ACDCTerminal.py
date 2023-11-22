@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class ACDCTerminal(IdentifiedObject):
     """
     An electrical connection point (AC or DC) to a piece of conducting equipment. Terminals are connected at physical
@@ -42,32 +42,38 @@ class ACDCTerminal(IdentifiedObject):
 
     sequenceNumber: int = Field(
         default=0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # OperationalLimitSet : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:0..n in CIM
+    # OperationalLimitSet : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     BusNameMarker: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     connected: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.SSH,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # Measurements : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+    # Type M:0..n in CIM
+    # Measurements : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

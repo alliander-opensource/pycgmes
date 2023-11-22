@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .ConductingEquipment import ConductingEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class EquivalentEquipment(ConductingEquipment):
     """
     The class represents equivalent objects that are the result of a network reduction. The class is the base for
@@ -27,9 +27,11 @@ class EquivalentEquipment(ConductingEquipment):
 
     EquivalentNetwork: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

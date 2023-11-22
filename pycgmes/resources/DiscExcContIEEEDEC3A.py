@@ -7,15 +7,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .DiscontinuousExcitationControlDynamics import DiscontinuousExcitationControlDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DiscExcContIEEEDEC3A(DiscontinuousExcitationControlDynamics):
     """
     IEEE type DEC3A model. In some systems, the stabilizer output is disconnected from the regulator immediately
@@ -28,16 +28,20 @@ class DiscExcContIEEEDEC3A(DiscontinuousExcitationControlDynamics):
 
     vtmin: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     tdr: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     @cached_property

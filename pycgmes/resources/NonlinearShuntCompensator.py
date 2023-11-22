@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .ShuntCompensator import ShuntCompensator
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class NonlinearShuntCompensator(ShuntCompensator):
     """
     A non linear shunt compensator has bank or section admittance values that differ. The attributes g, b, g0 and b0 of
@@ -25,8 +25,8 @@ class NonlinearShuntCompensator(ShuntCompensator):
     """
 
     # *Association not used*
-    # Type M:1..n in CIM  # pylint: disable-next=line-too-long
-    # NonlinearShuntCompensatorPoints : list = Field(default_factory=list, in_profiles = [Profile.EQ, ])
+    # Type M:1..n in CIM
+    # NonlinearShuntCompensatorPoints : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

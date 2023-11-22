@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+import os
 import subprocess  # nosec
 import sys
 from typing import Mapping
@@ -39,7 +40,7 @@ if "format" in COMMAND_LINE_TARGETS:
     COMMAND_LINE_TARGETS += ["black", "ruff"]
 
 if "quality" in COMMAND_LINE_TARGETS:
-    COMMAND_LINE_TARGETS += ["ruff", "lock", "pylint", "mypy", "test", "coverage", "license"]
+    COMMAND_LINE_TARGETS += ["ruff", "lock", "type", "test", "coverage", "license"]
 
 # Formatting targets, which might change files. Let's run them *before* the linters and friends.
 # This is why ruff is the first of the quality target, as it fixes things as well.
@@ -57,28 +58,25 @@ if "ruff" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
         # A lot are adding during generation because due to comments, some lines can be too long. They do not all
         # end up being too long, so let's clean up the not relevant one.
         cmd = f"ruff {_SUBJECT} {param}"
+        # Tries to fix what it can, forget about the rest.
+        cmd_test = f"ruff {_TEST_SUBJECT}  --fix-only"
         if _CHECK_ONLY:
             cmd += " --no-fix"
+            cmd_test += " --no-fix"
         else:
             cmd += " --fix"
-        _exec(cmd)
+        _exec(cmd, env=os.environ)
+        _exec(cmd_test, env=os.environ)
 
 
 if "lock" in COMMAND_LINE_TARGETS:
     _exec("poetry check --lock")
 
-if "pylint" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
-    _exec(f"pylint --rcfile=pyproject.toml {_SUBJECT}")
 
-
-if "mypy" in COMMAND_LINE_TARGETS:
-    # https://mypy.readthedocs.io/en/stable/running_mypy.html#library-stubs-not-installed
-    _exec(f"mypy {_SUBJECT}")
+if "type" in COMMAND_LINE_TARGETS or "pyright" in COMMAND_LINE_TARGETS:
+    _exec("pyright", env=os.environ)
     _target_found = True
 
-if "bandit" in COMMAND_LINE_TARGETS:
-    # B101: assert_used
-    _exec(f"bandit --recursive --configfile pyproject.toml .")
 
 if "test" in COMMAND_LINE_TARGETS or "tests" in COMMAND_LINE_TARGETS:
     # Running tests via coverage to only report when asking for coverage
@@ -94,6 +92,8 @@ if "coverage" in COMMAND_LINE_TARGETS:
     _exec("coverage report --show-missing")
 
 if "license" in COMMAND_LINE_TARGETS or "licence" in COMMAND_LINE_TARGETS:
+    # To fix:
+    # reuse annotate --copyright="Alliander" --license=Apache-2.0 --recursive pycgmes/{resources,utils}
     _exec("reuse lint")
 
 if not _target_found:

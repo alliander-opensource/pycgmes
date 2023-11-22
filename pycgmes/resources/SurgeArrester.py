@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .AuxiliaryEquipment import AuxiliaryEquipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SurgeArrester(AuxiliaryEquipment):
     """
     Shunt device, installed on the network, usually in the proximity of electrical equipment in order to protect the

@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .EnergyConsumer import EnergyConsumer
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class StationSupply(EnergyConsumer):
     """
     Station supply with load derived from the station output.

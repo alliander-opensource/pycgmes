@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
 from ..utils.base import Base
+from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SvStatus(Base):
     """
     State variable for status.
@@ -29,16 +29,20 @@ class SvStatus(Base):
 
     ConductingEquipment: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.SV,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ]
+        },
     )
 
     inService: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.SV,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ]
+        },
     )
 
     @cached_property

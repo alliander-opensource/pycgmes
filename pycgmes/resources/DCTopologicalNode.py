@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DCTopologicalNode(IdentifiedObject):
     """
     DC bus.
@@ -29,23 +29,25 @@ class DCTopologicalNode(IdentifiedObject):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # DCTerminals : list = Field(default_factory=list, in_profiles = [Profile.TP, ])
+    # Type M:0..n in CIM
+    # DCTerminals : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.TP, ]})
 
     DCEquipmentContainer: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.TP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # DCNodes : list = Field(default_factory=list, in_profiles = [Profile.TP, ])
+    # Type M:0..n in CIM
+    # DCNodes : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.TP, ]})
 
     # *Association not used*
-    # Type M:0..1 in CIM  # pylint: disable-next=line-too-long
-    # DCTopologicalIsland : Optional[str] = Field(default=None, in_profiles = [Profile.SV, ])
+    # Type M:0..1 in CIM
+    # DCTopologicalIsland : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

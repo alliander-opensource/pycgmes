@@ -7,15 +7,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .LimitSet import LimitSet
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class AnalogLimitSet(LimitSet):
     """
     An AnalogLimitSet specifies a set of Limits that are associated with an Analog measurement.
@@ -26,14 +26,16 @@ class AnalogLimitSet(LimitSet):
 
     Measurements: list = Field(
         default_factory=list,
-        in_profiles=[
-            Profile.OP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # Limits : list = Field(default_factory=list, in_profiles = [Profile.OP, ])
+    # Type M:0..n in CIM
+    # Limits : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

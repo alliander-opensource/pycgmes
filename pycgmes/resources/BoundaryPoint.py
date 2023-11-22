@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .PowerSystemResource import PowerSystemResource
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class BoundaryPoint(PowerSystemResource):
     """
     Designates a connection point at which one or more model authority sets shall connect to. The location of the
@@ -59,74 +59,92 @@ class BoundaryPoint(PowerSystemResource):
 
     fromEndIsoCode: str = Field(
         default="",
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     fromEndName: str = Field(
         default="",
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     fromEndNameTso: str = Field(
         default="",
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     toEndIsoCode: str = Field(
         default="",
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     toEndName: str = Field(
         default="",
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     toEndNameTso: str = Field(
         default="",
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     isDirectCurrent: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     isExcludedFromAreaInterchange: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     ConnectivityNode: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQBD,
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQBD,
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

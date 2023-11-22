@@ -7,15 +7,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
 from ..utils.base import Base
+from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class StreetDetail(Base):
     """
     Street details, in the context of address.
@@ -41,93 +41,119 @@ class StreetDetail(Base):
 
     number: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     name: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     suffix: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     prefix: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     type: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     code: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     buildingName: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     suiteNumber: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     addressGeneral: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     addressGeneral2: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     addressGeneral3: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     withinTownLimits: bool = Field(
         default=False,
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     floorIdentification: str = Field(
         default="",
-        in_profiles=[
-            Profile.GL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ]
+        },
     )
 
     @cached_property

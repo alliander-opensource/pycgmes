@@ -7,15 +7,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DCTopologicalIsland(IdentifiedObject):
     """
     An electrically connected subset of the network. DC topological islands can change as the current network state
@@ -28,9 +28,11 @@ class DCTopologicalIsland(IdentifiedObject):
 
     DCTopologicalNodes: list = Field(
         default_factory=list,
-        in_profiles=[
-            Profile.SV,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ]
+        },
     )
 
     @cached_property

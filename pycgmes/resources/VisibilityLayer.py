@@ -7,15 +7,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class VisibilityLayer(IdentifiedObject):
     """
     Layers are typically used for grouping diagram objects according to themes and scales. Themes are used to display or
@@ -32,16 +32,20 @@ class VisibilityLayer(IdentifiedObject):
 
     VisibleObjects: list = Field(
         default_factory=list,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     drawingOrder: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     @cached_property

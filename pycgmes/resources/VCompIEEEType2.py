@@ -7,15 +7,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .VoltageCompensatorDynamics import VoltageCompensatorDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class VCompIEEEType2(VoltageCompensatorDynamics):
     """
     Terminal voltage transducer and load compensator as defined in IEEE 421.5-2005, 4. This model is designed to cover
@@ -29,14 +29,16 @@ class VCompIEEEType2(VoltageCompensatorDynamics):
 
     tr: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DY,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ]
+        },
     )
 
     # *Association not used*
-    # Type M:2..n in CIM  # pylint: disable-next=line-too-long
-    # GenICompensationForGenJ : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+    # Type M:2..n in CIM
+    # GenICompensationForGenJ : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

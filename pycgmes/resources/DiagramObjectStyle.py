@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DiagramObjectStyle(IdentifiedObject):
     """
     A reference to a style used by the originating system for a diagram object.  A diagram object style describes
@@ -24,8 +24,8 @@ class DiagramObjectStyle(IdentifiedObject):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # StyledObjects : list = Field(default_factory=list, in_profiles = [Profile.DL, ])
+    # Type M:0..n in CIM
+    # StyledObjects : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DL, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

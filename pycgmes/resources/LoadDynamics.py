@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class LoadDynamics(IdentifiedObject):
     """
     Load whose behaviour is described by reference to a standard model or by definition of a user-defined model. A
@@ -26,8 +26,8 @@ class LoadDynamics(IdentifiedObject):
     """
 
     # *Association not used*
-    # Type M:0..n in CIM  # pylint: disable-next=line-too-long
-    # EnergyConsumer : list = Field(default_factory=list, in_profiles = [Profile.DY, ])
+    # Type M:0..n in CIM
+    # EnergyConsumer : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

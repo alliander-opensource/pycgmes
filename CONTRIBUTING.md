@@ -117,7 +117,7 @@ the work. For more information see the Code review guideline.
 
 ## Style guide
 
-We use black, pylint, ruff, mypy, pytest and coverage to enforce good quality.
+We use black, ruff, pyright, pytest and coverage to enforce good quality.
 They are all checked via Github actions, and can be run locally (after installing the
 dev dependency of the project) with `scons all`. Look at the [workflow](.github/workflows/_core.yaml) to see the specific steps.
 

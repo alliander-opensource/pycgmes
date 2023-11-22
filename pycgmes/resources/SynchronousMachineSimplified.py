@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .SynchronousMachineDynamics import SynchronousMachineDynamics
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class SynchronousMachineSimplified(SynchronousMachineDynamics):
     """
     The simplified model represents a synchronous generator as a constant internal voltage behind an impedance (Rs +

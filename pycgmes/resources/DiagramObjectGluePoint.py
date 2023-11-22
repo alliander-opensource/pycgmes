@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
 from ..utils.base import Base
+from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DiagramObjectGluePoint(Base):
     """
     This is used for grouping diagram object points from different diagram objects that are considered to be glued
@@ -25,8 +25,8 @@ class DiagramObjectGluePoint(Base):
     """
 
     # *Association not used*
-    # Type M:2..n in CIM  # pylint: disable-next=line-too-long
-    # DiagramObjectPoints : list = Field(default_factory=list, in_profiles = [Profile.DL, ])
+    # Type M:2..n in CIM
+    # DiagramObjectPoints : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DL, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

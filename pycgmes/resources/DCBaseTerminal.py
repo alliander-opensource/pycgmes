@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .ACDCTerminal import ACDCTerminal
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DCBaseTerminal(ACDCTerminal):
     """
     An electrical connection point at a piece of DC conducting equipment. DC terminals are connected at one physical DC
@@ -29,16 +29,20 @@ class DCBaseTerminal(ACDCTerminal):
 
     DCTopologicalNode: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.TP,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+            ]
+        },
     )
 
     DCNode: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

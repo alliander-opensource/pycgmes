@@ -7,14 +7,14 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
-from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from pydantic.dataclasses import dataclass
+
+from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class WindAeroConstIEC(IdentifiedObject):
     """
     Constant aerodynamic torque model which assumes that the aerodynamic torque is constant. Reference: IEC
@@ -24,8 +24,8 @@ class WindAeroConstIEC(IdentifiedObject):
     """
 
     # *Association not used*
-    # Type M:1 in CIM  # pylint: disable-next=line-too-long
-    # WindGenTurbineType1aIEC : Optional[str] = Field(default=None, in_profiles = [Profile.DY, ])
+    # Type M:1 in CIM
+    # WindGenTurbineType1aIEC : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:

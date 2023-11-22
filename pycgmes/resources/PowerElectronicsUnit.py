@@ -7,15 +7,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 """
 
 from functools import cached_property
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
+from ..utils.profile import BaseProfile, Profile
 from .Equipment import Equipment
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class PowerElectronicsUnit(Equipment):
     """
     A generating unit or battery or aggregation that connects to the AC network using power electronics rather than
@@ -27,21 +27,25 @@ class PowerElectronicsUnit(Equipment):
     """
 
     # *Association not used*
-    # Type M:1 in CIM  # pylint: disable-next=line-too-long
-    # PowerElectronicsConnection : Optional[str] = Field(default=None, in_profiles = [Profile.EQ, ])
+    # Type M:1 in CIM
+    # PowerElectronicsConnection : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     maxP: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     minP: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ]
+        },
     )
 
     @cached_property

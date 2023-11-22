@@ -8,15 +8,15 @@ Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/c
 
 from functools import cached_property
 from typing import Optional
+
 from pydantic import Field
 from pydantic.dataclasses import dataclass
-from ..utils.dataclassconfig import DataclassConfig
-from ..utils.profile import BaseProfile, Profile
 
 from ..utils.base import Base
+from ..utils.profile import BaseProfile, Profile
 
 
-@dataclass(config=DataclassConfig)
+@dataclass
 class DiagramObjectPoint(Base):
     """
     A point in a given space defined by 3 coordinates and associated to a diagram object.  The coordinates may be
@@ -33,44 +33,56 @@ class DiagramObjectPoint(Base):
 
     DiagramObject: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     DiagramObjectGluePoint: Optional[str] = Field(
         default=None,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     sequenceNumber: int = Field(
         default=0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     xPosition: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     yPosition: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     zPosition: float = Field(
         default=0.0,
-        in_profiles=[
-            Profile.DL,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ]
+        },
     )
 
     @cached_property
