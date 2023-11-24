@@ -165,6 +165,6 @@ class CgmesAttribute(TypedDict):
 
     # Actual value
     value: CgmesAttributeTypes
-    # The default will be None. Only custom attributes might have something different, given as metadata.
+    # Custom attributes might have something different, given as metadata.
     # See readme for more information.
-    namespace: str | None
+    namespace: str
