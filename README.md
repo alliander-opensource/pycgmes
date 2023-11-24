@@ -236,3 +236,15 @@ Deployment happens to pypi.org, via the standard poetry commands `poetry build`,
 ## License
 
 This project is licensed under the Apache 2.0 license - see [LICENSE](./LICENSE) for details.
+
+## Contributing
+
+Please read [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md), [CONTRIBUTING.md](./CONTRIBUTING.md), and [PROJECT GOVERNANCE.md](./PROJECT_GOVERNANCE.md) for details on the process for submitting pull requests to us.
+
+## Contact
+
+Please read [SUPPORT.md](./SUPPORT.md)for how to connect and get into contact with the project.
+
+## Attribution
+
+This project represents an advanced evolution of two prior initiatives: CIMgen and CIMpy. For further details and insights into the foundational work that inspired this project, interested parties are encouraged to visit their respective repositories on GitHub. CIMgen can be accessed at [CIMgen GitHub Repository](https://github.com/sogno-platform/cimgen), and CIMpy at [CIMpy GitHub Repository](https://github.com/sogno-platform/cimpy).
