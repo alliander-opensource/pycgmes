@@ -26,6 +26,9 @@ SPDX-License-Identifier: Apache-2.0
     - [CI](#ci)
     - [CD](#cd)
   - [License](#license)
+  - [Contributing](#contributing)
+  - [Contact](#contact)
+  - [Attribution](#attribution)
 
 Python dataclasses for CGMES 3 + RDF schema description + SHACL (validation) files.
 
