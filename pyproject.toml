@@ -4,7 +4,7 @@
 
 [tool.poetry]
 name = "pycgmes"
-version = "2.0.2"
+version = "2.0.3"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["pycgmes <pycgmes@alliander.com>"]
 readme = "README.md"
@@ -120,7 +120,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["pycgmes", "tests"] # Useful if ruff does not run from the actual root of the project and to import form tests
+known-first-party = ["pycgmes", "tests"] # Useful if ruff does not run from the actual root of the project and to import from tests
 
 [tool.ruff.lint.pep8-naming]
 # extend= use the default ignored names and add those
