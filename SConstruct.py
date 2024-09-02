@@ -35,19 +35,16 @@ def _exec(command: str, env: Mapping | None = None) -> int:
 if "all" in COMMAND_LINE_TARGETS:
     COMMAND_LINE_TARGETS += ["quality", "format"]
 
-# Ruff fixes and lints, hence its appearance twice.
-if "format" in COMMAND_LINE_TARGETS:
-    COMMAND_LINE_TARGETS += ["black", "ruff"]
 
 if "quality" in COMMAND_LINE_TARGETS:
-    COMMAND_LINE_TARGETS += ["ruff", "lock", "type", "test", "coverage", "license"]
+    COMMAND_LINE_TARGETS += ["lint", "lock", "type", "test", "coverage", "license"]
 
 # Formatting targets, which might change files. Let's run them *before* the linters and friends.
 # This is why ruff is the first of the quality target, as it fixes things as well.
-if "black" in COMMAND_LINE_TARGETS:
-    cmd = f"black  SConstruct.py {_SUBJECT} {_TEST_SUBJECT} examples"
+if "format" in COMMAND_LINE_TARGETS:
+    cmd = f"ruff format SConstruct.py {_SUBJECT} {_TEST_SUBJECT} examples"
     if _CHECK_ONLY:
-        cmd += " --check"
+        cmd += " --diff"
     _exec(cmd)
 
 # Quality target.
@@ -57,9 +54,9 @@ if "ruff" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
         # RUF100 means: remove #noqa when not relevant.
         # A lot are adding during generation because due to comments, some lines can be too long. They do not all
         # end up being too long, so let's clean up the not relevant one.
-        cmd = f"ruff {_SUBJECT} {param}"
+        cmd = f"ruff check {_SUBJECT} {param}"
         # Tries to fix what it can, forget about the rest.
-        cmd_test = f"ruff {_TEST_SUBJECT}  --fix-only"
+        cmd_test = f"ruff check {_TEST_SUBJECT}  --fix-only"
         if _CHECK_ONLY:
             cmd += " --no-fix"
             cmd_test += " --no-fix"
