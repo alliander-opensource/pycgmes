@@ -4,7 +4,7 @@
 
 [tool.poetry]
 name = "pycgmes"
-version = "2.0.2"
+version = "2.0.3"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["pycgmes <pycgmes@alliander.com>"]
 readme = "README.md"
@@ -32,7 +32,6 @@ poetry = ">=1.5.0" # key 'priority' in source
 pydantic = ">=2" # Used for dataclasses
 
 [tool.poetry.group.dev.dependencies]
-black = "*" # Formatter
 coverage = { extras = ["toml"], version = "*" } # unit test coverage
 pyright = "*" # replaces mypy
 reuse = "*" # Check licence headers
@@ -88,6 +87,8 @@ typeCheckingMode = "basic"
 line-length = 120
 # Group violations by containing file.
 output-format = "grouped"
+
+[tool.ruff.lint]
 select = [
     # See https://docs.astral.sh/ruff/rules/
     "E", # Default, pyflake
@@ -117,7 +118,11 @@ ignore = [
             # revisit when https://github.com/astral-sh/ruff/issues/7806 is done
     "N999", "N815", # Formatting due to CamelCase coming from CGMES.
 ]
-[tool.ruff.pep8-naming]
+
+[tool.ruff.lint.isort]
+known-first-party = ["pycgmes", "tests"] # Useful if ruff does not run from the actual root of the project and to import from tests
+
+[tool.ruff.lint.pep8-naming]
 # extend= use the default ignored names and add those
 extend-ignore-names = [
     "G", # makes sense in the context of graph
@@ -125,6 +130,9 @@ extend-ignore-names = [
     "create_*", # some functions are named after CIM nomenclatures, not python
     "N", # shortcut in stack
     ]
+
+[tool.ruff.format]
+docstring-code-format = true
 
 
 [tool.pytest.ini_options]

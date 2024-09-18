@@ -96,8 +96,7 @@ class Base:
             # The field is defined as a pydantic. Field, not a dataclass.field,
             # so access to metadata is a tad different. Furthermore, pyright is confused by extra.
             if (
-                profile is None
-                or (profile in f.default.json_schema_extra["in_profiles"])  # pyright: ignore[reportGeneralTypeIssues]
+                profile is None or (profile in f.default.json_schema_extra["in_profiles"])  # pyright: ignore[reportAttributeAccessIssue]
             )
             if f.name != "mRID"
         }
@@ -113,7 +112,7 @@ class Base:
         with thus the parent class included in the attribute name.
         """
         # What will be returned, has the qualname as key...
-        qual_attrs: dict[str, "CgmesAttribute"] = {}
+        qual_attrs: dict[str, CgmesAttribute] = {}
         # ... but we check existence with the unqualified (short) name.
         seen_attrs = set()
 
