@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -21,55 +18,33 @@ class OverexcLimX2(OverexcitationLimiterDynamics):
     Field voltage or current overexcitation limiter designed to protect the generator field of an AC machine with
       automatic excitation control from overheating due to prolonged overexcitation.
 
-    m: (m). true = IFD limiting false = EFD limiting.
-    efdrated: Rated field voltage if m = false or rated field current if m = true (EFDRATED).  Typical value = 1,05.
     efd1: Low voltage or current point on the inverse time characteristic (EFD1).  Typical value = 1,1.
+    efd2: Mid voltage or current point on the inverse time characteristic (EFD2).  Typical value = 1,2.
+    efd3: High voltage or current point on the inverse time characteristic (EFD3).  Typical value = 1,5.
+    efddes: Desired field voltage if m = false or desired field current if m = true (EFDDES).  Typical value = 1.
+    efdrated: Rated field voltage if m = false or rated field current if m = true (EFDRATED).  Typical value = 1,05.
+    kmx: Gain (KMX).  Typical value = 0,002.
+    m: (m). true = IFD limiting false = EFD limiting.
     t1: Time to trip the exciter at the low voltage or current point on the inverse time characteristic (TIME1) (>= 0).
       Typical value = 120.
-    efd2: Mid voltage or current point on the inverse time characteristic (EFD2).  Typical value = 1,2.
     t2: Time to trip the exciter at the mid voltage or current point on the inverse time characteristic (TIME2) (>= 0).
       Typical value = 40.
-    efd3: High voltage or current point on the inverse time characteristic (EFD3).  Typical value = 1,5.
     t3: Time to trip the exciter at the high voltage or current point on the inverse time characteristic (TIME3) (>= 0).
       Typical value = 15.
-    efddes: Desired field voltage if m = false or desired field current if m = true (EFDDES).  Typical value = 1.
-    kmx: Gain (KMX).  Typical value = 0,002.
     vlow: Low voltage limit (VLOW) (> 0).
     """
-
-    m: bool = Field(
-        default=False,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    efdrated: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
 
     efd1: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    t1: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -78,16 +53,12 @@ class OverexcLimX2(OverexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    t2: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -96,16 +67,12 @@ class OverexcLimX2(OverexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    t3: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -114,7 +81,26 @@ class OverexcLimX2(OverexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    efdrated: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -123,7 +109,68 @@ class OverexcLimX2(OverexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    m: bool = Field(
+        default=False,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t1: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t2: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t3: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -132,7 +179,12 @@ class OverexcLimX2(OverexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -145,3 +197,11 @@ class OverexcLimX2(OverexcitationLimiterDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

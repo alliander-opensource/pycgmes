@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -22,18 +19,37 @@ class OverexcLim2(OverexcitationLimiterDynamics):
       non-windup integral regulator. Irated is the rated machine excitation current (calculated from nameplate
       conditions: Vnom, Pnom, CosPhinom).
 
+    ifdlim: Limit value of rated field current (IFDLIM).  Typical value = 1,05.
     koi: Gain Over excitation limiter (KOI).  Typical value = 0,1.
     voimax: Maximum error signal (VOIMAX) (> OverexcLim2.voimin).  Typical value = 0.
     voimin: Minimum error signal (VOIMIN) (< OverexcLim2.voimax).  Typical value = -9999.
-    ifdlim: Limit value of rated field current (IFDLIM).  Typical value = 1,05.
     """
+
+    ifdlim: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
 
     koi: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -42,7 +58,12 @@ class OverexcLim2(OverexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -51,16 +72,12 @@ class OverexcLim2(OverexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    ifdlim: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -73,3 +90,11 @@ class OverexcLim2(OverexcitationLimiterDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

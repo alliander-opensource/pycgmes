@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -21,29 +17,39 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
     """
     Parent class supporting relationships to IEC wind turbines type 3 and type 4 including their control models.
 
-    WindContCurrLimIEC: Wind control current limitation model associated with this wind turbine type 3 or type 4 model.
     WIndContQIEC: Wind control Q model associated with this wind turbine type 3 or type 4 model.
+    WindContCurrLimIEC: Wind control current limitation model associated with this wind turbine type 3 or type 4 model.
     WindContQLimIEC: Constant Q limitation model associated with this wind generator type 3 or type 4 model.
     WindContQPQULimIEC: QP and QU limitation model associated with this wind generator type 3 or type 4 model.
     WindProtectionIEC: Wind turbune protection model associated with this wind generator type 3 or type 4 model.
     WindRefFrameRotIEC: Reference frame rotation model associated with this wind turbine type 3 or type 4 model.
     """
 
-    WindContCurrLimIEC: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
     WIndContQIEC: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    WindContCurrLimIEC: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -52,7 +58,12 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -61,7 +72,12 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -70,7 +86,12 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -79,7 +100,12 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -92,3 +118,11 @@ class WindTurbineType3or4IEC(WindTurbineType3or4Dynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

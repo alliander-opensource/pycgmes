@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -12,8 +8,8 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.base import Base
 from ..utils.profile import BaseProfile, Profile
+from ..utils.base import Base
 
 
 @dataclass
@@ -21,17 +17,22 @@ class Capacitance(Base):
     """
     Capacitive part of reactance (imaginary part of impedance), at rated frequency.
 
-    value:
-    unit:
-    multiplier:
+    multiplier: 
+    unit: 
+    value: 
     """
 
-    value: float = Field(
-        default=0.0,
+    multiplier: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -40,16 +41,26 @@ class Capacitance(Base):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    multiplier: Optional[str] = Field(
-        default=None,
+    value: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -62,3 +73,11 @@ class Capacitance(Base):
         return {
             Profile.EQ,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

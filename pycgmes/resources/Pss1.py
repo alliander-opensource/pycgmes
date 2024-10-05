@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -20,39 +17,49 @@ class Pss1(PowerSystemStabilizerDynamics):
     """
     Italian PSS with three inputs (speed, frequency, power).
 
-    komega: Shaft speed power input gain (Komega).  Typical value = 0.
     kf: Frequency power input gain (KF).  Typical value = 5.
+    komega: Shaft speed power input gain (Komega).  Typical value = 0.
     kpe: Electric power input gain (KPE).  Typical value = 0,3.
-    pmin: Minimum power PSS enabling (Pmin).  Typical value = 0,25.
     ks: PSS gain (Ks).  Typical value = 1.
-    vsmn: Stabilizer output maximum limit (VSMN).  Typical value = -0,06.
-    vsmx: Stabilizer output minimum limit (VSMX).  Typical value = 0,06.
-    tpe: Electric power filter time constant (TPE) (>= 0).  Typical value = 0,05.
+    pmin: Minimum power PSS enabling (Pmin).  Typical value = 0,25.
+    t10: Lead/lag time constant (T10) (>= 0).  Typical value = 0.
     t5: Washout (T5) (>= 0).  Typical value = 3,5.
     t6: Filter time constant (T6) (>= 0).  Typical value = 0.
     t7: Lead/lag time constant (T7) (>= 0). If = 0, both blocks are bypassed.  Typical value = 0.
     t8: Lead/lag time constant (T8) (>= 0).  Typical value = 0.
     t9: Lead/lag time constant (T9) (>= 0).  If = 0, both blocks are bypassed.  Typical value = 0.
-    t10: Lead/lag time constant (T10) (>= 0).  Typical value = 0.
+    tpe: Electric power filter time constant (TPE) (>= 0).  Typical value = 0,05.
     vadat: Signal selector (VADAT). true = closed (generator power is greater than Pmin) false = open (Pe is smaller
       than Pmin). Typical value = true.
+    vsmn: Stabilizer output maximum limit (VSMN).  Typical value = -0,06.
+    vsmx: Stabilizer output minimum limit (VSMX).  Typical value = 0,06.
     """
-
-    komega: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
 
     kf: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    komega: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -61,16 +68,12 @@ class Pss1(PowerSystemStabilizerDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    pmin: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -79,88 +82,124 @@ class Pss1(PowerSystemStabilizerDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    vsmn: float = Field(
+    pmin: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    vsmx: float = Field(
+    t10: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    tpe: int = Field(
-        default=0,
+    t5: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    t5: int = Field(
-        default=0,
+    t6: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    t6: int = Field(
-        default=0,
+    t7: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    t7: int = Field(
-        default=0,
+    t8: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    t8: int = Field(
-        default=0,
+    t9: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    t9: int = Field(
-        default=0,
+    tpe: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    t10: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -169,7 +208,40 @@ class Pss1(PowerSystemStabilizerDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    vsmn: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    vsmx: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -182,3 +254,11 @@ class Pss1(PowerSystemStabilizerDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

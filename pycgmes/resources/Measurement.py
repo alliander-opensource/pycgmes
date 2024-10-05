@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -35,6 +31,7 @@ class Measurement(IdentifiedObject):
       sensor location is needed both Measurement-PSR and Measurement-Terminal are used. The Measurement-Terminal
       association is never used alone.
 
+    PowerSystemResource: The power system resource that contains the measurement.
     Terminal: One or more measurements may be associated with a terminal in the network.
     measurementType: Specifies the type of measurement.  For example, this specifies if the measurement represents an
       indoor temperature, outdoor temperature, bus voltage, line flow, etc. When the
@@ -47,15 +44,33 @@ class Measurement(IdentifiedObject):
       jumpers or other reasons. If the attribute is missing three phases (ABC) shall be assumed.
     unitMultiplier: The unit multiplier of the measured quantity.
     unitSymbol: The unit of measure of the measured quantity.
-    PowerSystemResource: The power system resource that contains the measurement.
     """
+
+    PowerSystemResource: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     Terminal: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -64,7 +79,12 @@ class Measurement(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -73,7 +93,12 @@ class Measurement(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -82,7 +107,12 @@ class Measurement(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -91,16 +121,12 @@ class Measurement(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
-            ]
-        },
-    )
-
-    PowerSystemResource: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.OP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -113,3 +139,11 @@ class Measurement(IdentifiedObject):
         return {
             Profile.OP,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.OP

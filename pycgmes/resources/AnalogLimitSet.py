@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -20,22 +17,37 @@ class AnalogLimitSet(LimitSet):
     """
     An AnalogLimitSet specifies a set of Limits that are associated with an Analog measurement.
 
-    Measurements: The Measurements using the LimitSet.
     Limits: The limit values used for supervision of Measurements.
+    Measurements: The Measurements using the LimitSet.
     """
+
+    Limits: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
 
     Measurements: list = Field(
         default_factory=list,
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
         },
     )
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # Limits : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.OP, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -46,3 +58,11 @@ class AnalogLimitSet(LimitSet):
         return {
             Profile.OP,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.OP

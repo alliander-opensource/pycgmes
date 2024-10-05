@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -23,25 +19,35 @@ class DCBaseTerminal(ACDCTerminal):
       node that may have multiple DC terminals connected. A DC node is similar to an AC connectivity node. The model
       requires that DC connections are distinct from AC connections.
 
-    DCTopologicalNode: See association end Terminal.TopologicalNode.
     DCNode: The DC connectivity node to which this DC base terminal connects with zero impedance.
+    DCTopologicalNode: See association end Terminal.TopologicalNode.
     """
-
-    DCTopologicalNode: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.TP,
-            ]
-        },
-    )
 
     DCNode: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    DCTopologicalNode: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -52,7 +58,15 @@ class DCBaseTerminal(ACDCTerminal):
         where this element can be found.
         """
         return {
-            Profile.TP,
             Profile.EQ,
             Profile.SSH,
+            Profile.TP,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

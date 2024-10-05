@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -23,21 +19,40 @@ class MeasurementValue(IOPoint):
       Measurements can be associated with many state values, each representing a different source for the
       measurement.
 
-    timeStamp: The time when the value was last updated.
-    sensorAccuracy: The limit, expressed as a percentage of the sensor maximum, that errors will not exceed when the
-      sensor is used under  reference conditions.
     MeasurementValueQuality: A MeasurementValue has a MeasurementValueQuality associated with it.
     MeasurementValueSource: A reference to the type of source that updates the MeasurementValue, e.g. SCADA, CCLink,
       manual, etc. User conventions for the names of sources are contained in the
       introduction to IEC 61970-301.
+    sensorAccuracy: The limit, expressed as a percentage of the sensor maximum, that errors will not exceed when the
+      sensor is used under  reference conditions.
+    timeStamp: The time when the value was last updated.
     """
 
-    timeStamp: str = Field(
-        default="",
+    MeasurementValueQuality: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
-            ]
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    MeasurementValueSource: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -46,20 +61,26 @@ class MeasurementValue(IOPoint):
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # MeasurementValueQuality : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.OP, ]}) # noqa: E501
-
-    MeasurementValueSource: Optional[str] = Field(
-        default=None,
+    timeStamp: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -72,3 +93,11 @@ class MeasurementValue(IOPoint):
         return {
             Profile.OP,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.OP

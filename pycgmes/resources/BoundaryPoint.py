@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -25,6 +21,7 @@ class BoundaryPoint(PowerSystemResource):
       boundary model authority set which can contain one or many BoundaryPoint-s among other Equipment-s and their
       connections.
 
+    ConnectivityNode: The connectivity node that is designated as a boundary point.
     fromEndIsoCode: The ISO code of the region which the `From` side of the Boundary point belongs to or it is connected
       to. The ISO code is a two-character country code as defined by ISO 3166
       (http://www.iso.org/iso/country_codes). The length of the string is 2 characters maximum.
@@ -37,6 +34,12 @@ class BoundaryPoint(PowerSystemResource):
     fromEndNameTso: Identifies the name of the transmission system operator, distribution system operator or other
       entity at which the `From` side of the interconnection is connected to. The length of the
       string is 64 characters maximum.
+    isDirectCurrent: If true, this boundary point is a point of common coupling (PCC) of a direct current (DC)
+      interconnection, otherwise the interconnection is AC (default).
+    isExcludedFromAreaInterchange: If true, this boundary point is on the interconnection that is excluded from control
+      area interchange calculation and consequently has no related tie flows.
+      Otherwise, the interconnection is included in control area interchange and a
+      TieFlow is required at all sides of the boundary point (default).
     toEndIsoCode: The ISO code of the region which the `To` side of the Boundary point belongs to or is connected to.
       The ISO code is a two-character country code as defined by ISO 3166
       (http://www.iso.org/iso/country_codes). The length of the string is 2 characters maximum.
@@ -48,22 +51,35 @@ class BoundaryPoint(PowerSystemResource):
     toEndNameTso: Identifies the name of the transmission system operator, distribution system operator or other entity
       at which the `To` side of the interconnection is connected to. The length of the string is 64
       characters maximum.
-    isDirectCurrent: If true, this boundary point is a point of common coupling (PCC) of a direct current (DC)
-      interconnection, otherwise the interconnection is AC (default).
-    isExcludedFromAreaInterchange: If true, this boundary point is on the interconnection that is excluded from control
-      area interchange calculation and consequently has no related tie flows.
-      Otherwise, the interconnection is included in control area interchange and a
-      TieFlow is required at all sides of the boundary point (default).
-    ConnectivityNode: The connectivity node that is designated as a boundary point.
     """
+
+    ConnectivityNode: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.EQBD,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     fromEndIsoCode: str = Field(
         default="",
         json_schema_extra={
             "in_profiles": [
-                Profile.EQBD,
                 Profile.EQ,
-            ]
+                Profile.EQBD,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -71,9 +87,14 @@ class BoundaryPoint(PowerSystemResource):
         default="",
         json_schema_extra={
             "in_profiles": [
-                Profile.EQBD,
                 Profile.EQ,
-            ]
+                Profile.EQBD,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -81,39 +102,14 @@ class BoundaryPoint(PowerSystemResource):
         default="",
         json_schema_extra={
             "in_profiles": [
-                Profile.EQBD,
                 Profile.EQ,
-            ]
-        },
-    )
-
-    toEndIsoCode: str = Field(
-        default="",
-        json_schema_extra={
-            "in_profiles": [
                 Profile.EQBD,
-                Profile.EQ,
-            ]
-        },
-    )
-
-    toEndName: str = Field(
-        default="",
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQBD,
-                Profile.EQ,
-            ]
-        },
-    )
-
-    toEndNameTso: str = Field(
-        default="",
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQBD,
-                Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -121,9 +117,14 @@ class BoundaryPoint(PowerSystemResource):
         default=False,
         json_schema_extra={
             "in_profiles": [
-                Profile.EQBD,
                 Profile.EQ,
-            ]
+                Profile.EQBD,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -131,19 +132,59 @@ class BoundaryPoint(PowerSystemResource):
         default=False,
         json_schema_extra={
             "in_profiles": [
-                Profile.EQBD,
                 Profile.EQ,
-            ]
+                Profile.EQBD,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    ConnectivityNode: Optional[str] = Field(
-        default=None,
+    toEndIsoCode: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
-                Profile.EQBD,
                 Profile.EQ,
-            ]
+                Profile.EQBD,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    toEndName: str = Field(
+        default="",
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.EQBD,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    toEndNameTso: str = Field(
+        default="",
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.EQBD,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -154,6 +195,14 @@ class BoundaryPoint(PowerSystemResource):
         where this element can be found.
         """
         return {
-            Profile.EQBD,
             Profile.EQ,
+            Profile.EQBD,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

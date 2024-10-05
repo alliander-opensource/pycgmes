@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -23,55 +19,33 @@ class EnergyConsumer(EnergyConnection):
       .pfixedPct and .qfixedPct have meaning only if there is no LoadResponseCharacteristic associated with
       EnergyConsumer or if LoadResponseCharacteristic.exponentModel is set to False.
 
+    LoadDynamics: Load dynamics model used to describe dynamic behaviour of this energy consumer.
+    LoadResponse: The load response characteristic of this load.  If missing, this load is assumed to be constant power.
+    p: Active power of the load. Load sign convention is used, i.e. positive sign means flow out from a node. For
+      voltage dependent loads the value is at rated voltage. Starting value for a steady state solution.
     pfixed: Active power of the load that is a fixed quantity and does not vary as load group value varies. Load sign
       convention is used, i.e. positive sign means flow out from a node.
     pfixedPct: Fixed active power as a percentage of load group fixed active power. Used to represent the time-varying
       components.  Load sign convention is used, i.e. positive sign means flow out from a node.
+    q: Reactive power of the load. Load sign convention is used, i.e. positive sign means flow out from a node. For
+      voltage dependent loads the value is at rated voltage. Starting value for a steady state solution.
     qfixed: Reactive power of the load that is a fixed quantity and does not vary as load group value varies. Load sign
       convention is used, i.e. positive sign means flow out from a node.
     qfixedPct: Fixed reactive power as a percentage of load group fixed reactive power. Used to represent the time-
       varying components.  Load sign convention is used, i.e. positive sign means flow out from a node.
-    LoadResponse: The load response characteristic of this load.  If missing, this load is assumed to be constant power.
-    p: Active power of the load. Load sign convention is used, i.e. positive sign means flow out from a node. For
-      voltage dependent loads the value is at rated voltage. Starting value for a steady state solution.
-    q: Reactive power of the load. Load sign convention is used, i.e. positive sign means flow out from a node. For
-      voltage dependent loads the value is at rated voltage. Starting value for a steady state solution.
-    LoadDynamics: Load dynamics model used to describe dynamic behaviour of this energy consumer.
     """
 
-    pfixed: float = Field(
-        default=0.0,
+    LoadDynamics: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    pfixedPct: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    qfixed: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    qfixedPct: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -80,7 +54,12 @@ class EnergyConsumer(EnergyConnection):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -89,7 +68,40 @@ class EnergyConsumer(EnergyConnection):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    pfixed: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    pfixedPct: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -98,16 +110,40 @@ class EnergyConsumer(EnergyConnection):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    LoadDynamics: Optional[str] = Field(
-        default=None,
+    qfixed: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
-                Profile.DY,
-            ]
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    qfixedPct: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -118,7 +154,15 @@ class EnergyConsumer(EnergyConnection):
         where this element can be found.
         """
         return {
+            Profile.DY,
             Profile.EQ,
             Profile.SSH,
-            Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

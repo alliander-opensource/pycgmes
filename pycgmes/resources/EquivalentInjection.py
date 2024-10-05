@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -22,44 +18,63 @@ class EquivalentInjection(EquivalentEquipment):
     This class represents equivalent injections (generation or load).  Voltage regulation is allowed only at the point
       of connection.
 
+    ReactiveCapabilityCurve: The reactive capability curve used by this equivalent injection.
     maxP: Maximum active power of the injection.
     maxQ: Maximum reactive power of the injection.  Used for modelling of infeed for load flow exchange. Not used for
       short circuit modelling.  If maxQ and minQ are not used ReactiveCapabilityCurve can be used.
     minP: Minimum active power of the injection.
     minQ: Minimum reactive power of the injection.  Used for modelling of infeed for load flow exchange. Not used for
       short circuit modelling.  If maxQ and minQ are not used ReactiveCapabilityCurve can be used.
-    regulationCapability: Specifies whether or not the EquivalentInjection has the capability to regulate the local
-      voltage. If true the EquivalentInjection can regulate. If false the EquivalentInjection
-      cannot regulate. ReactiveCapabilityCurve can only be associated with EquivalentInjection
-      if the flag is true.
-    ReactiveCapabilityCurve: The reactive capability curve used by this equivalent injection.
+    p: Equivalent active power injection. Load sign convention is used, i.e. positive sign means flow out from a node.
+      Starting value for steady state solutions.
+    q: Equivalent reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node.
+      Starting value for steady state solutions.
     r: Positive sequence resistance. Used to represent Extended-Ward (IEC 60909). Usage : Extended-Ward is a result of
       network reduction prior to the data exchange.
     r0: Zero sequence resistance. Used to represent Extended-Ward (IEC 60909). Usage : Extended-Ward is a result of
       network reduction prior to the data exchange.
     r2: Negative sequence resistance. Used to represent Extended-Ward (IEC 60909). Usage : Extended-Ward is a result of
       network reduction prior to the data exchange.
+    regulationCapability: Specifies whether or not the EquivalentInjection has the capability to regulate the local
+      voltage. If true the EquivalentInjection can regulate. If false the EquivalentInjection
+      cannot regulate. ReactiveCapabilityCurve can only be associated with EquivalentInjection
+      if the flag is true.
+    regulationStatus: Specifies the regulation status of the EquivalentInjection.  True is regulating.  False is not
+      regulating.
+    regulationTarget: The target voltage for voltage regulation. The attribute shall be a positive value.
     x: Positive sequence reactance. Used to represent Extended-Ward (IEC 60909). Usage : Extended-Ward is a result of
       network reduction prior to the data exchange.
     x0: Zero sequence reactance. Used to represent Extended-Ward (IEC 60909). Usage : Extended-Ward is a result of
       network reduction prior to the data exchange.
     x2: Negative sequence reactance. Used to represent Extended-Ward (IEC 60909). Usage : Extended-Ward is a result of
       network reduction prior to the data exchange.
-    regulationStatus: Specifies the regulation status of the EquivalentInjection.  True is regulating.  False is not
-      regulating.
-    regulationTarget: The target voltage for voltage regulation. The attribute shall be a positive value.
-    p: Equivalent active power injection. Load sign convention is used, i.e. positive sign means flow out from a node.
-      Starting value for steady state solutions.
-    q: Equivalent reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node.
-      Starting value for steady state solutions.
     """
+
+    ReactiveCapabilityCurve: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     maxP: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -68,7 +83,12 @@ class EquivalentInjection(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -77,7 +97,12 @@ class EquivalentInjection(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -86,97 +111,12 @@ class EquivalentInjection(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
-        },
-    )
-
-    regulationCapability: bool = Field(
-        default=False,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    ReactiveCapabilityCurve: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    r: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    r0: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    r2: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    x: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    x0: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    x2: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    regulationStatus: bool = Field(
-        default=False,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SSH,
-            ]
-        },
-    )
-
-    regulationTarget: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -185,7 +125,12 @@ class EquivalentInjection(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -194,7 +139,138 @@ class EquivalentInjection(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    r: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    r0: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    r2: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    regulationCapability: bool = Field(
+        default=False,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    regulationStatus: bool = Field(
+        default=False,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    regulationTarget: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    x: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    x0: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    x2: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -209,3 +285,11 @@ class EquivalentInjection(EquivalentEquipment):
             Profile.SC,
             Profile.SSH,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

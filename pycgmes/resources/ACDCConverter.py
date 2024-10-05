@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -22,14 +18,28 @@ class ACDCConverter(ConductingEquipment):
     A unit with valves for three phases, together with unit control equipment, essential protective and switching
       devices, DC storage capacitors, phase reactors and auxiliaries, if any, used for conversion.
 
+    DCTerminals: A DC converter have DC converter terminals. A converter has two DC converter terminals.
+    PccTerminal: Point of common coupling terminal for this converter DC side. It is typically the terminal on the power
+      transformer (or switch) closest to the AC network.
     baseS: Base apparent power of the converter pole. The attribute shall be a positive value.
+    idc: Converter DC current, also called Id. It is converter`s state variable, result from power flow.
     idleLoss: Active power loss in pole at no power transfer. It is converter`s configuration data used in power flow.
       The attribute shall be a positive value.
+    maxP: Maximum active power limit. The value is overwritten by values of VsCapabilityCurve, if present.
     maxUdc: The maximum voltage on the DC side at which the converter should operate. It is converter`s configuration
       data used in power flow. The attribute shall be a positive value.
+    minP: Minimum active power limit. The value is overwritten by values of VsCapabilityCurve, if present.
     minUdc: The minimum voltage on the DC side at which the converter should operate. It is converter`s configuration
       data used in power flow. The attribute shall be a positive value.
     numberOfValves: Number of valves in the converter. Used in loss calculations.
+    p: Active power at the point of common coupling. Load sign convention is used, i.e. positive sign means flow out
+      from a node. Starting value for a steady state solution in the case a simplified power flow model is used.
+    poleLossP: The active power loss at a DC Pole  = idleLoss + switchingLoss*|Idc| + resitiveLoss*Idc^2. For lossless
+      operation Pdc=Pac. For rectifier operation with losses Pdc=Pac-lossP. For inverter operation with
+      losses Pdc=Pac+lossP. It is converter`s state variable used in power flow. The attribute shall be a
+      positive value.
+    q: Reactive power at the point of common coupling. Load sign convention is used, i.e. positive sign means flow out
+      from a node. Starting value for a steady state solution in the case a simplified power flow model is used.
     ratedUdc: Rated converter DC voltage, also called UdN. The attribute shall be a positive value. It is converter`s
       configuration data used in power flow. For instance a bipolar HVDC link with value  200 kV has a
       400kV difference between the dc lines.
@@ -37,127 +47,28 @@ class ACDCConverter(ConductingEquipment):
       positive value.
     switchingLoss: Switching losses, relative to the base apparent power `baseS`. Refer to poleLossP. The attribute
       shall be a positive value.
-    valveU0: Valve threshold voltage, also called Uvalve. Forward voltage drop when the valve is conducting. Used in
-      loss calculations, i.e. the switchLoss depend on numberOfValves * valveU0.
-    maxP: Maximum active power limit. The value is overwritten by values of VsCapabilityCurve, if present.
-    minP: Minimum active power limit. The value is overwritten by values of VsCapabilityCurve, if present.
-    PccTerminal: Point of common coupling terminal for this converter DC side. It is typically the terminal on the power
-      transformer (or switch) closest to the AC network.
-    DCTerminals: A DC converter have DC converter terminals. A converter has two DC converter terminals.
-    idc: Converter DC current, also called Id. It is converter`s state variable, result from power flow.
-    poleLossP: The active power loss at a DC Pole  = idleLoss + switchingLoss*|Idc| + resitiveLoss*Idc^2. For lossless
-      operation Pdc=Pac. For rectifier operation with losses Pdc=Pac-lossP. For inverter operation with
-      losses Pdc=Pac+lossP. It is converter`s state variable used in power flow. The attribute shall be a
-      positive value.
+    targetPpcc: Real power injection target in AC grid, at point of common coupling.  Load sign convention is used, i.e.
+      positive sign means flow out from a node.
+    targetUdc: Target value for DC voltage magnitude. The attribute shall be a positive value.
     uc: Line-to-line converter voltage, the voltage at the AC side of the valve. It is converter`s state variable,
       result from power flow. The attribute shall be a positive value.
     udc: Converter voltage at the DC side, also called Ud. It is converter`s state variable, result from power flow. The
       attribute shall be a positive value.
-    p: Active power at the point of common coupling. Load sign convention is used, i.e. positive sign means flow out
-      from a node. Starting value for a steady state solution in the case a simplified power flow model is used.
-    q: Reactive power at the point of common coupling. Load sign convention is used, i.e. positive sign means flow out
-      from a node. Starting value for a steady state solution in the case a simplified power flow model is used.
-    targetPpcc: Real power injection target in AC grid, at point of common coupling.  Load sign convention is used, i.e.
-      positive sign means flow out from a node.
-    targetUdc: Target value for DC voltage magnitude. The attribute shall be a positive value.
+    valveU0: Valve threshold voltage, also called Uvalve. Forward voltage drop when the valve is conducting. Used in
+      loss calculations, i.e. the switchLoss depend on numberOfValves * valveU0.
     """
 
-    baseS: float = Field(
-        default=0.0,
+    DCTerminals: list = Field(
+        default_factory=list,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
-        },
-    )
-
-    idleLoss: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    maxUdc: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    minUdc: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    numberOfValves: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    ratedUdc: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    resistiveLoss: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    switchingLoss: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    valveU0: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    maxP: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    minP: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -166,47 +77,124 @@ class ACDCConverter(ConductingEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    # *Association not used*
-    # Type M:0..n in CIM
-    # DCTerminals : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
+    baseS: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
 
     idc: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.SV,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    poleLossP: float = Field(
+    idleLoss: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
-                Profile.SV,
-            ]
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    uc: float = Field(
+    maxP: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
-                Profile.SV,
-            ]
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    udc: float = Field(
+    maxUdc: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
-                Profile.SV,
-            ]
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    minP: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    minUdc: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    numberOfValves: int = Field(
+        default=0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -215,7 +203,26 @@ class ACDCConverter(ConductingEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    poleLossP: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -224,7 +231,54 @@ class ACDCConverter(ConductingEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    ratedUdc: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    resistiveLoss: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    switchingLoss: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -233,7 +287,12 @@ class ACDCConverter(ConductingEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -242,7 +301,54 @@ class ACDCConverter(ConductingEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    uc: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    udc: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    valveU0: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -253,8 +359,16 @@ class ACDCConverter(ConductingEquipment):
         where this element can be found.
         """
         return {
-            Profile.EQ,
-            Profile.SV,
-            Profile.SSH,
             Profile.DY,
+            Profile.EQ,
+            Profile.SSH,
+            Profile.SV,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

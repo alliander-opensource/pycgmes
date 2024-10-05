@@ -1,18 +1,15 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.base import Base
 from ..utils.profile import BaseProfile, Profile
+from ..utils.base import Base
 
 
 @dataclass
@@ -20,37 +17,24 @@ class Status(Base):
     """
     Current status information relevant to an entity.
 
+    dateTime: Date and time for which status `value` applies.
+    reason: Reason code or explanation for why an object went to the current status `value`.
+    remark: Pertinent information regarding the current `value`, as free form text.
     value: Status value at `dateTime`; prior status changes may have been kept in instances of activity records
       associated with the object to which this status applies.
-    dateTime: Date and time for which status `value` applies.
-    remark: Pertinent information regarding the current `value`, as free form text.
-    reason: Reason code or explanation for why an object went to the current status `value`.
     """
-
-    value: str = Field(
-        default="",
-        json_schema_extra={
-            "in_profiles": [
-                Profile.GL,
-            ]
-        },
-    )
 
     dateTime: str = Field(
         default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.GL,
-            ]
-        },
-    )
-
-    remark: str = Field(
-        default="",
-        json_schema_extra={
-            "in_profiles": [
-                Profile.GL,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -59,7 +43,40 @@ class Status(Base):
         json_schema_extra={
             "in_profiles": [
                 Profile.GL,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    remark: str = Field(
+        default="",
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    value: str = Field(
+        default="",
+        json_schema_extra={
+            "in_profiles": [
+                Profile.GL,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -72,3 +89,11 @@ class Status(Base):
         return {
             Profile.GL,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.GL

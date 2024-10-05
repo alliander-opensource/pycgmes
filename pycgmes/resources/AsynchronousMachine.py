@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -22,103 +18,36 @@ class AsynchronousMachine(RotatingMachine):
     A rotating machine whose shaft rotates asynchronously with the electrical field.  Also known as an induction machine
       with no external connection to the rotor windings, e.g. squirrel-cage induction machine.
 
-    nominalFrequency: Nameplate data indicates if the machine is 50 Hz or 60 Hz.
-    nominalSpeed: Nameplate data.  Depends on the slip and number of pole pairs.
+    AsynchronousMachineDynamics: Asynchronous machine dynamics model used to describe dynamic behaviour of this
+      asynchronous machine.
+    asynchronousMachineType: Indicates the type of Asynchronous Machine (motor or generator).
     converterFedDrive: Indicates whether the machine is a converter fed drive. Used for short circuit data exchange
       according to IEC 60909.
     efficiency: Efficiency of the asynchronous machine at nominal operation as a percentage. Indicator for converter
       drive motors. Used for short circuit data exchange according to IEC 60909.
     iaIrRatio: Ratio of locked-rotor current to the rated current of the motor (Ia/Ir). Used for short circuit data
       exchange according to IEC 60909.
+    nominalFrequency: Nameplate data indicates if the machine is 50 Hz or 60 Hz.
+    nominalSpeed: Nameplate data.  Depends on the slip and number of pole pairs.
     polePairNumber: Number of pole pairs of stator. Used for short circuit data exchange according to IEC 60909.
     ratedMechanicalPower: Rated mechanical power (Pr in IEC 60909-0). Used for short circuit data exchange according to
       IEC 60909.
     reversible: Indicates for converter drive motors if the power can be reversible. Used for short circuit data
       exchange according to IEC 60909.
     rxLockedRotorRatio: Locked rotor ratio (R/X). Used for short circuit data exchange according to IEC 60909.
-    asynchronousMachineType: Indicates the type of Asynchronous Machine (motor or generator).
-    AsynchronousMachineDynamics: Asynchronous machine dynamics model used to describe dynamic behaviour of this
-      asynchronous machine.
     """
 
-    nominalFrequency: float = Field(
-        default=0.0,
+    AsynchronousMachineDynamics: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    nominalSpeed: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    converterFedDrive: bool = Field(
-        default=False,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    efficiency: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    iaIrRatio: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    polePairNumber: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    ratedMechanicalPower: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    reversible: bool = Field(
-        default=False,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
-        },
-    )
-
-    rxLockedRotorRatio: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -127,13 +56,140 @@ class AsynchronousMachine(RotatingMachine):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # AsynchronousMachineDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
+    converterFedDrive: bool = Field(
+        default=False,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    efficiency: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    iaIrRatio: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    nominalFrequency: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    nominalSpeed: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    polePairNumber: int = Field(
+        default=0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    ratedMechanicalPower: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    reversible: bool = Field(
+        default=False,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    rxLockedRotorRatio: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -142,8 +198,16 @@ class AsynchronousMachine(RotatingMachine):
         where this element can be found.
         """
         return {
+            Profile.DY,
             Profile.EQ,
             Profile.SC,
             Profile.SSH,
-            Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

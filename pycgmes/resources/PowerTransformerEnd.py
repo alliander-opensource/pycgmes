@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -38,25 +34,25 @@ class PowerTransformerEnd(TransformerEnd):
 
     PowerTransformer: The power transformer of this power transformer end.
     b: Magnetizing branch susceptance (B mag).  The value can be positive or negative.
-    connectionKind: Kind of connection.
-    ratedS: Normal apparent power rating. The attribute shall be a positive value. For a two-winding transformer the
-      values for the high and low voltage sides shall be identical.
-    g: Magnetizing branch conductance.
-    ratedU: Rated voltage: phase-phase for three-phase windings, and either phase-phase or phase-neutral for single-
-      phase windings. A high voltage side, as given by TransformerEnd.endNumber, shall have a ratedU that is
-      greater than or equal to ratedU for the lower voltage sides. The attribute shall be a positive value.
-    r: Resistance (star-model) of the transformer end. The attribute shall be equal to or greater than zero for non-
-      equivalent transformers.
-    x: Positive sequence series reactance (star-model) of the transformer end.
     b0: Zero sequence magnetizing branch susceptance.
+    connectionKind: Kind of connection.
+    g: Magnetizing branch conductance.
+    g0: Zero sequence magnetizing branch conductance (star-model).
     phaseAngleClock: Terminal voltage phase angle displacement where 360 degrees are represented with clock hours. The
       valid values are 0 to 11. For example, for the secondary side end of a transformer with
       vector group code of `Dyn11`, specify the connection kind as wye with neutral and specify the
       phase angle of the clock as 11.  The clock value of the transformer end number specified as
       1, is assumed to be zero.  Note the transformer end number is not assumed to be the same as
       the terminal sequence number.
-    g0: Zero sequence magnetizing branch conductance (star-model).
+    r: Resistance (star-model) of the transformer end. The attribute shall be equal to or greater than zero for non-
+      equivalent transformers.
     r0: Zero sequence series resistance (star-model) of the transformer end.
+    ratedS: Normal apparent power rating. The attribute shall be a positive value. For a two-winding transformer the
+      values for the high and low voltage sides shall be identical.
+    ratedU: Rated voltage: phase-phase for three-phase windings, and either phase-phase or phase-neutral for single-
+      phase windings. A high voltage side, as given by TransformerEnd.endNumber, shall have a ratedU that is
+      greater than or equal to ratedU for the lower voltage sides. The attribute shall be a positive value.
+    x: Positive sequence series reactance (star-model) of the transformer end.
     x0: Zero sequence series reactance of the transformer end.
     """
 
@@ -65,7 +61,12 @@ class PowerTransformerEnd(TransformerEnd):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -74,61 +75,12 @@ class PowerTransformerEnd(TransformerEnd):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
-        },
-    )
-
-    connectionKind: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    ratedS: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    g: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    ratedU: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    r: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    x: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -137,16 +89,40 @@ class PowerTransformerEnd(TransformerEnd):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    phaseAngleClock: int = Field(
-        default=0,
+    connectionKind: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
-                Profile.SC,
-            ]
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    g: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -155,7 +131,40 @@ class PowerTransformerEnd(TransformerEnd):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    phaseAngleClock: int = Field(
+        default=0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    r: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -164,7 +173,54 @@ class PowerTransformerEnd(TransformerEnd):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    ratedS: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    ratedU: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    x: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -173,7 +229,12 @@ class PowerTransformerEnd(TransformerEnd):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -187,3 +248,11 @@ class PowerTransformerEnd(TransformerEnd):
             Profile.EQ,
             Profile.SC,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

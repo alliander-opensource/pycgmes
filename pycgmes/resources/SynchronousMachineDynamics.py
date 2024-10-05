@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -29,51 +25,116 @@ class SynchronousMachineDynamics(RotatingMachineDynamics):
       the models, but are commonly referred to as reactances since, at nominal frequency, the PU values are the
       same. However, some references use the symbol L instead of X.
 
-    SynchronousMachine: Synchronous machine to which synchronous machine dynamics model applies.
     CrossCompoundTurbineGovernorDyanmics: The cross-compound turbine governor with which this high-pressure synchronous
       machine is associated.
     CrossCompoundTurbineGovernorDynamics: The cross-compound turbine governor with which this low-pressure synchronous
       machine is associated.
-    MechanicalLoadDynamics: Mechanical load model associated with this synchronous machine model.
     ExcitationSystemDynamics: Excitation system model associated with this synchronous machine model.
+    GenICompensationForGenJ: Compensation of voltage compensator`s generator for current flow out of this  generator.
+    MechanicalLoadDynamics: Mechanical load model associated with this synchronous machine model.
+    SynchronousMachine: Synchronous machine to which synchronous machine dynamics model applies.
     TurbineGovernorDynamics: Turbine-governor model associated with this synchronous machine model. Multiplicity of
       greater than one is intended to support hydro units that have multiple turbines on
       one generator.
-    GenICompensationForGenJ: Compensation of voltage compensator`s generator for current flow out of this  generator.
     """
+
+    CrossCompoundTurbineGovernorDyanmics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    CrossCompoundTurbineGovernorDynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    ExcitationSystemDynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    GenICompensationForGenJ: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    MechanicalLoadDynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     SynchronousMachine: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # CrossCompoundTurbineGovernorDyanmics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # CrossCompoundTurbineGovernorDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # MechanicalLoadDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # ExcitationSystemDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # TurbineGovernorDynamics : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # GenICompensationForGenJ : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
+    TurbineGovernorDynamics: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -84,3 +145,11 @@ class SynchronousMachineDynamics(RotatingMachineDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

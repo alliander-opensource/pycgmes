@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -20,18 +17,37 @@ class WindContQLimIEC(IdentifiedObject):
     """
     Constant Q limitation model. Reference: IEC 61400-27-1:2015, 5.6.5.9.
 
-    qmax: Maximum reactive power (qmax) (> WindContQLimIEC.qmin). It is a type-dependent parameter.
-    qmin: Minimum reactive power (qmin) (< WindContQLimIEC.qmax). It is a type-dependent parameter.
     WindTurbineType3or4IEC: Wind generator type 3 or type 4 model with which this constant Q limitation model is
       associated.
+    qmax: Maximum reactive power (qmax) (> WindContQLimIEC.qmin). It is a type-dependent parameter.
+    qmin: Minimum reactive power (qmin) (< WindContQLimIEC.qmax). It is a type-dependent parameter.
     """
+
+    WindTurbineType3or4IEC: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     qmax: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -40,13 +56,14 @@ class WindContQLimIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # WindTurbineType3or4IEC : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -57,3 +74,11 @@ class WindContQLimIEC(IdentifiedObject):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -23,8 +19,8 @@ class WindTurbineType3IEC(WindTurbineType3or4IEC):
 
     WindAeroOneDimIEC: Wind aerodynamic model associated with this wind generator type 3 model.
     WindAeroTwoDimIEC: Wind aerodynamic model associated with this wind turbine type 3 model.
-    WindContPitchAngleIEC: Wind control pitch angle model associated with this wind turbine type 3.
     WindContPType3IEC: Wind control P type 3 model associated with this wind turbine type 3 model.
+    WindContPitchAngleIEC: Wind control pitch angle model associated with this wind turbine type 3.
     WindGenType3IEC: Wind generator type 3 model associated with this wind turbine type 3 model.
     WindMechIEC: Wind mechanical model associated with this wind turbine type 3 model.
     """
@@ -34,7 +30,12 @@ class WindTurbineType3IEC(WindTurbineType3or4IEC):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -43,16 +44,12 @@ class WindTurbineType3IEC(WindTurbineType3or4IEC):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    WindContPitchAngleIEC: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -61,7 +58,26 @@ class WindTurbineType3IEC(WindTurbineType3or4IEC):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    WindContPitchAngleIEC: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -70,7 +86,12 @@ class WindTurbineType3IEC(WindTurbineType3or4IEC):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -79,7 +100,12 @@ class WindTurbineType3IEC(WindTurbineType3or4IEC):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -92,3 +118,11 @@ class WindTurbineType3IEC(WindTurbineType3or4IEC):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

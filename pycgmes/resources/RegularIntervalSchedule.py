@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -21,20 +18,21 @@ class RegularIntervalSchedule(BasicIntervalSchedule):
     The schedule has time points where the time between them is constant.
 
     TimePoints: The regular interval time point data values that define this schedule.
-    timeStep: The time between each pair of subsequent regular time points in sequence order.
     endTime: The time for the last time point.  The value can be a time of day, not a specific date.
+    timeStep: The time between each pair of subsequent regular time points in sequence order.
     """
 
-    # *Association not used*
-    # Type M:1..n in CIM
-    # TimePoints : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
-
-    timeStep: int = Field(
-        default=0,
+    TimePoints: list = Field(
+        default_factory=list,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -43,7 +41,26 @@ class RegularIntervalSchedule(BasicIntervalSchedule):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    timeStep: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -56,3 +73,11 @@ class RegularIntervalSchedule(BasicIntervalSchedule):
         return {
             Profile.EQ,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -24,6 +20,12 @@ class DiagramObject(IdentifiedObject):
       values, breakers, disconnectors, power transformers, and transmission lines.
 
     Diagram: A diagram object is part of a diagram.
+    DiagramObjectPoints: A diagram object can have 0 or more points to reflect its layout position, routing (for
+      polylines) or boundary (for polygons).
+    DiagramObjectStyle: A diagram object has a style associated that provides a reference for the style used in the
+      originating system.
+    IdentifiedObject: The domain object to which this diagram object is associated.
+    VisibilityLayers: A diagram object can be part of multiple visibility layers.
     drawingOrder: The drawing order of this element. The higher the number, the later the element is drawn in sequence.
       This is used to ensure that elements that overlap are rendered in the correct order.
     isPolygon: Defines whether or not the diagram objects points define the boundaries of a polygon or the routing of a
@@ -46,12 +48,6 @@ class DiagramObject(IdentifiedObject):
       which has one terminal is pointing to the right hand side of the diagram. The connection point `From
       side` of an element which has more than one terminal is pointing to the right hand side of the
       diagram.
-    IdentifiedObject: The domain object to which this diagram object is associated.
-    DiagramObjectPoints: A diagram object can have 0 or more points to reflect its layout position, routing (for
-      polylines) or boundary (for polygons).
-    VisibilityLayers: A diagram object can be part of multiple visibility layers.
-    DiagramObjectStyle: A diagram object has a style associated that provides a reference for the style used in the
-      originating system.
     """
 
     Diagram: Optional[str] = Field(
@@ -59,52 +55,40 @@ class DiagramObject(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    drawingOrder: int = Field(
-        default=0,
+    DiagramObjectPoints: list = Field(
+        default_factory=list,
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,
-            ]
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
         },
     )
 
-    isPolygon: bool = Field(
-        default=False,
+    DiagramObjectStyle: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,
-            ]
-        },
-    )
-
-    offsetX: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DL,
-            ]
-        },
-    )
-
-    offsetY: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DL,
-            ]
-        },
-    )
-
-    rotation: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DL,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -113,24 +97,96 @@ class DiagramObject(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    # *Association not used*
-    # Type M:0..n in CIM
-    # DiagramObjectPoints : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DL, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # VisibilityLayers : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DL, ]}) # noqa: E501
-
-    DiagramObjectStyle: Optional[str] = Field(
-        default=None,
+    VisibilityLayers: list = Field(
+        default_factory=list,
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,
-            ]
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    drawingOrder: int = Field(
+        default=0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    isPolygon: bool = Field(
+        default=False,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    offsetX: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    offsetY: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    rotation: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -143,3 +199,11 @@ class DiagramObject(IdentifiedObject):
         return {
             Profile.DL,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DL

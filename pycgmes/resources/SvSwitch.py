@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -12,8 +8,8 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.base import Base
 from ..utils.profile import BaseProfile, Profile
+from ..utils.base import Base
 
 
 @dataclass
@@ -21,25 +17,35 @@ class SvSwitch(Base):
     """
     State variable for switch.
 
-    open: The attribute tells if the computed state of the switch is considered open.
     Switch: The switch associated with the switch state.
+    open: The attribute tells if the computed state of the switch is considered open.
     """
-
-    open: bool = Field(
-        default=False,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SV,
-            ]
-        },
-    )
 
     Switch: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.SV,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    open: bool = Field(
+        default=False,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -52,3 +58,11 @@ class SvSwitch(Base):
         return {
             Profile.SV,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.SV

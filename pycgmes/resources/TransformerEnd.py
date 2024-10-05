@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -31,8 +27,8 @@ class TransformerEnd(IdentifiedObject):
       or phase angle clock number.  Highest voltage winding should be 1.  Each end within a power
       transformer should have a unique subsequent end number.   Note the transformer end number need not
       match the terminal sequence number.
-    rground: (for Yn and Zn connections) Resistance part of neutral impedance where `grounded` is true.
     grounded: (for Yn and Zn connections) True if the neutral is solidly grounded.
+    rground: (for Yn and Zn connections) Resistance part of neutral impedance where `grounded` is true.
     xground: (for Yn and Zn connections) Reactive part of neutral impedance where `grounded` is true.
     """
 
@@ -41,24 +37,54 @@ class TransformerEnd(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # PhaseTapChanger : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
+    PhaseTapChanger: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # RatioTapChanger : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
+    RatioTapChanger: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     Terminal: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -67,16 +93,12 @@ class TransformerEnd(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
-        },
-    )
-
-    rground: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -85,7 +107,26 @@ class TransformerEnd(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    rground: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SC,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -94,7 +135,12 @@ class TransformerEnd(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -108,3 +154,11 @@ class TransformerEnd(IdentifiedObject):
             Profile.EQ,
             Profile.SC,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ
