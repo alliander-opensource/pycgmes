@@ -8,14 +8,12 @@ from pydantic.dataclasses import dataclass
 
 from pycgmes.resources.Bay import Bay
 from pycgmes.utils.base import Base
-from pycgmes.utils.config import cgmes_resource_config
 from pycgmes.utils.constants import NAMESPACES
 from pycgmes.utils.profile import Profile
 
 
 @dataclass
 class CustomBay(Bay):
-    model_config = cgmes_resource_config
     # Extends Bay. Has a lot of inherited fields.
     colour: str = Field(
         default="Red",
@@ -23,18 +21,22 @@ class CustomBay(Bay):
             "in_profiles": [
                 Profile.EQ,
             ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
             "namespace": "custom",
         },
     )
 
     @classmethod
-    def apparent_name(cls):
+    def apparent_name(cls) -> str:
         return "Bay"
 
 
 @dataclass
 class CustomBase(Base):
-    model_config = cgmes_resource_config
     # Extends Base. Has no inherited fields. Says its Bay.
     colour: str = Field(
         default="Red",
@@ -42,25 +44,34 @@ class CustomBase(Base):
             "in_profiles": [
                 Profile.EQ,
             ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
             "namespace": "custom",
         },
     )
 
     @classmethod
-    def apparent_name(cls):
+    def apparent_name(cls) -> str:
         return "Bay"
 
 
 @dataclass
 class CustomButNotmuch(Base):
-    model_config = cgmes_resource_config
     # Extends Base. No inherited fields. Not namespace defined anywhere.
     colour: str = Field(
         default="Red",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
         # no namespace
     )
@@ -70,7 +81,6 @@ class CustomButNotmuch(Base):
 
 @dataclass
 class CustomNS(Base):
-    model_config = cgmes_resource_config
     # Extends Base. No inherited fields. NS only defined at class level, but will be
     # used by the attribute.
     colour: str = Field(
@@ -78,13 +88,18 @@ class CustomNS(Base):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
         # no namespace
     )
 
     @property
-    def namespace(self):
+    def namespace(self) -> str:
         return "cheesy namespace"
 
     # no apparent_name()

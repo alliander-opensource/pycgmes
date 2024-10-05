@@ -41,6 +41,13 @@ class TestBay:
     def test_bay_has_expected_str(self):
         expected = textwrap.dedent(
             """
+        ConnectivityNodes=[]
+        Controls=[]
+        DiagramObjects=[]
+        Equipments=[]
+        Location=None
+        Measurements=[]
+        TopologicalNode=[]
         VoltageLevel=None
         __class__=Bay
         description=
@@ -56,11 +63,14 @@ class TestBay:
 
     def test_bay_has_expected_profiles(self):
         expected = {Profile.EQBD, Profile.EQ}
-
         assert expected == Bay().possible_profiles
 
+    def test_bay_has_expected_recommended_profile(self):
+        expected = Profile.EQ
+        assert expected == Bay().recommended_profile
+
     @pytest.mark.parametrize(
-        "profile, attribute_names",
+        ("profile", "attribute_names"),
         [
             # Different profiles will have different attributes.
             ("EQ", {"description", "VoltageLevel", "energyIdentCodeEic", "shortName", "name"}),
@@ -79,3 +89,12 @@ class TestBay:
         # Extra fields are not allowed
         with pytest.raises(ValidationError):
             Bay(somefield="should not exist")
+
+    def test_possible_attribute_profiles(self):
+        attr_profiles_map = Bay().possible_attribute_profiles
+        assert len(attr_profiles_map) == 13
+        assert attr_profiles_map["VoltageLevel"] == [Profile.EQ, Profile.EQBD]
+        assert Profile.EQ in attr_profiles_map["name"]
+        assert Profile.EQBD in attr_profiles_map["name"]
+        assert Profile.SV in attr_profiles_map["name"]
+        assert Profile.TP in attr_profiles_map["name"]

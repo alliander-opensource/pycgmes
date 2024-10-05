@@ -22,4 +22,5 @@ class TestLoadAll:
     def test_importing(self, resource):
         mod = importlib.import_module(f".{resource}", package="pycgmes.resources")
         # Calling possible profiles to have full coverage.
-        getattr(mod, resource)().possible_profiles
+        profiles = getattr(mod, resource)().possible_profiles
+        assert profiles
