@@ -65,12 +65,12 @@ jobs:
         run: |
           poetry install --with dev
 
-      - name: scons black
+      - name: scons format
         if: ${{ ! inputs._SKIP_QUALITY }}
-        run: poetry run scons black check
-      - name: scons ruff
+        run: poetry run scons format check
+      - name: scons lint
         if: ${{ ! inputs._SKIP_QUALITY }}
-        run: poetry run scons ruff check
+        run: poetry run scons lint check
       - name: scons type
         if: ${{ ! inputs._SKIP_QUALITY }}
         run: poetry run scons type
