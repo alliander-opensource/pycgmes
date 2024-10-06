@@ -30,6 +30,7 @@ exclude = ["./pycgmes/shacl"]
 python = "^3.10"
 poetry = ">=1.5.0" # key 'priority' in source
 pydantic = ">=2" # Used for dataclasses
+chevron = ">=0.14.0" # Used for writer
 
 [tool.poetry.group.dev.dependencies]
 coverage = { extras = ["toml"], version = "*" } # unit test coverage
