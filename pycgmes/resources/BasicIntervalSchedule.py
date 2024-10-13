@@ -29,15 +29,15 @@ class BasicIntervalSchedule(IdentifiedObject):
                 Profile.EQ,
             ],
             "is_used": True,
-            "is_class_attribute": True,
+            "is_class_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    value1Unit: Optional[str] = Field(
-        default=None,
+    value1Unit: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
@@ -50,8 +50,8 @@ class BasicIntervalSchedule(IdentifiedObject):
         },
     )
 
-    value2Unit: Optional[str] = Field(
-        default=None,
+    value2Unit: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

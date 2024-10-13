@@ -32,8 +32,8 @@ class PetersenCoil(EarthFaultCompensator):
       based on nominal voltage divided by position current.
     """
 
-    mode: Optional[str] = Field(
-        default=None,
+    mode: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,

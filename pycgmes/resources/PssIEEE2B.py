@@ -49,8 +49,8 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
     vstmin: Stabilizer output minimum limit (Vstmin) (< PssIEEE2B.vstmax).  Typical value = -0,1.
     """
 
-    inputSignal1Type: Optional[str] = Field(
-        default=None,
+    inputSignal1Type: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
@@ -63,8 +63,8 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
         },
     )
 
-    inputSignal2Type: Optional[str] = Field(
-        default=None,
+    inputSignal2Type: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

@@ -95,8 +95,8 @@ class GeneratingUnit(Equipment):
         },
     )
 
-    genControlSource: Optional[str] = Field(
-        default=None,
+    genControlSource: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

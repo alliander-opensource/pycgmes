@@ -114,8 +114,8 @@ class ControlArea(PowerSystemResource):
         },
     )
 
-    type: Optional[str] = Field(
-        default=None,
+    type: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

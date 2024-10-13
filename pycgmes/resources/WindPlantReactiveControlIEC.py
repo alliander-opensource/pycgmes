@@ -288,8 +288,8 @@ class WindPlantReactiveControlIEC(IdentifiedObject):
         },
     )
 
-    windPlantQcontrolModesType: Optional[str] = Field(
-        default=None,
+    windPlantQcontrolModesType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

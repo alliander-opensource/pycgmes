@@ -56,8 +56,8 @@ class LoadGenericNonLinear(LoadDynamics):
         },
     )
 
-    genericNonLinearLoadModelType: Optional[str] = Field(
-        default=None,
+    genericNonLinearLoadModelType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
