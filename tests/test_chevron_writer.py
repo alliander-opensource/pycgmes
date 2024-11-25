@@ -18,50 +18,50 @@ from pycgmes.resources.TopologicalIsland import TopologicalIsland
 from pycgmes.resources.TopologicalNode import TopologicalNode
 from pycgmes.resources.TownDetail import TownDetail
 from pycgmes.resources.VoltageLevel import VoltageLevel
+from pycgmes.utils.chevron_writer import ChevronWriter
 from pycgmes.utils.profile import Profile
-from pycgmes.utils.writer import Writer
 
 
-class TestWriter:
+class TestChevronWriter:
     def test_is_class_matching_profile(self):
-        assert Writer.is_class_matching_profile(TopologicalNode(), Profile.TP)
-        assert Writer.is_class_matching_profile(TopologicalNode(), Profile.SV)
-        assert Writer.is_class_matching_profile(TopologicalNode(), Profile.EQ)
+        assert ChevronWriter.is_class_matching_profile(TopologicalNode(), Profile.TP)
+        assert ChevronWriter.is_class_matching_profile(TopologicalNode(), Profile.SV)
+        assert ChevronWriter.is_class_matching_profile(TopologicalNode(), Profile.EQ)
 
     def test_get_class_profile(self):
-        assert Writer.get_class_profile(BaseVoltage()) == Profile.EQ
-        assert Writer.get_class_profile(TopologicalNode()) == Profile.TP
-        assert Writer.get_class_profile(TopologicalIsland()) == Profile.SV
+        assert ChevronWriter.get_class_profile(BaseVoltage()) == Profile.EQ
+        assert ChevronWriter.get_class_profile(TopologicalNode()) == Profile.TP
+        assert ChevronWriter.get_class_profile(TopologicalIsland()) == Profile.SV
 
     def test_get_class_profile_map(self):
-        class_profile_map = Writer.get_class_profile_map([BaseVoltage(), TopologicalNode(), BaseVoltage()])
+        class_profile_map = ChevronWriter.get_class_profile_map([BaseVoltage(), TopologicalNode(), BaseVoltage()])
         expected = {"BaseVoltage": Profile.EQ, "TopologicalNode": Profile.TP}
         assert class_profile_map == expected
 
     def test_get_attribute_profile(self):
         base_voltage = BaseVoltage()
-        class_profile = Writer.get_class_profile(base_voltage)
-        assert Writer.get_attribute_profile(base_voltage, "nominalVoltage", class_profile) == Profile.EQ
-        assert Writer.get_attribute_profile(base_voltage, "name", class_profile) == Profile.EQ
-        assert Writer.get_attribute_profile(base_voltage, "shortName", class_profile) == Profile.EQ
-        assert Writer.get_attribute_profile(base_voltage, "description", class_profile) == Profile.EQ
+        class_profile = ChevronWriter.get_class_profile(base_voltage)
+        assert ChevronWriter.get_attribute_profile(base_voltage, "nominalVoltage", class_profile) == Profile.EQ
+        assert ChevronWriter.get_attribute_profile(base_voltage, "name", class_profile) == Profile.EQ
+        assert ChevronWriter.get_attribute_profile(base_voltage, "shortName", class_profile) == Profile.EQ
+        assert ChevronWriter.get_attribute_profile(base_voltage, "description", class_profile) == Profile.EQ
 
         topological_node = TopologicalNode()
-        class_profile = Writer.get_class_profile(topological_node)
-        assert Writer.get_attribute_profile(topological_node, "BaseVoltage", class_profile) == Profile.TP
-        assert Writer.get_attribute_profile(topological_node, "name", class_profile) == Profile.TP
-        assert Writer.get_attribute_profile(topological_node, "shortName", class_profile) == Profile.TP
-        assert Writer.get_attribute_profile(topological_node, "description", class_profile) == Profile.TP
+        class_profile = ChevronWriter.get_class_profile(topological_node)
+        assert ChevronWriter.get_attribute_profile(topological_node, "BaseVoltage", class_profile) == Profile.TP
+        assert ChevronWriter.get_attribute_profile(topological_node, "name", class_profile) == Profile.TP
+        assert ChevronWriter.get_attribute_profile(topological_node, "shortName", class_profile) == Profile.TP
+        assert ChevronWriter.get_attribute_profile(topological_node, "description", class_profile) == Profile.TP
 
         topological_island = TopologicalIsland()
-        class_profile = Writer.get_class_profile(topological_island)
-        assert Writer.get_attribute_profile(topological_island, "TopologicalNodes", class_profile) == Profile.SV
-        assert Writer.get_attribute_profile(topological_island, "name", class_profile) == Profile.SV
-        assert Writer.get_attribute_profile(topological_island, "shortName", class_profile) == Profile.EQ
-        assert Writer.get_attribute_profile(topological_island, "description", class_profile) == Profile.EQ
+        class_profile = ChevronWriter.get_class_profile(topological_island)
+        assert ChevronWriter.get_attribute_profile(topological_island, "TopologicalNodes", class_profile) == Profile.SV
+        assert ChevronWriter.get_attribute_profile(topological_island, "name", class_profile) == Profile.SV
+        assert ChevronWriter.get_attribute_profile(topological_island, "shortName", class_profile) == Profile.EQ
+        assert ChevronWriter.get_attribute_profile(topological_island, "description", class_profile) == Profile.EQ
 
     def test_get_attribute_infos(self):
-        infos = Writer.get_attribute_infos(BaseVoltage(name="20", nominalVoltage=20.0))
+        infos = ChevronWriter.get_attribute_infos(BaseVoltage(name="20", nominalVoltage=20.0))
         assert len(infos) == 6
         assert infos["nominalVoltage"]["attr_name"] == "BaseVoltage.nominalVoltage"
         assert infos["nominalVoltage"]["value"] == 20.0
@@ -69,13 +69,13 @@ class TestWriter:
         assert infos["name"]["value"] == "20"
 
     def test_generate_primitive(self):
-        writer = Writer(
+        writer = ChevronWriter(
             {
                 "BaseVoltage.20": BaseVoltage(mRID="BaseVoltage.20", nominalVoltage=20.0),
                 "VoltageLevel.98": VoltageLevel(mRID="VoltageLevel.98", name="98", BaseVoltage="BaseVoltage.20"),
             }
         )
-        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        class_profile_map = ChevronWriter.get_class_profile_map(writer.objects.values())
         xml = writer.generate(Profile.EQ, "model" + "_" + Profile.EQ.long_name, class_profile_map)
         expected = textwrap.dedent(
             """\
@@ -98,13 +98,13 @@ class TestWriter:
         assert xml == expected
 
     def test_generate_enum(self):
-        writer = Writer(
+        writer = ChevronWriter(
             {
                 "Analog.N0": Analog(mRID="Analog.N0", unitMultiplier="UnitMultiplier.k", unitSymbol="UnitSymbol.V"),
                 "AnalogValue.N0": AnalogValue(mRID="AnalogValue.N0", Analog="Analog.N0.Voltage"),
             }
         )
-        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        class_profile_map = ChevronWriter.get_class_profile_map(writer.objects.values())
         xml = writer.generate(Profile.OP, "model" + "_" + Profile.OP.long_name, class_profile_map)
         expected = textwrap.dedent(
             """\
@@ -128,14 +128,14 @@ class TestWriter:
         assert xml == expected
 
     def test_generate_class_list(self):
-        writer = Writer(
+        writer = ChevronWriter(
             {
                 "N0": TopologicalNode(mRID="N0", name="N0"),
                 "N1": TopologicalNode(mRID="N1", name="N1"),
                 "TopologicalIsland.N": TopologicalIsland(mRID="N", name="N", TopologicalNodes=["N0", "N1"]),
             }
         )
-        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        class_profile_map = ChevronWriter.get_class_profile_map(writer.objects.values())
         xml = writer.generate(Profile.SV, "model" + "_" + Profile.SV.long_name, class_profile_map)
         expected = textwrap.dedent(
             """\
@@ -156,13 +156,13 @@ class TestWriter:
         assert xml == expected
 
     def test_generate_about(self):
-        writer = Writer(
+        writer = ChevronWriter(
             {
                 "N0": TopologicalNode(mRID="N0"),
                 "Terminal.N0": Terminal(mRID="Terminal.N0", TopologicalNode="N0"),
             }
         )
-        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        class_profile_map = ChevronWriter.get_class_profile_map(writer.objects.values())
         xml = writer.generate(Profile.TP, "model" + "_" + Profile.TP.long_name, class_profile_map)
         expected = textwrap.dedent(
             """\
@@ -183,7 +183,7 @@ class TestWriter:
         assert xml == expected
 
     def test_write(self, tmp_path):
-        writer = Writer(
+        writer = ChevronWriter(
             {
                 "Analog.N0.Voltage": Analog(
                     mRID="Analog.N0.Voltage",
@@ -198,7 +198,7 @@ class TestWriter:
                 "VoltageLevel.98": VoltageLevel(mRID="VoltageLevel.98", name="98", BaseVoltage="BaseVoltage.20"),
             }
         )
-        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        class_profile_map = ChevronWriter.get_class_profile_map(writer.objects.values())
         profile_file_map = writer.write(str(tmp_path / "model"), "model", class_profile_map)
         assert len(profile_file_map) == 2
         assert profile_file_map[Profile.EQ] == str(tmp_path / "model_CoreEquipment.xml")
@@ -253,7 +253,7 @@ class TestWriter:
         assert xml == expected
 
     def test_generate_location(self):
-        writer = Writer(
+        writer = ChevronWriter(
             {
                 "_Location": Location(mRID="_Location", mainAddress="_Address"),
                 "_Address": StreetAddress(status="_Status", streetDetail="_Street", townDetail="_Town"),
@@ -262,7 +262,7 @@ class TestWriter:
                 "_Town": TownDetail(name="Berlin", country="Germany"),
             }
         )
-        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        class_profile_map = ChevronWriter.get_class_profile_map(writer.objects.values())
         xml = writer.generate(Profile.GL, "model" + "_" + Profile.GL.long_name, class_profile_map)
         expected = textwrap.dedent(
             """\
@@ -299,12 +299,12 @@ class TestWriter:
         assert xml == expected
 
     def test_generate_season(self):
-        writer = Writer(
+        writer = ChevronWriter(
             {
                 "_Season": Season(mRID="_Season", startDate="--10-13", endDate="--10-31"),
             }
         )
-        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        class_profile_map = ChevronWriter.get_class_profile_map(writer.objects.values())
         xml = writer.generate(Profile.EQ, "model" + "_" + Profile.EQ.long_name, class_profile_map)
         expected = textwrap.dedent(
             """\
