@@ -2,39 +2,13 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class OrientationKind(Base):
+class OrientationKind(str, Enum):
     """
-    The orientation of the coordinate system with respect to top, left, and the coordinate number system.
-
+    The orientation of the coordinate system with respect to top, left, and the coordinate number system.  # noqa: E501
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.DL,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.DL
+    positive = "positive"  # For 2D diagrams, a positive orientation will result in X values increasing from left to right and Y values increasing from bottom to top.  This is also known as a right hand orientation.  # noqa: E501
+    negative = "negative"  # For 2D diagrams, a negative orientation gives the left-hand orientation (favoured by computer graphics displays) with X values increasing from left to right and Y values increasing from top to bottom.   This is also known as a left hand orientation.  # noqa: E501

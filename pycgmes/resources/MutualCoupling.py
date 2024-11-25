@@ -10,6 +10,11 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
+from .Conductance import Conductance
+from .Length import Length
+from .Reactance import Reactance
+from .Resistance import Resistance
+from .Susceptance import Susceptance
 
 
 @dataclass
@@ -42,6 +47,7 @@ class MutualCoupling(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -56,6 +62,7 @@ class MutualCoupling(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -70,9 +77,11 @@ class MutualCoupling(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Susceptance,
         },
     )
 
@@ -84,9 +93,11 @@ class MutualCoupling(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Length,
         },
     )
 
@@ -98,9 +109,11 @@ class MutualCoupling(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Length,
         },
     )
 
@@ -112,9 +125,11 @@ class MutualCoupling(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Length,
         },
     )
 
@@ -126,9 +141,11 @@ class MutualCoupling(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Length,
         },
     )
 
@@ -140,9 +157,11 @@ class MutualCoupling(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Conductance,
         },
     )
 
@@ -154,9 +173,11 @@ class MutualCoupling(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -168,9 +189,11 @@ class MutualCoupling(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 

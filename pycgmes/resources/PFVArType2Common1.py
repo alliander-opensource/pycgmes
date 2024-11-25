@@ -10,6 +10,8 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .PFVArControllerType2Dynamics import PFVArControllerType2Dynamics
+from .Boolean import Boolean
+from .PU import PU
 
 
 @dataclass
@@ -38,9 +40,11 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Boolean,
         },
     )
 
@@ -52,9 +56,11 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -66,9 +72,11 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -80,9 +88,11 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -94,9 +104,11 @@ class PFVArType2Common1(PFVArControllerType2Dynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 

@@ -10,6 +10,14 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
+from .Area import Area
+from .Boolean import Boolean
+from .Float import Float
+from .Frequency import Frequency
+from .Length import Length
+from .PU import PU
+from .Seconds import Seconds
+from .VolumeFlowRate import VolumeFlowRate
 
 
 @dataclass
@@ -59,9 +67,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -73,9 +83,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Area,
         },
     )
 
@@ -87,9 +99,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Area,
         },
     )
 
@@ -101,9 +115,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -115,9 +131,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Frequency,
         },
     )
 
@@ -129,9 +147,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -143,6 +163,7 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -157,9 +178,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Length,
         },
     )
 
@@ -171,9 +194,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Length,
         },
     )
 
@@ -185,9 +210,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Length,
         },
     )
 
@@ -199,9 +226,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -213,9 +242,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -227,9 +258,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -241,9 +274,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -255,9 +290,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": VolumeFlowRate,
         },
     )
 
@@ -269,9 +306,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -283,9 +322,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -297,9 +338,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -311,9 +354,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -325,9 +370,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -339,9 +386,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -353,9 +402,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -367,9 +418,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -381,9 +434,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -395,9 +450,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -409,9 +466,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Boolean,
         },
     )
 
@@ -423,9 +482,11 @@ class GovHydroFrancis(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Length,
         },
     )
 

@@ -10,6 +10,10 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
+from .AngleDegrees import AngleDegrees
+from .Float import Float
+from .PU import PU
+from .Seconds import Seconds
 
 
 @dataclass
@@ -40,6 +44,7 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": False,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -54,9 +59,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -68,9 +75,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -82,9 +91,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -96,9 +107,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -110,9 +123,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -124,9 +139,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -138,9 +155,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -152,9 +171,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": AngleDegrees,
         },
     )
 
@@ -166,9 +187,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": AngleDegrees,
         },
     )
 
@@ -180,9 +203,11 @@ class WindContPitchAngleIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 

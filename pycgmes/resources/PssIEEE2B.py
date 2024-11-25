@@ -10,6 +10,9 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .PowerSystemStabilizerDynamics import PowerSystemStabilizerDynamics
+from .Integer import Integer
+from .PU import PU
+from .Seconds import Seconds
 
 
 @dataclass
@@ -57,6 +60,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -71,6 +75,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -85,9 +90,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -99,9 +106,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -113,9 +122,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -127,9 +138,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Integer,
         },
     )
 
@@ -141,9 +154,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Integer,
         },
     )
 
@@ -155,9 +170,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -169,9 +186,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -183,9 +202,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -197,9 +218,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -211,9 +234,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -225,9 +250,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -239,9 +266,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -253,9 +282,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -267,9 +298,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -281,9 +314,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -295,9 +330,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -309,9 +346,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -323,9 +362,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -337,9 +378,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -351,9 +394,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -365,9 +410,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -379,9 +426,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -393,9 +442,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -407,9 +458,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -421,9 +474,11 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 

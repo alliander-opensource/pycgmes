@@ -10,6 +10,12 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
+from .ActivePower import ActivePower
+from .Boolean import Boolean
+from .Float import Float
+from .Frequency import Frequency
+from .PU import PU
+from .Seconds import Seconds
 
 
 @dataclass
@@ -69,9 +75,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Frequency,
         },
     )
 
@@ -83,9 +91,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": ActivePower,
         },
     )
 
@@ -97,9 +107,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Frequency,
         },
     )
 
@@ -111,9 +123,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -125,9 +139,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -139,9 +155,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -153,9 +171,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -167,9 +187,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -181,9 +203,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -195,9 +219,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -209,9 +235,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -223,9 +251,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -237,9 +267,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -251,9 +283,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -265,9 +299,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -279,9 +315,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -293,9 +331,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -307,9 +347,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -321,9 +363,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": ActivePower,
         },
     )
 
@@ -335,9 +379,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -349,9 +395,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -363,9 +411,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -377,9 +427,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -391,9 +443,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -405,9 +459,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -419,9 +475,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -433,9 +491,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -447,9 +507,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Boolean,
         },
     )
 
@@ -461,9 +523,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Boolean,
         },
     )
 
@@ -475,9 +539,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -489,9 +555,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -503,9 +571,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -517,9 +587,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -531,9 +603,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -545,9 +619,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -559,9 +635,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -573,9 +651,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -587,9 +667,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -601,9 +683,11 @@ class GovSteam1(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Boolean,
         },
     )
 

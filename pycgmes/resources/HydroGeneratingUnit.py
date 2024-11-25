@@ -10,6 +10,7 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .GeneratingUnit import GeneratingUnit
+from .Length import Length
 
 
 @dataclass
@@ -31,6 +32,7 @@ class HydroGeneratingUnit(GeneratingUnit):
             ],
             "is_used": True,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -45,9 +47,11 @@ class HydroGeneratingUnit(GeneratingUnit):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Length,
         },
     )
 
@@ -59,6 +63,7 @@ class HydroGeneratingUnit(GeneratingUnit):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -73,6 +78,7 @@ class HydroGeneratingUnit(GeneratingUnit):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,

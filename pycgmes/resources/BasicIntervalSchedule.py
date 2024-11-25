@@ -10,6 +10,7 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
+from .DateTime import DateTime
 
 
 @dataclass
@@ -30,9 +31,11 @@ class BasicIntervalSchedule(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": DateTime,
         },
     )
 
@@ -44,6 +47,7 @@ class BasicIntervalSchedule(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -58,6 +62,7 @@ class BasicIntervalSchedule(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,

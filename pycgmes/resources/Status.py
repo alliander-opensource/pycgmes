@@ -10,6 +10,8 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from ..utils.base import Base
+from .DateTime import DateTime
+from .String import String
 
 
 @dataclass
@@ -32,9 +34,11 @@ class Status(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": DateTime,
         },
     )
 
@@ -46,9 +50,11 @@ class Status(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": String,
         },
     )
 
@@ -60,9 +66,11 @@ class Status(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": String,
         },
     )
 
@@ -74,9 +82,11 @@ class Status(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": String,
         },
     )
 

@@ -2,39 +2,15 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class ExcST7BOELselectorKind(Base):
+class ExcST7BOELselectorKind(str, Enum):
     """
-    Types of connections for the OEL input used for static excitation systems type 7B.
-
+    Types of connections for the OEL input used for static excitation systems type 7B.  # noqa: E501
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.DY,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.DY
+    noOELinput = "noOELinput"  # No OEL input is used. Corresponds to &lt;i&gt;OELin&lt;/i&gt; not = 1 and not = 2 and not = 3 on the ExcST7B diagram. Original ExcST7B model would have called this &lt;i&gt;OELin&lt;/i&gt; = 0.  # noqa: E501
+    addVref = "addVref"  # The signal is added to &lt;i&gt;Vref&lt;/i&gt;.  Corresponds to &lt;i&gt;OELin&lt;/i&gt; = 1 on the ExcST7B diagram.  # noqa: E501
+    inputLVgate = "inputLVgate"  # The signal is connected into the input &lt;i&gt;LVGate&lt;/i&gt;. Corresponds to &lt;i&gt;OELin&lt;/i&gt; = 2 on the ExcST7B diagram.  # noqa: E501
+    outputLVgate = "outputLVgate"  # The signal is connected into the output &lt;i&gt;LVGate&lt;/i&gt;.  Corresponds to &lt;i&gt;OELin&lt;/i&gt; = 3 on the ExcST7B diagram.  # noqa: E501

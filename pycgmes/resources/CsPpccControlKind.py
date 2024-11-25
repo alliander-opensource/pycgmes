@@ -2,39 +2,14 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class CsPpccControlKind(Base):
+class CsPpccControlKind(str, Enum):
     """
-    Active power control modes for HVDC line operating as Current Source Converter.
-
+    Active power control modes for HVDC line operating as Current Source Converter.  # noqa: E501
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.SSH,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.SSH
+    activePower = "activePower"  # Control is active power control at AC side, at point of common coupling. Target is provided by ACDCConverter.targetPpcc.  # noqa: E501
+    dcVoltage = "dcVoltage"  # Control is DC voltage  with target value provided by ACDCConverter.targetUdc.  # noqa: E501
+    dcCurrent = "dcCurrent"  # Control is DC current  with target value provided by CsConverter.targetIdc.  # noqa: E501

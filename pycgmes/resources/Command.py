@@ -10,6 +10,7 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .Control import Control
+from .Integer import Integer
 
 
 @dataclass
@@ -31,6 +32,7 @@ class Command(Control):
             ],
             "is_used": True,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -45,6 +47,7 @@ class Command(Control):
             ],
             "is_used": True,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -59,9 +62,11 @@ class Command(Control):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Integer,
         },
     )
 
@@ -73,9 +78,11 @@ class Command(Control):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Integer,
         },
     )
 

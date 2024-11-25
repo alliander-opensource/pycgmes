@@ -10,6 +10,8 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .EquivalentEquipment import EquivalentEquipment
+from .Reactance import Reactance
+from .Resistance import Resistance
 
 
 @dataclass
@@ -75,9 +77,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -89,9 +93,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -103,9 +109,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 
@@ -117,9 +125,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 
@@ -131,9 +141,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -145,9 +157,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -159,9 +173,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 
@@ -173,9 +189,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 
@@ -187,9 +205,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -201,9 +221,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -215,9 +237,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 
@@ -229,9 +253,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 
@@ -243,9 +269,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -257,9 +285,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -271,9 +301,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 
@@ -285,9 +317,11 @@ class EquivalentBranch(EquivalentEquipment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 

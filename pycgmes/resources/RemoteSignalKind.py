@@ -2,39 +2,20 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class RemoteSignalKind(Base):
+class RemoteSignalKind(str, Enum):
     """
-    Type of input signal coming from remote bus.
-
+    Type of input signal coming from remote bus.  # noqa: E501
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.DY,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.DY
+    remoteBusVoltageFrequency = "remoteBusVoltageFrequency"  # Input is voltage frequency from remote terminal bus.  # noqa: E501
+    remoteBusVoltageFrequencyDeviation = "remoteBusVoltageFrequencyDeviation"  # Input is voltage frequency deviation from remote terminal bus.  # noqa: E501
+    remoteBusFrequency = "remoteBusFrequency"  # Input is frequency from remote terminal bus.  # noqa: E501
+    remoteBusFrequencyDeviation = "remoteBusFrequencyDeviation"  # Input is frequency deviation from remote terminal bus.  # noqa: E501
+    remoteBusVoltageAmplitude = "remoteBusVoltageAmplitude"  # Input is voltage amplitude from remote terminal bus.  # noqa: E501
+    remoteBusVoltage = "remoteBusVoltage"  # Input is voltage from remote terminal bus.  # noqa: E501
+    remoteBranchCurrentAmplitude = "remoteBranchCurrentAmplitude"  # Input is branch current amplitude from remote terminal bus.  # noqa: E501
+    remoteBusVoltageAmplitudeDerivative = "remoteBusVoltageAmplitudeDerivative"  # Input is branch current amplitude derivative from remote terminal bus.  # noqa: E501
+    remotePuBusVoltageDerivative = "remotePuBusVoltageDerivative"  # Input is PU voltage derivative from remote terminal bus.  # noqa: E501

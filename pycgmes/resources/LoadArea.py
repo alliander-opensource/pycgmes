@@ -29,6 +29,7 @@ class LoadArea(EnergyArea):
             ],
             "is_used": False,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": True,
             "is_primitive_attribute": False,

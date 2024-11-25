@@ -10,6 +10,9 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .SynchronousMachineDetailed import SynchronousMachineDetailed
+from .Float import Float
+from .PU import PU
+from .Seconds import Seconds
 
 
 @dataclass
@@ -64,9 +67,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Float,
         },
     )
 
@@ -78,6 +83,7 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -92,6 +98,7 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -106,9 +113,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -120,9 +129,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -134,9 +145,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -148,9 +161,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -162,9 +177,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -176,9 +193,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -190,9 +209,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -204,9 +225,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -218,9 +241,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -232,9 +257,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 
@@ -246,9 +273,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": PU,
         },
     )
 

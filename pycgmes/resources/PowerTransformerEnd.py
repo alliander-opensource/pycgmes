@@ -10,6 +10,13 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .TransformerEnd import TransformerEnd
+from .ApparentPower import ApparentPower
+from .Conductance import Conductance
+from .Integer import Integer
+from .Reactance import Reactance
+from .Resistance import Resistance
+from .Susceptance import Susceptance
+from .Voltage import Voltage
 
 
 @dataclass
@@ -64,6 +71,7 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -78,9 +86,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Susceptance,
         },
     )
 
@@ -92,9 +102,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Susceptance,
         },
     )
 
@@ -106,6 +118,7 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -120,9 +133,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Conductance,
         },
     )
 
@@ -134,9 +149,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Conductance,
         },
     )
 
@@ -148,9 +165,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": Integer,
         },
     )
 
@@ -162,9 +181,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -176,9 +197,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -190,9 +213,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": ApparentPower,
         },
     )
 
@@ -204,9 +229,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Voltage,
         },
     )
 
@@ -218,9 +245,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 
@@ -232,9 +261,11 @@ class PowerTransformerEnd(TransformerEnd):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 

@@ -10,6 +10,7 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from ..utils.base import Base
+from .String import String
 
 
 @dataclass
@@ -40,6 +41,7 @@ class IdentifiedObject(Base):
             ],
             "is_used": False,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": True,
             "is_primitive_attribute": False,
@@ -59,9 +61,11 @@ class IdentifiedObject(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": String,
         },
     )
 
@@ -75,9 +79,11 @@ class IdentifiedObject(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": String,
         },
     )
 
@@ -98,9 +104,11 @@ class IdentifiedObject(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": String,
         },
     )
 
@@ -119,9 +127,11 @@ class IdentifiedObject(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": String,
         },
     )
 
@@ -135,9 +145,11 @@ class IdentifiedObject(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": String,
         },
     )
 

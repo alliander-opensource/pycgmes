@@ -2,39 +2,14 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class ExcREXSFeedbackSignalKind(Base):
+class ExcREXSFeedbackSignalKind(str, Enum):
     """
-    Types of rate feedback signals.
-
+    Types of rate feedback signals.  # noqa: E501
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.DY,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.DY
+    fieldVoltage = "fieldVoltage"  # The voltage regulator output voltage is used. It is the same as exciter field voltage.  # noqa: E501
+    fieldCurrent = "fieldCurrent"  # The exciter field current is used.  # noqa: E501
+    outputVoltage = "outputVoltage"  # The output voltage of the exciter is used.  # noqa: E501

@@ -10,6 +10,7 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
+from .Seconds import Seconds
 
 
 @dataclass
@@ -33,6 +34,7 @@ class WindContQPQULimIEC(IdentifiedObject):
             ],
             "is_used": False,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": True,
             "is_primitive_attribute": False,
@@ -47,6 +49,7 @@ class WindContQPQULimIEC(IdentifiedObject):
             ],
             "is_used": False,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -61,9 +64,11 @@ class WindContQPQULimIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 
@@ -75,9 +80,11 @@ class WindContQPQULimIEC(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Seconds,
         },
     )
 

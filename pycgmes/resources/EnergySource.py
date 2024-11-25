@@ -10,6 +10,12 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .EnergyConnection import EnergyConnection
+from .ActivePower import ActivePower
+from .AngleRadians import AngleRadians
+from .Reactance import Reactance
+from .ReactivePower import ReactivePower
+from .Resistance import Resistance
+from .Voltage import Voltage
 
 
 @dataclass
@@ -51,6 +57,7 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -65,9 +72,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": ActivePower,
         },
     )
 
@@ -79,9 +88,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Voltage,
         },
     )
 
@@ -93,9 +104,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": ActivePower,
         },
     )
 
@@ -107,9 +120,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": ActivePower,
         },
     )
 
@@ -121,9 +136,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -135,9 +152,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -149,9 +168,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": ReactivePower,
         },
     )
 
@@ -163,9 +184,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Resistance,
         },
     )
 
@@ -177,9 +200,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": AngleRadians,
         },
     )
 
@@ -191,9 +216,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Voltage,
         },
     )
 
@@ -205,9 +232,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 
@@ -219,9 +248,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 
@@ -233,9 +264,11 @@ class EnergySource(EnergyConnection):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": Reactance,
         },
     )
 

@@ -2,39 +2,21 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class FuelType(Base):
+class FuelType(str, Enum):
     """
-    Type of fuel.
-
+    Type of fuel.  # noqa: E501
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.EQ,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.EQ
+    coal = "coal"  # Generic coal, not including lignite type.  # noqa: E501
+    oil = "oil"  # Oil.  # noqa: E501
+    gas = "gas"  # Natural gas.  # noqa: E501
+    lignite = "lignite"  # The fuel is lignite coal.  Note that this is a special type of coal, so the other enum of coal is reserved for hard coal types or if the exact type of coal is not known.  # noqa: E501
+    hardCoal = "hardCoal"  # Hard coal.  # noqa: E501
+    oilShale = "oilShale"  # Oil Shale.  # noqa: E501
+    brownCoalLignite = "brownCoalLignite"  # Brown coal lignite.  # noqa: E501
+    coalDerivedGas = "coalDerivedGas"  # Coal derived gas.  # noqa: E501
+    peat = "peat"  # Peat.  # noqa: E501
+    other = "other"  # Any fuel type not included in the rest of the enumerated value.  # noqa: E501

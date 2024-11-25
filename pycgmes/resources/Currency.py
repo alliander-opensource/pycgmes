@@ -2,39 +2,172 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class Currency(Base):
+class Currency(str, Enum):
     """
-    Monetary currencies.  ISO 4217 standard including 3-character currency code.
-
+    Monetary currencies.  ISO 4217 standard including 3-character currency code.  # noqa: E501
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.EQ,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.EQ
+    AED = "AED"  # United Arab Emirates dirham.  # noqa: E501
+    AFN = "AFN"  # Afghan afghani.  # noqa: E501
+    ALL = "ALL"  # Albanian lek.  # noqa: E501
+    AMD = "AMD"  # Armenian dram.  # noqa: E501
+    ANG = "ANG"  # Netherlands Antillean guilder.  # noqa: E501
+    AOA = "AOA"  # Angolan kwanza.  # noqa: E501
+    ARS = "ARS"  # Argentine peso.  # noqa: E501
+    AUD = "AUD"  # Australian dollar.  # noqa: E501
+    AWG = "AWG"  # Aruban florin.  # noqa: E501
+    AZN = "AZN"  # Azerbaijani manat.  # noqa: E501
+    BAM = "BAM"  # Bosnia and Herzegovina convertible mark.  # noqa: E501
+    BBD = "BBD"  # Barbados dollar.  # noqa: E501
+    BDT = "BDT"  # Bangladeshi taka.  # noqa: E501
+    BGN = "BGN"  # Bulgarian lev.  # noqa: E501
+    BHD = "BHD"  # Bahraini dinar.  # noqa: E501
+    BIF = "BIF"  # Burundian franc.  # noqa: E501
+    BMD = "BMD"  # Bermudian dollar (customarily known as Bermuda dollar).  # noqa: E501
+    BND = "BND"  # Brunei dollar.  # noqa: E501
+    BOB = "BOB"  # Boliviano.  # noqa: E501
+    BOV = "BOV"  # Bolivian Mvdol (funds code).  # noqa: E501
+    BRL = "BRL"  # Brazilian real.  # noqa: E501
+    BSD = "BSD"  # Bahamian dollar.  # noqa: E501
+    BTN = "BTN"  # Bhutanese ngultrum.  # noqa: E501
+    BWP = "BWP"  # Botswana pula.  # noqa: E501
+    BYR = "BYR"  # Belarusian ruble.  # noqa: E501
+    BZD = "BZD"  # Belize dollar.  # noqa: E501
+    CAD = "CAD"  # Canadian dollar.  # noqa: E501
+    CDF = "CDF"  # Congolese franc.  # noqa: E501
+    CHF = "CHF"  # Swiss franc.  # noqa: E501
+    CLF = "CLF"  # Unidad de Fomento (funds code), Chile.  # noqa: E501
+    CLP = "CLP"  # Chilean peso.  # noqa: E501
+    CNY = "CNY"  # Chinese yuan.  # noqa: E501
+    COP = "COP"  # Colombian peso.  # noqa: E501
+    COU = "COU"  # Unidad de Valor Real.  # noqa: E501
+    CRC = "CRC"  # Costa Rican colon.  # noqa: E501
+    CUC = "CUC"  # Cuban convertible peso.  # noqa: E501
+    CUP = "CUP"  # Cuban peso.  # noqa: E501
+    CVE = "CVE"  # Cape Verde escudo.  # noqa: E501
+    CZK = "CZK"  # Czech koruna.  # noqa: E501
+    DJF = "DJF"  # Djiboutian franc.  # noqa: E501
+    DKK = "DKK"  # Danish krone.  # noqa: E501
+    DOP = "DOP"  # Dominican peso.  # noqa: E501
+    DZD = "DZD"  # Algerian dinar.  # noqa: E501
+    EEK = "EEK"  # Estonian kroon.  # noqa: E501
+    EGP = "EGP"  # Egyptian pound.  # noqa: E501
+    ERN = "ERN"  # Eritrean nakfa.  # noqa: E501
+    ETB = "ETB"  # Ethiopian birr.  # noqa: E501
+    EUR = "EUR"  # Euro.  # noqa: E501
+    FJD = "FJD"  # Fiji dollar.  # noqa: E501
+    FKP = "FKP"  # Falkland Islands pound.  # noqa: E501
+    GBP = "GBP"  # Pound sterling.  # noqa: E501
+    GEL = "GEL"  # Georgian lari.  # noqa: E501
+    GHS = "GHS"  # Ghanaian cedi.  # noqa: E501
+    GIP = "GIP"  # Gibraltar pound.  # noqa: E501
+    GMD = "GMD"  # Gambian dalasi.  # noqa: E501
+    GNF = "GNF"  # Guinean franc.  # noqa: E501
+    GTQ = "GTQ"  # Guatemalan quetzal.  # noqa: E501
+    GYD = "GYD"  # Guyanese dollar.  # noqa: E501
+    HKD = "HKD"  # Hong Kong dollar.  # noqa: E501
+    HNL = "HNL"  # Honduran lempira.  # noqa: E501
+    HRK = "HRK"  # Croatian kuna.  # noqa: E501
+    HTG = "HTG"  # Haitian gourde.  # noqa: E501
+    HUF = "HUF"  # Hungarian forint.  # noqa: E501
+    IDR = "IDR"  # Indonesian rupiah.  # noqa: E501
+    ILS = "ILS"  # Israeli new sheqel.  # noqa: E501
+    INR = "INR"  # Indian rupee.  # noqa: E501
+    IQD = "IQD"  # Iraqi dinar.  # noqa: E501
+    IRR = "IRR"  # Iranian rial.  # noqa: E501
+    ISK = "ISK"  # Icelandic króna.  # noqa: E501
+    JMD = "JMD"  # Jamaican dollar.  # noqa: E501
+    JOD = "JOD"  # Jordanian dinar.  # noqa: E501
+    JPY = "JPY"  # Japanese yen.  # noqa: E501
+    KES = "KES"  # Kenyan shilling.  # noqa: E501
+    KGS = "KGS"  # Kyrgyzstani som.  # noqa: E501
+    KHR = "KHR"  # Cambodian riel.  # noqa: E501
+    KMF = "KMF"  # Comoro franc.  # noqa: E501
+    KPW = "KPW"  # North Korean won.  # noqa: E501
+    KRW = "KRW"  # South Korean won.  # noqa: E501
+    KWD = "KWD"  # Kuwaiti dinar.  # noqa: E501
+    KYD = "KYD"  # Cayman Islands dollar.  # noqa: E501
+    KZT = "KZT"  # Kazakhstani tenge.  # noqa: E501
+    LAK = "LAK"  # Lao kip.  # noqa: E501
+    LBP = "LBP"  # Lebanese pound.  # noqa: E501
+    LKR = "LKR"  # Sri Lanka rupee.  # noqa: E501
+    LRD = "LRD"  # Liberian dollar.  # noqa: E501
+    LSL = "LSL"  # Lesotho loti.  # noqa: E501
+    LTL = "LTL"  # Lithuanian litas.  # noqa: E501
+    LVL = "LVL"  # Latvian lats.  # noqa: E501
+    LYD = "LYD"  # Libyan dinar.  # noqa: E501
+    MAD = "MAD"  # Moroccan dirham.  # noqa: E501
+    MDL = "MDL"  # Moldovan leu.  # noqa: E501
+    MGA = "MGA"  # Malagasy ariary.  # noqa: E501
+    MKD = "MKD"  # Macedonian denar.  # noqa: E501
+    MMK = "MMK"  # Myanma kyat.  # noqa: E501
+    MNT = "MNT"  # Mongolian tugrik.  # noqa: E501
+    MOP = "MOP"  # Macanese pataca.  # noqa: E501
+    MRO = "MRO"  # Mauritanian ouguiya.  # noqa: E501
+    MUR = "MUR"  # Mauritian rupee.  # noqa: E501
+    MVR = "MVR"  # Maldivian rufiyaa.  # noqa: E501
+    MWK = "MWK"  # Malawian kwacha.  # noqa: E501
+    MXN = "MXN"  # Mexican peso.  # noqa: E501
+    MYR = "MYR"  # Malaysian ringgit.  # noqa: E501
+    MZN = "MZN"  # Mozambican metical.  # noqa: E501
+    NAD = "NAD"  # Namibian dollar.  # noqa: E501
+    NGN = "NGN"  # Nigerian naira.  # noqa: E501
+    NIO = "NIO"  # Cordoba oro.  # noqa: E501
+    NOK = "NOK"  # Norwegian krone.  # noqa: E501
+    NPR = "NPR"  # Nepalese rupee.  # noqa: E501
+    NZD = "NZD"  # New Zealand dollar.  # noqa: E501
+    OMR = "OMR"  # Omani rial.  # noqa: E501
+    PAB = "PAB"  # Panamanian balboa.  # noqa: E501
+    PEN = "PEN"  # Peruvian nuevo sol.  # noqa: E501
+    PGK = "PGK"  # Papua New Guinean kina.  # noqa: E501
+    PHP = "PHP"  # Philippine peso.  # noqa: E501
+    PKR = "PKR"  # Pakistani rupee.  # noqa: E501
+    PLN = "PLN"  # Polish zloty.  # noqa: E501
+    PYG = "PYG"  # Paraguayan guaraní.  # noqa: E501
+    QAR = "QAR"  # Qatari rial.  # noqa: E501
+    RON = "RON"  # Romanian new leu.  # noqa: E501
+    RSD = "RSD"  # Serbian dinar.  # noqa: E501
+    RUB = "RUB"  # Russian rouble.  # noqa: E501
+    RWF = "RWF"  # Rwandan franc.  # noqa: E501
+    SAR = "SAR"  # Saudi riyal.  # noqa: E501
+    SBD = "SBD"  # Solomon Islands dollar.  # noqa: E501
+    SCR = "SCR"  # Seychelles rupee.  # noqa: E501
+    SDG = "SDG"  # Sudanese pound.  # noqa: E501
+    SEK = "SEK"  # Swedish krona/kronor.  # noqa: E501
+    SGD = "SGD"  # Singapore dollar.  # noqa: E501
+    SHP = "SHP"  # Saint Helena pound.  # noqa: E501
+    SLL = "SLL"  # Sierra Leonean leone.  # noqa: E501
+    SOS = "SOS"  # Somali shilling.  # noqa: E501
+    SRD = "SRD"  # Surinamese dollar.  # noqa: E501
+    STD = "STD"  # São Tomé and Príncipe dobra.  # noqa: E501
+    SYP = "SYP"  # Syrian pound.  # noqa: E501
+    SZL = "SZL"  # Lilangeni.  # noqa: E501
+    THB = "THB"  # Thai baht.  # noqa: E501
+    TJS = "TJS"  # Tajikistani somoni.  # noqa: E501
+    TMT = "TMT"  # Turkmenistani manat.  # noqa: E501
+    TND = "TND"  # Tunisian dinar.  # noqa: E501
+    TOP = "TOP"  # Tongan pa'anga.  # noqa: E501
+    TRY = "TRY"  # Turkish lira.  # noqa: E501
+    TTD = "TTD"  # Trinidad and Tobago dollar.  # noqa: E501
+    TWD = "TWD"  # New Taiwan dollar.  # noqa: E501
+    TZS = "TZS"  # Tanzanian shilling.  # noqa: E501
+    UAH = "UAH"  # Ukrainian hryvnia.  # noqa: E501
+    UGX = "UGX"  # Ugandan shilling.  # noqa: E501
+    USD = "USD"  # United States dollar.  # noqa: E501
+    UYU = "UYU"  # Uruguayan peso.  # noqa: E501
+    UZS = "UZS"  # Uzbekistan som.  # noqa: E501
+    VEF = "VEF"  # Venezuelan bolívar fuerte.  # noqa: E501
+    VND = "VND"  # Vietnamese Dong.  # noqa: E501
+    VUV = "VUV"  # Vanuatu vatu.  # noqa: E501
+    WST = "WST"  # Samoan tala.  # noqa: E501
+    XAF = "XAF"  # CFA franc BEAC.  # noqa: E501
+    XCD = "XCD"  # East Caribbean dollar.  # noqa: E501
+    XOF = "XOF"  # CFA Franc BCEAO.  # noqa: E501
+    XPF = "XPF"  # CFP franc.  # noqa: E501
+    YER = "YER"  # Yemeni rial.  # noqa: E501
+    ZAR = "ZAR"  # South African rand.  # noqa: E501
+    ZMK = "ZMK"  # Zambian kwacha.  # noqa: E501
+    ZWL = "ZWL"  # Zimbabwe dollar.  # noqa: E501
