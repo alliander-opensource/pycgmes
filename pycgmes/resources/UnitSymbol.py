@@ -8,7 +8,7 @@ from enum import Enum
 class UnitSymbol(str, Enum):
     """
     The derived units defined for usage in the CIM. In some cases, the derived unit is equal to an SI unit. Whenever possible, the standard derived symbol is used instead of the formula for the derived unit. For example, the unit symbol Farad is defined as "F" instead of "CPerV". In cases where a standard symbol does not exist for a derived unit, the formula for the unit is used as the unit symbol. For example, density does not have a standard symbol and so it is represented as "kgPerm3". With the exception of the "kg", which is an SI unit, the unit symbols do not contain multipliers and therefore represent the base derived unit to which a multiplier can be applied as a whole.  Every unit symbol is treated as an unparseable text as if it were a single-letter symbol. The meaning of each unit symbol is defined by the accompanying descriptive text and not by the text contents of the unit symbol. To allow the widest possible range of serializations without requiring special character handling, several substitutions are made which deviate from the format described in IEC 80000-1. The division symbol "/" is replaced by the letters "Per". Exponents are written in plain text after the unit as "m3" instead of being formatted as "m" with a superscript of 3  or introducing a symbol as in "m^3". The degree symbol "[SYMBOL REMOVED]" is replaced with the letters "deg". Any clarification of the meaning for a substitution is included in the description for the unit symbol. Non-SI units are included in list of unit symbols to allow sources of data to be correctly labelled with their non-SI units (for example, a GPS sensor that is reporting numbers that represent feet instead of meters). This allows software to use the unit symbol information correctly convert and scale the raw data of those sources into SI-based units.  The integer values are used for harmonization with IEC 61850.  # noqa: E501
-    """
+    """  # noqa: E501
 
     none = "none"  # Dimension less quantity, e.g. count, per unit, etc.  # noqa: E501
     m = "m"  # Length in metres.  # noqa: E501
@@ -62,7 +62,7 @@ class UnitSymbol(str, Enum):
     JPerkgK = "JPerkgK"  # Specific heat capacity, specific entropy, joules per kilogram Kelvin.  # noqa: E501
     VA = "VA"  # Apparent power in volt amperes. See also real power and reactive power.  # noqa: E501
     VAr = "VAr"  # Reactive power in volt amperes reactive. The &quot;reactive&quot; or &quot;imaginary&quot; component of electrical power (VIsin(phi)). (See also real power and apparent power). Note: Different meter designs use different methods to arrive at their results. Some meters may compute reactive power as an arithmetic value, while others compute the value vectorially. The data consumer should determine the method in use and the suitability of the measurement for the intended purpose.  # noqa: E501
-    cosPhi = "cosPhi"  # Power factor, dimensionless. Note 1: This definition of power factor only holds for balanced systems. See the alternative definition under code 153. Note 2 : Beware of differing sign conventions in use between the IEC and EEI. It is assumed that the data consumer understands the type of meter in use and the sign convention in use by the utility.  # noqa: E501
+    cosPhi = "cosPhi"  # Power factor, dimensionless. Note 1: This definition of power factor only holds for balanced systems. See the alternative definition under code 153. Note 2 : Beware of differing sign conventions in use between the IEC and EEI. It is assumed that the data consumer understands the type of meter in use and the sign convention in use by the utility.  # noqa: E501, RUF003
     Vs = "Vs"  # Volt seconds (Ws/A).  # noqa: E501
     V2 = "V2"  # Volt squared (W²/A²).  # noqa: E501
     As = "As"  # Ampere seconds (A·s).  # noqa: E501
@@ -94,24 +94,24 @@ class UnitSymbol(str, Enum):
     m3Perh = "m3Perh"  # Volumetric flow rate, cubic metres per hour.  # noqa: E501
     gal = "gal"  # Volume in gallons, US gallon (1 gal = 231 in3 = 128 fl ounce).  # noqa: E501
     Btu = "Btu"  # Energy, British Thermal Units.  # noqa: E501
-    l = "l"  # Volume in litres, litre = dm3 = m3/1000.  # noqa: E501
+    l = "l"  # Volume in litres, litre = dm3 = m3/1000.  # noqa: E501, E741
     lPerh = "lPerh"  # Volumetric flow rate, litres per hour.  # noqa: E501
-    lPerl = "lPerl"  # Concentration, The ratio of the volume of a solute divided by the volume of  the solution. Note: Users may need use a prefix such a ‘µ' to express a quantity such as ‘µL/L'.  # noqa: E501
-    gPerg = "gPerg"  # Concentration, The ratio of the mass of a solute divided by the mass of  the solution. Note: Users may need use a prefix such a ‘µ' to express a quantity such as ‘µg/g'.  # noqa: E501
+    lPerl = "lPerl"  # Concentration, The ratio of the volume of a solute divided by the volume of  the solution. Note: Users may need use a prefix such a ‘µ' to express a quantity such as ‘µL/L'.  # noqa: E501, RUF003
+    gPerg = "gPerg"  # Concentration, The ratio of the mass of a solute divided by the mass of  the solution. Note: Users may need use a prefix such a ‘µ' to express a quantity such as ‘µg/g'.  # noqa: E501, RUF003
     molPerm3 = "molPerm3"  # Concentration, The amount of substance concentration, (c), the amount of solvent in moles divided by the volume of solution in m³.  # noqa: E501
     molPermol = "molPermol"  # Concentration, Molar fraction, the ratio of the molar amount of a solute divided by the molar amount of the solution.  # noqa: E501
     molPerkg = "molPerkg"  # Concentration, Molality, the amount of solute in moles and the amount of solvent in kilograms.  # noqa: E501
-    sPers = "sPers"  # Time, Ratio of time.  Note: Users may need to supply a prefix such as ‘&amp;#181;' to show rates such as ‘&amp;#181;s/s'.  # noqa: E501
-    HzPerHz = "HzPerHz"  # Frequency, rate of frequency change.   Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mHz/Hz'.  # noqa: E501
-    VPerV = "VPerV"  # Voltage, ratio of voltages.  Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mV/V'.  # noqa: E501
-    APerA = "APerA"  # Current, ratio of amperages.   Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mA/A'.  # noqa: E501
+    sPers = "sPers"  # Time, Ratio of time.  Note: Users may need to supply a prefix such as ‘&amp;#181;' to show rates such as ‘&amp;#181;s/s'.  # noqa: E501, RUF003
+    HzPerHz = "HzPerHz"  # Frequency, rate of frequency change.   Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mHz/Hz'.  # noqa: E501, RUF003
+    VPerV = "VPerV"  # Voltage, ratio of voltages.  Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mV/V'.  # noqa: E501, RUF003
+    APerA = "APerA"  # Current, ratio of amperages.   Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mA/A'.  # noqa: E501, RUF003
     VPerVA = "VPerVA"  # Power factor, PF, the ratio of the active power to the apparent power.  Note: The sign convention used for power factor will differ between IEC meters and EEI (ANSI) meters. It is assumed that the data consumers understand the type of meter being used and agree on the sign convention in use at any given utility.  # noqa: E501
     rev = "rev"  # Amount of rotation, revolutions.  # noqa: E501
     kat = "kat"  # Catalytic activity, katal = mol / s.  # noqa: E501
     JPerkg = "JPerkg"  # Specific energy, Joules / kg.  # noqa: E501
     m3Uncompensated = "m3Uncompensated"  # Volume, cubic metres, with the value uncompensated for weather effects.  # noqa: E501
     m3Compensated = "m3Compensated"  # Volume, cubic metres, with the value compensated for weather effects.  # noqa: E501
-    WPerW = "WPerW"  # Signal Strength, ratio of power.   Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mW/W'.  # noqa: E501
+    WPerW = "WPerW"  # Signal Strength, ratio of power.   Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mW/W'.  # noqa: E501, RUF003
     therm = "therm"  # Energy, therms.  # noqa: E501
     onePerm = "onePerm"  # Wavenumber, reciprocal metres,  (1/m).  # noqa: E501
     m3Perkg = "m3Perkg"  # Specific volume, cubic metres per kilogram, v.  # noqa: E501

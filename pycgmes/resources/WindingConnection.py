@@ -16,4 +16,4 @@ class WindingConnection(str, Enum):
     Yn = "Yn"  # Wye, with neutral brought out for grounding.  # noqa: E501
     Zn = "Zn"  # ZigZag, with neutral brought out for grounding.  # noqa: E501
     A = "A"  # Autotransformer common winding.  # noqa: E501
-    I = "I"  # Independent winding, for single-phase connections.  # noqa: E501
+    I = "I"  # Independent winding, for single-phase connections.  # noqa: E501, E741
