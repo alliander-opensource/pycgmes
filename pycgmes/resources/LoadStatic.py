@@ -10,7 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
-from .Float import Float
 
 
 @dataclass
@@ -68,7 +67,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -84,7 +83,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -100,7 +99,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -116,7 +115,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -132,7 +131,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -148,7 +147,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -164,7 +163,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -180,7 +179,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -196,7 +195,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -212,7 +211,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -228,7 +227,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -244,7 +243,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -260,7 +259,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -276,7 +275,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -292,7 +291,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -308,7 +307,7 @@ class LoadStatic(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 

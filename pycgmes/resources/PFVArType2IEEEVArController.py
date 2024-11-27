@@ -10,9 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .PFVArControllerType2Dynamics import PFVArControllerType2Dynamics
-from .Boolean import Boolean
-from .Float import Float
-from .PU import PU
 
 
 @dataclass
@@ -45,7 +42,7 @@ class PFVArType2IEEEVArController(PFVArControllerType2Dynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Boolean,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -61,7 +58,7 @@ class PFVArType2IEEEVArController(PFVArControllerType2Dynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -77,7 +74,7 @@ class PFVArType2IEEEVArController(PFVArControllerType2Dynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -93,7 +90,7 @@ class PFVArType2IEEEVArController(PFVArControllerType2Dynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -109,7 +106,7 @@ class PFVArType2IEEEVArController(PFVArControllerType2Dynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -125,7 +122,7 @@ class PFVArType2IEEEVArController(PFVArControllerType2Dynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -141,7 +138,7 @@ class PFVArType2IEEEVArController(PFVArControllerType2Dynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 

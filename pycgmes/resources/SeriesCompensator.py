@@ -10,11 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .ConductingEquipment import ConductingEquipment
-from .Boolean import Boolean
-from .CurrentFlow import CurrentFlow
-from .Reactance import Reactance
-from .Resistance import Resistance
-from .Voltage import Voltage
 
 
 @dataclass
@@ -48,7 +43,7 @@ class SeriesCompensator(ConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -64,7 +59,7 @@ class SeriesCompensator(ConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -80,7 +75,7 @@ class SeriesCompensator(ConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Boolean,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -96,7 +91,7 @@ class SeriesCompensator(ConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": CurrentFlow,
+            "attribute_class": "CurrentFlow",
         },
     )
 
@@ -112,7 +107,7 @@ class SeriesCompensator(ConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Voltage,
+            "attribute_class": "Voltage",
         },
     )
 
@@ -128,7 +123,7 @@ class SeriesCompensator(ConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
@@ -144,7 +139,7 @@ class SeriesCompensator(ConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 

@@ -7,8 +7,8 @@ from enum import Enum
 
 class RotorKind(str, Enum):
     """
-    Type of rotor on physical machine.  # noqa: E501
+    Type of rotor on physical machine.
     """
 
-    roundRotor = "roundRotor"  # Round rotor type of synchronous machine.  # noqa: E501
-    salientPole = "salientPole"  # Salient pole type of synchronous machine.  # noqa: E501
+    roundRotor = "roundRotor"  # Round rotor type of synchronous machine.  # noqa: E501, E741, RUF003
+    salientPole = "salientPole"  # Salient pole type of synchronous machine.  # noqa: E501, E741, RUF003

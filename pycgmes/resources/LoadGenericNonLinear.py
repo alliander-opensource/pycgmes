@@ -10,8 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .LoadDynamics import LoadDynamics
-from .Float import Float
-from .Seconds import Seconds
 
 
 @dataclass
@@ -42,7 +40,7 @@ class LoadGenericNonLinear(LoadDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -58,7 +56,7 @@ class LoadGenericNonLinear(LoadDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -89,7 +87,7 @@ class LoadGenericNonLinear(LoadDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -105,7 +103,7 @@ class LoadGenericNonLinear(LoadDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -121,7 +119,7 @@ class LoadGenericNonLinear(LoadDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Seconds,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -137,7 +135,7 @@ class LoadGenericNonLinear(LoadDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Seconds,
+            "attribute_class": "Seconds",
         },
     )
 

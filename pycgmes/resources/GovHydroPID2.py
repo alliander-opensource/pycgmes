@@ -10,11 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .TurbineGovernorDynamics import TurbineGovernorDynamics
-from .ActivePower import ActivePower
-from .Boolean import Boolean
-from .Float import Float
-from .PU import PU
-from .Seconds import Seconds
 
 
 @dataclass
@@ -61,7 +56,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -77,7 +72,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -93,7 +88,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Boolean,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -109,7 +104,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -125,7 +120,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -141,7 +136,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -157,7 +152,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -173,7 +168,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -189,7 +184,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -205,7 +200,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -221,7 +216,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -237,7 +232,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ActivePower,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -253,7 +248,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -269,7 +264,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -285,7 +280,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -301,7 +296,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -317,7 +312,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Seconds,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -333,7 +328,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Seconds,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -349,7 +344,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Seconds,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -365,7 +360,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Seconds,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -381,7 +376,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -397,7 +392,7 @@ class GovHydroPID2(TurbineGovernorDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 

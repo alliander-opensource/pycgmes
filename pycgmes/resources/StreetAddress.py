@@ -10,7 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from ..utils.base import Base
-from .String import String
 
 
 @dataclass
@@ -38,7 +37,7 @@ class StreetAddress(Base):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": String,
+            "attribute_class": "String",
         },
     )
 
@@ -54,7 +53,7 @@ class StreetAddress(Base):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": String,
+            "attribute_class": "String",
         },
     )
 
@@ -70,7 +69,7 @@ class StreetAddress(Base):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": String,
+            "attribute_class": "String",
         },
     )
 

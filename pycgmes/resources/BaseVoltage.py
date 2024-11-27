@@ -10,7 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
-from .Voltage import Voltage
 
 
 @dataclass
@@ -101,7 +100,7 @@ class BaseVoltage(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Voltage,
+            "attribute_class": "Voltage",
         },
     )
 

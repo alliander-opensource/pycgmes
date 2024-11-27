@@ -10,7 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .PFVArControllerType1Dynamics import PFVArControllerType1Dynamics
-from .Boolean import Boolean
 
 
 @dataclass
@@ -52,7 +51,7 @@ class PFVArControllerType1UserDefined(PFVArControllerType1Dynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Boolean,
+            "attribute_class": "Boolean",
         },
     )
 

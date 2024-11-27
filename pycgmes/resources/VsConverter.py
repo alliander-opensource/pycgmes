@@ -10,13 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .ACDCConverter import ACDCConverter
-from .AngleDegrees import AngleDegrees
-from .Float import Float
-from .PU import PU
-from .PerCent import PerCent
-from .ReactivePower import ReactivePower
-from .Resistance import Resistance
-from .Voltage import Voltage
 
 
 @dataclass
@@ -90,7 +83,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": AngleDegrees,
+            "attribute_class": "AngleDegrees",
         },
     )
 
@@ -106,7 +99,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -122,7 +115,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -138,7 +131,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -184,7 +177,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PerCent,
+            "attribute_class": "PerCent",
         },
     )
 
@@ -200,7 +193,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -216,7 +209,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": AngleDegrees,
+            "attribute_class": "AngleDegrees",
         },
     )
 
@@ -232,7 +225,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -248,7 +241,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ReactivePower,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -264,7 +257,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Voltage,
+            "attribute_class": "Voltage",
         },
     )
 
@@ -280,7 +273,7 @@ class VsConverter(ACDCConverter):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Voltage,
+            "attribute_class": "Voltage",
         },
     )
 

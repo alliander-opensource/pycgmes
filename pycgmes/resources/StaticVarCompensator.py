@@ -10,10 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .RegulatingCondEq import RegulatingCondEq
-from .Reactance import Reactance
-from .ReactivePower import ReactivePower
-from .Voltage import Voltage
-from .VoltagePerReactivePower import VoltagePerReactivePower
 
 
 @dataclass
@@ -68,7 +64,7 @@ class StaticVarCompensator(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
@@ -84,7 +80,7 @@ class StaticVarCompensator(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
@@ -100,7 +96,7 @@ class StaticVarCompensator(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ReactivePower,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -131,7 +127,7 @@ class StaticVarCompensator(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": VoltagePerReactivePower,
+            "attribute_class": "VoltagePerReactivePower",
         },
     )
 
@@ -147,7 +143,7 @@ class StaticVarCompensator(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Voltage,
+            "attribute_class": "Voltage",
         },
     )
 

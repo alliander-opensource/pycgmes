@@ -10,10 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .RegulatingCondEq import RegulatingCondEq
-from .ActivePower import ActivePower
-from .ApparentPower import ApparentPower
-from .ReactivePower import ReactivePower
-from .Voltage import Voltage
 
 
 @dataclass
@@ -78,7 +74,7 @@ class PowerElectronicsConnection(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ReactivePower,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -94,7 +90,7 @@ class PowerElectronicsConnection(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ReactivePower,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -110,7 +106,7 @@ class PowerElectronicsConnection(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ActivePower,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -126,7 +122,7 @@ class PowerElectronicsConnection(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ReactivePower,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -142,7 +138,7 @@ class PowerElectronicsConnection(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ApparentPower,
+            "attribute_class": "ApparentPower",
         },
     )
 
@@ -158,7 +154,7 @@ class PowerElectronicsConnection(RegulatingCondEq):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Voltage,
+            "attribute_class": "Voltage",
         },
     )
 

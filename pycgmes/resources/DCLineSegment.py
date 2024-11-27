@@ -10,10 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .DCConductingEquipment import DCConductingEquipment
-from .Capacitance import Capacitance
-from .Inductance import Inductance
-from .Length import Length
-from .Resistance import Resistance
 
 
 @dataclass
@@ -40,7 +36,7 @@ class DCLineSegment(DCConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Capacitance,
+            "attribute_class": "Capacitance",
         },
     )
 
@@ -56,7 +52,7 @@ class DCLineSegment(DCConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Inductance,
+            "attribute_class": "Inductance",
         },
     )
 
@@ -72,7 +68,7 @@ class DCLineSegment(DCConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Length,
+            "attribute_class": "Length",
         },
     )
 
@@ -88,7 +84,7 @@ class DCLineSegment(DCConductingEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 

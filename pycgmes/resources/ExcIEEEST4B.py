@@ -10,9 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
-from .AngleDegrees import AngleDegrees
-from .PU import PU
-from .Seconds import Seconds
 
 
 @dataclass
@@ -54,7 +51,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -70,7 +67,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -86,7 +83,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -102,7 +99,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -118,7 +115,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -134,7 +131,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -150,7 +147,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -166,7 +163,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -182,7 +179,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Seconds,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -198,7 +195,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": AngleDegrees,
+            "attribute_class": "AngleDegrees",
         },
     )
 
@@ -214,7 +211,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -230,7 +227,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -246,7 +243,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -262,7 +259,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -278,7 +275,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -294,7 +291,7 @@ class ExcIEEEST4B(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 

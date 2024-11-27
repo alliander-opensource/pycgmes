@@ -10,7 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .AsynchronousMachineDynamics import AsynchronousMachineDynamics
-from .PU import PU
 
 
 @dataclass
@@ -47,7 +46,7 @@ class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -63,7 +62,7 @@ class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -79,7 +78,7 @@ class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -95,7 +94,7 @@ class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -111,7 +110,7 @@ class AsynchronousMachineEquivalentCircuit(AsynchronousMachineDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 

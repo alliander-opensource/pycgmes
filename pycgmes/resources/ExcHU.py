@@ -10,9 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .ExcitationSystemDynamics import ExcitationSystemDynamics
-from .Float import Float
-from .PU import PU
-from .Seconds import Seconds
 
 
 @dataclass
@@ -47,7 +44,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -63,7 +60,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -79,7 +76,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -95,7 +92,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -111,7 +108,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -127,7 +124,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -143,7 +140,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -159,7 +156,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -175,7 +172,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -191,7 +188,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Seconds,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -207,7 +204,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Seconds,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -223,7 +220,7 @@ class ExcHU(ExcitationSystemDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Seconds,
+            "attribute_class": "Seconds",
         },
     )
 

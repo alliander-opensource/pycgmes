@@ -10,9 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .EarthFaultCompensator import EarthFaultCompensator
-from .CurrentFlow import CurrentFlow
-from .Reactance import Reactance
-from .Voltage import Voltage
 
 
 @dataclass
@@ -62,7 +59,7 @@ class PetersenCoil(EarthFaultCompensator):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Voltage,
+            "attribute_class": "Voltage",
         },
     )
 
@@ -78,7 +75,7 @@ class PetersenCoil(EarthFaultCompensator):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": CurrentFlow,
+            "attribute_class": "CurrentFlow",
         },
     )
 
@@ -94,7 +91,7 @@ class PetersenCoil(EarthFaultCompensator):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": CurrentFlow,
+            "attribute_class": "CurrentFlow",
         },
     )
 
@@ -110,7 +107,7 @@ class PetersenCoil(EarthFaultCompensator):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
@@ -126,7 +123,7 @@ class PetersenCoil(EarthFaultCompensator):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
@@ -142,7 +139,7 @@ class PetersenCoil(EarthFaultCompensator):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 

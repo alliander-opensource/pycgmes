@@ -10,7 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .UnderexcitationLimiterDynamics import UnderexcitationLimiterDynamics
-from .PU import PU
 
 
 @dataclass
@@ -41,7 +40,7 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -57,7 +56,7 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -73,7 +72,7 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -89,7 +88,7 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -105,7 +104,7 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -121,7 +120,7 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -137,7 +136,7 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 

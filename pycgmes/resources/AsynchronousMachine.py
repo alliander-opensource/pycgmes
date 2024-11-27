@@ -10,13 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .RotatingMachine import RotatingMachine
-from .ActivePower import ActivePower
-from .Boolean import Boolean
-from .Float import Float
-from .Frequency import Frequency
-from .Integer import Integer
-from .PerCent import PerCent
-from .RotationSpeed import RotationSpeed
 
 
 @dataclass
@@ -86,7 +79,7 @@ class AsynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Boolean,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -102,7 +95,7 @@ class AsynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PerCent,
+            "attribute_class": "PerCent",
         },
     )
 
@@ -118,7 +111,7 @@ class AsynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -134,7 +127,7 @@ class AsynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Frequency,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -150,7 +143,7 @@ class AsynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": RotationSpeed,
+            "attribute_class": "RotationSpeed",
         },
     )
 
@@ -166,7 +159,7 @@ class AsynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Integer,
+            "attribute_class": "Integer",
         },
     )
 
@@ -182,7 +175,7 @@ class AsynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ActivePower,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -198,7 +191,7 @@ class AsynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Boolean,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -214,7 +207,7 @@ class AsynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 

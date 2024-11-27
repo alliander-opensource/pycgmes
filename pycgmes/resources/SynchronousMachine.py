@@ -10,15 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .RotatingMachine import RotatingMachine
-from .Boolean import Boolean
-from .CurrentFlow import CurrentFlow
-from .Float import Float
-from .Integer import Integer
-from .PU import PU
-from .PerCent import PerCent
-from .Reactance import Reactance
-from .ReactivePower import ReactivePower
-from .Resistance import Resistance
 
 
 @dataclass
@@ -113,7 +104,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Boolean,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -129,7 +120,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -145,7 +136,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
@@ -161,7 +152,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": CurrentFlow,
+            "attribute_class": "CurrentFlow",
         },
     )
 
@@ -177,7 +168,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ReactivePower,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -193,7 +184,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ReactivePower,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -209,7 +200,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Float,
+            "attribute_class": "Float",
         },
     )
 
@@ -240,7 +231,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PerCent,
+            "attribute_class": "PerCent",
         },
     )
 
@@ -256,7 +247,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -272,7 +263,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -288,7 +279,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -304,7 +295,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Integer,
+            "attribute_class": "Integer",
         },
     )
 
@@ -320,7 +311,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -336,7 +327,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -352,7 +343,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -398,7 +389,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PerCent,
+            "attribute_class": "PerCent",
         },
     )
 
@@ -414,7 +405,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
@@ -430,7 +421,7 @@ class SynchronousMachine(RotatingMachine):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 

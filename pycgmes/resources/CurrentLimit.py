@@ -10,7 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .OperationalLimit import OperationalLimit
-from .CurrentFlow import CurrentFlow
 
 
 @dataclass
@@ -34,7 +33,7 @@ class CurrentLimit(OperationalLimit):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": CurrentFlow,
+            "attribute_class": "CurrentFlow",
         },
     )
 
@@ -50,7 +49,7 @@ class CurrentLimit(OperationalLimit):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": CurrentFlow,
+            "attribute_class": "CurrentFlow",
         },
     )
 

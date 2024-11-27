@@ -10,8 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
-from .AngleDegrees import AngleDegrees
-from .PU import PU
 
 
 @dataclass
@@ -58,7 +56,7 @@ class WindAeroTwoDimIEC(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -74,7 +72,7 @@ class WindAeroTwoDimIEC(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -90,7 +88,7 @@ class WindAeroTwoDimIEC(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -106,7 +104,7 @@ class WindAeroTwoDimIEC(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -122,7 +120,7 @@ class WindAeroTwoDimIEC(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": PU,
+            "attribute_class": "PU",
         },
     )
 
@@ -138,7 +136,7 @@ class WindAeroTwoDimIEC(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": AngleDegrees,
+            "attribute_class": "AngleDegrees",
         },
     )
 
@@ -154,7 +152,7 @@ class WindAeroTwoDimIEC(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": AngleDegrees,
+            "attribute_class": "AngleDegrees",
         },
     )
 

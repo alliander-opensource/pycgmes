@@ -10,11 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .Conductor import Conductor
-from .Conductance import Conductance
-from .Reactance import Reactance
-from .Resistance import Resistance
-from .Susceptance import Susceptance
-from .Temperature import Temperature
 
 
 @dataclass
@@ -85,7 +80,7 @@ class ACLineSegment(Conductor):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Susceptance,
+            "attribute_class": "Susceptance",
         },
     )
 
@@ -101,7 +96,7 @@ class ACLineSegment(Conductor):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Susceptance,
+            "attribute_class": "Susceptance",
         },
     )
 
@@ -117,7 +112,7 @@ class ACLineSegment(Conductor):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Conductance,
+            "attribute_class": "Conductance",
         },
     )
 
@@ -133,7 +128,7 @@ class ACLineSegment(Conductor):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Conductance,
+            "attribute_class": "Conductance",
         },
     )
 
@@ -149,7 +144,7 @@ class ACLineSegment(Conductor):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -165,7 +160,7 @@ class ACLineSegment(Conductor):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -181,7 +176,7 @@ class ACLineSegment(Conductor):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Temperature,
+            "attribute_class": "Temperature",
         },
     )
 
@@ -197,7 +192,7 @@ class ACLineSegment(Conductor):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
@@ -213,7 +208,7 @@ class ACLineSegment(Conductor):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 

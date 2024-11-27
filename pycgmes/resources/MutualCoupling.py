@@ -10,11 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .IdentifiedObject import IdentifiedObject
-from .Conductance import Conductance
-from .Length import Length
-from .Reactance import Reactance
-from .Resistance import Resistance
-from .Susceptance import Susceptance
 
 
 @dataclass
@@ -81,7 +76,7 @@ class MutualCoupling(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Susceptance,
+            "attribute_class": "Susceptance",
         },
     )
 
@@ -97,7 +92,7 @@ class MutualCoupling(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Length,
+            "attribute_class": "Length",
         },
     )
 
@@ -113,7 +108,7 @@ class MutualCoupling(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Length,
+            "attribute_class": "Length",
         },
     )
 
@@ -129,7 +124,7 @@ class MutualCoupling(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Length,
+            "attribute_class": "Length",
         },
     )
 
@@ -145,7 +140,7 @@ class MutualCoupling(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Length,
+            "attribute_class": "Length",
         },
     )
 
@@ -161,7 +156,7 @@ class MutualCoupling(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Conductance,
+            "attribute_class": "Conductance",
         },
     )
 
@@ -177,7 +172,7 @@ class MutualCoupling(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -193,7 +188,7 @@ class MutualCoupling(IdentifiedObject):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 

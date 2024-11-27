@@ -10,12 +10,6 @@ from pydantic.dataclasses import dataclass
 
 from ..utils.profile import BaseProfile, Profile
 from .EquivalentEquipment import EquivalentEquipment
-from .ActivePower import ActivePower
-from .Boolean import Boolean
-from .Reactance import Reactance
-from .ReactivePower import ReactivePower
-from .Resistance import Resistance
-from .Voltage import Voltage
 
 
 @dataclass
@@ -83,7 +77,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ActivePower,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -99,7 +93,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ReactivePower,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -115,7 +109,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ActivePower,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -131,7 +125,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ReactivePower,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -147,7 +141,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ActivePower,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -163,7 +157,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": ReactivePower,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -179,7 +173,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -195,7 +189,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -211,7 +205,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Resistance,
+            "attribute_class": "Resistance",
         },
     )
 
@@ -227,7 +221,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Boolean,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -243,7 +237,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "attribute_class": Boolean,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -259,7 +253,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Voltage,
+            "attribute_class": "Voltage",
         },
     )
 
@@ -275,7 +269,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
@@ -291,7 +285,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
@@ -307,7 +301,7 @@ class EquivalentInjection(EquivalentEquipment):
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
-            "attribute_class": Reactance,
+            "attribute_class": "Reactance",
         },
     )
 
