@@ -106,7 +106,7 @@ class UnitSymbol(str, Enum):
     V2h = "V2h"  # Volt-squared hour, volt-squared-hours.  # noqa: E501, E741, RUF003
     A2h = "A2h"  # Ampere-squared hour, ampere-squared hour.  # noqa: E501, E741, RUF003
     Ah = "Ah"  # Ampere-hours, ampere-hours.  # noqa: E501, E741, RUF003
-    count = "count"  # Amount of substance, Counter value.  # noqa: E501, E741, RUF003
+    count = "count"  # Amount of substance, Counter value.  # noqa: E501, E741, RUF003  # type: ignore
     ft3 = "ft3"  # Volume, cubic feet.  # noqa: E501, E741, RUF003
     m3Perh = "m3Perh"  # Volumetric flow rate, cubic metres per hour.  # noqa: E501, E741, RUF003
     gal = "gal"  # Volume in gallons, US gallon (1 gal = 231 in3 = 128 fl ounce).  # noqa: E501, E741, RUF003

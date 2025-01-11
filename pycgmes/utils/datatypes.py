@@ -15,8 +15,8 @@ from .profile import BaseProfile
 class Primitive:
     name: str = Field(frozen=True)
     type: object = Field(frozen=True)
-    namespace: str = Field(frozen=True, default=NAMESPACES["cim"])
     profiles: list[BaseProfile] = Field(frozen=True)
+    namespace: str = Field(frozen=True, default=NAMESPACES["cim"])
 
 
 @dataclass(config=cgmes_resource_config)
