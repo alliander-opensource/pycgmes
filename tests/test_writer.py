@@ -117,6 +117,7 @@ class TestWriter:
               <cim:Analog rdf:ID="Analog.N0">
                 <cim:Measurement.unitMultiplier rdf:resource="http://iec.ch/TC57/CIM100#UnitMultiplier.k" />
                 <cim:Measurement.unitSymbol rdf:resource="http://iec.ch/TC57/CIM100#UnitSymbol.V" />
+                <cim:Analog.positiveFlowIn>false</cim:Analog.positiveFlowIn>
               </cim:Analog>
               <cim:AnalogValue rdf:ID="AnalogValue.N0">
                 <cim:AnalogValue.Analog rdf:resource="#Analog.N0.Voltage" />
@@ -241,6 +242,7 @@ class TestWriter:
                 <cim:Measurement.measurementType>Voltage</cim:Measurement.measurementType>
                 <cim:Measurement.unitMultiplier rdf:resource="http://iec.ch/TC57/CIM100#UnitMultiplier.k" />
                 <cim:Measurement.unitSymbol rdf:resource="http://iec.ch/TC57/CIM100#UnitSymbol.V" />
+                <cim:Analog.positiveFlowIn>false</cim:Analog.positiveFlowIn>
               </cim:Analog>
               <cim:AnalogValue rdf:ID="AnalogValue.N0.Voltage">
                 <cim:AnalogValue.Analog rdf:resource="#Analog.N0.Voltage" />
@@ -285,7 +287,7 @@ class TestWriter:
               <cim:StreetDetail rdf:ID="_Street">
                 <cim:StreetDetail.name>Ku'damm</cim:StreetDetail.name>
                 <cim:StreetDetail.number>33</cim:StreetDetail.number>
-                <cim:StreetDetail.withinTownLimits>True</cim:StreetDetail.withinTownLimits>
+                <cim:StreetDetail.withinTownLimits>true</cim:StreetDetail.withinTownLimits>
               </cim:StreetDetail>
               <cim:TownDetail rdf:ID="_Town">
                 <cim:TownDetail.country>Germany</cim:TownDetail.country>
