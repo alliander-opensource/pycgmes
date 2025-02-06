@@ -24,5 +24,5 @@ class Testshacl:
         assert all(f.is_file() for f in files)  # ... and are actual files.
 
     def test_wrong_file_format(self):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match="^Parameter .* must be one of 'rdf' or 'ttl'"):
             shacl.get_all_shacl_files(serialization="cheese")

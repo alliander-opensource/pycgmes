@@ -53,7 +53,7 @@ if "ruff" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
     # Replaces isort, autoflake and probably pylint eventually.
     cmd = f"ruff check {_SUBJECT} {_TEST_SUBJECT} --exclude {_RESOURCES}"
     if _CHECK_ONLY:
-        cmd += " --diff"
+        cmd += " --no-fix"
     else:
         cmd += " --fix"
     _exec(cmd, env=os.environ)

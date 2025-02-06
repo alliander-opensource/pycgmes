@@ -130,7 +130,12 @@ extend-ignore-names = [
     "mRID", "lineColor", # cim notation
     "create_*", # some functions are named after CIM nomenclatures, not python
     "N", # shortcut in stack
-    ]
+]
+
+[tool.ruff.lint.per-file-ignores]
+"{tests}/*" = [
+    "PLR2004", # magic number are OK in tests
+]
 
 [tool.ruff.format]
 docstring-code-format = true
