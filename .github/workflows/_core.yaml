@@ -54,7 +54,7 @@ jobs:
       - name: Poetry setup
         run: |
           pip install -U poetry
-          poetry lock --check || exit 1
+          poetry check --lock || exit 1
           poetry env info
 
       - name: Python package installation
