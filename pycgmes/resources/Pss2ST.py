@@ -42,8 +42,8 @@ class Pss2ST(PowerSystemStabilizerDynamics):
     vcu: Cutoff limiter (VCU).
     """
 
-    inputSignal1Type: Optional[str] = Field(
-        default=None,
+    inputSignal1Type: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
@@ -56,8 +56,8 @@ class Pss2ST(PowerSystemStabilizerDynamics):
         },
     )
 
-    inputSignal2Type: Optional[str] = Field(
-        default=None,
+    inputSignal2Type: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

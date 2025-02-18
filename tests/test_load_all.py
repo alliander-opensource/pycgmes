@@ -3,8 +3,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import importlib
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator
 
 import pytest
 

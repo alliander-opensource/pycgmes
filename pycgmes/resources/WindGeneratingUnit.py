@@ -36,8 +36,8 @@ class WindGeneratingUnit(GeneratingUnit):
         },
     )
 
-    windGenUnitType: Optional[str] = Field(
-        default=None,
+    windGenUnitType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

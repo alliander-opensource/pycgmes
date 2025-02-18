@@ -36,31 +36,31 @@ class Season(IdentifiedObject):
         },
     )
 
-    endDate: float = Field(
-        default=0.0,
+    endDate: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
             ],
             "is_used": True,
-            "is_class_attribute": True,
+            "is_class_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    startDate: float = Field(
-        default=0.0,
+    startDate: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
             ],
             "is_used": True,
-            "is_class_attribute": True,
+            "is_class_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 

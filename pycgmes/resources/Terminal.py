@@ -179,9 +179,9 @@ class Terminal(ACDCTerminal):
                 Profile.EQ,
             ],
             "is_used": False,
-            "is_class_attribute": True,
+            "is_class_attribute": False,
             "is_enum_attribute": False,
-            "is_list_attribute": False,
+            "is_list_attribute": True,
             "is_primitive_attribute": False,
         },
     )
@@ -214,8 +214,8 @@ class Terminal(ACDCTerminal):
         },
     )
 
-    phases: Optional[str] = Field(
-        default=None,
+    phases: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

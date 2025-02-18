@@ -135,8 +135,8 @@ class GovHydroFrancis(TurbineGovernorDynamics):
         },
     )
 
-    governorControl: Optional[str] = Field(
-        default=None,
+    governorControl: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

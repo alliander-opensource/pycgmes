@@ -191,8 +191,8 @@ class CsConverter(ACDCConverter):
         },
     )
 
-    operatingMode: Optional[str] = Field(
-        default=None,
+    operatingMode: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
@@ -205,8 +205,8 @@ class CsConverter(ACDCConverter):
         },
     )
 
-    pPccControl: Optional[str] = Field(
-        default=None,
+    pPccControl: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,

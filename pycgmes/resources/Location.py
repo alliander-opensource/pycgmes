@@ -67,8 +67,8 @@ class Location(IdentifiedObject):
         },
     )
 
-    mainAddress: float = Field(
-        default=0.0,
+    mainAddress: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.GL,

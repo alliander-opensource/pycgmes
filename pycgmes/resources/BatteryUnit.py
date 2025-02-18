@@ -23,8 +23,8 @@ class BatteryUnit(PowerElectronicsUnit):
       BatteryUnit.ratedE.
     """
 
-    batteryState: Optional[str] = Field(
-        default=None,
+    batteryState: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,

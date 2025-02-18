@@ -154,8 +154,8 @@ class RegulatingControl(PowerSystemResource):
         },
     )
 
-    mode: Optional[str] = Field(
-        default=None,
+    mode: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
@@ -196,8 +196,8 @@ class RegulatingControl(PowerSystemResource):
         },
     )
 
-    targetValueUnitMultiplier: Optional[str] = Field(
-        default=None,
+    targetValueUnitMultiplier: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,

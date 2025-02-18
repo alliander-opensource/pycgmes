@@ -36,8 +36,8 @@ class FossilFuel(IdentifiedObject):
         },
     )
 
-    fossilFuelType: Optional[str] = Field(
-        default=None,
+    fossilFuelType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

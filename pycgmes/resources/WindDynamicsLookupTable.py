@@ -174,8 +174,8 @@ class WindDynamicsLookupTable(IdentifiedObject):
         },
     )
 
-    lookupTableFunctionType: Optional[str] = Field(
-        default=None,
+    lookupTableFunctionType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

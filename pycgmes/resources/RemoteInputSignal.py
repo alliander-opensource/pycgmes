@@ -156,8 +156,8 @@ class RemoteInputSignal(IdentifiedObject):
         },
     )
 
-    remoteSignalType: Optional[str] = Field(
-        default=None,
+    remoteSignalType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

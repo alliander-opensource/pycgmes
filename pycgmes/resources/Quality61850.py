@@ -160,8 +160,8 @@ class Quality61850(Base):
         },
     )
 
-    source: Optional[str] = Field(
-        default=None,
+    source: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
@@ -202,8 +202,8 @@ class Quality61850(Base):
         },
     )
 
-    validity: Optional[str] = Field(
-        default=None,
+    validity: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,

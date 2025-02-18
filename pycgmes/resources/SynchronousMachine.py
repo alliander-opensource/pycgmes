@@ -188,8 +188,8 @@ class SynchronousMachine(RotatingMachine):
         },
     )
 
-    operatingMode: Optional[str] = Field(
-        default=None,
+    operatingMode: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
@@ -314,8 +314,8 @@ class SynchronousMachine(RotatingMachine):
         },
     )
 
-    shortCircuitRotorType: Optional[str] = Field(
-        default=None,
+    shortCircuitRotorType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
@@ -328,8 +328,8 @@ class SynchronousMachine(RotatingMachine):
         },
     )
 
-    type: Optional[str] = Field(
-        default=None,
+    type: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

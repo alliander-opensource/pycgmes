@@ -61,8 +61,8 @@ class Diagram(IdentifiedObject):
         },
     )
 
-    orientation: Optional[str] = Field(
-        default=None,
+    orientation: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,

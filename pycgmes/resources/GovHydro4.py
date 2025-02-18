@@ -366,8 +366,8 @@ class GovHydro4(TurbineGovernorDynamics):
         },
     )
 
-    model: Optional[str] = Field(
-        default=None,
+    model: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

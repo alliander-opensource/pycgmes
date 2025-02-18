@@ -147,8 +147,8 @@ class ExcIEEEST6B(ExcitationSystemDynamics):
         },
     )
 
-    oelin: Optional[str] = Field(
-        default=None,
+    oelin: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

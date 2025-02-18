@@ -51,8 +51,8 @@ class AsynchronousMachine(RotatingMachine):
         },
     )
 
-    asynchronousMachineType: Optional[str] = Field(
-        default=None,
+    asynchronousMachineType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,

@@ -43,8 +43,8 @@ class PssWECC(PowerSystemStabilizerDynamics):
     vsmin: Minimum output signal (Vsmin) (< PssWECC.vsmax).  Typical value = -0,05.
     """
 
-    inputSignal1Type: Optional[str] = Field(
-        default=None,
+    inputSignal1Type: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
@@ -57,8 +57,8 @@ class PssWECC(PowerSystemStabilizerDynamics):
         },
     )
 
-    inputSignal2Type: Optional[str] = Field(
-        default=None,
+    inputSignal2Type: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

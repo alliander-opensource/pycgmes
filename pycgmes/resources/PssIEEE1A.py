@@ -61,8 +61,8 @@ class PssIEEE1A(PowerSystemStabilizerDynamics):
         },
     )
 
-    inputSignalType: Optional[str] = Field(
-        default=None,
+    inputSignalType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

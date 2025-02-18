@@ -93,8 +93,8 @@ class StaticVarCompensator(RegulatingCondEq):
         },
     )
 
-    sVCControlMode: Optional[str] = Field(
-        default=None,
+    sVCControlMode: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

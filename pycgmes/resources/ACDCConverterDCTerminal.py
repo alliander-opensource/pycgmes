@@ -42,8 +42,8 @@ class ACDCConverterDCTerminal(DCBaseTerminal):
         },
     )
 
-    polarity: Optional[str] = Field(
-        default=None,
+    polarity: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

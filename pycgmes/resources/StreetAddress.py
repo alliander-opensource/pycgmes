@@ -67,8 +67,8 @@ class StreetAddress(Base):
         },
     )
 
-    status: float = Field(
-        default=0.0,
+    status: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.GL,
@@ -81,8 +81,8 @@ class StreetAddress(Base):
         },
     )
 
-    streetDetail: float = Field(
-        default=0.0,
+    streetDetail: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.GL,
@@ -95,8 +95,8 @@ class StreetAddress(Base):
         },
     )
 
-    townDetail: float = Field(
-        default=0.0,
+    townDetail: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.GL,

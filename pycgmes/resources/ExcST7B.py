@@ -92,8 +92,8 @@ class ExcST7B(ExcitationSystemDynamics):
         },
     )
 
-    oelin: Optional[str] = Field(
-        default=None,
+    oelin: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
@@ -190,8 +190,8 @@ class ExcST7B(ExcitationSystemDynamics):
         },
     )
 
-    uelin: Optional[str] = Field(
-        default=None,
+    uelin: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

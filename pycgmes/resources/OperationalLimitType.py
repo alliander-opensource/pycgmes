@@ -58,8 +58,8 @@ class OperationalLimitType(IdentifiedObject):
         },
     )
 
-    direction: Optional[str] = Field(
-        default=None,
+    direction: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
@@ -86,8 +86,8 @@ class OperationalLimitType(IdentifiedObject):
         },
     )
 
-    kind: Optional[str] = Field(
-        default=None,
+    kind: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
