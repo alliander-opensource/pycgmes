@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -20,87 +17,29 @@ class ExcSEXS(ExcitationSystemDynamics):
     """
     Simplified excitation system.
 
+    efdmax: Field voltage clipping maximum limit (Efdmax) (> ExcSEXS.efdmin).  Typical value = 5.
+    efdmin: Field voltage clipping minimum limit (Efdmin) (< ExcSEXS.efdmax).  Typical value = -5.
+    emax: Maximum field voltage output (Emax) (> ExcSEXS.emin).  Typical value = 5.
+    emin: Minimum field voltage output (Emin) (< ExcSEXS.emax).  Typical value = -5.
+    k: Gain (K) (> 0).  Typical value = 100.
+    kc: PI controller gain (Kc) (> 0 if ExcSEXS.tc > 0).  Typical value = 0,08.
     tatb: Gain reduction ratio of lag-lead element ([Ta / Tb]).  Typical value = 0,1.
     tb: Denominator time constant of lag-lead block (Tb) (>= 0).  Typical value = 10.
-    k: Gain (K) (> 0).  Typical value = 100.
-    te: Time constant of gain block (Te) (> 0).  Typical value = 0,05.
-    emin: Minimum field voltage output (Emin) (< ExcSEXS.emax).  Typical value = -5.
-    emax: Maximum field voltage output (Emax) (> ExcSEXS.emin).  Typical value = 5.
-    kc: PI controller gain (Kc) (> 0 if ExcSEXS.tc > 0).  Typical value = 0,08.
     tc: PI controller phase lead time constant (Tc) (>= 0).  Typical value = 0.
-    efdmin: Field voltage clipping minimum limit (Efdmin) (< ExcSEXS.efdmax).  Typical value = -5.
-    efdmax: Field voltage clipping maximum limit (Efdmax) (> ExcSEXS.efdmin).  Typical value = 5.
+    te: Time constant of gain block (Te) (> 0).  Typical value = 0,05.
     """
 
-    tatb: float = Field(
+    efdmax: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    tb: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    k: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    te: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    emin: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    emax: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kc: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tc: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -109,16 +48,124 @@ class ExcSEXS(ExcitationSystemDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    efdmax: float = Field(
+    emax: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    emin: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    k: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kc: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tatb: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tb: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tc: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    te: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -131,3 +178,11 @@ class ExcSEXS(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

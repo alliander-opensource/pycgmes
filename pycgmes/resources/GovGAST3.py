@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -20,125 +17,54 @@ class GovGAST3(TurbineGovernorDynamics):
     """
     Generic turbogas with acceleration and temperature controller.
 
-    bp: Droop (bp).  Typical value = 0,05.
-    tg: Time constant of speed governor (Tg) (>= 0).  Typical value = 0,05.
-    rcmx: Maximum fuel flow (RCMX).  Typical value = 1.
-    rcmn: Minimum fuel flow (RCMN).  Typical value = -0,1.
-    ky: Coefficient of transfer function of fuel valve positioner (Ky).  Typical value = 1.
-    ty: Time constant of fuel valve positioner (Ty) (>= 0).  Typical value = 0,2.
-    tac: Fuel control time constant (Tac) (>= 0).  Typical value = 0,1.
-    kac: Fuel system feedback (KAC).  Typical value = 0.
-    tc: Compressor discharge volume time constant (Tc) (>= 0).  Typical value = 0,2.
     bca: Acceleration limit set-point (Bca).  Unit = 1/s.  Typical value = 0,01.
-    kca: Acceleration control integral gain (Kca). Unit = 1/s.  Typical value = 100.
+    bp: Droop (bp).  Typical value = 0,05.
     dtc: Exhaust temperature variation due to fuel flow increasing from 0 to 1 PU (deltaTc).  Typical value = 390.
     ka: Minimum fuel flow (Ka).  Typical value = 0,23.
-    tsi: Time constant of radiation shield (Tsi) (>= 0).  Typical value = 15.
+    kac: Fuel system feedback (KAC).  Typical value = 0.
+    kca: Acceleration control integral gain (Kca). Unit = 1/s.  Typical value = 100.
     ksi: Gain of radiation shield (Ksi).  Typical value = 0,8.
-    ttc: Time constant of thermocouple (Ttc) (>= 0).  Typical value = 2,5.
-    tfen: Turbine rated exhaust temperature correspondent to Pm=1 PU (Tfen).  Typical value = 540.
-    td: Temperature controller derivative gain (Td) (>= 0).  Typical value = 3,3.
-    tt: Temperature controller integration rate (Tt).  Typical value = 250.
-    mxef: Fuel flow maximum positive error value (MXef).  Typical value = 0,05.
+    ky: Coefficient of transfer function of fuel valve positioner (Ky).  Typical value = 1.
     mnef: Fuel flow maximum negative error value (MNef).  Typical value = -0,05.
+    mxef: Fuel flow maximum positive error value (MXef).  Typical value = 0,05.
+    rcmn: Minimum fuel flow (RCMN).  Typical value = -0,1.
+    rcmx: Maximum fuel flow (RCMX).  Typical value = 1.
+    tac: Fuel control time constant (Tac) (>= 0).  Typical value = 0,1.
+    tc: Compressor discharge volume time constant (Tc) (>= 0).  Typical value = 0,2.
+    td: Temperature controller derivative gain (Td) (>= 0).  Typical value = 3,3.
+    tfen: Turbine rated exhaust temperature correspondent to Pm=1 PU (Tfen).  Typical value = 540.
+    tg: Time constant of speed governor (Tg) (>= 0).  Typical value = 0,05.
+    tsi: Time constant of radiation shield (Tsi) (>= 0).  Typical value = 15.
+    tt: Temperature controller integration rate (Tt).  Typical value = 250.
+    ttc: Time constant of thermocouple (Ttc) (>= 0).  Typical value = 2,5.
+    ty: Time constant of fuel valve positioner (Ty) (>= 0).  Typical value = 0,2.
     """
-
-    bp: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tg: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    rcmx: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    rcmn: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    ky: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    ty: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tac: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kac: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tc: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
 
     bca: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    kca: float = Field(
+    bp: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -147,7 +73,12 @@ class GovGAST3(TurbineGovernorDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -156,16 +87,40 @@ class GovGAST3(TurbineGovernorDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    tsi: int = Field(
-        default=0,
+    kac: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kca: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -174,52 +129,26 @@ class GovGAST3(TurbineGovernorDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    ttc: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tfen: float = Field(
+    ky: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    td: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tt: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    mxef: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -228,7 +157,180 @@ class GovGAST3(TurbineGovernorDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    mxef: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    rcmn: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    rcmx: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tac: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tc: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    td: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tfen: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tg: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tsi: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tt: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    ttc: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    ty: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -241,3 +343,11 @@ class GovGAST3(TurbineGovernorDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

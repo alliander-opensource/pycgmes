@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -36,41 +32,57 @@ class ControlArea(PowerSystemResource):
       TieFlow.positiveFlowIn flag TRUE. If not, the orientation must be reversed by setting the
       TieFlow.positiveFlowIn flag FALSE.
 
+    ControlAreaGeneratingUnit: The generating unit specifications for the control area.
+    EnergyArea: The energy area that is forecast from this control area specification.
+    TieFlow: The tie flows associated with the control area.
+    netInterchange: The specified positive net interchange into the control area, i.e. positive sign means flow into the
+      area.
+    pTolerance: Active power net interchange tolerance. The attribute shall be a positive value or zero.
     type: The primary type of control area definition used to determine if this is used for automatic generation
       control, for planning interchange control, or other purposes.   A control area specified with primary
       type of automatic generation control could still be forecast and used as an interchange area in power
       flow analysis.
-    TieFlow: The tie flows associated with the control area.
-    ControlAreaGeneratingUnit: The generating unit specifications for the control area.
-    EnergyArea: The energy area that is forecast from this control area specification.
-    netInterchange: The specified positive net interchange into the control area, i.e. positive sign means flow into the
-      area.
-    pTolerance: Active power net interchange tolerance. The attribute shall be a positive value or zero.
     """
 
-    type: Optional[str] = Field(
-        default=None,
+    ControlAreaGeneratingUnit: list = Field(
+        default_factory=list,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
         },
     )
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # TieFlow : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # ControlAreaGeneratingUnit : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
 
     EnergyArea: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    TieFlow: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -79,7 +91,12 @@ class ControlArea(PowerSystemResource):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -88,7 +105,26 @@ class ControlArea(PowerSystemResource):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    type: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -102,3 +138,11 @@ class ControlArea(PowerSystemResource):
             Profile.EQ,
             Profile.SSH,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

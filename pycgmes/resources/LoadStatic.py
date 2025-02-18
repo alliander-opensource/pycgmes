@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -23,25 +19,25 @@ class LoadStatic(IdentifiedObject):
       the amplitude and frequency of the bus voltage.
 
     LoadAggregate: Aggregate load to which this aggregate static load belongs.
-    staticLoadModelType: Type of static load model.  Typical value = constantZ.
+    ep1: First term voltage exponent for active power (Ep1).  Used only when .staticLoadModelType = exponential.
+    ep2: Second term voltage exponent for active power (Ep2).  Used only when .staticLoadModelType = exponential.
+    ep3: Third term voltage exponent for active power (Ep3).  Used only when .staticLoadModelType = exponential.
+    eq1: First term voltage exponent for reactive power (Eq1).  Used only when .staticLoadModelType = exponential.
+    eq2: Second term voltage exponent for reactive power (Eq2).  Used only when .staticLoadModelType = exponential.
+    eq3: Third term voltage exponent for reactive power (Eq3).  Used only when .staticLoadModelType = exponential.
     kp1: First term voltage coefficient for active power (Kp1).  Not used when .staticLoadModelType = constantZ.
     kp2: Second term voltage coefficient for active power (Kp2).  Not used when .staticLoadModelType = constantZ.
     kp3: Third term voltage coefficient for active power (Kp3).  Not used when .staticLoadModelType = constantZ.
     kp4: Frequency coefficient for active power (Kp4)  (not = 0 if .staticLoadModelType = zIP2).  Used only when
       .staticLoadModelType = zIP2.
-    ep1: First term voltage exponent for active power (Ep1).  Used only when .staticLoadModelType = exponential.
-    ep2: Second term voltage exponent for active power (Ep2).  Used only when .staticLoadModelType = exponential.
-    ep3: Third term voltage exponent for active power (Ep3).  Used only when .staticLoadModelType = exponential.
     kpf: Frequency deviation coefficient for active power (Kpf).  Not used when .staticLoadModelType = constantZ.
     kq1: First term voltage coefficient for reactive power (Kq1).  Not used when .staticLoadModelType = constantZ.
     kq2: Second term voltage coefficient for reactive power (Kq2).  Not used when .staticLoadModelType = constantZ.
     kq3: Third term voltage coefficient for reactive power (Kq3).  Not used when .staticLoadModelType = constantZ.
     kq4: Frequency coefficient for reactive power (Kq4)  (not = 0 when .staticLoadModelType = zIP2).  Used only when
       .staticLoadModelType - zIP2.
-    eq1: First term voltage exponent for reactive power (Eq1).  Used only when .staticLoadModelType = exponential.
-    eq2: Second term voltage exponent for reactive power (Eq2).  Used only when .staticLoadModelType = exponential.
-    eq3: Third term voltage exponent for reactive power (Eq3).  Used only when .staticLoadModelType = exponential.
     kqf: Frequency deviation coefficient for reactive power (Kqf).  Not used when .staticLoadModelType = constantZ.
+    staticLoadModelType: Type of static load model.  Typical value = constantZ.
     """
 
     LoadAggregate: Optional[str] = Field(
@@ -49,52 +45,12 @@ class LoadStatic(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    staticLoadModelType: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kp1: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kp2: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kp3: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kp4: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -103,7 +59,12 @@ class LoadStatic(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -112,7 +73,12 @@ class LoadStatic(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -121,52 +87,12 @@ class LoadStatic(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    kpf: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kq1: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kq2: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kq3: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kq4: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -175,7 +101,12 @@ class LoadStatic(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -184,7 +115,12 @@ class LoadStatic(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -193,7 +129,138 @@ class LoadStatic(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kp1: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kp2: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kp3: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kp4: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kpf: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kq1: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kq2: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kq3: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kq4: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -202,7 +269,26 @@ class LoadStatic(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    staticLoadModelType: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -215,3 +301,11 @@ class LoadStatic(IdentifiedObject):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

@@ -1,8 +1,3 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
-# Drop in dataclass replacement, allowing easier json dump and validation in the future.
 import importlib
 from dataclasses import Field, fields
 from functools import cached_property
@@ -25,7 +20,26 @@ class Base:
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
+        """
+        A resource can be used by multiple profiles. This is the set of profiles
+        where this element can be found.
+        """
         raise NotImplementedError("Method not implemented because not relevant in Base.")
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        raise NotImplementedError("Method not implemented because not relevant in Base.")
+
+    @cached_property
+    def possible_attribute_profiles(self) -> dict[str, list[BaseProfile]]:
+        """
+        Mapping of attribute to the list of possible profiles.
+        """
+        return {f.name: Base.get_extra_prop(f, "in_profiles") for f in fields(self)}
 
     @staticmethod
     def parse_json_as(attrs: dict[str, Any]) -> "Base":
@@ -93,12 +107,9 @@ class Base:
         return {
             f
             for f in fields(self)
-            # The field is defined as a pydantic. Field, not a dataclass.field,
-            # so access to metadata is a tad different. Furthermore, pyright is confused by extra.
-            if (
-                profile is None or (profile in f.default.json_schema_extra["in_profiles"])  # pyright: ignore[reportAttributeAccessIssue]
-            )
+            if profile is None or (profile in Base.get_extra_prop(f, "in_profiles"))
             if f.name != "mRID"
+            if Base.get_extra_prop(f, "is_used")
         }
 
     def cgmes_attributes_in_profile(self, profile: BaseProfile | None) -> dict[str, "CgmesAttribute"]:
@@ -152,6 +163,12 @@ class Base:
     def __str__(self) -> str:
         """Returns the string representation of this resource."""
         return "\n".join([f"{k}={v}" for k, v in sorted(self.to_dict().items())])
+
+    @staticmethod
+    def get_extra_prop(field: Field, prop: str) -> Any:
+        # The field is defined as a pydantic field, not a dataclass field,
+        # so access to metadata is a tad different. Furthermore, pyright is confused by extra.
+        return field.default.json_schema_extra[prop]  # pyright: ignore[reportAttributeAccessIssue]
 
 
 CgmesAttributeTypes: TypeAlias = str | int | float | Base | list | None

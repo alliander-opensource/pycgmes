@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -21,7 +17,10 @@ class TapChanger(PowerSystemResource):
     """
     Mechanism for changing transformer winding tap positions.
 
+    SvTapStep: The tap step state associated with the tap changer.
+    TapChangerControl: The regulating control scheme in which this tap changer participates.
     TapSchedules: A TapChanger can have TapSchedules.
+    controlEnabled: Specifies the regulation status of the equipment.  True is regulating, false is not regulating.
     highStep: Highest possible tap step position, advance from neutral. The attribute shall be greater than lowStep.
     lowStep: Lowest possible tap step position, retard from neutral.
     ltcFlag: Specifies whether or not a TapChanger has load tap changing capabilities.
@@ -38,9 +37,6 @@ class TapChanger(PowerSystemResource):
     normalStep: The tap step position used in `normal` network operation for this winding. For a `Fixed` tap changer
       indicates the current physical tap setting. The attribute shall be equal to or greater than
       lowStep and equal to or less than highStep.
-    TapChangerControl: The regulating control scheme in which this tap changer participates.
-    SvTapStep: The tap step state associated with the tap changer.
-    controlEnabled: Specifies the regulation status of the equipment.  True is regulating, false is not regulating.
     step: Tap changer position. Starting step for a steady state solution. Non integer values are allowed to support
       continuous tap variables. The reasons for continuous value are to support study cases where no discrete
       tap changer has yet been designed, a solution where a narrow voltage band forces the tap step to
@@ -48,61 +44,17 @@ class TapChanger(PowerSystemResource):
       greater than lowStep and equal to or less than highStep.
     """
 
-    # *Association not used*
-    # Type M:0..n in CIM
-    # TapSchedules : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
-
-    highStep: int = Field(
-        default=0,
+    SvTapStep: Optional[str] = Field(
+        default=None,
         json_schema_extra={
             "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    lowStep: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    ltcFlag: bool = Field(
-        default=False,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    neutralStep: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    neutralU: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    normalStep: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
+                Profile.SV,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -111,20 +63,124 @@ class TapChanger(PowerSystemResource):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # SvTapStep : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]})
+    TapSchedules: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
 
     controlEnabled: bool = Field(
         default=False,
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    highStep: int = Field(
+        default=0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    lowStep: int = Field(
+        default=0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    ltcFlag: bool = Field(
+        default=False,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    neutralStep: int = Field(
+        default=0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    neutralU: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    normalStep: int = Field(
+        default=0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -133,7 +189,12 @@ class TapChanger(PowerSystemResource):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -145,6 +206,14 @@ class TapChanger(PowerSystemResource):
         """
         return {
             Profile.EQ,
-            Profile.SV,
             Profile.SSH,
+            Profile.SV,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -30,7 +26,10 @@ class Pss2ST(PowerSystemStabilizerDynamics):
       shall be different than Pss2ST.inputSignal1Type).  Typical value = busVoltageDerivative.
     k1: Gain (K1).
     k2: Gain (K2).
+    lsmax: Limiter (LSMAX) (> Pss2ST.lsmin).
+    lsmin: Limiter (LSMIN) (< Pss2ST.lsmax).
     t1: Time constant (T1) (>= 0).
+    t10: Time constant (T10) (>= 0).
     t2: Time constant (T2) (>= 0).
     t3: Time constant (T3) (>= 0).
     t4: Time constant (T4) (>= 0).
@@ -39,11 +38,8 @@ class Pss2ST(PowerSystemStabilizerDynamics):
     t7: Time constant (T7) (>= 0).
     t8: Time constant (T8) (>= 0).
     t9: Time constant (T9) (>= 0).
-    t10: Time constant (T10) (>= 0).
-    lsmax: Limiter (LSMAX) (> Pss2ST.lsmin).
-    lsmin: Limiter (LSMIN) (< Pss2ST.lsmax).
-    vcu: Cutoff limiter (VCU).
     vcl: Cutoff limiter (VCL).
+    vcu: Cutoff limiter (VCU).
     """
 
     inputSignal1Type: Optional[str] = Field(
@@ -51,7 +47,12 @@ class Pss2ST(PowerSystemStabilizerDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -60,7 +61,12 @@ class Pss2ST(PowerSystemStabilizerDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -69,7 +75,12 @@ class Pss2ST(PowerSystemStabilizerDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -78,97 +89,12 @@ class Pss2ST(PowerSystemStabilizerDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    t1: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    t2: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    t3: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    t4: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    t5: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    t6: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    t7: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    t8: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    t9: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    t10: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -177,7 +103,12 @@ class Pss2ST(PowerSystemStabilizerDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -186,16 +117,152 @@ class Pss2ST(PowerSystemStabilizerDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    vcu: float = Field(
+    t1: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t10: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t2: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t3: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t4: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t5: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t6: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t7: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t8: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    t9: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -204,7 +271,26 @@ class Pss2ST(PowerSystemStabilizerDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    vcu: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -217,3 +303,11 @@ class Pss2ST(PowerSystemStabilizerDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

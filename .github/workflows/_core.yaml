@@ -54,7 +54,7 @@ jobs:
       - name: Poetry setup
         run: |
           pip install -U poetry
-          poetry lock --check || exit 1
+          poetry check --lock || exit 1
           poetry env info
 
       - name: Python package installation
@@ -65,12 +65,12 @@ jobs:
         run: |
           poetry install --with dev
 
-      - name: scons black
+      - name: scons format
         if: ${{ ! inputs._SKIP_QUALITY }}
-        run: poetry run scons black check
-      - name: scons ruff
+        run: poetry run scons format check
+      - name: scons lint
         if: ${{ ! inputs._SKIP_QUALITY }}
-        run: poetry run scons ruff check
+        run: poetry run scons lint check
       - name: scons type
         if: ${{ ! inputs._SKIP_QUALITY }}
         run: poetry run scons type

@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -20,142 +17,39 @@ class ExcAC5A(ExcitationSystemDynamics):
     """
     Modified IEEE AC5A alternator-supplied rectifier excitation system with different minimum controller output.
 
+    a: Coefficient to allow different usage of the model (a).  Typical value = 1.
+    efd1: Exciter voltage at which exciter saturation is defined (Efd1) (> 0).  Typical value = 5,6.
+    efd2: Exciter voltage at which exciter saturation is defined (Efd2) (> 0).  Typical value = 4,2.
     ka: Voltage regulator gain (Ka) (> 0).  Typical value = 400.
+    ke: Exciter constant related to self-excited field (Ke).  Typical value = 1.
+    kf: Excitation control system stabilizer gains (Kf) (>= 0).  Typical value = 0,03.
     ks: Coefficient to allow different usage of the model-speed coefficient (Ks).  Typical value = 0.
+    seefd1: Exciter saturation function value at the corresponding exciter voltage, Efd1 (Se[Efd1]) (>= 0).  Typical
+      value = 0,86.
+    seefd2: Exciter saturation function value at the corresponding exciter voltage, Efd2 (Se[Efd2]) (>= 0).  Typical
+      value = 0,5.
+    ta: Voltage regulator time constant (Ta) (> 0).  Typical value = 0,02.
     tb: Voltage regulator time constant (Tb) (>= 0).  Typical value = 0.
     tc: Voltage regulator time constant (Tc) (>= 0).  Typical value = 0.
-    ta: Voltage regulator time constant (Ta) (> 0).  Typical value = 0,02.
-    vrmax: Maximum voltage regulator output (Vrmax) (> 0).  Typical value = 7,3.
-    vrmin: Minimum voltage regulator output (Vrmin) (< 0).  Typical value =-7,3.
-    ke: Exciter constant related to self-excited field (Ke).  Typical value = 1.
     te: Exciter time constant, integration rate associated with exciter control (Te) (> 0).  Typical value = 0,8.
-    kf: Excitation control system stabilizer gains (Kf) (>= 0).  Typical value = 0,03.
     tf1: Excitation control system stabilizer time constant (Tf1) (> 0).  Typical value  = 1.
     tf2: Excitation control system stabilizer time constant (Tf2) (>= 0).  Typical value = 0,8.
     tf3: Excitation control system stabilizer time constant (Tf3) (>= 0).  Typical value = 0.
-    efd1: Exciter voltage at which exciter saturation is defined (Efd1) (> 0).  Typical value = 5,6.
-    seefd1: Exciter saturation function value at the corresponding exciter voltage, Efd1 (Se[Efd1]) (>= 0).  Typical
-      value = 0,86.
-    efd2: Exciter voltage at which exciter saturation is defined (Efd2) (> 0).  Typical value = 4,2.
-    seefd2: Exciter saturation function value at the corresponding exciter voltage, Efd2 (Se[Efd2]) (>= 0).  Typical
-      value = 0,5.
-    a: Coefficient to allow different usage of the model (a).  Typical value = 1.
+    vrmax: Maximum voltage regulator output (Vrmax) (> 0).  Typical value = 7,3.
+    vrmin: Minimum voltage regulator output (Vrmin) (< 0).  Typical value =-7,3.
     """
 
-    ka: float = Field(
+    a: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    ks: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tb: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tc: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    ta: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    vrmax: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    vrmin: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    ke: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    te: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    kf: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tf1: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tf2: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tf3: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -164,16 +58,12 @@ class ExcAC5A(ExcitationSystemDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    seefd1: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -182,7 +72,82 @@ class ExcAC5A(ExcitationSystemDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    ka: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    ke: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    kf: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    ks: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    seefd1: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -191,16 +156,138 @@ class ExcAC5A(ExcitationSystemDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    a: float = Field(
+    ta: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tb: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tc: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    te: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tf1: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tf2: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tf3: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    vrmax: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    vrmin: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -213,3 +300,11 @@ class ExcAC5A(ExcitationSystemDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

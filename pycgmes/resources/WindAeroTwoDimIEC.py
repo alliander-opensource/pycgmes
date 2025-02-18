@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -20,6 +17,7 @@ class WindAeroTwoDimIEC(IdentifiedObject):
     """
     Two-dimensional aerodynamic model.   Reference: IEC 61400-27-1:2015, 5.6.1.3.
 
+    WindTurbineType3IEC: Wind turbine type 3 model with which this wind aerodynamic model is associated.
     dpomega: Partial derivative of aerodynamic power with respect to changes in WTR speed (dpomega). It is a type-
       dependent parameter.
     dptheta: Partial derivative of aerodynamic power with respect to changes in pitch angle (dptheta). It is a type-
@@ -27,17 +25,35 @@ class WindAeroTwoDimIEC(IdentifiedObject):
     dpv1: Partial derivative (dpv1). It is a type-dependent parameter.
     omegazero: Rotor speed if the wind turbine is not derated (omega0). It is a type-dependent parameter.
     pavail: Available aerodynamic power (pavail). It is a case-dependent parameter.
-    thetazero: Pitch angle if the wind turbine is not derated (theta0). It is a case-dependent parameter.
     thetav2: Blade angle at twice rated wind speed (thetav2). It is a type-dependent parameter.
-    WindTurbineType3IEC: Wind turbine type 3 model with which this wind aerodynamic model is associated.
+    thetazero: Pitch angle if the wind turbine is not derated (theta0). It is a case-dependent parameter.
     """
+
+    WindTurbineType3IEC: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     dpomega: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -46,7 +62,12 @@ class WindAeroTwoDimIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -55,7 +76,12 @@ class WindAeroTwoDimIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -64,7 +90,12 @@ class WindAeroTwoDimIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -73,16 +104,12 @@ class WindAeroTwoDimIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    thetazero: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -91,13 +118,28 @@ class WindAeroTwoDimIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    # *Association not used*
-    # Type M:1 in CIM
-    # WindTurbineType3IEC : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
+    thetazero: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -108,3 +150,11 @@ class WindAeroTwoDimIEC(IdentifiedObject):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

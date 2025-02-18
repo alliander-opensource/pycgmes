@@ -2,48 +2,56 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+from functools import cached_property
+
+import pytest
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
 from pycgmes.resources.Bay import Bay
-from pycgmes.utils.config import cgmes_resource_config
 from pycgmes.utils.profile import BaseProfile
 
 
 class CustomProfile(BaseProfile):
     CUS = "Tom"
     FRO = "Mage"
-    model_config = cgmes_resource_config
 
 
 @dataclass
 class CustomBayAttr(Bay):
-    model_config = cgmes_resource_config
     colour: str = Field(
         default="Red",
         json_schema_extra={
             "in_profiles": [
                 CustomProfile.CUS,
             ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
             "namespace": "custom",
         },
     )
 
     @classmethod
-    def apparent_name(cls):
+    def apparent_name(cls) -> str:
         return "Bay"
 
 
 @dataclass
 class CustomBayClass(Bay):
-    model_config = cgmes_resource_config
-
     @classmethod
-    def apparent_name(cls):
+    def apparent_name(cls) -> str:
         return "Cheese"
 
-    def possible_profiles(self):
+    @cached_property
+    def possible_profiles(self) -> set[BaseProfile]:
         return {CustomProfile.CUS}
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        return CustomProfile.CUS
 
 
 class TestCustom:
@@ -64,4 +72,10 @@ class TestCustom:
 
     def test_custom_class(self):
         cust = CustomBayClass()
-        assert cust.possible_profiles() == {CustomProfile.CUS}
+        assert cust.possible_profiles == {CustomProfile.CUS}
+        assert cust.recommended_profile == CustomProfile.CUS
+
+    def test_custom_class_uris(self):
+        profile = CustomProfile.CUS
+        with pytest.raises(NotImplementedError):
+            assert profile.uris

@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -22,30 +19,26 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
       characteristic (look -up table) is a single straight-line, the same as UnderexcLimIEEE2 (see Figure 10.4 (p
       32), IEEE 421.5-2005 Section 10.2).
 
-    q0: Segment Q initial point (Q0).  Typical value = -0,31.
-    q1: Segment Q end point (Q1).  Typical value = -0,1.
+    kui: Gain Under excitation limiter (KUI).  Typical value = 0,1.
     p0: Segment P initial point (P0).  Typical value = 0.
     p1: Segment P end point (P1).  Typical value = 1.
-    kui: Gain Under excitation limiter (KUI).  Typical value = 0,1.
-    vuimin: Minimum error signal (VUIMIN) (< UnderexcLim2Simplified.vuimax).  Typical value = 0.
+    q0: Segment Q initial point (Q0).  Typical value = -0,31.
+    q1: Segment Q end point (Q1).  Typical value = -0,1.
     vuimax: Maximum error signal (VUIMAX) (> UnderexcLim2Simplified.vuimin).  Typical value = 1.
+    vuimin: Minimum error signal (VUIMIN) (< UnderexcLim2Simplified.vuimax).  Typical value = 0.
     """
 
-    q0: float = Field(
+    kui: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    q1: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -54,7 +47,12 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -63,25 +61,40 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    kui: float = Field(
+    q0: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    vuimin: float = Field(
+    q1: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -90,7 +103,26 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    vuimin: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -103,3 +135,11 @@ class UnderexcLim2Simplified(UnderexcitationLimiterDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -23,28 +19,24 @@ class RatioTapChanger(TapChanger):
       transformer.  Angle sign convention (general): Positive value indicates a positive phase shift from the
       winding where the tap is located to the other winding (for a two-winding transformer).
 
+    RatioTapChangerTable: The tap ratio table for this ratio  tap changer.
+    TransformerEnd: Transformer end to which this ratio tap changer belongs.
     stepVoltageIncrement: Tap step increment, in per cent of rated voltage of the power transformer end, per step
       position. When the increment is negative, the voltage decreases when the tap step
       increases.
-    RatioTapChangerTable: The tap ratio table for this ratio  tap changer.
-    TransformerEnd: Transformer end to which this ratio tap changer belongs.
     """
-
-    stepVoltageIncrement: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
 
     RatioTapChangerTable: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -53,7 +45,26 @@ class RatioTapChanger(TapChanger):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    stepVoltageIncrement: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -67,3 +78,11 @@ class RatioTapChanger(TapChanger):
             Profile.EQ,
             Profile.SSH,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -24,29 +21,25 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics):
       of OELs and duplicate how they interact with the rest of the excitation systems would likely result in a level
       of application insufficient for the studies for which they are intended. Reference: IEEE OEL 421.5-2005, 9.
 
-    itfpu: OEL timed field current limiter pickup level (ITFPU).  Typical value = 1,05.
-    ifdmax: OEL instantaneous field current limit (IFDMAX).  Typical value = 1,5.
-    ifdlim: OEL timed field current limit (IFDLIM).  Typical value = 1,05.
     hyst: OEL pickup/drop-out hysteresis (HYST).  Typical value = 0,03.
+    ifdlim: OEL timed field current limit (IFDLIM).  Typical value = 1,05.
+    ifdmax: OEL instantaneous field current limit (IFDMAX).  Typical value = 1,5.
+    itfpu: OEL timed field current limiter pickup level (ITFPU).  Typical value = 1,05.
     kcd: OEL cooldown gain (KCD).  Typical value = 1.
     kramp: OEL ramped limit rate (KRAMP).  Unit = PU / s.  Typical value = 10.
     """
 
-    itfpu: float = Field(
+    hyst: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    ifdmax: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -55,16 +48,40 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    hyst: float = Field(
+    ifdmax: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    itfpu: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -73,7 +90,12 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -82,7 +104,12 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -95,3 +122,11 @@ class OverexcLimIEEE(OverexcitationLimiterDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

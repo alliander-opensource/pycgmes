@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -22,20 +18,35 @@ class VoltageCompensatorDynamics(DynamicsFunctionBlock):
     Voltage compensator function block whose behaviour is described by reference to a standard model or by definition of
       a user-defined model.
 
-    RemoteInputSignal: Remote input signal used by this voltage compensator model.
     ExcitationSystemDynamics: Excitation system model with which this voltage compensator is associated.
+    RemoteInputSignal: Remote input signal used by this voltage compensator model.
     """
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # RemoteInputSignal : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     ExcitationSystemDynamics: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    RemoteInputSignal: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -48,3 +59,11 @@ class VoltageCompensatorDynamics(DynamicsFunctionBlock):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

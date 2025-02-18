@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -24,8 +21,8 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
       (Rc, Xc and Tr) are set to zero, the standard model VCompIEEEType1 is bypassed.  Reference: IEEE 421.5-2005 4.
 
     rc: Resistive component of compensation of a generator (Rc) (>= 0).
-    xc: Reactive component of compensation of a generator (Xc) (>= 0).
     tr: Time constant which is used for the combined voltage sensing and compensation signal (Tr) (>= 0).
+    xc: Reactive component of compensation of a generator (Xc) (>= 0).
     """
 
     rc: float = Field(
@@ -33,7 +30,26 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tr: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -42,16 +58,12 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    tr: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -64,3 +76,11 @@ class VCompIEEEType1(VoltageCompensatorDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

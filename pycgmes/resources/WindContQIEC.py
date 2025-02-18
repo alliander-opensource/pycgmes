@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -21,6 +17,7 @@ class WindContQIEC(IdentifiedObject):
     """
     Q control model. Reference: IEC 61400-27-1:2015, 5.6.5.7.
 
+    WindTurbineType3or4IEC: Wind turbine type 3 or type 4 model with which this reactive control model is associated.
     iqh1: Maximum reactive current injection during dip (iqh1). It is a type-dependent parameter.
     iqmax: Maximum reactive current injection (iqmax) (> WindContQIEC.iqmin). It is a type-dependent parameter.
     iqmin: Minimum reactive current injection (iqmin) (< WindContQIEC.iqmax). It is a type-dependent parameter.
@@ -30,12 +27,12 @@ class WindContQIEC(IdentifiedObject):
     kpq: Reactive power PI controller proportional gain (KP,q). It is a type-dependent parameter.
     kpu: Voltage PI controller proportional gain (KP,u). It is a type-dependent parameter.
     kqv: Voltage scaling factor for UVRT current (Kqv). It is a project-dependent parameter.
-    tpfiltq: Power measurement filter time constant (Tpfiltq) (>= 0). It is a type-dependent parameter.
     rdroop: Resistive component of voltage drop impedance (rdroop) (>= 0). It is a project-dependent parameter.
-    tufiltq: Voltage measurement filter time constant (Tufiltq) (>= 0). It is a type-dependent parameter.
+    tpfiltq: Power measurement filter time constant (Tpfiltq) (>= 0). It is a type-dependent parameter.
     tpost: Length of time period where post fault reactive power is injected (Tpost) (>= 0). It is a project-dependent
       parameter.
     tqord: Time constant in reactive power order lag (Tqord) (>= 0). It is a type-dependent parameter.
+    tufiltq: Voltage measurement filter time constant (Tufiltq) (>= 0). It is a type-dependent parameter.
     udb1: Voltage deadband lower limit (udb1). It is a type-dependent parameter.
     udb2: Voltage deadband upper limit (udb2). It is a type-dependent parameter.
     umax: Maximum voltage in voltage PI controller integral term (umax) (> WindContQIEC.umin). It is a type-dependent
@@ -47,15 +44,33 @@ class WindContQIEC(IdentifiedObject):
     windQcontrolModesType: Types of general wind turbine Q control modes (MqG).  It is a project-dependent parameter.
     windUVRTQcontrolModesType: Types of UVRT Q control modes (MqUVRT). It is a project-dependent parameter.
     xdroop: Inductive component of voltage drop impedance (xdroop) (>= 0). It is a project-dependent parameter.
-    WindTurbineType3or4IEC: Wind turbine type 3 or type 4 model with which this reactive control model is associated.
     """
+
+    WindTurbineType3or4IEC: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     iqh1: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -64,7 +79,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -73,7 +93,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -82,7 +107,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -91,7 +121,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -100,7 +135,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -109,7 +149,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -118,7 +163,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -127,16 +177,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    tpfiltq: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -145,34 +191,68 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    tufiltq: int = Field(
-        default=0,
+    tpfiltq: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    tpost: int = Field(
-        default=0,
+    tpost: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    tqord: int = Field(
-        default=0,
+    tqord: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tufiltq: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -181,7 +261,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -190,7 +275,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -199,7 +289,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -208,7 +303,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -217,7 +317,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -226,7 +331,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -235,7 +345,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -244,7 +359,12 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -253,13 +373,14 @@ class WindContQIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
-
-    # *Association not used*
-    # Type M:1 in CIM
-    # WindTurbineType3or4IEC : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -270,3 +391,11 @@ class WindContQIEC(IdentifiedObject):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

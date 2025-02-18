@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -21,37 +17,69 @@ class ConnectivityNode(IdentifiedObject):
     """
     Connectivity nodes are points where terminals of AC conducting equipment are connected together with zero impedance.
 
+    BoundaryPoint: The boundary point associated with the connectivity node.
+    ConnectivityNodeContainer: Container of this connectivity node.
+    Terminals: Terminals interconnected with zero impedance at a this connectivity node.
     TopologicalNode: The topological node to which this connectivity node is assigned.  May depend on the current state
       of switches in the network.
-    BoundaryPoint: The boundary point associated with the connectivity node.
-    Terminals: Terminals interconnected with zero impedance at a this connectivity node.
-    ConnectivityNodeContainer: Container of this connectivity node.
     """
+
+    BoundaryPoint: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.EQBD,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    ConnectivityNodeContainer: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.EQBD,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    Terminals: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+                Profile.EQBD,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
 
     TopologicalNode: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.TP,
-            ]
-        },
-    )
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # BoundaryPoint : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.EQBD, Profile.EQ, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # Terminals : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQBD, Profile.EQ, ]}) # noqa: E501
-
-    ConnectivityNodeContainer: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQBD,
-                Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -62,7 +90,15 @@ class ConnectivityNode(IdentifiedObject):
         where this element can be found.
         """
         return {
-            Profile.TP,
-            Profile.EQBD,
             Profile.EQ,
+            Profile.EQBD,
+            Profile.TP,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

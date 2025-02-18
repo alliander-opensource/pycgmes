@@ -15,14 +15,14 @@ class Testshacl:
         assert shacl.get_shacl_file_dir().exists
         assert shacl.get_shacl_file_dir().is_dir()
 
-    @pytest.mark.parametrize("format", ["rdf", "ttl"])
-    def test_got_some_files(self, format):
-        files = shacl.get_all_shacl_files(serialization=format)
+    @pytest.mark.parametrize("serialization_type", ["rdf", "ttl"])
+    def test_got_some_files(self, serialization_type):
+        files = shacl.get_all_shacl_files(serialization=serialization_type)
         assert files  # not empty
-        assert all([f.suffix == f".{format}" for f in files])  # All the expected format ...
-        assert all([f.exists() for f in files])  # ... exist ...
-        assert all([f.is_file() for f in files])  # ... and are actual files.
+        assert all(f.suffix == f".{serialization_type}" for f in files)  # All the expected format ...
+        assert all(f.exists() for f in files)  # ... exist ...
+        assert all(f.is_file() for f in files)  # ... and are actual files.
 
     def test_wrong_file_format(self):
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match="^Parameter .* must be one of 'rdf' or 'ttl'"):
             shacl.get_all_shacl_files(serialization="cheese")

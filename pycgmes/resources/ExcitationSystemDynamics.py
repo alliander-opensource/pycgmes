@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -22,55 +18,130 @@ class ExcitationSystemDynamics(DynamicsFunctionBlock):
     Excitation system function block whose behaviour is described by reference to a standard model or by definition of a
       user-defined model.
 
-    SynchronousMachineDynamics: Synchronous machine model with which this excitation system model is associated.
-    VoltageCompensatorDynamics: Voltage compensator model associated with this excitation system model.
-    OverexcitationLimiterDynamics: Overexcitation limiter model associated with this excitation system model.
-    PFVArControllerType2Dynamics: Power factor or VAr controller type 2 model associated with this excitation system
-      model.
     DiscontinuousExcitationControlDynamics: Discontinuous excitation control model associated with this excitation
       system model.
-    PowerSystemStabilizerDynamics: Power system stabilizer model associated with this excitation system model.
-    UnderexcitationLimiterDynamics: Undrexcitation limiter model associated with this excitation system model.
+    OverexcitationLimiterDynamics: Overexcitation limiter model associated with this excitation system model.
     PFVArControllerType1Dynamics: Power factor or VAr controller type 1 model associated with this excitation system
       model.
+    PFVArControllerType2Dynamics: Power factor or VAr controller type 2 model associated with this excitation system
+      model.
+    PowerSystemStabilizerDynamics: Power system stabilizer model associated with this excitation system model.
+    SynchronousMachineDynamics: Synchronous machine model with which this excitation system model is associated.
+    UnderexcitationLimiterDynamics: Undrexcitation limiter model associated with this excitation system model.
+    VoltageCompensatorDynamics: Voltage compensator model associated with this excitation system model.
     """
+
+    DiscontinuousExcitationControlDynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    OverexcitationLimiterDynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    PFVArControllerType1Dynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    PFVArControllerType2Dynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    PowerSystemStabilizerDynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     SynchronousMachineDynamics: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    # *Association not used*
-    # Type M:1 in CIM
-    # VoltageCompensatorDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
+    UnderexcitationLimiterDynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # OverexcitationLimiterDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # PFVArControllerType2Dynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # DiscontinuousExcitationControlDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # PowerSystemStabilizerDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # UnderexcitationLimiterDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
-
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # PFVArControllerType1Dynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
+    VoltageCompensatorDynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -81,3 +152,11 @@ class ExcitationSystemDynamics(DynamicsFunctionBlock):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

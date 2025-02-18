@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -22,25 +18,35 @@ class WindGeneratingUnit(GeneratingUnit):
     A wind driven generating unit, connected to the grid by means of a rotating machine.  May be used to represent a
       single turbine or an aggregation.
 
-    windGenUnitType: The kind of wind generating unit.
     WindPowerPlant: A wind power plant may have wind generating units.
+    windGenUnitType: The kind of wind generating unit.
     """
-
-    windGenUnitType: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
 
     WindPowerPlant: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    windGenUnitType: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -54,3 +60,11 @@ class WindGeneratingUnit(GeneratingUnit):
             Profile.EQ,
             Profile.SSH,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

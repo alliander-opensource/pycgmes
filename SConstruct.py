@@ -12,6 +12,7 @@ from SCons.Script import COMMAND_LINE_TARGETS
 _CHECK_ONLY = "check" in COMMAND_LINE_TARGETS
 _SUBJECT = "pycgmes"
 _TEST_SUBJECT = "tests"
+_RESOURCES = "pycgmes/resources"
 
 # Remember if a target has been found, to warn if not.
 _target_found: bool = False
@@ -42,7 +43,7 @@ if "quality" in COMMAND_LINE_TARGETS:
 # Formatting targets, which might change files. Let's run them *before* the linters and friends.
 # This is why ruff is the first of the quality target, as it fixes things as well.
 if "format" in COMMAND_LINE_TARGETS:
-    cmd = f"ruff format SConstruct.py {_SUBJECT} {_TEST_SUBJECT} examples"
+    cmd = f"ruff format SConstruct.py {_SUBJECT} {_TEST_SUBJECT} examples --exclude {_RESOURCES}"
     if _CHECK_ONLY:
         cmd += " --diff"
     _exec(cmd)
@@ -50,20 +51,15 @@ if "format" in COMMAND_LINE_TARGETS:
 # Quality target.
 if "ruff" in COMMAND_LINE_TARGETS or "lint" in COMMAND_LINE_TARGETS:
     # Replaces isort, autoflake and probably pylint eventually.
-    for param in ["", "--extend-select RUF100"]:
-        # RUF100 means: remove #noqa when not relevant.
-        # A lot are adding during generation because due to comments, some lines can be too long. They do not all
-        # end up being too long, so let's clean up the not relevant one.
-        cmd = f"ruff check {_SUBJECT} {param}"
-        # Tries to fix what it can, forget about the rest.
-        cmd_test = f"ruff check {_TEST_SUBJECT}  --fix-only"
-        if _CHECK_ONLY:
-            cmd += " --no-fix"
-            cmd_test += " --no-fix"
-        else:
-            cmd += " --fix"
-        _exec(cmd, env=os.environ)
-        _exec(cmd_test, env=os.environ)
+    cmd = f"ruff check {_SUBJECT} {_TEST_SUBJECT} --exclude {_RESOURCES}"
+    if _CHECK_ONLY:
+        cmd += " --no-fix"
+    else:
+        cmd += " --fix"
+    _exec(cmd, env=os.environ)
+    # Don't change generated files!
+    cmd = f"ruff check {_RESOURCES} --no-fix --ignore I001,F401,N815,N999,RUF100,W291,W293"
+    _exec(cmd, env=os.environ)
 
 
 if "lock" in COMMAND_LINE_TARGETS:

@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2023 Alliander
+#
+# SPDX-License-Identifier: Apache-2.0
+
+version = 1
+SPDX-PackageName = "pycgmes"
+SPDX-PackageSupplier = "pycgmes <pycgmes@alliander.com>"
+SPDX-PackageDownloadLocation = "https://github.com/alliander-opensource/pycgmes"
+
+[[annotations]]
+path = ["data/**", "schemas/**", "pycgmes/shacl/datafiles/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "ENTSO-E <cgmes.conformity@entsoe.eu>"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "poetry.lock"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "pycgmes <pycgmes@alliander.com>"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["pycgmes/resources/**", "pycgmes/utils/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = [
+    "2023 Alliander",
+    "2024 SOGNO"
+]
+SPDX-License-Identifier = "Apache-2.0"

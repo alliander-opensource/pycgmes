@@ -1,18 +1,15 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.base import Base
 from ..utils.profile import BaseProfile, Profile
+from ..utils.base import Base
 
 
 @dataclass
@@ -20,6 +17,7 @@ class IdentifiedObject(Base):
     """
     This is a root class to provide common identification for all classes needing identification and naming attributes.
 
+    DiagramObjects: The diagram objects that are associated with the domain object.
     description: The description is a free human readable text describing or naming the object. It may be non unique and
       may not correlate to a naming hierarchy.
     energyIdentCodeEic: The attribute is used for an exchange of the EIC code (Energy identification Code). The length
@@ -32,20 +30,38 @@ class IdentifiedObject(Base):
     name: The name is any free human readable and possibly non unique text naming the object.
     shortName: The attribute is used for an exchange of a human readable short name with length of the string 12
       characters maximum.
-    DiagramObjects: The diagram objects that are associated with the domain object.
     """
+
+    DiagramObjects: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
 
     description: str = Field(
         default="",
         json_schema_extra={
             "in_profiles": [
-                Profile.TP,
                 Profile.DL,
-                Profile.EQBD,
-                Profile.EQ,
                 Profile.DY,
+                Profile.EQ,
+                Profile.EQBD,
                 Profile.OP,
-            ]
+                Profile.TP,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -53,10 +69,15 @@ class IdentifiedObject(Base):
         default="",
         json_schema_extra={
             "in_profiles": [
-                Profile.TP,
-                Profile.EQBD,
                 Profile.EQ,
-            ]
+                Profile.EQBD,
+                Profile.TP,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -64,17 +85,22 @@ class IdentifiedObject(Base):
         default="",
         json_schema_extra={
             "in_profiles": [
-                Profile.TP,
-                Profile.GL,
                 Profile.DL,
-                Profile.EQBD,
-                Profile.EQ,
-                Profile.SC,
-                Profile.SV,
-                Profile.SSH,
                 Profile.DY,
+                Profile.EQ,
+                Profile.EQBD,
+                Profile.GL,
                 Profile.OP,
-            ]
+                Profile.SC,
+                Profile.SSH,
+                Profile.SV,
+                Profile.TP,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -82,15 +108,20 @@ class IdentifiedObject(Base):
         default="",
         json_schema_extra={
             "in_profiles": [
-                Profile.TP,
-                Profile.GL,
                 Profile.DL,
-                Profile.EQBD,
-                Profile.EQ,
-                Profile.SV,
                 Profile.DY,
+                Profile.EQ,
+                Profile.EQBD,
+                Profile.GL,
                 Profile.OP,
-            ]
+                Profile.SV,
+                Profile.TP,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -98,16 +129,17 @@ class IdentifiedObject(Base):
         default="",
         json_schema_extra={
             "in_profiles": [
-                Profile.TP,
-                Profile.EQBD,
                 Profile.EQ,
-            ]
+                Profile.EQBD,
+                Profile.TP,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # DiagramObjects : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DL, ]})
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -116,14 +148,22 @@ class IdentifiedObject(Base):
         where this element can be found.
         """
         return {
-            Profile.TP,
-            Profile.GL,
             Profile.DL,
-            Profile.EQBD,
-            Profile.EQ,
-            Profile.SC,
-            Profile.SV,
-            Profile.SSH,
             Profile.DY,
+            Profile.EQ,
+            Profile.EQBD,
+            Profile.GL,
             Profile.OP,
+            Profile.SC,
+            Profile.SSH,
+            Profile.SV,
+            Profile.TP,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

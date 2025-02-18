@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -32,40 +28,45 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
       (Xd); - .xDirectTrans (X'd); - .xDirectSubtrans (X''d); - .xQuadSync (Xq); - .xQuadTrans (X'q); -
       .xQuadSubtrans (X''q); - .tpdo (T'do); - .tppdo (T''do); - .tpqo (T'qo); - .tppqo (T''qo); - .tc.
 
-    rotorType: Type of rotor on physical machine.
-    modelType: Type of synchronous machine model used in dynamic simulation applications.
     ks: Saturation loading correction factor (Ks) (>= 0).  Used only by type J model.  Typical value = 0.
+    modelType: Type of synchronous machine model used in dynamic simulation applications.
+    rotorType: Type of rotor on physical machine.
+    tc: Damping time constant for `Canay` reactance (>= 0).  Typical value = 0.
+    tpdo: Direct-axis transient rotor time constant (T`do) (> SynchronousMachineTimeConstantReactance.tppdo).  Typical
+      value = 5.
+    tppdo: Direct-axis subtransient rotor time constant (T``do) (> 0).  Typical value = 0,03.
+    tppqo: Quadrature-axis subtransient rotor time constant (T``qo) (> 0). Typical value = 0,03.
+    tpqo: Quadrature-axis transient rotor time constant (T`qo) (> SynchronousMachineTimeConstantReactance.tppqo).
+      Typical value = 0,5.
+    xDirectSubtrans: Direct-axis subtransient reactance (unsaturated) (X``d) (>
+      RotatingMachineDynamics.statorLeakageReactance).  Typical value = 0,2.
     xDirectSync: Direct-axis synchronous reactance (Xd) (>= SynchronousMachineTimeConstantReactance.xDirectTrans). The
       quotient of a sustained value of that AC component of armature voltage that is produced by the
       total direct-axis flux due to direct-axis armature current and the value of the AC component of
       this current, the machine running at rated speed.  Typical value = 1,8.
     xDirectTrans: Direct-axis transient reactance (unsaturated) (X`d) (>=
       SynchronousMachineTimeConstantReactance.xDirectSubtrans).  Typical value = 0,5.
-    xDirectSubtrans: Direct-axis subtransient reactance (unsaturated) (X``d) (>
-      RotatingMachineDynamics.statorLeakageReactance).  Typical value = 0,2.
+    xQuadSubtrans: Quadrature-axis subtransient reactance (X``q) (> RotatingMachineDynamics.statorLeakageReactance).
+      Typical value = 0,2.
     xQuadSync: Quadrature-axis synchronous reactance (Xq) (>= SynchronousMachineTimeConstantReactance.xQuadTrans). The
       ratio of the component of reactive armature voltage, due to the quadrature-axis component of
       armature current, to this component of current, under steady state conditions and at rated
       frequency.  Typical value = 1,6.
     xQuadTrans: Quadrature-axis transient reactance (X`q) (>= SynchronousMachineTimeConstantReactance.xQuadSubtrans).
       Typical value = 0,3.
-    xQuadSubtrans: Quadrature-axis subtransient reactance (X``q) (> RotatingMachineDynamics.statorLeakageReactance).
-      Typical value = 0,2.
-    tpdo: Direct-axis transient rotor time constant (T`do) (> SynchronousMachineTimeConstantReactance.tppdo).  Typical
-      value = 5.
-    tppdo: Direct-axis subtransient rotor time constant (T``do) (> 0).  Typical value = 0,03.
-    tpqo: Quadrature-axis transient rotor time constant (T`qo) (> SynchronousMachineTimeConstantReactance.tppqo).
-      Typical value = 0,5.
-    tppqo: Quadrature-axis subtransient rotor time constant (T``qo) (> 0). Typical value = 0,03.
-    tc: Damping time constant for `Canay` reactance (>= 0).  Typical value = 0.
     """
 
-    rotorType: Optional[str] = Field(
-        default=None,
+    ks: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -74,34 +75,96 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    ks: float = Field(
+    rotorType: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    tc: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    xDirectSync: float = Field(
+    tpdo: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    xDirectTrans: float = Field(
+    tppdo: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tppqo: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    tpqo: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -110,25 +173,40 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    xQuadSync: float = Field(
+    xDirectSync: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    xQuadTrans: float = Field(
+    xDirectTrans: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -137,52 +215,40 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    tpdo: int = Field(
-        default=0,
+    xQuadSync: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    tppdo: int = Field(
-        default=0,
+    xQuadTrans: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    tpqo: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tppqo: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    tc: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -195,3 +261,11 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

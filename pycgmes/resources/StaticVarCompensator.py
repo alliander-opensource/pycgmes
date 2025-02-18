@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -26,27 +22,46 @@ class StaticVarCompensator(RegulatingCondEq):
       characteristic slope defines the proportion.  If the voltage at the controlled bus is equal to the voltage
       setpoint, the SVC MVar output is zero.
 
+    StaticVarCompensatorDynamics: Static Var Compensator dynamics model used to describe dynamic behaviour of this
+      Static Var Compensator.
     capacitiveRating: Capacitive reactance at maximum capacitive reactive power.  Shall always be positive.
     inductiveRating: Inductive reactance at maximum inductive reactive power.  Shall always be negative.
+    q: Reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node. Starting
+      value for a steady state solution.
+    sVCControlMode: SVC control mode.
     slope: The characteristics slope of an SVC defines how the reactive power output changes in proportion to the
       difference between the regulated bus voltage and the voltage setpoint. The attribute shall be a
       positive value or zero.
-    sVCControlMode: SVC control mode.
     voltageSetPoint: The reactive power output of the SVC is proportional to the difference between the voltage at the
       regulated bus and the voltage setpoint.  When the regulated bus voltage is equal to the
       voltage setpoint, the reactive power output is zero.
-    q: Reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node. Starting
-      value for a steady state solution.
-    StaticVarCompensatorDynamics: Static Var Compensator dynamics model used to describe dynamic behaviour of this
-      Static Var Compensator.
     """
+
+    StaticVarCompensatorDynamics: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     capacitiveRating: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -55,34 +70,12 @@ class StaticVarCompensator(RegulatingCondEq):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
-        },
-    )
-
-    slope: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    sVCControlMode: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    voltageSetPoint: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -91,13 +84,56 @@ class StaticVarCompensator(RegulatingCondEq):
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # StaticVarCompensatorDynamics : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
+    sVCControlMode: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    slope: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    voltageSetPoint: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -106,7 +142,15 @@ class StaticVarCompensator(RegulatingCondEq):
         where this element can be found.
         """
         return {
+            Profile.DY,
             Profile.EQ,
             Profile.SSH,
-            Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -25,72 +21,147 @@ class TopologicalNode(IdentifiedObject):
       model, switch statuses are not used to form topological nodes. Instead they are manually created or deleted in
       a model builder tool. Topological nodes maintained this way are also called "busses".
 
+    AngleRefTopologicalIsland: The island for which the node is an angle reference.   Normally there is one angle
+      reference node for each island.
     BaseVoltage: The base voltage of the topological node.
+    ConnectivityNodeContainer: The connectivity node container to which the topological node belongs.
     ConnectivityNodes: The connectivity nodes combine together to form this topological node.  May depend on the current
       state of switches in the network.
-    ConnectivityNodeContainer: The connectivity node container to which the topological node belongs.
+    ReportingGroup: The reporting group to which the topological node belongs.
+    SvInjection: The injection flows state variables associated with the topological node.
+    SvVoltage: The state voltage associated with the topological node.
     Terminal: The terminals associated with the topological node.   This can be used as an alternative to the
       connectivity node path to terminal, thus making it unnecessary to model connectivity nodes in some
       cases.   Note that if connectivity nodes are in the model, this association would probably not be
       used as an input specification.
-    ReportingGroup: The reporting group to which the topological node belongs.
-    SvInjection: The injection flows state variables associated with the topological node.
-    SvVoltage: The state voltage associated with the topological node.
-    AngleRefTopologicalIsland: The island for which the node is an angle reference.   Normally there is one angle
-      reference node for each island.
     TopologicalIsland: A topological node belongs to a topological island.
     """
+
+    AngleRefTopologicalIsland: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     BaseVoltage: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.TP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # ConnectivityNodes : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.TP, ]}) # noqa: E501
 
     ConnectivityNodeContainer: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.TP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    # *Association not used*
-    # Type M:1..n in CIM
-    # Terminal : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.TP, ]})
+    ConnectivityNodes: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
 
     ReportingGroup: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.TP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # SvInjection : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]})
+    SvInjection: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # SvVoltage : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]})
+    SvVoltage: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # AngleRefTopologicalIsland : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]}) # noqa: E501
+    Terminal: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.TP,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # TopologicalIsland : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.SV, ]}) # noqa: E501
+    TopologicalIsland: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -99,6 +170,14 @@ class TopologicalNode(IdentifiedObject):
         where this element can be found.
         """
         return {
-            Profile.TP,
             Profile.SV,
+            Profile.TP,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.TP

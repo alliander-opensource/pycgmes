@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -27,41 +23,28 @@ class SynchronousMachineDetailed(SynchronousMachineDynamics):
       differences in saturation representation might not result in significant model performance differences so
       model substitutions are often acceptable.
 
-    saturationFactorQAxis: Quadrature-axis saturation factor at rated terminal voltage (S1q) (>= 0). Typical value =
-      0,02.
-    saturationFactor120QAxis: Quadrature-axis saturation factor at 120% of rated terminal voltage (S12q) (>=
-      SynchonousMachineDetailed.saturationFactorQAxis).  Typical value = 0,12.
     efdBaseRatio: Ratio (exciter voltage/generator voltage) of Efd bases of exciter and generator models (> 0). Typical
       value = 1.
     ifdBaseType: Excitation base system mode. It should be equal to the value of WLMDV given by the user. WLMDV is the
       PU ratio between the field voltage and the excitation current: Efd = WLMDV x Ifd. Typical value =
       ifag.
+    saturationFactor120QAxis: Quadrature-axis saturation factor at 120% of rated terminal voltage (S12q) (>=
+      SynchonousMachineDetailed.saturationFactorQAxis).  Typical value = 0,12.
+    saturationFactorQAxis: Quadrature-axis saturation factor at rated terminal voltage (S1q) (>= 0). Typical value =
+      0,02.
     """
-
-    saturationFactorQAxis: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    saturationFactor120QAxis: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
 
     efdBaseRatio: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -70,7 +53,40 @@ class SynchronousMachineDetailed(SynchronousMachineDynamics):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    saturationFactor120QAxis: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    saturationFactorQAxis: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -83,3 +99,11 @@ class SynchronousMachineDetailed(SynchronousMachineDynamics):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

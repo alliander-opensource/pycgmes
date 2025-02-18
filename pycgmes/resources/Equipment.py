@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -22,6 +18,7 @@ class Equipment(PowerSystemResource):
     The parts of a power system that are physical devices, electronic or mechanical.
 
     EquipmentContainer: Container of this equipment.
+    OperationalLimitSet: The operational limit sets associated with this equipment.
     aggregate: The aggregate flag provides an alternative way of representing an aggregated (equivalent) element. It is
       applicable in cases when the dedicated classes for equivalent equipment do not have all of the
       attributes necessary to represent the required level of detail.  In case the flag is set to `true`
@@ -30,23 +27,41 @@ class Equipment(PowerSystemResource):
       power transformers or synchronous machines operating in parallel modelled as a single aggregate
       power transformer or aggregate synchronous machine.   The attribute is not used for
       EquivalentBranch, EquivalentShunt and EquivalentInjection.
+    inService: Specifies the availability of the equipment. True means the equipment is available for topology
+      processing, which determines if the equipment is energized or not. False means that the equipment
+      is treated by network applications as if it is not in the model.
     normallyInService: Specifies the availability of the equipment under normal operating conditions. True means the
       equipment is available for topology processing, which determines if the equipment is
       energized or not. False means that the equipment is treated by network applications as if
       it is not in the model.
-    OperationalLimitSet: The operational limit sets associated with this equipment.
-    inService: Specifies the availability of the equipment. True means the equipment is available for topology
-      processing, which determines if the equipment is energized or not. False means that the equipment
-      is treated by network applications as if it is not in the model.
     """
 
     EquipmentContainer: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
-                Profile.EQBD,
                 Profile.EQ,
-            ]
+                Profile.EQBD,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    OperationalLimitSet: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -55,7 +70,26 @@ class Equipment(PowerSystemResource):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    inService: bool = Field(
+        default=False,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SSH,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -64,20 +98,12 @@ class Equipment(PowerSystemResource):
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
-        },
-    )
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # OperationalLimitSet : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]}) # noqa: E501
-
-    inService: bool = Field(
-        default=False,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SSH,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -88,9 +114,17 @@ class Equipment(PowerSystemResource):
         where this element can be found.
         """
         return {
-            Profile.EQBD,
+            Profile.DY,
             Profile.EQ,
+            Profile.EQBD,
             Profile.SC,
             Profile.SSH,
-            Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

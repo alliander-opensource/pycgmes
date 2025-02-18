@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -22,6 +19,7 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
 
     WindDynamicsLookupTable: The wind dynamics lookup table associated with this frequency and active power wind plant
       model.
+    WindPlantIEC: Wind plant model with which this wind plant frequency and active power control is associated.
     dprefmax: Maximum ramp rate of pWTref request from the plant controller to the wind turbines (dprefmax) (>
       WindPlantFreqPcontrolIEC.dprefmin). It is a case-dependent parameter.
     dprefmin: Minimum (negative) ramp rate of pWTref request from the plant controller to the wind turbines (dprefmin)
@@ -30,10 +28,6 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
       WindPlantFreqPcontrolIEC.dpwprefmin). It is a project-dependent parameter.
     dpwprefmin: Maximum negative ramp rate for wind plant power reference (dpWPrefmin) (<
       WindPlantFreqPcontrolIEC.dpwprefmax). It is a project-dependent parameter.
-    prefmax: Maximum pWTref request from the plant controller to the wind turbines (prefmax) (>
-      WindPlantFreqPcontrolIEC.prefmin). It is a project-dependent parameter.
-    prefmin: Minimum pWTref request from the plant controller to the wind turbines (prefmin) (<
-      WindPlantFreqPcontrolIEC.prefmax). It is a project-dependent parameter.
     kiwpp: Plant P controller integral gain (KIWPp). It is a project-dependent parameter.
     kiwppmax: Maximum PI integrator term (KIWPpmax) (> WindPlantFreqPcontrolIEC.kiwppmin). It is a project-dependent
       parameter.
@@ -41,24 +35,56 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
       parameter.
     kpwpp: Plant P controller proportional gain (KPWPp). It is a project-dependent parameter.
     kwppref: Power reference gain (KWPpref). It is a project-dependent parameter.
+    prefmax: Maximum pWTref request from the plant controller to the wind turbines (prefmax) (>
+      WindPlantFreqPcontrolIEC.prefmin). It is a project-dependent parameter.
+    prefmin: Minimum pWTref request from the plant controller to the wind turbines (prefmin) (<
+      WindPlantFreqPcontrolIEC.prefmax). It is a project-dependent parameter.
     tpft: Lead time constant in reference value transfer function (Tpft) (>= 0). It is a project-dependent parameter.
     tpfv: Lag time constant in reference value transfer function (Tpfv) (>= 0). It is a project-dependent parameter.
     twpffiltp: Filter time constant for frequency measurement (TWPffiltp) (>= 0). It is a project-dependent parameter.
     twppfiltp: Filter time constant for active power measurement (TWPpfiltp) (>= 0). It is a project-dependent
       parameter.
-    WindPlantIEC: Wind plant model with which this wind plant frequency and active power control is associated.
     """
 
-    # *Association not used*
-    # Type M:1..n in CIM
-    # WindDynamicsLookupTable : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DY, ]}) # noqa: E501
+    WindDynamicsLookupTable: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    WindPlantIEC: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     dprefmax: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -67,7 +93,12 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -76,7 +107,12 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -85,25 +121,12 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
-        },
-    )
-
-    prefmax: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
-        },
-    )
-
-    prefmin: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -112,7 +135,12 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -121,7 +149,12 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -130,7 +163,12 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -139,7 +177,12 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -148,49 +191,98 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    tpft: int = Field(
-        default=0,
+    prefmax: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    tpfv: int = Field(
-        default=0,
+    prefmin: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    twpffiltp: int = Field(
-        default=0,
+    tpft: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    twppfiltp: int = Field(
-        default=0,
+    tpfv: float = Field(
+        default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
-    # *Association not used*
-    # Type M:1 in CIM
-    # WindPlantIEC : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.DY, ]})
+    twpffiltp: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    twppfiltp: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DY,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
 
     @cached_property
     def possible_profiles(self) -> set[BaseProfile]:
@@ -201,3 +293,11 @@ class WindPlantFreqPcontrolIEC(IdentifiedObject):
         return {
             Profile.DY,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DY

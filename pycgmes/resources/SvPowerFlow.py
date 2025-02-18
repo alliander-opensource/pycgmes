@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -12,8 +8,8 @@ from typing import Optional
 from pydantic import Field
 from pydantic.dataclasses import dataclass
 
-from ..utils.base import Base
 from ..utils.profile import BaseProfile, Profile
+from ..utils.base import Base
 
 
 @dataclass
@@ -22,19 +18,38 @@ class SvPowerFlow(Base):
     State variable for power flow. Load convention is used for flow direction. This means flow out from the
       TopologicalNode into the equipment is positive.
 
+    Terminal: The terminal associated with the power flow state variable.
     p: The active power flow. Load sign convention is used, i.e. positive sign means flow out from a TopologicalNode
       (bus) into the conducting equipment.
     q: The reactive power flow. Load sign convention is used, i.e. positive sign means flow out from a TopologicalNode
       (bus) into the conducting equipment.
-    Terminal: The terminal associated with the power flow state variable.
     """
+
+    Terminal: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.SV,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     p: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.SV,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -43,16 +58,12 @@ class SvPowerFlow(Base):
         json_schema_extra={
             "in_profiles": [
                 Profile.SV,
-            ]
-        },
-    )
-
-    Terminal: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.SV,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -65,3 +76,11 @@ class SvPowerFlow(Base):
         return {
             Profile.SV,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.SV

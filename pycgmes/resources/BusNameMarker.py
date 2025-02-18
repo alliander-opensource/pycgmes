@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -26,31 +22,51 @@ class BusNameMarker(IdentifiedObject):
       BusbarSections would normally be associated.  For a "straight" busbar configuration, normally only the main
       terminal at the BusbarSection would be associated.
 
+    ReportingGroup: The reporting group to which this bus name marker belongs.
     Terminal: The terminals associated with this bus name marker.
     priority: Priority of bus name marker for use as topology bus name.  Use 0 for do not care.  Use 1 for highest
       priority.  Use 2 as priority is less than 1 and so on.
-    ReportingGroup: The reporting group to which this bus name marker belongs.
     """
-
-    # *Association not used*
-    # Type M:1..n in CIM
-    # Terminal : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.EQ, ]})
-
-    priority: int = Field(
-        default=0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
 
     ReportingGroup: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    Terminal: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    priority: int = Field(
+        default=0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -63,3 +79,11 @@ class BusNameMarker(IdentifiedObject):
         return {
             Profile.EQ,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

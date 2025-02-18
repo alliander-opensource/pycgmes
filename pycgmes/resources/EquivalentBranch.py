@@ -1,12 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
+from typing import Optional
 
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -22,16 +19,6 @@ class EquivalentBranch(EquivalentEquipment):
       EquivalentBranch is spanning the same nodes, the impedance quantities for the EquivalentBranch shall consider
       the needed phase shift.
 
-    r: Positive sequence series resistance of the reduced branch.
-    r21: Resistance from terminal sequence 2 to terminal sequence 1 .Used for steady state power flow. This attribute is
-      optional and represent unbalanced network such as off-nominal phase shifter. If only EquivalentBranch.r
-      is given, then EquivalentBranch.r21 is assumed equal to EquivalentBranch.r. Usage rule : EquivalentBranch
-      is a result of network reduction prior to the data exchange.
-    x: Positive sequence series reactance of the reduced branch.
-    x21: Reactance from terminal sequence 2 to terminal sequence 1. Used for steady state power flow. This attribute is
-      optional and represents an unbalanced network such as off-nominal phase shifter. If only
-      EquivalentBranch.x is given, then EquivalentBranch.x21 is assumed equal to EquivalentBranch.x. Usage
-      rule: EquivalentBranch is a result of network reduction prior to the data exchange.
     negativeR12: Negative sequence series resistance from terminal sequence  1 to terminal sequence 2. Used for short
       circuit data exchange according to IEC 60909. EquivalentBranch is a result of network reduction
       prior to the data exchange.
@@ -56,6 +43,16 @@ class EquivalentBranch(EquivalentEquipment):
     positiveX21: Positive sequence series reactance from terminal sequence 2 to terminal sequence 1. Used for short
       circuit data exchange according to IEC 60909. Usage : EquivalentBranch is a result of network
       reduction prior to the data exchange.
+    r: Positive sequence series resistance of the reduced branch.
+    r21: Resistance from terminal sequence 2 to terminal sequence 1 .Used for steady state power flow. This attribute is
+      optional and represent unbalanced network such as off-nominal phase shifter. If only EquivalentBranch.r
+      is given, then EquivalentBranch.r21 is assumed equal to EquivalentBranch.r. Usage rule : EquivalentBranch
+      is a result of network reduction prior to the data exchange.
+    x: Positive sequence series reactance of the reduced branch.
+    x21: Reactance from terminal sequence 2 to terminal sequence 1. Used for steady state power flow. This attribute is
+      optional and represents an unbalanced network such as off-nominal phase shifter. If only
+      EquivalentBranch.x is given, then EquivalentBranch.x21 is assumed equal to EquivalentBranch.x. Usage
+      rule: EquivalentBranch is a result of network reduction prior to the data exchange.
     zeroR12: Zero sequence series resistance from terminal sequence  1 to terminal sequence 2. Used for short circuit
       data exchange according to IEC 60909. EquivalentBranch is a result of network reduction prior to the
       data exchange.
@@ -70,48 +67,17 @@ class EquivalentBranch(EquivalentEquipment):
       the data exchange.
     """
 
-    r: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    r21: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    x: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
-    x21: float = Field(
-        default=0.0,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.EQ,
-            ]
-        },
-    )
-
     negativeR12: float = Field(
         default=0.0,
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -120,7 +86,12 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -129,7 +100,12 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -138,7 +114,12 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -147,7 +128,12 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -156,7 +142,12 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -165,7 +156,12 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -174,7 +170,68 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    r: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    r21: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    x: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
+    )
+
+    x21: float = Field(
+        default=0.0,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -183,7 +240,12 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -192,7 +254,12 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -201,7 +268,12 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -210,7 +282,12 @@ class EquivalentBranch(EquivalentEquipment):
         json_schema_extra={
             "in_profiles": [
                 Profile.SC,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -224,3 +301,11 @@ class EquivalentBranch(EquivalentEquipment):
             Profile.EQ,
             Profile.SC,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.EQ

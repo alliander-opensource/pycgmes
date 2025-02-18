@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -23,6 +19,8 @@ class Diagram(IdentifiedObject):
       attribute defines the orientation. The initial view related attributes can be used to specify an initial view
       with the x,y coordinates of the diagonal points.
 
+    DiagramElements: A diagram is made up of multiple diagram objects.
+    DiagramStyle: A Diagram may have a DiagramStyle.
     orientation: Coordinate system orientation of the diagram. A positive orientation gives standard `right-hand`
       orientation, with negative orientation indicating a `left-hand` orientation. For 2D diagrams, a
       positive orientation will result in X values increasing from left to right and Y values
@@ -33,16 +31,47 @@ class Diagram(IdentifiedObject):
     x2InitialView: X coordinate of the second corner of the initial view.
     y1InitialView: Y coordinate of the first corner of the initial view.
     y2InitialView: Y coordinate of the second corner of the initial view.
-    DiagramElements: A diagram is made up of multiple diagram objects.
-    DiagramStyle: A Diagram may have a DiagramStyle.
     """
+
+    DiagramElements: list = Field(
+        default_factory=list,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ],
+            "is_used": False,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": True,
+            "is_primitive_attribute": False,
+        },
+    )
+
+    DiagramStyle: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.DL,
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     orientation: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": True,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -51,7 +80,12 @@ class Diagram(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -60,7 +94,12 @@ class Diagram(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -69,7 +108,12 @@ class Diagram(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -78,20 +122,12 @@ class Diagram(IdentifiedObject):
         json_schema_extra={
             "in_profiles": [
                 Profile.DL,
-            ]
-        },
-    )
-
-    # *Association not used*
-    # Type M:0..n in CIM
-    # DiagramElements : list = Field(default_factory=list, json_schema_extra={"in_profiles":[Profile.DL, ]}) # noqa: E501
-
-    DiagramStyle: Optional[str] = Field(
-        default=None,
-        json_schema_extra={
-            "in_profiles": [
-                Profile.DL,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 
@@ -104,3 +140,11 @@ class Diagram(IdentifiedObject):
         return {
             Profile.DL,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.DL

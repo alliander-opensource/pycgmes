@@ -9,6 +9,7 @@ concurrency:
   group: ${{ github.workflow }}
 
 on:
+  pull_request:
   push:
     tags-ignore: # Only on branches, not tags
       - "*"

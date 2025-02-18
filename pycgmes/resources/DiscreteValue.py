@@ -1,9 +1,5 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
-
 """
-Generated from the CGMES 3 files via cimgen: https://github.com/sogno-platform/cimgen
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
 from functools import cached_property
@@ -25,16 +21,31 @@ class DiscreteValue(MeasurementValue):
     Discrete: Measurement to which this value is connected.
     """
 
-    # *Association not used*
-    # Type M:0..1 in CIM
-    # Command : Optional[str] = Field(default=None, json_schema_extra={"in_profiles":[Profile.OP, ]})
+    Command: Optional[str] = Field(
+        default=None,
+        json_schema_extra={
+            "in_profiles": [
+                Profile.OP,
+            ],
+            "is_used": False,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
+        },
+    )
 
     Discrete: Optional[str] = Field(
         default=None,
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
-            ]
+            ],
+            "is_used": True,
+            "is_class_attribute": True,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": False,
         },
     )
 
@@ -47,3 +58,11 @@ class DiscreteValue(MeasurementValue):
         return {
             Profile.OP,
         }
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        """
+        This is the profile with most of the attributes.
+        It should be used to write the data to as few as possible files.
+        """
+        return Profile.OP

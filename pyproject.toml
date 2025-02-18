@@ -4,7 +4,7 @@
 
 [tool.poetry]
 name = "pycgmes"
-version = "2.0.3"
+version = "2.0.4"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["pycgmes <pycgmes@alliander.com>"]
 readme = "README.md"
@@ -30,6 +30,7 @@ exclude = ["./pycgmes/shacl"]
 python = "^3.10"
 poetry = ">=1.5.0" # key 'priority' in source
 pydantic = ">=2" # Used for dataclasses
+chevron = ">=0.14.0" # Used for writer
 
 [tool.poetry.group.dev.dependencies]
 coverage = { extras = ["toml"], version = "*" } # unit test coverage
@@ -129,7 +130,12 @@ extend-ignore-names = [
     "mRID", "lineColor", # cim notation
     "create_*", # some functions are named after CIM nomenclatures, not python
     "N", # shortcut in stack
-    ]
+]
+
+[tool.ruff.lint.per-file-ignores]
+"{tests}/*" = [
+    "PLR2004", # magic number are OK in tests
+]
 
 [tool.ruff.format]
 docstring-code-format = true

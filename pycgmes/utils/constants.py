@@ -1,9 +1,9 @@
-# SPDX-FileCopyrightText: 2023 Alliander
-#
-# SPDX-License-Identifier: Apache-2.0
+"""
+Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
+"""
 
 # Default namespaces used by CGMES.
-NAMESPACES = {  # Those are strings, not real addresses, hence the NOSONAR.
+NAMESPACES: dict[str, str] = {  # Those are strings, not real addresses, hence the NOSONAR.
     "cim": "http://iec.ch/TC57/CIM100#",  # NOSONAR
     "entsoe": "http://entsoe.eu/CIM/SchemaExtension/3/1#",  # NOSONAR
     "md": "http://iec.ch/TC57/61970-552/ModelDescription/1#",  # NOSONAR
