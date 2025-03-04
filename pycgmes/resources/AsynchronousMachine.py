@@ -45,6 +45,7 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": False,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -59,6 +60,7 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -73,9 +75,11 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -87,9 +91,11 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PerCent",
         },
     )
 
@@ -101,9 +107,11 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -115,9 +123,11 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -129,9 +139,11 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "RotationSpeed",
         },
     )
 
@@ -143,9 +155,11 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Integer",
         },
     )
 
@@ -157,9 +171,11 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -171,9 +187,11 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -185,9 +203,11 @@ class AsynchronousMachine(RotatingMachine):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 

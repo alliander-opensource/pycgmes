@@ -15,10 +15,9 @@ on:
         type: boolean
         default: false
         description: for debug purposes only - if true skip all scons quality checks
-      # Python version. Nothing is 3.10 specific yet as far as I know
       _PYTHON_VERSION:
         type: string
-        default: "3.10" # Weirdly enough, trailing 0 are removed if this string is not quoted.
+        default: "3.11" # Weirdly enough, trailing 0 are removed if this string is not quoted.
         description: Version of python used to run tests
     secrets:
       PYCGMES_PYPI_TOKEN:
@@ -37,7 +36,7 @@ jobs:
           show-progress: false # very verbose for not much
 
       - name: Setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "${{ inputs._PYTHON_VERSION }}"
           architecture: "x64" # default
@@ -46,7 +45,7 @@ jobs:
 
       - name: Poetry caching
         id: poetry-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .cache/pypoetry # NOT $HOME/.cache, which only caches the downloads, before building.
           key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}

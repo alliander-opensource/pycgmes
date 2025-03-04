@@ -98,9 +98,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -112,9 +114,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -126,9 +130,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -140,9 +146,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -154,9 +162,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -168,9 +178,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -182,9 +194,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -196,9 +210,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -210,9 +226,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -224,9 +242,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -238,9 +258,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -252,9 +274,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -266,9 +290,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Frequency",
         },
     )
 
@@ -280,9 +306,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -294,9 +322,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -308,9 +338,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -322,9 +354,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -336,9 +370,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -350,9 +386,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -364,9 +402,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -378,9 +418,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -392,9 +434,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -406,9 +450,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -420,9 +466,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -434,9 +482,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -448,9 +498,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -462,9 +514,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -476,9 +530,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -490,9 +546,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -504,9 +562,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -518,9 +578,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -532,9 +594,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -546,9 +610,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -560,9 +626,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -574,9 +642,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -588,9 +658,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -602,9 +674,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -616,9 +690,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -630,9 +706,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -644,9 +722,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -658,6 +738,7 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": True,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
@@ -672,9 +753,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -686,9 +769,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -700,9 +785,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -714,9 +801,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -728,9 +817,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -742,9 +833,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -756,9 +849,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -770,9 +865,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -784,9 +881,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -798,9 +897,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -812,9 +913,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "Seconds",
         },
     )
 
@@ -826,9 +929,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -840,9 +945,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -854,9 +961,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 
@@ -868,9 +977,11 @@ class GovCT2(TurbineGovernorDynamics):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Boolean",
         },
     )
 

@@ -11,8 +11,8 @@ from pydantic.dataclasses import dataclass
 
 from pycgmes.resources.Bay import Bay
 from pycgmes.utils.base import Base
+from pycgmes.utils.chevron_writer import ChevronWriter
 from pycgmes.utils.profile import BaseProfile, Profile
-from pycgmes.utils.writer import Writer
 
 
 class CustomProfile(BaseProfile):
@@ -95,41 +95,41 @@ class CustomBase(Base):
         return CustomProfile.FRO
 
 
-class TestWriter:
+class TestChevronWriter:
     def test_is_class_matching_profile(self):
-        assert Writer.is_class_matching_profile(CustomBayAttr(), CustomProfile.CUS)
-        assert Writer.is_class_matching_profile(CustomBayAttr(), Profile.EQ)
-        assert Writer.is_class_matching_profile(CustomBayClass(), CustomProfile.CUS)
-        assert Writer.is_class_matching_profile(CustomBayClass(), Profile.EQ)
-        assert Writer.is_class_matching_profile(CustomBase(), CustomProfile.FRO)
-        assert not Writer.is_class_matching_profile(CustomBase(), Profile.EQ)
+        assert ChevronWriter.is_class_matching_profile(CustomBayAttr(), CustomProfile.CUS)
+        assert ChevronWriter.is_class_matching_profile(CustomBayAttr(), Profile.EQ)
+        assert ChevronWriter.is_class_matching_profile(CustomBayClass(), CustomProfile.CUS)
+        assert ChevronWriter.is_class_matching_profile(CustomBayClass(), Profile.EQ)
+        assert ChevronWriter.is_class_matching_profile(CustomBase(), CustomProfile.FRO)
+        assert not ChevronWriter.is_class_matching_profile(CustomBase(), Profile.EQ)
 
     def test_get_class_profile(self):
-        assert Writer.get_class_profile(CustomBayAttr()) == CustomProfile.CUS
-        assert Writer.get_class_profile(CustomBayClass()) == CustomProfile.CUS
-        assert Writer.get_class_profile(CustomBase()) == CustomProfile.FRO
+        assert ChevronWriter.get_class_profile(CustomBayAttr()) == CustomProfile.CUS
+        assert ChevronWriter.get_class_profile(CustomBayClass()) == CustomProfile.CUS
+        assert ChevronWriter.get_class_profile(CustomBase()) == CustomProfile.FRO
 
     def test_get_class_profile_map(self):
-        class_profile_map = Writer.get_class_profile_map([CustomBayAttr(), CustomBayClass(), CustomBase()])
+        class_profile_map = ChevronWriter.get_class_profile_map([CustomBayAttr(), CustomBayClass(), CustomBase()])
         expected = {"Bay": CustomProfile.CUS, "CustomBayClass": CustomProfile.CUS, "Cheese": CustomProfile.FRO}
         assert class_profile_map == expected
 
     def test_get_attribute_profile(self):
         custom_bay_attr = CustomBayAttr()
-        class_profile = Writer.get_class_profile(custom_bay_attr)
-        assert Writer.get_attribute_profile(custom_bay_attr, "colour", class_profile) == CustomProfile.CUS
-        assert Writer.get_attribute_profile(custom_bay_attr, "name", class_profile) == Profile.EQ
+        class_profile = ChevronWriter.get_class_profile(custom_bay_attr)
+        assert ChevronWriter.get_attribute_profile(custom_bay_attr, "colour", class_profile) == CustomProfile.CUS
+        assert ChevronWriter.get_attribute_profile(custom_bay_attr, "name", class_profile) == Profile.EQ
 
         custom_bay_class = CustomBayClass()
-        class_profile = Writer.get_class_profile(custom_bay_class)
-        assert Writer.get_attribute_profile(custom_bay_class, "name", class_profile) == Profile.EQ
+        class_profile = ChevronWriter.get_class_profile(custom_bay_class)
+        assert ChevronWriter.get_attribute_profile(custom_bay_class, "name", class_profile) == Profile.EQ
 
         custom_base = CustomBase()
-        class_profile = Writer.get_class_profile(custom_base)
-        assert Writer.get_attribute_profile(custom_base, "colour", class_profile) == CustomProfile.FRO
+        class_profile = ChevronWriter.get_class_profile(custom_base)
+        assert ChevronWriter.get_attribute_profile(custom_base, "colour", class_profile) == CustomProfile.FRO
 
     def test_get_attribute_infos(self):
-        infos = Writer.get_attribute_infos(CustomBayAttr(name="CBA", colour="Blue"))
+        infos = ChevronWriter.get_attribute_infos(CustomBayAttr(name="CBA", colour="Blue"))
         assert len(infos) == 7
         assert infos["colour"]["attr_name"] == "Bay.colour"
         assert infos["colour"]["value"] == "Blue"
@@ -137,14 +137,14 @@ class TestWriter:
         assert infos["name"]["value"] == "CBA"
 
     def test_generate_custom(self):
-        writer = Writer(
+        writer = ChevronWriter(
             {
                 "CBA": CustomBayAttr(mRID="CBA", name="CBA", colour="Blue"),
                 "CBC": CustomBayClass(mRID="CBC", name="CBC"),
                 "CB": CustomBase(),
             }
         )
-        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        class_profile_map = ChevronWriter.get_class_profile_map(writer.objects.values())
         xml = writer.generate(CustomProfile.CUS, "model" + "_" + CustomProfile.CUS.long_name, class_profile_map)
         expected = textwrap.dedent(
             """\
@@ -165,14 +165,14 @@ class TestWriter:
         assert xml == expected
 
     def test_generate_about(self):
-        writer = Writer(
+        writer = ChevronWriter(
             {
                 "CBA": CustomBayAttr(mRID="CBA", name="CBA", colour="Blue"),
                 "CBC": CustomBayClass(mRID="CBC", name="CBC"),
                 "CB": CustomBase(),
             }
         )
-        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        class_profile_map = ChevronWriter.get_class_profile_map(writer.objects.values())
         xml = writer.generate(Profile.EQ, "model" + "_" + Profile.EQ.long_name, class_profile_map)
         expected = textwrap.dedent(
             """\
@@ -194,14 +194,14 @@ class TestWriter:
         assert xml == expected
 
     def test_write(self, tmp_path):
-        writer = Writer(
+        writer = ChevronWriter(
             {
                 "CBA": CustomBayAttr(mRID="CBA", name="CBA", colour="Blue"),
                 "CBC": CustomBayClass(mRID="CBC", name="CBC"),
                 "CB": CustomBase(),
             }
         )
-        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        class_profile_map = ChevronWriter.get_class_profile_map(writer.objects.values())
         profile_file_map = writer.write(str(tmp_path / "model"), "model", class_profile_map)
         assert len(profile_file_map) == 3
         assert profile_file_map[CustomProfile.CUS] == str(tmp_path / "model_Tom.xml")

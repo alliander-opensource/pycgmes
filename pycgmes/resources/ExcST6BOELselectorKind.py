@@ -2,39 +2,14 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class ExcST6BOELselectorKind(Base):
+class ExcST6BOELselectorKind(str, Enum):
     """
     Types of connections for the OEL input used for static excitation systems type 6B.
-
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.DY,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.DY
+    noOELinput = "noOELinput"  # No OEL input is used. Corresponds to &lt;i&gt;OELin&lt;/i&gt; not = 1 and not = 2 on the ExcST6B diagram. Original ExcST6B model would have called this &lt;i&gt;OELin&lt;/i&gt; = 0.  # noqa: E501, E741, RUF003
+    beforeUEL = "beforeUEL"  # The connection is before UEL. Corresponds to &lt;i&gt;OELin&lt;/i&gt; = 1 on the ExcST6B diagram.  # noqa: E501, E741, RUF003
+    afterUEL = "afterUEL"  # The connection is after UEL. Corresponds to &lt;i&gt;OELin&lt;/i&gt; = 2 on the ExcST6B diagram.  # noqa: E501, E741, RUF003

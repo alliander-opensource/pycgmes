@@ -44,9 +44,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -58,9 +60,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -72,9 +76,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -86,9 +92,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -100,9 +108,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -114,9 +124,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -128,9 +140,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -142,9 +156,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -156,9 +172,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -170,9 +188,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -184,9 +204,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -198,9 +220,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 
@@ -212,9 +236,11 @@ class StreetDetail(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Boolean",
         },
     )
 

@@ -5,12 +5,12 @@ from typing import Any
 
 import chevron
 
-from pycgmes.utils.base import Base
-from pycgmes.utils.constants import NAMESPACES
-from pycgmes.utils.profile import BaseProfile, Profile
+from .base import Base
+from .constants import NAMESPACES
+from .profile import BaseProfile, Profile
 
 
-class Writer:
+class ChevronWriter:
     """Class for writing CIM RDF/XML files."""
 
     def __init__(self, objects: dict[str, Base]):
@@ -98,14 +98,15 @@ class Writer:
         about = []
         for rdfid, obj in self.objects.items():
             typ = obj.apparent_name()
-            if typ in class_profile_map and Writer.is_class_matching_profile(obj, profile):
+            if typ in class_profile_map and ChevronWriter.is_class_matching_profile(obj, profile):
                 class_profile = class_profile_map[typ]
                 main_entry_of_object = class_profile == profile
 
                 attributes = []
-                for attr, attr_infos in Writer.get_attribute_infos(obj).items():
+                for attr, attr_infos in ChevronWriter.get_attribute_infos(obj).items():
                     value = attr_infos["value"]
-                    if value and attr != "mRID" and Writer.get_attribute_profile(obj, attr, class_profile) == profile:
+                    attribute_profile = ChevronWriter.get_attribute_profile(obj, attr, class_profile)
+                    if value and attr != "mRID" and attribute_profile == profile:
                         if isinstance(value, list | tuple):
                             attributes.extend(attr_infos | {"value": v} for v in value)
                         else:
@@ -152,7 +153,7 @@ class Writer:
         :param obj_list:  List of CIM objects.
         :return:          Mapping of CIM type to profile.
         """
-        return {obj.apparent_name(): Writer.get_class_profile(obj) for obj in obj_list}
+        return {obj.apparent_name(): ChevronWriter.get_class_profile(obj) for obj in obj_list}
 
     @staticmethod
     def get_attribute_profile(obj: Base, attr: str, class_profile: BaseProfile) -> BaseProfile | None:
@@ -190,8 +191,9 @@ class Writer:
                         infos = {
                             "attr_name": attr_name,
                             "namespace": extra.get("namespace", obj.namespace),
-                            "value": Writer._get_xml_value(getattr(obj, attr)),
+                            "value": ChevronWriter._get_xml_value(getattr(obj, attr)),
                             "is_class_attribute": extra.get("is_class_attribute"),
+                            "is_datatype_attribute": extra.get("is_datatype_attribute"),
                             "is_enum_attribute": extra.get("is_enum_attribute"),
                             "is_list_attribute": extra.get("is_list_attribute"),
                             "is_primitive_attribute": extra.get("is_primitive_attribute"),

@@ -58,6 +58,7 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": False,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": True,
             "is_primitive_attribute": False,
@@ -72,9 +73,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -86,9 +89,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -100,9 +105,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -114,9 +121,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -128,9 +137,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -142,9 +153,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -156,9 +169,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -170,9 +185,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -184,9 +201,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -198,9 +217,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -212,9 +233,11 @@ class LoadResponseCharacteristic(IdentifiedObject):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
