@@ -77,10 +77,10 @@ class MeasurementValue(IOPoint):
                 Profile.OP,
             ],
             "is_used": True,
-            "is_class_attribute": True,
+            "is_class_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": False,
+            "is_primitive_attribute": True,
         },
     )
 

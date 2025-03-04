@@ -51,8 +51,8 @@ class HydroGeneratingUnit(GeneratingUnit):
         },
     )
 
-    energyConversionCapability: Optional[str] = Field(
-        default=None,
+    energyConversionCapability: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
@@ -65,8 +65,8 @@ class HydroGeneratingUnit(GeneratingUnit):
         },
     )
 
-    turbineType: Optional[str] = Field(
-        default=None,
+    turbineType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

@@ -341,8 +341,8 @@ class GovCT1(TurbineGovernorDynamics):
         },
     )
 
-    rselect: Optional[str] = Field(
-        default=None,
+    rselect: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

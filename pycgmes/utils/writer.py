@@ -1,5 +1,7 @@
+from collections.abc import Iterable
 from dataclasses import fields
 from pathlib import Path
+from typing import Any
 
 import chevron
 
@@ -79,7 +81,7 @@ class Writer:
                 )
         return output
 
-    def sort_attributes_to_profile(self, profile: BaseProfile, class_profile_map: dict[str, BaseProfile]):
+    def sort_attributes_to_profile(self, profile: BaseProfile, class_profile_map: dict[str, BaseProfile]):  # NOSONAR
         """Sort CIM objects and their attributes depending on whether the profile is the main profile of the class.
 
         Sorts a list of objects to two lists: main and about.
@@ -104,7 +106,7 @@ class Writer:
                 for attr, attr_infos in Writer.get_attribute_infos(obj).items():
                     value = attr_infos["value"]
                     if value and attr != "mRID" and Writer.get_attribute_profile(obj, attr, class_profile) == profile:
-                        if isinstance(value, (list, tuple)):
+                        if isinstance(value, list | tuple):
                             attributes.extend(attr_infos | {"value": v} for v in value)
                         else:
                             attributes.append(attr_infos)
@@ -141,7 +143,7 @@ class Writer:
         return obj.recommended_profile
 
     @staticmethod
-    def get_class_profile_map(obj_list: list[Base]) -> dict[str, BaseProfile]:
+    def get_class_profile_map(obj_list: Iterable[Base]) -> dict[str, BaseProfile]:
         """Get the main profiles for a list of CIM objects.
 
         The result could be used as parameter for the functions: write and generate.
@@ -188,7 +190,7 @@ class Writer:
                         infos = {
                             "attr_name": attr_name,
                             "namespace": extra.get("namespace", obj.namespace),
-                            "value": getattr(obj, attr),
+                            "value": Writer._get_xml_value(getattr(obj, attr)),
                             "is_class_attribute": extra.get("is_class_attribute"),
                             "is_enum_attribute": extra.get("is_enum_attribute"),
                             "is_list_attribute": extra.get("is_list_attribute"),
@@ -196,3 +198,9 @@ class Writer:
                         }
                         attr_infos_map[attr] = infos
         return attr_infos_map
+
+    @staticmethod
+    def _get_xml_value(value: Any) -> Any:
+        if isinstance(value, bool):
+            return "true" if value else "false"
+        return value

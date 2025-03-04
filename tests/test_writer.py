@@ -8,9 +8,15 @@ from pathlib import Path
 from pycgmes.resources.Analog import Analog
 from pycgmes.resources.AnalogValue import AnalogValue
 from pycgmes.resources.BaseVoltage import BaseVoltage
+from pycgmes.resources.Location import Location
+from pycgmes.resources.Season import Season
+from pycgmes.resources.Status import Status
+from pycgmes.resources.StreetAddress import StreetAddress
+from pycgmes.resources.StreetDetail import StreetDetail
 from pycgmes.resources.Terminal import Terminal
 from pycgmes.resources.TopologicalIsland import TopologicalIsland
 from pycgmes.resources.TopologicalNode import TopologicalNode
+from pycgmes.resources.TownDetail import TownDetail
 from pycgmes.resources.VoltageLevel import VoltageLevel
 from pycgmes.utils.profile import Profile
 from pycgmes.utils.writer import Writer
@@ -111,6 +117,7 @@ class TestWriter:
               <cim:Analog rdf:ID="Analog.N0">
                 <cim:Measurement.unitMultiplier rdf:resource="http://iec.ch/TC57/CIM100#UnitMultiplier.k" />
                 <cim:Measurement.unitSymbol rdf:resource="http://iec.ch/TC57/CIM100#UnitSymbol.V" />
+                <cim:Analog.positiveFlowIn>false</cim:Analog.positiveFlowIn>
               </cim:Analog>
               <cim:AnalogValue rdf:ID="AnalogValue.N0">
                 <cim:AnalogValue.Analog rdf:resource="#Analog.N0.Voltage" />
@@ -235,10 +242,82 @@ class TestWriter:
                 <cim:Measurement.measurementType>Voltage</cim:Measurement.measurementType>
                 <cim:Measurement.unitMultiplier rdf:resource="http://iec.ch/TC57/CIM100#UnitMultiplier.k" />
                 <cim:Measurement.unitSymbol rdf:resource="http://iec.ch/TC57/CIM100#UnitSymbol.V" />
+                <cim:Analog.positiveFlowIn>false</cim:Analog.positiveFlowIn>
               </cim:Analog>
               <cim:AnalogValue rdf:ID="AnalogValue.N0.Voltage">
                 <cim:AnalogValue.Analog rdf:resource="#Analog.N0.Voltage" />
               </cim:AnalogValue>
+            </rdf:RDF>
+            """
+        )
+        assert xml == expected
+
+    def test_generate_location(self):
+        writer = Writer(
+            {
+                "_Location": Location(mRID="_Location", mainAddress="_Address"),
+                "_Address": StreetAddress(status="_Status", streetDetail="_Street", townDetail="_Town"),
+                "_Status": Status(dateTime="2024-10-13 19:17:22 +0200", value="verified"),
+                "_Street": StreetDetail(name="Ku'damm", number="33", withinTownLimits=True),
+                "_Town": TownDetail(name="Berlin", country="Germany"),
+            }
+        )
+        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        xml = writer.generate(Profile.GL, "model" + "_" + Profile.GL.long_name, class_profile_map)
+        expected = textwrap.dedent(
+            """\
+            <?xml version="1.0" encoding="utf-8" ?>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#">
+              <md:FullModel rdf:about="model_GeographicalLocation">
+                <md:Model.modelingAuthoritySet>www.sogno.energy</md:Model.modelingAuthoritySet>
+                <md:Model.profile>http://iec.ch/TC57/ns/CIM/GeographicalLocation-EU/3.0</md:Model.profile>
+              </md:FullModel>
+              <cim:Location rdf:ID="_Location">
+                <cim:Location.mainAddress rdf:resource="#_Address" />
+              </cim:Location>
+              <cim:StreetAddress rdf:ID="_Address">
+                <cim:StreetAddress.status rdf:resource="#_Status" />
+                <cim:StreetAddress.streetDetail rdf:resource="#_Street" />
+                <cim:StreetAddress.townDetail rdf:resource="#_Town" />
+              </cim:StreetAddress>
+              <cim:Status rdf:ID="_Status">
+                <cim:Status.dateTime>2024-10-13 19:17:22 +0200</cim:Status.dateTime>
+                <cim:Status.value>verified</cim:Status.value>
+              </cim:Status>
+              <cim:StreetDetail rdf:ID="_Street">
+                <cim:StreetDetail.name>Ku'damm</cim:StreetDetail.name>
+                <cim:StreetDetail.number>33</cim:StreetDetail.number>
+                <cim:StreetDetail.withinTownLimits>true</cim:StreetDetail.withinTownLimits>
+              </cim:StreetDetail>
+              <cim:TownDetail rdf:ID="_Town">
+                <cim:TownDetail.country>Germany</cim:TownDetail.country>
+                <cim:TownDetail.name>Berlin</cim:TownDetail.name>
+              </cim:TownDetail>
+            </rdf:RDF>
+            """
+        )
+        assert xml == expected
+
+    def test_generate_season(self):
+        writer = Writer(
+            {
+                "_Season": Season(mRID="_Season", startDate="--10-13", endDate="--10-31"),
+            }
+        )
+        class_profile_map = Writer.get_class_profile_map(writer.objects.values())
+        xml = writer.generate(Profile.EQ, "model" + "_" + Profile.EQ.long_name, class_profile_map)
+        expected = textwrap.dedent(
+            """\
+            <?xml version="1.0" encoding="utf-8" ?>
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#">
+              <md:FullModel rdf:about="model_CoreEquipment">
+                <md:Model.modelingAuthoritySet>www.sogno.energy</md:Model.modelingAuthoritySet>
+                <md:Model.profile>http://iec.ch/TC57/ns/CIM/CoreEquipment-EU/3.0</md:Model.profile>
+              </md:FullModel>
+              <cim:Season rdf:ID="_Season">
+                <cim:Season.endDate>--10-31</cim:Season.endDate>
+                <cim:Season.startDate>--10-13</cim:Season.startDate>
+              </cim:Season>
             </rdf:RDF>
             """
         )

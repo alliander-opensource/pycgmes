@@ -125,8 +125,8 @@ class VsConverter(ACDCConverter):
         },
     )
 
-    pPccControl: Optional[str] = Field(
-        default=None,
+    pPccControl: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,
@@ -139,8 +139,8 @@ class VsConverter(ACDCConverter):
         },
     )
 
-    qPccControl: Optional[str] = Field(
-        default=None,
+    qPccControl: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.SSH,

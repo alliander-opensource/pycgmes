@@ -51,8 +51,8 @@ class HydroPowerPlant(PowerSystemResource):
         },
     )
 
-    hydroPlantStorageType: Optional[str] = Field(
-        default=None,
+    hydroPlantStorageType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

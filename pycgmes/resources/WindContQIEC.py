@@ -340,8 +340,8 @@ class WindContQIEC(IdentifiedObject):
         },
     )
 
-    windQcontrolModesType: Optional[str] = Field(
-        default=None,
+    windQcontrolModesType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
@@ -354,8 +354,8 @@ class WindContQIEC(IdentifiedObject):
         },
     )
 
-    windUVRTQcontrolModesType: Optional[str] = Field(
-        default=None,
+    windUVRTQcontrolModesType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

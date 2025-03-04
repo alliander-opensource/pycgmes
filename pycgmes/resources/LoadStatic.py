@@ -278,8 +278,8 @@ class LoadStatic(IdentifiedObject):
         },
     )
 
-    staticLoadModelType: Optional[str] = Field(
-        default=None,
+    staticLoadModelType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

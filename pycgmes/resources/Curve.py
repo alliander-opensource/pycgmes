@@ -39,8 +39,8 @@ class Curve(IdentifiedObject):
         },
     )
 
-    curveStyle: Optional[str] = Field(
-        default=None,
+    curveStyle: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
@@ -53,8 +53,8 @@ class Curve(IdentifiedObject):
         },
     )
 
-    xUnit: Optional[str] = Field(
-        default=None,
+    xUnit: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
@@ -67,8 +67,8 @@ class Curve(IdentifiedObject):
         },
     )
 
-    y1Unit: Optional[str] = Field(
-        default=None,
+    y1Unit: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,
@@ -81,8 +81,8 @@ class Curve(IdentifiedObject):
         },
     )
 
-    y2Unit: Optional[str] = Field(
-        default=None,
+    y2Unit: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

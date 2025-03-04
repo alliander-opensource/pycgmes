@@ -70,8 +70,8 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
         },
     )
 
-    modelType: Optional[str] = Field(
-        default=None,
+    modelType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,
@@ -84,8 +84,8 @@ class SynchronousMachineTimeConstantReactance(SynchronousMachineDetailed):
         },
     )
 
-    rotorType: Optional[str] = Field(
-        default=None,
+    rotorType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

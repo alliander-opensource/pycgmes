@@ -48,8 +48,8 @@ class SynchronousMachineDetailed(SynchronousMachineDynamics):
         },
     )
 
-    ifdBaseType: Optional[str] = Field(
-        default=None,
+    ifdBaseType: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

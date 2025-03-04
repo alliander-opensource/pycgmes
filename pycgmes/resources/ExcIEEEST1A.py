@@ -210,8 +210,8 @@ class ExcIEEEST1A(ExcitationSystemDynamics):
         },
     )
 
-    uelin: Optional[str] = Field(
-        default=None,
+    uelin: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.DY,

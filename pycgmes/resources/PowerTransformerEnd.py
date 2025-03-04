@@ -98,8 +98,8 @@ class PowerTransformerEnd(TransformerEnd):
         },
     )
 
-    connectionKind: Optional[str] = Field(
-        default=None,
+    connectionKind: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.EQ,

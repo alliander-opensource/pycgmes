@@ -88,8 +88,8 @@ class Measurement(IdentifiedObject):
         },
     )
 
-    phases: Optional[str] = Field(
-        default=None,
+    phases: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
@@ -102,8 +102,8 @@ class Measurement(IdentifiedObject):
         },
     )
 
-    unitMultiplier: Optional[str] = Field(
-        default=None,
+    unitMultiplier: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
@@ -116,8 +116,8 @@ class Measurement(IdentifiedObject):
         },
     )
 
-    unitSymbol: Optional[str] = Field(
-        default=None,
+    unitSymbol: str = Field(
+        default="",
         json_schema_extra={
             "in_profiles": [
                 Profile.OP,
