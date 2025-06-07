@@ -22,7 +22,7 @@ SPDX-License-Identifier: Apache-2.0
     - [SHACL files](#shacl-files)
     - [V3 source zip](#v3-source-zip)
     - [Dataclasses](#dataclasses)
-  - [Library build, CI, CD...](#library-build-ci-cd)
+  - [Library build, CI, CD](#library-build-ci-cd)
     - [CI](#ci)
     - [CD](#cd)
   - [License](#license)
@@ -76,9 +76,16 @@ class higher in the hierarchy (for instance `Equipment`) there is a lot more wor
 class CustomBay(Bay):
     colour: str = Field(
         default="Red",
-        in_profiles=[
-            Profile.EQ,
-        ],
+        json_schema_extra={
+            "in_profiles": [
+                Profile.EQ,
+            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
     )
 ```
 
@@ -86,7 +93,7 @@ class CustomBay(Bay):
 
 This approach is cleaner and more standard compliant: the official CGMES profiles stay untouched, while a new additional profile contains your customisations.
 
-You can do this by extending the `BaseProfile`` Enum in [profile.py](./pycgmes/utils/profile.py).
+You can do this by extending the `BaseProfile` Enum in [profile.py](./pycgmes/utils/profile.py).
 
 While in Python it is not possible to extend or compose Enums which already have fields, you can create your own:
 
@@ -94,8 +101,8 @@ While in Python it is not possible to extend or compose Enums which already have
 from pycgmes.utils.profile import BaseProfile
 
 class CustomProfile(BaseProfile):
-    CUS="Tom"
-    FRO="Mage"
+    CUS = "Tom"
+    FRO = "Mage"
 ```
 
 And use it everywhere you would use a profile:
@@ -109,11 +116,18 @@ class CustomBayAttr(Bay):
             "in_profiles": [
                 CustomProfile.CUS,
             ],
-        }
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+            "namespace": "custom",
+        },
     )
 
 # And for instance:
-custom_attrs = CustomBayAttr(colour="purple").cgmes_attributes_in_profile(CustomProfile.CUS)
+custom_attr = CustomBayAttr(colour="purple")
+attr_dict = custom_attr.cgmes_attributes_in_profile(CustomProfile.CUS)
 ```
 
 ### Implementation details
@@ -128,11 +142,10 @@ from pydantic.dataclasses import dataclass
 
 from pycgmes.resources.ACLineSegment import ACLineSegment
 
-
 @dataclass
 class ACLineSegmentCustom(ACLineSegment):
     @classmethod
-    def apparent_name(cls):
+    def apparent_name(cls) -> str:
         return "ACLineSegment"
 ```
 
@@ -143,6 +156,14 @@ class ACLineSegmentCustom(ACLineSegment):
 The default class (or resource) namespace is `http://iec.ch/TC57/CIM100#`.
 
 You can override it when you create a custom resource by just redefining the property `namespace`:
+
+```python
+@dataclass
+class ACLineSegmentCustom(ACLineSegment):
+    @property
+    def namespace(self) -> str:
+        return "custom ns class"
+```
 
 ##### Attribute namespace
 
@@ -155,11 +176,10 @@ The namespace of an attribute is the first value found:
 - namespace of the first parent defining one. The top parent (`Base`) defined  `cim`.
 
 ```python
-from pydantic.dataclasses import dataclass
 from pydantic import Field
+from pydantic.dataclasses import dataclass
 
-from pycgmes.resources import ACLineSegment
-
+from pycgmes.resources.ACLineSegment import ACLineSegment
 
 @dataclass
 class ACLineSegmentCustom(ACLineSegment):
@@ -167,8 +187,12 @@ class ACLineSegmentCustom(ACLineSegment):
         default="Red",
         json_schema_extra={
             "in_profiles": [
-                Profile.EQ, # Do not do this, see chapter "create a new profile"
-            ],
+                Profile.EQ, # Do not do this, see chapter "Create a new profile"            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
             "namespace": "custom",
         },
     )
@@ -177,9 +201,13 @@ class ACLineSegmentCustom(ACLineSegment):
         default="Big",
         json_schema_extra={
             "in_profiles": [
-                Profile.EQ, # Do not do this, see chapter "create a new profile"
-            ],
-        }
+                Profile.EQ, # Do not do this, see chapter "Create a new profile"            ],
+            "is_used": True,
+            "is_class_attribute": False,
+            "is_enum_attribute": False,
+            "is_list_attribute": False,
+            "is_primitive_attribute": True,
+        },
     )
 
     @property
@@ -187,7 +215,7 @@ class ACLineSegmentCustom(ACLineSegment):
         return "custom ns class"
 
     @classmethod
-    def apparent_name(cls):
+    def apparent_name(cls) -> str:
         return "ACLineSegment"
 ```
 
@@ -224,7 +252,7 @@ files (those extracted and mentioned above) but is usually not needed.
 
 Generated from the modernpython serialisation of [cimgen](https://github.com/sogno-platform/cimgen).
 
-## Library build, CI, CD...
+## Library build, CI, CD
 
 ### CI
 
@@ -246,7 +274,7 @@ Please read [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md), [CONTRIBUTING.md](./CONT
 
 ## Contact
 
-Please read [SUPPORT.md](./SUPPORT.md)for how to connect and get into contact with the project.
+Please read [SUPPORT.md](./SUPPORT.md) for how to connect and get into contact with the project.
 
 ## Attribution
 
