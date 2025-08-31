@@ -29,7 +29,7 @@ class UnitSymbol(str, Enum):
 
     none = "none"  # Dimension less quantity, e.g. count, per unit, etc.  # noqa: E501
     m = "m"  # Length in metres.  # noqa: E501
-    kg = "kg"  # Mass in kilograms.  Note: multiplier &quot;k&quot; is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
+    kg = "kg"  # Mass in kilograms.  Note: multiplier "k" is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
     s = "s"  # Time in seconds.  # noqa: E501
     A = "A"  # Current in amperes.  # noqa: E501
     K = "K"  # Temperature in kelvins.  # noqa: E501
@@ -55,7 +55,7 @@ class UnitSymbol(str, Enum):
     lm = "lm"  # Luminous flux in lumens (cd·sr).  # noqa: E501
     Wb = "Wb"  # Magnetic flux in webers (V·s).  # noqa: E501
     T = "T"  # Magnetic flux density in teslas (Wb/m2).  # noqa: E501
-    W = "W"  # Real power in watts (J/s). Electrical power may have real and reactive components. The real portion of electrical power (I&amp;#178;R or VIcos(phi)), is expressed in Watts. See also apparent power and reactive power.  # noqa: E501
+    W = "W"  # Real power in watts (J/s). Electrical power may have real and reactive components. The real portion of electrical power (I&#178;R or VIcos(phi)), is expressed in Watts. See also apparent power and reactive power.  # noqa: E501
     Pa = "Pa"  # Pressure in pascals (N/m²). Note: the absolute or relative measurement of pressure is implied with this entry. See below for more explicit forms.  # noqa: E501
     m2 = "m2"  # Area in square metres (m²).  # noqa: E501
     m3 = "m3"  # Volume in cubic metres (m³).  # noqa: E501
@@ -63,8 +63,8 @@ class UnitSymbol(str, Enum):
     mPers2 = "mPers2"  # Acceleration in metres per second squared (m/s²).  # noqa: E501
     m3Pers = "m3Pers"  # Volumetric flow rate in cubic metres per second (m³/s).  # noqa: E501
     mPerm3 = "mPerm3"  # Fuel efficiency in metres per cubic metres (m/m³).  # noqa: E501
-    kgm = "kgm"  # Moment of mass in kilogram metres (kg·m) (first moment of mass). Note: multiplier &quot;k&quot; is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
-    kgPerm3 = "kgPerm3"  # Density in kilogram/cubic metres (kg/m³). Note: multiplier &quot;k&quot; is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
+    kgm = "kgm"  # Moment of mass in kilogram metres (kg·m) (first moment of mass). Note: multiplier "k" is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
+    kgPerm3 = "kgPerm3"  # Density in kilogram/cubic metres (kg/m³). Note: multiplier "k" is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
     m2Pers = "m2Pers"  # Viscosity in square metres / second (m²/s).  # noqa: E501
     WPermK = "WPermK"  # Thermal conductivity in watt/metres kelvin.  # noqa: E501
     JPerK = "JPerK"  # Heat capacity in joules/kelvin.  # noqa: E501
@@ -78,7 +78,7 @@ class UnitSymbol(str, Enum):
     PaPers = "PaPers"  # Pressure change rate in pascals per second.  # noqa: E501
     JPerkgK = "JPerkgK"  # Specific heat capacity, specific entropy, joules per kilogram Kelvin.  # noqa: E501
     VA = "VA"  # Apparent power in volt amperes. See also real power and reactive power.  # noqa: E501
-    VAr = "VAr"  # Reactive power in volt amperes reactive. The &quot;reactive&quot; or &quot;imaginary&quot; component of electrical power (VIsin(phi)). (See also real power and apparent power). Note: Different meter designs use different methods to arrive at their results. Some meters may compute reactive power as an arithmetic value, while others compute the value vectorially. The data consumer should determine the method in use and the suitability of the measurement for the intended purpose.  # noqa: E501
+    VAr = "VAr"  # Reactive power in volt amperes reactive. The "reactive" or "imaginary" component of electrical power (VIsin(phi)). (See also real power and apparent power). Note: Different meter designs use different methods to arrive at their results. Some meters may compute reactive power as an arithmetic value, while others compute the value vectorially. The data consumer should determine the method in use and the suitability of the measurement for the intended purpose.  # noqa: E501
     cosPhi = "cosPhi"  # Power factor, dimensionless. Note 1: This definition of power factor only holds for balanced systems. See the alternative definition under code 153. Note 2 : Beware of differing sign conventions in use between the IEC and EEI. It is assumed that the data consumer understands the type of meter in use and the sign convention in use by the utility.  # noqa: E501, RUF003
     Vs = "Vs"  # Volt seconds (Ws/A).  # noqa: E501
     V2 = "V2"  # Volt squared (W²/A²).  # noqa: E501
@@ -92,11 +92,11 @@ class UnitSymbol(str, Enum):
     HzPers = "HzPers"  # Rate of change of frequency in hertz per second.  # noqa: E501
     character = "character"  # Number of characters.  # noqa: E501
     charPers = "charPers"  # Data rate (baud) in characters per second.  # noqa: E501
-    kgm2 = "kgm2"  # Moment of mass in kilogram square metres (kg·m²) (Second moment of mass, commonly called the moment of inertia). Note: multiplier &quot;k&quot; is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
-    dB = "dB"  # Sound pressure level in decibels. Note:  multiplier &quot;d&quot; is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
+    kgm2 = "kgm2"  # Moment of mass in kilogram square metres (kg·m²) (Second moment of mass, commonly called the moment of inertia). Note: multiplier "k" is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
+    dB = "dB"  # Sound pressure level in decibels. Note:  multiplier "d" is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
     WPers = "WPers"  # Ramp rate in watts per second.  # noqa: E501
     lPers = "lPers"  # Volumetric flow rate in litres per second.  # noqa: E501
-    dBm = "dBm"  # Power level (logarithmic ratio of signal strength , Bel-mW), normalized to 1mW. Note:  multiplier &quot;d&quot; is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
+    dBm = "dBm"  # Power level (logarithmic ratio of signal strength , Bel-mW), normalized to 1mW. Note:  multiplier "d" is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
     h = "h"  # Time in hours, hour = 60 min = 3600 s.  # noqa: E501
     min = "min"  # Time in minutes, minute  = 60 s.  # noqa: E501
     Q = "Q"  # Quantity power, Q.  # noqa: E501
@@ -118,7 +118,7 @@ class UnitSymbol(str, Enum):
     molPerm3 = "molPerm3"  # Concentration, The amount of substance concentration, (c), the amount of solvent in moles divided by the volume of solution in m³.  # noqa: E501
     molPermol = "molPermol"  # Concentration, Molar fraction, the ratio of the molar amount of a solute divided by the molar amount of the solution.  # noqa: E501
     molPerkg = "molPerkg"  # Concentration, Molality, the amount of solute in moles and the amount of solvent in kilograms.  # noqa: E501
-    sPers = "sPers"  # Time, Ratio of time.  Note: Users may need to supply a prefix such as ‘&amp;#181;' to show rates such as ‘&amp;#181;s/s'.  # noqa: E501, RUF003
+    sPers = "sPers"  # Time, Ratio of time.  Note: Users may need to supply a prefix such as ‘&#181;' to show rates such as ‘&#181;s/s'.  # noqa: E501, RUF003
     HzPerHz = "HzPerHz"  # Frequency, rate of frequency change.   Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mHz/Hz'.  # noqa: E501, RUF003
     VPerV = "VPerV"  # Voltage, ratio of voltages.  Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mV/V'.  # noqa: E501, RUF003
     APerA = "APerA"  # Current, ratio of amperages.   Note: Users may need to supply a prefix such as ‘m' to show rates such as ‘mA/A'.  # noqa: E501, RUF003
@@ -153,7 +153,7 @@ class UnitSymbol(str, Enum):
     anglemin = "anglemin"  # Plane angle, minutes.  # noqa: E501
     anglesec = "anglesec"  # Plane angle, seconds.  # noqa: E501
     ha = "ha"  # Area, hectares.  # noqa: E501
-    tonne = "tonne"  # Mass in tons, &quot;tonne&quot; or &quot;metric  ton&quot; (1000 kg = 1 Mg).  # noqa: E501
+    tonne = "tonne"  # Mass in tons, "tonne" or "metric  ton" (1000 kg = 1 Mg).  # noqa: E501
     bar = "bar"  # Pressure in bars, (1 bar = 100 kPa).  # noqa: E501
     mmHg = "mmHg"  # Pressure, millimetres of mercury (1 mmHg is approximately 133.3 Pa).  # noqa: E501
     M = "M"  # Length, nautical miles (1 M = 1852 m).  # noqa: E501
@@ -166,5 +166,5 @@ class UnitSymbol(str, Enum):
     onePerHz = "onePerHz"  # Reciprocal of frequency (1/Hz).  # noqa: E501
     VPerVAr = "VPerVAr"  # Power factor, PF, the ratio of the active power to the apparent power. Note: The sign convention used for power factor will differ between IEC meters and EEI (ANSI) meters. It is assumed that the data consumers understand the type of meter being used and agree on the sign convention in use at any given utility.  # noqa: E501
     ohmPerm = "ohmPerm"  # Electric resistance per length in ohms per metre ((V/A)/m).  # noqa: E501
-    kgPerJ = "kgPerJ"  # Weight per energy in kilograms per joule (kg/J). Note: multiplier &quot;k&quot; is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
+    kgPerJ = "kgPerJ"  # Weight per energy in kilograms per joule (kg/J). Note: multiplier "k" is included in this unit symbol for compatibility with IEC 61850-7-3.  # noqa: E501
     JPers = "JPers"  # Energy rate in joules per second (J/s).  # noqa: E501
