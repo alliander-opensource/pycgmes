@@ -62,9 +62,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "ActivePowerPerFrequency",
         },
     )
 
@@ -76,9 +78,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Boolean",
         },
     )
 
@@ -90,9 +94,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "CurrentFlow",
         },
     )
 
@@ -104,9 +110,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -118,9 +126,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -132,9 +142,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -146,9 +158,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -160,9 +174,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -174,9 +190,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "CurrentFlow",
         },
     )
 
@@ -188,9 +206,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -202,9 +222,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -216,9 +238,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -230,9 +254,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -244,9 +270,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Float",
         },
     )
 
@@ -258,9 +286,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "ActivePower",
         },
     )
 
@@ -272,9 +302,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "ReactivePower",
         },
     )
 
@@ -286,9 +318,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "Integer",
         },
     )
 
@@ -300,9 +334,11 @@ class ExternalNetworkInjection(RegulatingCondEq):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": True,
             "is_enum_attribute": False,
             "is_list_attribute": False,
-            "is_primitive_attribute": True,
+            "is_primitive_attribute": False,
+            "attribute_class": "PU",
         },
     )
 

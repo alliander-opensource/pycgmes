@@ -2,39 +2,16 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class SynchronousMachineModelKind(Base):
+class SynchronousMachineModelKind(str, Enum):
     """
     Type of synchronous machine model used in dynamic simulation applications.
-
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.DY,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.DY
+    subtransient = "subtransient"  # Subtransient synchronous machine model.  # noqa: E501, E741, RUF003
+    subtransientTypeF = "subtransientTypeF"  # WECC type F variant of subtransient synchronous machine model.  # noqa: E501, E741, RUF003
+    subtransientTypeJ = "subtransientTypeJ"  # WECC type J variant of subtransient synchronous machine model.  # noqa: E501, E741, RUF003
+    subtransientSimplified = "subtransientSimplified"  # Simplified version of subtransient synchronous machine model where magnetic coupling between the direct- and quadrature- axes is ignored.  # noqa: E501, E741, RUF003
+    subtransientSimplifiedDirectAxis = "subtransientSimplifiedDirectAxis"  # Simplified version of a subtransient synchronous machine model with no damper circuit on the direct-axis.  # noqa: E501, E741, RUF003

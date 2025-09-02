@@ -4,9 +4,12 @@
 
 import importlib
 from collections.abc import Iterator
+from enum import EnumType
 from pathlib import Path
 
 import pytest
+
+from pycgmes.utils.datatypes import CIMDatatype, Primitive
 
 
 def get_all_resources() -> Iterator[str]:
@@ -22,5 +25,7 @@ class TestLoadAll:
     def test_importing(self, resource):
         mod = importlib.import_module(f".{resource}", package="pycgmes.resources")
         # Calling possible profiles to have full coverage.
-        profiles = getattr(mod, resource)().possible_profiles
-        assert profiles
+        cls = getattr(mod, resource)
+        if type(cls) not in (Primitive, CIMDatatype, EnumType):
+            profiles = cls().possible_profiles
+            assert profiles

@@ -4,7 +4,7 @@
 
 [tool.poetry]
 name = "pycgmes"
-version = "2.0.5"
+version = "2.0.6"
 description = "Python dataclasses for CGMES 3.0.0"
 authors = ["pycgmes <pycgmes@alliander.com>"]
 readme = "README.md"
@@ -14,7 +14,6 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Framework :: Pydantic",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Typing :: Typed",
@@ -27,7 +26,7 @@ exclude = ["./pycgmes/shacl"]
 
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 poetry = ">=1.5.0" # key 'priority' in source
 pydantic = ">=2" # Used for dataclasses
 chevron = ">=0.14.0" # Used for writer

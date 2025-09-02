@@ -2,18 +2,10 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class UnitMultiplier(Base):
+class UnitMultiplier(str, Enum):
     """
     The unit multipliers defined for the CIM.  When applied to unit symbols, the unit symbol is treated as a derived
       unit. Regardless of the contents of the unit symbol text, the unit symbol shall be treated as if it were a
@@ -30,32 +22,26 @@ class UnitMultiplier(Base):
       the "kg" as if it were replaced by one of the proposed replacements for the SI mass symbol. If one imagines
       that the "kg" were replaced by a symbol "Þ", then it is easier to conceptualize the multiplier "m" as creating
       the proper unit "mÞ", and not the forbidden unit "mkg".
-
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.DL,
-            Profile.DY,
-            Profile.EQ,
-            Profile.EQBD,
-            Profile.OP,
-            Profile.SC,
-            Profile.SSH,
-            Profile.SV,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.EQ
+    y = "y"  # Yocto 10**-24.  # noqa: E501, E741, RUF003
+    z = "z"  # Zepto 10**-21.  # noqa: E501, E741, RUF003
+    a = "a"  # Atto 10**-18.  # noqa: E501, E741, RUF003
+    f = "f"  # Femto 10**-15.  # noqa: E501, E741, RUF003
+    p = "p"  # Pico 10**-12.  # noqa: E501, E741, RUF003
+    n = "n"  # Nano 10**-9.  # noqa: E501, E741, RUF003
+    micro = "micro"  # Micro 10**-6.  # noqa: E501, E741, RUF003
+    m = "m"  # Milli 10**-3.  # noqa: E501, E741, RUF003
+    c = "c"  # Centi 10**-2.  # noqa: E501, E741, RUF003
+    d = "d"  # Deci 10**-1.  # noqa: E501, E741, RUF003
+    none = "none"  # No multiplier or equivalently multiply by 1.  # noqa: E501, E741, RUF003
+    da = "da"  # Deca 10**1.  # noqa: E501, E741, RUF003
+    h = "h"  # Hecto 10**2.  # noqa: E501, E741, RUF003
+    k = "k"  # Kilo 10**3.  # noqa: E501, E741, RUF003
+    M = "M"  # Mega 10**6.  # noqa: E501, E741, RUF003
+    G = "G"  # Giga 10**9.  # noqa: E501, E741, RUF003
+    T = "T"  # Tera 10**12.  # noqa: E501, E741, RUF003
+    P = "P"  # Peta 10**15.  # noqa: E501, E741, RUF003
+    E = "E"  # Exa 10**18.  # noqa: E501, E741, RUF003
+    Z = "Z"  # Zetta 10**21.  # noqa: E501, E741, RUF003
+    Y = "Y"  # Yotta 10**24.  # noqa: E501, E741, RUF003

@@ -2,39 +2,16 @@
 Generated from the CGMES files via cimgen: https://github.com/sogno-platform/cimgen
 """
 
-from functools import cached_property
-from typing import Optional
-
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from ..utils.profile import BaseProfile, Profile
-from ..utils.base import Base
+from enum import Enum
 
 
-@dataclass
-class BatteryStateKind(Base):
+class BatteryStateKind(str, Enum):
     """
     The state of the battery unit.
-
     """
 
-    # No attributes defined for this class.
-
-    @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        """
-        A resource can be used by multiple profiles. This is the set of profiles
-        where this element can be found.
-        """
-        return {
-            Profile.SSH,
-        }
-
-    @cached_property
-    def recommended_profile(self) -> BaseProfile:
-        """
-        This is the profile with most of the attributes.
-        It should be used to write the data to as few as possible files.
-        """
-        return Profile.SSH
+    discharging = "discharging"  # Stored energy is decreasing.  # noqa: E501, E741, RUF003
+    full = "full"  # Unable to charge, and not discharging.  # noqa: E501, E741, RUF003
+    waiting = "waiting"  # Neither charging nor discharging, but able to do so.  # noqa: E501, E741, RUF003
+    charging = "charging"  # Stored energy is increasing.  # noqa: E501, E741, RUF003
+    empty = "empty"  # Unable to discharge, and not charging.  # noqa: E501, E741, RUF003

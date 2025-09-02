@@ -31,6 +31,7 @@ class EnergyArea(IdentifiedObject):
             ],
             "is_used": False,
             "is_class_attribute": True,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": False,
