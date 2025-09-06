@@ -10,6 +10,6 @@ class HydroPlantStorageKind(str, Enum):
     The type of hydro power plant.
     """
 
-    runOfRiver = "runOfRiver"  # Run of river.  # noqa: E501, E741, RUF003
-    pumpedStorage = "pumpedStorage"  # Pumped storage.  # noqa: E501, E741, RUF003
-    storage = "storage"  # Storage.  # noqa: E501, E741, RUF003
+    runOfRiver = "runOfRiver"  # Run of river.  # noqa: E501
+    pumpedStorage = "pumpedStorage"  # Pumped storage.  # noqa: E501
+    storage = "storage"  # Storage.  # noqa: E501

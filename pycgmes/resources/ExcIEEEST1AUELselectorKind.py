@@ -10,7 +10,7 @@ class ExcIEEEST1AUELselectorKind(str, Enum):
     Types of connections for the UEL input used in ExcIEEEST1A.
     """
 
-    ignoreUELsignal = "ignoreUELsignal"  # Ignore UEL signal.  # noqa: E501, E741, RUF003
-    inputHVgateVoltageOutput = "inputHVgateVoltageOutput"  # UEL input HV gate with voltage regulator output.  # noqa: E501, E741, RUF003
-    inputHVgateErrorSignal = "inputHVgateErrorSignal"  # UEL input HV gate with error signal.  # noqa: E501, E741, RUF003
-    inputAddedToErrorSignal = "inputAddedToErrorSignal"  # UEL input added to error signal.  # noqa: E501, E741, RUF003
+    ignoreUELsignal = "ignoreUELsignal"  # Ignore UEL signal.  # noqa: E501
+    inputHVgateVoltageOutput = "inputHVgateVoltageOutput"  # UEL input HV gate with voltage regulator output.  # noqa: E501
+    inputHVgateErrorSignal = "inputHVgateErrorSignal"  # UEL input HV gate with error signal.  # noqa: E501
+    inputAddedToErrorSignal = "inputAddedToErrorSignal"  # UEL input added to error signal.  # noqa: E501

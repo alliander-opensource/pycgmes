@@ -48,6 +48,7 @@ class VsConverter(ACDCConverter):
                 Profile.EQ,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": True,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -63,6 +64,7 @@ class VsConverter(ACDCConverter):
                 Profile.DY,
             ],
             "is_used": False,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": True,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -78,6 +80,7 @@ class VsConverter(ACDCConverter):
                 Profile.SV,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -94,6 +97,7 @@ class VsConverter(ACDCConverter):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -110,6 +114,7 @@ class VsConverter(ACDCConverter):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -126,6 +131,7 @@ class VsConverter(ACDCConverter):
                 Profile.EQ,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -142,6 +148,7 @@ class VsConverter(ACDCConverter):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": True,
@@ -157,6 +164,7 @@ class VsConverter(ACDCConverter):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": True,
@@ -172,6 +180,7 @@ class VsConverter(ACDCConverter):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -188,6 +197,7 @@ class VsConverter(ACDCConverter):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -204,6 +214,7 @@ class VsConverter(ACDCConverter):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -220,6 +231,7 @@ class VsConverter(ACDCConverter):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -236,6 +248,7 @@ class VsConverter(ACDCConverter):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -252,6 +265,7 @@ class VsConverter(ACDCConverter):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -268,6 +282,7 @@ class VsConverter(ACDCConverter):
                 Profile.SV,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -284,8 +299,8 @@ class VsConverter(ACDCConverter):
         where this element can be found.
         """
         return {
-            Profile.DY,
             Profile.EQ,
+            Profile.DY,
             Profile.SSH,
             Profile.SV,
         }

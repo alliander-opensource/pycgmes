@@ -28,8 +28,8 @@ class EnergyConnection(ConductingEquipment):
         where this element can be found.
         """
         return {
-            Profile.DY,
             Profile.EQ,
+            Profile.DY,
             Profile.SC,
             Profile.SSH,
         }

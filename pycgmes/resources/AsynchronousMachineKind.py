@@ -10,5 +10,5 @@ class AsynchronousMachineKind(str, Enum):
     Kind of Asynchronous Machine.
     """
 
-    generator = "generator"  # The Asynchronous Machine is a generator.  # noqa: E501, E741, RUF003
-    motor = "motor"  # The Asynchronous Machine is a motor.  # noqa: E501, E741, RUF003
+    generator = "generator"  # The Asynchronous Machine is a generator.  # noqa: E501
+    motor = "motor"  # The Asynchronous Machine is a motor.  # noqa: E501

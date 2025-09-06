@@ -14,8 +14,8 @@ ActivePower = CIMDatatype(
     multiplier=UnitMultiplier.M,
     unit=UnitSymbol.W,
     profiles=[
-        Profile.DY,
         Profile.EQ,
+        Profile.DY,
         Profile.SC,
         Profile.SSH,
         Profile.SV,

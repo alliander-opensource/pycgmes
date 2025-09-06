@@ -32,6 +32,7 @@ class PowerSystemResource(IdentifiedObject):
                 Profile.OP,
             ],
             "is_used": False,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -47,6 +48,7 @@ class PowerSystemResource(IdentifiedObject):
                 Profile.GL,
             ],
             "is_used": False,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": True,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -62,6 +64,7 @@ class PowerSystemResource(IdentifiedObject):
                 Profile.OP,
             ],
             "is_used": False,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -77,8 +80,8 @@ class PowerSystemResource(IdentifiedObject):
         where this element can be found.
         """
         return {
-            Profile.DY,
             Profile.EQ,
+            Profile.DY,
             Profile.EQBD,
             Profile.GL,
             Profile.OP,

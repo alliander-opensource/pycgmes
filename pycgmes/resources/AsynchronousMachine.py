@@ -44,6 +44,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.DY,
             ],
             "is_used": False,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": True,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -59,6 +60,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.SSH,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": True,
@@ -74,6 +76,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.SC,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -90,6 +93,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.SC,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -106,6 +110,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.SC,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -122,6 +127,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.EQ,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -138,6 +144,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.EQ,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -154,6 +161,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.SC,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -170,6 +178,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.SC,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -186,6 +195,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.SC,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -202,6 +212,7 @@ class AsynchronousMachine(RotatingMachine):
                 Profile.SC,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -218,8 +229,8 @@ class AsynchronousMachine(RotatingMachine):
         where this element can be found.
         """
         return {
-            Profile.DY,
             Profile.EQ,
+            Profile.DY,
             Profile.SC,
             Profile.SSH,
         }

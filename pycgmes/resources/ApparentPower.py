@@ -14,8 +14,8 @@ ApparentPower = CIMDatatype(
     multiplier=UnitMultiplier.M,
     unit=UnitSymbol.VA,
     profiles=[
-        Profile.DY,
         Profile.EQ,
+        Profile.DY,
         Profile.SSH,
     ],
 )

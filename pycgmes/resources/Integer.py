@@ -10,9 +10,9 @@ Integer = Primitive(
     name="Integer",
     type=int,
     profiles=[
+        Profile.EQ,
         Profile.DL,
         Profile.DY,
-        Profile.EQ,
         Profile.GL,
         Profile.OP,
         Profile.SC,
