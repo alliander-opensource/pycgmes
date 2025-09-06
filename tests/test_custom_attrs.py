@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+from functools import cached_property
+
 import pytest
 from pydantic import Field
 from pydantic.dataclasses import dataclass
@@ -9,7 +11,7 @@ from pydantic.dataclasses import dataclass
 from pycgmes.resources.Bay import Bay
 from pycgmes.utils.base import Base
 from pycgmes.utils.constants import NAMESPACES
-from pycgmes.utils.profile import Profile
+from pycgmes.utils.profile import BaseProfile, Profile
 
 
 @dataclass
@@ -22,11 +24,13 @@ class CustomBay(Bay):
                 Profile.EQ,
             ],
             "is_used": True,
+            "namespace": "custom",
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "namespace": "custom",
+            "attribute_class": "String",
         },
     )
 
@@ -45,17 +49,23 @@ class CustomBase(Base):
                 Profile.EQ,
             ],
             "is_used": True,
+            "namespace": "custom",
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "namespace": "custom",
+            "attribute_class": "String",
         },
     )
 
     @classmethod
     def apparent_name(cls) -> str:
         return "Bay"
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        return Profile.EQ
 
 
 @dataclass
@@ -69,14 +79,20 @@ class CustomButNotmuch(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
         # no namespace
     )
 
     # no apparent_name()
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        return Profile.EQ
 
 
 @dataclass
@@ -91,18 +107,24 @@ class CustomNS(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
         # no namespace
     )
 
-    @property
+    @cached_property
     def namespace(self) -> str:
         return "cheesy namespace"
 
     # no apparent_name()
+
+    @cached_property
+    def recommended_profile(self) -> BaseProfile:
+        return Profile.EQ
 
 
 class TestCustom:

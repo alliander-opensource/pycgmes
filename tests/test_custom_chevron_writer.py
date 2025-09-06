@@ -34,11 +34,13 @@ class CustomBayAttr(Bay):
                 CustomProfile.CUS,
             ],
             "is_used": True,
+            "namespace": "custom",
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "namespace": "custom",
+            "attribute_class": "String",
         },
     )
 
@@ -76,10 +78,13 @@ class CustomBase(Base):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
+        # No namespace defined, it will use the class namespace.
     )
 
     @classmethod
@@ -87,8 +92,8 @@ class CustomBase(Base):
         return "Cheese"
 
     @cached_property
-    def possible_profiles(self) -> set[BaseProfile]:
-        return {CustomProfile.FRO}
+    def namespace(self) -> str:
+        return "cheesy namespace"
 
     @cached_property
     def recommended_profile(self) -> BaseProfile:
@@ -149,18 +154,18 @@ class TestChevronWriter:
         expected = textwrap.dedent(
             """\
             <?xml version="1.0" encoding="utf-8" ?>
-            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#">
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:ns0="custom">
               <md:FullModel rdf:about="model_Tom">
                 <md:Model.modelingAuthoritySet>www.sogno.energy</md:Model.modelingAuthoritySet>
                 <md:Model.profile>http://custom</md:Model.profile>
               </md:FullModel>
               <cim:Bay rdf:ID="CBA">
-                <cim:Bay.colour>Blue</cim:Bay.colour>
+                <ns0:Bay.colour>Blue</ns0:Bay.colour>
               </cim:Bay>
               <cim:CustomBayClass rdf:ID="CBC">
               </cim:CustomBayClass>
             </rdf:RDF>
-            """
+            """  # noqa: E501
         )
         assert xml == expected
 
@@ -177,7 +182,7 @@ class TestChevronWriter:
         expected = textwrap.dedent(
             """\
             <?xml version="1.0" encoding="utf-8" ?>
-            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#">
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#" xmlns:cim="http://iec.ch/TC57/CIM100#">
               <md:FullModel rdf:about="model_CoreEquipment">
                 <md:Model.modelingAuthoritySet>www.sogno.energy</md:Model.modelingAuthoritySet>
                 <md:Model.profile>http://iec.ch/TC57/ns/CIM/CoreEquipment-EU/3.0</md:Model.profile>
@@ -189,7 +194,7 @@ class TestChevronWriter:
                 <cim:IdentifiedObject.name>CBC</cim:IdentifiedObject.name>
               </cim:CustomBayClass>
             </rdf:RDF>
-            """
+            """  # noqa: E501
         )
         assert xml == expected
 
@@ -212,15 +217,15 @@ class TestChevronWriter:
         expected = textwrap.dedent(
             """\
             <?xml version="1.0" encoding="utf-8" ?>
-            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cim="http://iec.ch/TC57/CIM100#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#">
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#" xmlns:ns0="cheesy namespace">
               <md:FullModel rdf:about="model_Mage">
                 <md:Model.modelingAuthoritySet>www.sogno.energy</md:Model.modelingAuthoritySet>
                 <md:Model.profile>http://fromage</md:Model.profile>
               </md:FullModel>
-              <cim:Cheese rdf:ID="CB">
-                <cim:Cheese.colour>Red</cim:Cheese.colour>
-              </cim:Cheese>
+              <ns0:Cheese rdf:ID="CB">
+                <ns0:Cheese.colour>Red</ns0:Cheese.colour>
+              </ns0:Cheese>
             </rdf:RDF>
-            """
+            """  # noqa: E501
         )
         assert xml == expected
