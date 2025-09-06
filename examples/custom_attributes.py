@@ -25,11 +25,13 @@ class CustomAttribute(ACLineSegment):
                 CustomProfile.MYOWN,
             ],
             "is_used": True,
+            "namespace": "custom for colour",
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "namespace": "custom for colour",
+            "attribute_class": "String",
         },
     )
 
@@ -41,16 +43,18 @@ class CustomAttribute(ACLineSegment):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
         # No namespace defined, it will use the class namespace.
     )
 
     @classmethod
     def apparent_name(cls) -> str:
-        return cls.__base__.apparent_name()
+        return cls.__base__.apparent_name()  # type: ignore
 
     @cached_property
     def namespace(self) -> str:
@@ -63,7 +67,7 @@ if __name__ == "__main__":
     print("Attributes in profile MYOWN:")
     print(
         json.dumps(
-            {qualname: attr for qualname, attr in my_resource.cgmes_attributes_in_profile(CustomProfile.MYOWN).items()},
+            my_resource.cgmes_attributes_in_profile(CustomProfile.MYOWN),
             indent=2,
         )
     )
