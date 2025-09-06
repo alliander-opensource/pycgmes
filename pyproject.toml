@@ -70,7 +70,7 @@ exclude_also = [ # Regexp of lines (or first line of block) which do not count f
 ]
 
 [tool.pyright]
-include = ["pycgmes"]
+include = ["pycgmes", "examples"]
 exclude = ["tests"]
 # Simulate mypy - these vars will always have the value defined here during type checks
 defineConstant = { TYPE_CHECKING = true }

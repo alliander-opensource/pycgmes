@@ -14,9 +14,9 @@ AngleDegrees = CIMDatatype(
     multiplier=UnitMultiplier.none,
     unit=UnitSymbol.deg,
     profiles=[
+        Profile.EQ,
         Profile.DL,
         Profile.DY,
-        Profile.EQ,
         Profile.SC,
         Profile.SSH,
         Profile.SV,

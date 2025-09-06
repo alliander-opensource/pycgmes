@@ -14,8 +14,8 @@ Seconds = CIMDatatype(
     multiplier=UnitMultiplier.none,
     unit=UnitSymbol.s,
     profiles=[
-        Profile.DY,
         Profile.EQ,
+        Profile.DY,
     ],
 )
 

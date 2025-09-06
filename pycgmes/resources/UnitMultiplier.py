@@ -24,24 +24,24 @@ class UnitMultiplier(str, Enum):
       the proper unit "mÞ", and not the forbidden unit "mkg".
     """
 
-    y = "y"  # Yocto 10**-24.  # noqa: E501, E741, RUF003
-    z = "z"  # Zepto 10**-21.  # noqa: E501, E741, RUF003
-    a = "a"  # Atto 10**-18.  # noqa: E501, E741, RUF003
-    f = "f"  # Femto 10**-15.  # noqa: E501, E741, RUF003
-    p = "p"  # Pico 10**-12.  # noqa: E501, E741, RUF003
-    n = "n"  # Nano 10**-9.  # noqa: E501, E741, RUF003
-    micro = "micro"  # Micro 10**-6.  # noqa: E501, E741, RUF003
-    m = "m"  # Milli 10**-3.  # noqa: E501, E741, RUF003
-    c = "c"  # Centi 10**-2.  # noqa: E501, E741, RUF003
-    d = "d"  # Deci 10**-1.  # noqa: E501, E741, RUF003
-    none = "none"  # No multiplier or equivalently multiply by 1.  # noqa: E501, E741, RUF003
-    da = "da"  # Deca 10**1.  # noqa: E501, E741, RUF003
-    h = "h"  # Hecto 10**2.  # noqa: E501, E741, RUF003
-    k = "k"  # Kilo 10**3.  # noqa: E501, E741, RUF003
-    M = "M"  # Mega 10**6.  # noqa: E501, E741, RUF003
-    G = "G"  # Giga 10**9.  # noqa: E501, E741, RUF003
-    T = "T"  # Tera 10**12.  # noqa: E501, E741, RUF003
-    P = "P"  # Peta 10**15.  # noqa: E501, E741, RUF003
-    E = "E"  # Exa 10**18.  # noqa: E501, E741, RUF003
-    Z = "Z"  # Zetta 10**21.  # noqa: E501, E741, RUF003
-    Y = "Y"  # Yotta 10**24.  # noqa: E501, E741, RUF003
+    y = "y"  # Yocto 10**-24.  # noqa: E501
+    z = "z"  # Zepto 10**-21.  # noqa: E501
+    a = "a"  # Atto 10**-18.  # noqa: E501
+    f = "f"  # Femto 10**-15.  # noqa: E501
+    p = "p"  # Pico 10**-12.  # noqa: E501
+    n = "n"  # Nano 10**-9.  # noqa: E501
+    micro = "micro"  # Micro 10**-6.  # noqa: E501
+    m = "m"  # Milli 10**-3.  # noqa: E501
+    c = "c"  # Centi 10**-2.  # noqa: E501
+    d = "d"  # Deci 10**-1.  # noqa: E501
+    none = "none"  # No multiplier or equivalently multiply by 1.  # noqa: E501
+    da = "da"  # Deca 10**1.  # noqa: E501
+    h = "h"  # Hecto 10**2.  # noqa: E501
+    k = "k"  # Kilo 10**3.  # noqa: E501
+    M = "M"  # Mega 10**6.  # noqa: E501
+    G = "G"  # Giga 10**9.  # noqa: E501
+    T = "T"  # Tera 10**12.  # noqa: E501
+    P = "P"  # Peta 10**15.  # noqa: E501
+    E = "E"  # Exa 10**18.  # noqa: E501
+    Z = "Z"  # Zetta 10**21.  # noqa: E501
+    Y = "Y"  # Yotta 10**24.  # noqa: E501

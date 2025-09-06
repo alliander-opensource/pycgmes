@@ -26,11 +26,13 @@ class CustomBayAttr(Bay):
                 CustomProfile.CUS,
             ],
             "is_used": True,
+            "namespace": "custom",
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "namespace": "custom",
+            "attribute_class": "String",
         },
     )
 

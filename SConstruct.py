@@ -10,7 +10,7 @@ from typing import Mapping
 from SCons.Script import COMMAND_LINE_TARGETS
 
 _CHECK_ONLY = "check" in COMMAND_LINE_TARGETS
-_SUBJECT = "pycgmes"
+_SUBJECT = "pycgmes examples"
 _TEST_SUBJECT = "tests"
 _RESOURCES = "pycgmes/resources"
 
@@ -43,7 +43,7 @@ if "quality" in COMMAND_LINE_TARGETS:
 # Formatting targets, which might change files. Let's run them *before* the linters and friends.
 # This is why ruff is the first of the quality target, as it fixes things as well.
 if "format" in COMMAND_LINE_TARGETS:
-    cmd = f"ruff format SConstruct.py {_SUBJECT} {_TEST_SUBJECT} examples --exclude {_RESOURCES}"
+    cmd = f"ruff format SConstruct.py {_SUBJECT} {_TEST_SUBJECT} --exclude {_RESOURCES}"
     if _CHECK_ONLY:
         cmd += " --diff"
     _exec(cmd)

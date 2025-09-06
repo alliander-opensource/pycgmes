@@ -14,8 +14,8 @@ Length = CIMDatatype(
     multiplier=UnitMultiplier.k,
     unit=UnitSymbol.m,
     profiles=[
-        Profile.DY,
         Profile.EQ,
+        Profile.DY,
         Profile.SC,
     ],
 )

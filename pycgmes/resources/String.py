@@ -10,9 +10,9 @@ String = Primitive(
     name="String",
     type=str,
     profiles=[
+        Profile.EQ,
         Profile.DL,
         Profile.DY,
-        Profile.EQ,
         Profile.EQBD,
         Profile.GL,
         Profile.OP,

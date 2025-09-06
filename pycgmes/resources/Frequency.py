@@ -14,8 +14,8 @@ Frequency = CIMDatatype(
     multiplier=UnitMultiplier.none,
     unit=UnitSymbol.Hz,
     profiles=[
-        Profile.DY,
         Profile.EQ,
+        Profile.DY,
     ],
 )
 

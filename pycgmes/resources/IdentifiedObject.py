@@ -39,6 +39,7 @@ class IdentifiedObject(Base):
                 Profile.DL,
             ],
             "is_used": False,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -51,14 +52,15 @@ class IdentifiedObject(Base):
         default="",
         json_schema_extra={
             "in_profiles": [
+                Profile.EQ,
                 Profile.DL,
                 Profile.DY,
-                Profile.EQ,
                 Profile.EQBD,
                 Profile.OP,
                 Profile.TP,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -77,6 +79,7 @@ class IdentifiedObject(Base):
                 Profile.TP,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100-European#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -90,9 +93,9 @@ class IdentifiedObject(Base):
         default="",
         json_schema_extra={
             "in_profiles": [
+                Profile.EQ,
                 Profile.DL,
                 Profile.DY,
-                Profile.EQ,
                 Profile.EQBD,
                 Profile.GL,
                 Profile.OP,
@@ -102,6 +105,7 @@ class IdentifiedObject(Base):
                 Profile.TP,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -115,9 +119,9 @@ class IdentifiedObject(Base):
         default="",
         json_schema_extra={
             "in_profiles": [
+                Profile.EQ,
                 Profile.DL,
                 Profile.DY,
-                Profile.EQ,
                 Profile.EQBD,
                 Profile.GL,
                 Profile.OP,
@@ -125,6 +129,7 @@ class IdentifiedObject(Base):
                 Profile.TP,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -143,6 +148,7 @@ class IdentifiedObject(Base):
                 Profile.TP,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100-European#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -159,9 +165,9 @@ class IdentifiedObject(Base):
         where this element can be found.
         """
         return {
+            Profile.EQ,
             Profile.DL,
             Profile.DY,
-            Profile.EQ,
             Profile.EQBD,
             Profile.GL,
             Profile.OP,

@@ -27,6 +27,7 @@ class WindPowerPlant(PowerSystemResource):
                 Profile.EQ,
             ],
             "is_used": False,
+            "namespace": "http://iec.ch/TC57/CIM100-European#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,

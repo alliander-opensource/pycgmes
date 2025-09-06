@@ -72,6 +72,11 @@ If this is a leaf node (for instance `ACLineSegment`), it "just works". If you w
 class higher in the hierarchy (for instance `Equipment`) there is a lot more work to do.
 
 ```python
+from pydantic import Field
+from pydantic.dataclasses import dataclass
+
+from pycgmes.resources.Bay import Bay
+
 @dataclass
 class CustomBay(Bay):
     colour: str = Field(
@@ -82,9 +87,11 @@ class CustomBay(Bay):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 ```
@@ -118,10 +125,11 @@ class CustomBayAttr(Bay):
             ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "namespace": "custom",
+            "attribute_class": "String",
         },
     )
 
@@ -138,8 +146,6 @@ By default, an attribute is fully qualified. A standard `attribute` in `ACLineSe
 In the case of a custom attribute defined via a sub class, the result would be: `ACLineSegmentCustom.customAttribute`. To preserve the original class name (i.e. serialise your attribute as `ACLineSegment.customAttribute`), you need to override the `apparent_name` of your custom class:
 
 ```python
-from pydantic.dataclasses import dataclass
-
 from pycgmes.resources.ACLineSegment import ACLineSegment
 
 @dataclass
@@ -176,24 +182,22 @@ The namespace of an attribute is the first value found:
 - namespace of the first parent defining one. The top parent (`Base`) defined  `cim`.
 
 ```python
-from pydantic import Field
-from pydantic.dataclasses import dataclass
-
-from pycgmes.resources.ACLineSegment import ACLineSegment
-
 @dataclass
 class ACLineSegmentCustom(ACLineSegment):
     colour: str = Field(
         default="Red",
         json_schema_extra={
             "in_profiles": [
-                Profile.EQ, # Do not do this, see chapter "Create a new profile"            ],
+                Profile.EQ, # Do not do this, see chapter "Create a new profile"
+            ],
             "is_used": True,
+            "namespace": "custom",
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
-            "namespace": "custom",
+            "attribute_class": "String",
         },
     )
 
@@ -201,12 +205,15 @@ class ACLineSegmentCustom(ACLineSegment):
         default="Big",
         json_schema_extra={
             "in_profiles": [
-                Profile.EQ, # Do not do this, see chapter "Create a new profile"            ],
+                Profile.EQ, # Do not do this, see chapter "Create a new profile"
+            ],
             "is_used": True,
             "is_class_attribute": False,
+            "is_datatype_attribute": False,
             "is_enum_attribute": False,
             "is_list_attribute": False,
             "is_primitive_attribute": True,
+            "attribute_class": "String",
         },
     )
 

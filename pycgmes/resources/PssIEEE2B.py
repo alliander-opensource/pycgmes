@@ -56,6 +56,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": True,
@@ -71,6 +72,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": True,
@@ -86,6 +88,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -102,6 +105,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -118,6 +122,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -134,6 +139,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -150,6 +156,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": False,
             "is_enum_attribute": False,
@@ -166,6 +173,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -182,6 +190,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -198,6 +207,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -214,6 +224,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -230,6 +241,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -246,6 +258,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -262,6 +275,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -278,6 +292,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -294,6 +309,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -310,6 +326,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -326,6 +343,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -342,6 +360,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -358,6 +377,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -374,6 +394,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -390,6 +411,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -406,6 +428,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -422,6 +445,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -438,6 +462,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -454,6 +479,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,
@@ -470,6 +496,7 @@ class PssIEEE2B(PowerSystemStabilizerDynamics):
                 Profile.DY,
             ],
             "is_used": True,
+            "namespace": "http://iec.ch/TC57/CIM100#",  # NOSONAR
             "is_class_attribute": False,
             "is_datatype_attribute": True,
             "is_enum_attribute": False,

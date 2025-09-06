@@ -10,5 +10,5 @@ class HydroEnergyConversionKind(str, Enum):
     Specifies the capability of the hydro generating unit to convert energy as a generator or pump.
     """
 
-    generator = "generator"  # Able to generate power, but not able to pump water for energy storage.  # noqa: E501, E741, RUF003
-    pumpAndGenerator = "pumpAndGenerator"  # Able to both generate power and pump water for energy storage.  # noqa: E501, E741, RUF003
+    generator = "generator"  # Able to generate power, but not able to pump water for energy storage.  # noqa: E501
+    pumpAndGenerator = "pumpAndGenerator"  # Able to both generate power and pump water for energy storage.  # noqa: E501
